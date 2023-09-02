@@ -37,6 +37,7 @@ dependencies:
     path: ../configs
   resources:
     path: ../resources
+  firebase_core: ^2.15.1
 
 dev_dependencies:
   flutter_test:
