@@ -1,0 +1,6 @@
+# melos_managed_dependency_overrides: configs,resources
+dependency_overrides:
+  configs:
+    path: ../configs
+  resources:
+    path: ../resources

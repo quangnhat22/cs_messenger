@@ -1,0 +1,3 @@
+APP_NAME=CS Messenger Dev
+IOS_BUNDLE_ID=xyz.coffeesolution.messenger.dev
+ANDROID_BUNDLE_ID=xyz.coffeesolution.messenger.dev
