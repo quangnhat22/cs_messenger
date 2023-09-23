@@ -1,3 +1,4 @@
+import 'package:app/configs/di/di.dart';
 import 'package:configs/configs.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:resources/resources.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Fsplash.preserve(widgetsBinding: WidgetsBinding.instance);
+  configureAllPackagesDependencies();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -20,6 +22,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final deviceInfo = DeviceInfo.getDeviceInfo();
     return MaterialApp(
       title: 'Flutter Demo',
       supportedLocales: R.appLocalizationDelegate.supportedLocales,
@@ -113,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             Text(
-             '',
+              '',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
