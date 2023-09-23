@@ -38,6 +38,44 @@ scripts:
     description: Unused files Resources module.
   ## End Resources
 
+
+  ## Data
+  build-data:
+    run: melos exec --fail-fast --scope="*data*" --flutter -- flutter packages pub run build_runner build --delete-conflicting-outputs
+    description: Generates data.
+
+  analyze-data:
+    run: melos exec --fail-fast --scope="*data*" --flutter -- flutter pub run dart_code_metric:metrics analyze lib
+    description: Analyze Data module.
+
+  outdated-data:
+    run: melos exec --fail-fast --scope="*data*" --flutter -- dart pub outdated
+    description: Outdated Data module.
+
+  unused-file-data:
+    run: melos exec --fail-fast --scope="*data*" --flutter -- flutter pub run dart_code_metric:metrics check-unused-files lib
+    description: Unused files Data module.
+  ## End Data
+
+  ## Domain
+  build-domain:
+    run: melos exec --fail-fast --scope="*domain*" --flutter -- flutter packages pub run build_runner build --delete-conflicting-outputs
+    description: Generates domain.
+
+  outdated-domain:
+    run: melos exec --fail-fast --scope="*domain*" --flutter -- dart pub outdated
+    description: Outdated Domain module.
+
+  analyze-domain:
+    run: melos exec --fail-fast --scope="*domain*" --flutter -- flutter pub run dart_code_metric:metrics analyze lib
+    description: Analyze Domain module.
+
+  unused-file-domain:
+    run: melos exec --fail-fast --scope="*domain*" --flutter -- flutter pub run dart_code_metric:metrics check-unused-files lib
+    description: Unused files Domain module.
+
+  ## End Domain
+
   ## Configs
   outdated-configs:
     run: melos exec --fail-fast --scope="*configs*" --flutter -- dart pub outdated
@@ -64,4 +102,18 @@ scripts:
   unused-file-app:
     run: melos exec --fail-fast --scope="*app*" --flutter -- flutter pub run dart_code_metrics:metrics check-unused-files lib
     description: Unused files App module.
+
+  build-app:
+    run: melos exec --fail-fast --scope="*app*" --flutter -- flutter packages pub run build_runner build --delete-conflicting-outputs
+    description: Generates domain.
   ## End App
+
+  ## Utilities
+  outdated-utilities:
+    run: melos exec --fail-fast --scope="*utilities*" --flutter -- dart pub outdated
+    description: Outdated Utilities module.
+
+  analyze-utilities:
+    run: melos exec --fail-fast --scope="*utilities*" --flutter -- flutter pub run dart_code_metric:metrics analyze lib
+    description: Analyze Utilities module.
+  ## End Utilities

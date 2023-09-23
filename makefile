@@ -16,8 +16,9 @@ build-init:
 	@melos gen-app-splash $(flavor)
 
 build-runner: 
-	# @melos build-domain
-	# @melos build-data
+	@melos build-domain
+	@melos build-data
+	@melos build-app
 	@melos build-resources
 	@melos gen-strings
 
