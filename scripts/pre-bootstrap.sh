@@ -1,4 +1,26 @@
-#!/bin/zsh
+case "$(uname -sr)" in
+
+   Darwin*)
+     #!/bin/zsh
+     ;;
+
+   Linux*Microsoft*)
+     echo 'WSL'  # Windows Subsystem for Linux
+     ;;
+
+   Linux*)
+     #!/bin/bash
+     ;;
+
+   CYGWIN*|MINGW*|MINGW32*|MSYS*)
+     echo 'MS Windows'
+     ;;
+
+   *)
+     echo 'Other OS'
+     ;;
+esac
+
 echo "Installing fvm..."
 dart pub global activate fvm
 echo "Installing Melos..."
