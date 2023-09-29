@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "254498490258",
+    "project_id": "cs-messenger-77d68",
+    "storage_bucket": "cs-messenger-77d68.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254498490258:android:62367331e2f59ae12ea34b",
+        "android_client_info": {
+          "package_name": "xyz.coffeesolution.messenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254498490258-trbgtirokiheqahtfvoa4g90h4qeb663.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABJnMiHKyImrWE-jskOCZW1JKT3ZXKSZo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "254498490258-trbgtirokiheqahtfvoa4g90h4qeb663.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "254498490258-upt8fhuqvohcvtuurqp3d9u6r580mhf6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "xyz.coffeesolution.messenger.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
