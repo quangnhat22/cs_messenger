@@ -1,3 +1,28 @@
 {
-  "language": "Vietnamese"
+  "language": "Vietnamese",
+  "back": "Quay lại",
+  "skip": "Bỏ qua",
+  "next": "Tiếp tục",
+  "welcomeToApp": "Chào mừng đến với {app}",
+  "@welcomeToApp": {
+    "placeholders": {
+      "app": {
+        "type": "String",
+        "example": "Demo App"
+      }
+    }
+  },
+  "discoverSeamlessMessaging": "Khám phá tính năng nhắn tin mượt mà và cuộc gọi video chất lượng cao. Giữ kết nối với bạn bè và người thân một cách dễ dàng chưa từng có.",
+  "connectingPeopleAnytimeAnywhere": "Kết nối với bạn bè ở mọi lúc, mọi Nơi",
+  "experienceThePower": "Trải nghiệm sức mạnh của việc nhắn tin tức thời và cuộc gọi video rõ nét. Kết nối với mọi người trên toàn thế giới dễ dàng.",
+  "stayCloseNoMatterDistance": "Khoảng cách không là vấn đề",
+  "bridgeTheGap": "Bỏ qua khoảng cách với {app}. Chia sẻ những kỉ niệm, gửi tin nhắn và video call, bất kể bạn đang ở đâu.",
+  "@bridgeTheGap": {
+    "placeholders": {
+      "app": {
+        "type": "String",
+        "example": "Demo App"
+      }
+    }
+  }
 }

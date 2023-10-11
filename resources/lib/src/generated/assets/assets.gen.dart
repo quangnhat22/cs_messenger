@@ -8,6 +8,8 @@
 // ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/services.dart';
 
 class $AssetsPngsGen {
   const $AssetsPngsGen();
@@ -15,14 +17,44 @@ class $AssetsPngsGen {
   /// File path: assets/pngs/app_icon.png
   AssetGenImage get appIcon => const AssetGenImage('assets/pngs/app_icon.png');
 
+  /// File path: assets/pngs/onboarding_first_step.png
+  AssetGenImage get onboardingFirstStep =>
+      const AssetGenImage('assets/pngs/onboarding_first_step.png');
+
+  /// File path: assets/pngs/onboarding_second_step.png
+  AssetGenImage get onboardingSecondStep =>
+      const AssetGenImage('assets/pngs/onboarding_second_step.png');
+
+  /// File path: assets/pngs/onboarding_third_step.png
+  AssetGenImage get onboardingThirdStep =>
+      const AssetGenImage('assets/pngs/onboarding_third_step.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [appIcon];
+  List<AssetGenImage> get values =>
+      [appIcon, onboardingFirstStep, onboardingSecondStep, onboardingThirdStep];
+}
+
+class $AssetsSvgsGen {
+  const $AssetsSvgsGen();
+
+  /// File path: assets/svgs/ic_error.svg
+  SvgGenImage get icError => const SvgGenImage('assets/svgs/ic_error.svg');
+
+  /// File path: assets/svgs/ic_success.svg
+  SvgGenImage get icSuccess => const SvgGenImage('assets/svgs/ic_success.svg');
+
+  /// File path: assets/svgs/ic_warning.svg
+  SvgGenImage get icWarning => const SvgGenImage('assets/svgs/ic_warning.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [icError, icSuccess, icWarning];
 }
 
 class Assets {
   Assets._();
 
   static const $AssetsPngsGen pngs = $AssetsPngsGen();
+  static const $AssetsSvgsGen svgs = $AssetsSvgsGen();
 }
 
 class AssetGenImage {
@@ -91,6 +123,59 @@ class AssetGenImage {
       _assetName,
       bundle: bundle,
       package: package,
+    );
+  }
+
+  String get path => _assetName;
+
+  String get keyName => 'packages/resources/$_assetName';
+}
+
+class SvgGenImage {
+  const SvgGenImage(this._assetName);
+
+  final String _assetName;
+
+  SvgPicture svg({
+    Key? key,
+    bool matchTextDirection = false,
+    AssetBundle? bundle,
+    String? package = 'resources',
+    double? width,
+    double? height,
+    BoxFit fit = BoxFit.contain,
+    AlignmentGeometry alignment = Alignment.center,
+    bool allowDrawingOutsideViewBox = false,
+    WidgetBuilder? placeholderBuilder,
+    String? semanticsLabel,
+    bool excludeFromSemantics = false,
+    SvgTheme theme = const SvgTheme(),
+    ColorFilter? colorFilter,
+    Clip clipBehavior = Clip.hardEdge,
+    @deprecated Color? color,
+    @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
+    @deprecated bool cacheColorFilter = false,
+  }) {
+    return SvgPicture.asset(
+      _assetName,
+      key: key,
+      matchTextDirection: matchTextDirection,
+      bundle: bundle,
+      package: package,
+      width: width,
+      height: height,
+      fit: fit,
+      alignment: alignment,
+      allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
+      placeholderBuilder: placeholderBuilder,
+      semanticsLabel: semanticsLabel,
+      excludeFromSemantics: excludeFromSemantics,
+      theme: theme,
+      colorFilter: colorFilter,
+      color: color,
+      colorBlendMode: colorBlendMode,
+      clipBehavior: clipBehavior,
+      cacheColorFilter: cacheColorFilter,
     );
   }
 

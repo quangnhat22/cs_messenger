@@ -59,6 +59,96 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Quay lại`
+  String get back {
+    return Intl.message(
+      'Quay lại',
+      name: 'back',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bỏ qua`
+  String get skip {
+    return Intl.message(
+      'Bỏ qua',
+      name: 'skip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tiếp tục`
+  String get next {
+    return Intl.message(
+      'Tiếp tục',
+      name: 'next',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chào mừng đến với {app}`
+  String welcomeToApp(String app) {
+    return Intl.message(
+      'Chào mừng đến với $app',
+      name: 'welcomeToApp',
+      desc: '',
+      args: [app],
+    );
+  }
+
+  /// `Khám phá tính năng nhắn tin mượt mà và cuộc gọi video chất lượng cao. Giữ kết nối với bạn bè và người thân một cách dễ dàng chưa từng có.`
+  String get discoverSeamlessMessaging {
+    return Intl.message(
+      'Khám phá tính năng nhắn tin mượt mà và cuộc gọi video chất lượng cao. Giữ kết nối với bạn bè và người thân một cách dễ dàng chưa từng có.',
+      name: 'discoverSeamlessMessaging',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Kết nối với bạn bè ở mọi lúc, mọi Nơi`
+  String get connectingPeopleAnytimeAnywhere {
+    return Intl.message(
+      'Kết nối với bạn bè ở mọi lúc, mọi Nơi',
+      name: 'connectingPeopleAnytimeAnywhere',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trải nghiệm sức mạnh của việc nhắn tin tức thời và cuộc gọi video rõ nét. Kết nối với mọi người trên toàn thế giới dễ dàng.`
+  String get experienceThePower {
+    return Intl.message(
+      'Trải nghiệm sức mạnh của việc nhắn tin tức thời và cuộc gọi video rõ nét. Kết nối với mọi người trên toàn thế giới dễ dàng.',
+      name: 'experienceThePower',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Khoảng cách không là vấn đề`
+  String get stayCloseNoMatterDistance {
+    return Intl.message(
+      'Khoảng cách không là vấn đề',
+      name: 'stayCloseNoMatterDistance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bỏ qua khoảng cách với {app}. Chia sẻ những kỉ niệm, gửi tin nhắn và video call, bất kể bạn đang ở đâu.`
+  String bridgeTheGap(String app) {
+    return Intl.message(
+      'Bỏ qua khoảng cách với $app. Chia sẻ những kỉ niệm, gửi tin nhắn và video call, bất kể bạn đang ở đâu.',
+      name: 'bridgeTheGap',
+      desc: '',
+      args: [app],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

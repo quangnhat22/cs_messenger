@@ -1,3 +1,28 @@
 {
-  "language": "English"
+  "language": "English",
+  "back": "Back",
+  "skip": "Skip",
+  "next": "Next",
+  "welcomeToApp": "Welcome to {app}",
+  "@welcomeToApp": {
+    "placeholders": {
+      "app": {
+        "type": "String",
+        "example": "Demo App"
+      }
+    }
+  },
+  "discoverSeamlessMessaging": "Discover seamless messaging and high-quality video calls. Stay connected with friends and loved ones like never before.",
+  "connectingPeopleAnytimeAnywhere": "Connecting People, Anytime, Anywhere",
+  "experienceThePower": "Experience the power of instant messaging and crystal-clear video calls. Connect with people across the globe with ease.",
+  "stayCloseNoMatterDistance": "Stay Close, No Matter the Distance",
+  "bridgeTheGap": "Bridge the gap with {app}. Share moments, send messages, and have face-to-face conversations, regardless of where you are.",
+  "@bridgeTheGap": {
+    "placeholders": {
+      "app": {
+        "type": "String",
+        "example": "Demo App"
+      }
+    }
+  }
 }
