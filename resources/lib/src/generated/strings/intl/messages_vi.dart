@@ -20,8 +20,26 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'vi';
 
+  static String m0(app) =>
+      "Bỏ qua khoảng cách với ${app}. Chia sẻ những kỉ niệm, gửi tin nhắn và video call, bất kể bạn đang ở đâu.";
+
+  static String m1(app) => "Chào mừng đến với ${app}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "language": MessageLookupByLibrary.simpleMessage("Vietnamese")
+        "back": MessageLookupByLibrary.simpleMessage("Quay lại"),
+        "bridgeTheGap": m0,
+        "connectingPeopleAnytimeAnywhere": MessageLookupByLibrary.simpleMessage(
+            "Kết nối với bạn bè ở mọi lúc, mọi Nơi"),
+        "discoverSeamlessMessaging": MessageLookupByLibrary.simpleMessage(
+            "Khám phá tính năng nhắn tin mượt mà và cuộc gọi video chất lượng cao. Giữ kết nối với bạn bè và người thân một cách dễ dàng chưa từng có."),
+        "experienceThePower": MessageLookupByLibrary.simpleMessage(
+            "Trải nghiệm sức mạnh của việc nhắn tin tức thời và cuộc gọi video rõ nét. Kết nối với mọi người trên toàn thế giới dễ dàng."),
+        "language": MessageLookupByLibrary.simpleMessage("Vietnamese"),
+        "next": MessageLookupByLibrary.simpleMessage("Tiếp tục"),
+        "skip": MessageLookupByLibrary.simpleMessage("Bỏ qua"),
+        "stayCloseNoMatterDistance":
+            MessageLookupByLibrary.simpleMessage("Khoảng cách không là vấn đề"),
+        "welcomeToApp": m1
       };
 }

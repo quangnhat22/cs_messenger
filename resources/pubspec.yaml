@@ -55,6 +55,7 @@ flutter_intl:
 flutter:
   assets:
     - assets/pngs/
+    - assets/svgs/
     #- images/a_dot_ham.jpeg
   # fonts:
   #   - family: Schyler

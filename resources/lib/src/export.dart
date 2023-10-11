@@ -6,6 +6,6 @@ class R {
   static const AppLocalizationDelegate appLocalizationDelegate =
       Strings.delegate;
 
-  // static $AssetsSvgsGen svgs = Assets.svgs;
+  static $AssetsSvgsGen svgs = Assets.svgs;
   static $AssetsPngsGen pngs = Assets.pngs;
 }
