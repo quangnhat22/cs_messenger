@@ -24,5 +24,34 @@
         "example": "Demo App"
       }
     }
-  }
+  },
+  "welcomeBack": "Welcome back!",
+  "signInYourAccountToSeeYourChatting": "Sign in your account to see your chatting",
+  "welcome": "Welcome",
+  "startChattingWithANewAccount": "Start chatting with a new account",
+  "email": "Email",
+  "password": "Password",
+  "confirmPassword": "Confirm Password",
+  "forgotPassword": "Forgot password",
+  "login": "Login",
+  "register": "Register",
+  "sendEmailSuccess": "Send email success",
+  "pleaseCheckYourEmailToRecovery": "Please check your email to recovery your password",
+  "backToWelcome": "Back to Welcome",
+  "openEmailApp": "Open Email app",
+  "confirm": "Confirm",
+  "close": "Close",
+  "pleaseLoginAgain": "Please login again",
+  "error": "Error",
+  "systemIsCurrentlyErrorPleaseTryAgainLater": "System is currently error, please try again later",
+  "dataConflict": "Input data has already existed!",
+  "doYouWantToLogOut": "Do you want to log out?",
+  "invalidInput": "Invalid Input",
+  "home": "Home",
+  "friends": "Friends",
+  "groups": "Groups",
+  "settings": "Settings",
+  "noData": "No Data!",
+  "retry": "Retry",
+  "serverError": "Server error"
 }

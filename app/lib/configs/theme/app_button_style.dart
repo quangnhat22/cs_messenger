@@ -124,7 +124,6 @@ class AppButtonStyle {
             if (states.contains(MaterialState.disabled)) {
               return AppColorPalette.of.grayColor[5];
             }
-            return AppColorPalette.of.grayColor[1];
           },
         ),
       );

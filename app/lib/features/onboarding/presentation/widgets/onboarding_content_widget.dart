@@ -1,5 +1,5 @@
 import 'package:app/components/main/text/app_text_base_builder.dart';
-import 'package:app/configs/exts/app_constants_ext.dart';
+import 'package:app/configs/exts/app_exts.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 

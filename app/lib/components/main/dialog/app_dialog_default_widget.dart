@@ -28,9 +28,12 @@ class AppDefaultDialogWidget extends AppDialogBaseBuilder {
           _buildContentDialog(context),
           if (_isHaveCloseIcon == true)
             Positioned(
+              right: AppSizeExt.of.majorScale(2),
               child: IconButton(
                 icon: const Icon(Icons.close),
-                onPressed: () {},
+                onPressed: () {
+                  context.router.pop();
+                },
               ),
             )
         ],

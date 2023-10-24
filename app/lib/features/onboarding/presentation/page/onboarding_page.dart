@@ -1,10 +1,10 @@
 import 'package:app/components/main/page/app_main_page_base_builder.dart';
 import 'package:app/components/main/slide/app_slide_base_builder.dart';
-import 'package:app/configs/exts/app_constants_ext.dart';
+import 'package:app/configs/exts/app_exts.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:app/features/onboarding/presentation/widgets/onboarding_content_widget.dart';
-import 'package:resources/resources.dart';
 import 'package:flutter/material.dart';
+import 'package:resources/resources.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});

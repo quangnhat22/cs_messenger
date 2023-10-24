@@ -1,6 +1,8 @@
 part of 'app_button_base_builder.dart';
 
 class AppButtonOutlineWidget extends AppButtonBaseBuilder {
+  Color? _borderColor;
+
   @override
   Widget build(BuildContext context) {
     if (_prefixIcon == null && _buttonText == null) return const SizedBox();
@@ -19,16 +21,17 @@ class AppButtonOutlineWidget extends AppButtonBaseBuilder {
       style: _buttonStyle(context),
       child: Row(
         mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (_prefixIcon != null) _prefixIcon!,
-          // if (_prefixIcon != null && _buttonText != null)
-          //   SizedBox(width: AppSizeExt.of.majorPaddingScale(6 / 4)),
+          if (_prefixIcon != null && _buttonText != null)
+            SizedBox(width: AppSizeExt.of.majorPaddingScale(2)),
           if (_buttonText != null)
             AppTextBodyLargeWidget()
                 .setText(_buttonText!)
-                .setTextStyle(_textStyle)
-                .setColor(Theme.of(context).colorScheme.primary)
+                // .setTextStyle(_textStyle)
+                .setColor(
+                    _textStyle?.color ?? Theme.of(context).colorScheme.primary)
                 .build(context),
           // if (_suffixIcon != null)
           //   SizedBox(width: AppSizeExt.of.majorPaddingScale(2)),
@@ -161,7 +164,16 @@ class AppButtonOutlineWidget extends AppButtonBaseBuilder {
           textStyle: MaterialStateProperty.resolveWith<TextStyle?>(
             (Set<MaterialState> states) => textStyle,
           ),
+          side: _borderColor != null
+              ? MaterialStateProperty.all(BorderSide(
+                  color: _borderColor!, width: 1.0, style: BorderStyle.solid))
+              : null,
         );
+  }
+
+  AppButtonOutlineWidget setBorderColor(Color? borderColor) {
+    _borderColor = borderColor;
+    return this;
   }
 
   @override
@@ -209,6 +221,13 @@ class AppButtonOutlineWidget extends AppButtonBaseBuilder {
   @override
   AppButtonOutlineWidget setTextStyle(TextStyle? textStyle) {
     _textStyle = textStyle;
+    return this;
+  }
+
+  @Deprecated('It\'s not working! Please using it with [AppButtonFilledWidget]')
+  @override
+  AppButtonOutlineWidget setBackgroundColor(Color? backgroundColor) {
+    _backgroundColor = backgroundColor;
     return this;
   }
 }

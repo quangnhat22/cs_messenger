@@ -19,7 +19,7 @@ class AppSlideWidget extends AppSlideBaseBuilder {
       durationNextPage: _durationNextPage!,
       padding: _padding,
       indexInit: _indexInit ?? 0,
-      durationAuto: _dutationAuto,
+      durationAuto: _durationAuto,
       textSkipButton: _textSkipButton,
       textBackButton: _textBackButton,
       textNextButton: _textNextButton,
@@ -33,7 +33,7 @@ class AppSlideWidget extends AppSlideBaseBuilder {
 
   @override
   AppSlideWidget setDurationAuto(Duration durationAuto) {
-    _dutationAuto = durationAuto;
+    _durationAuto = durationAuto;
     return this;
   }
 

@@ -1,6 +1,9 @@
+import 'package:app/configs/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 part 'app_main_page_widget.dart';
+part 'app_nested_scroll_page_widget.dart';
+part 'app_stack_page_widget.dart';
 
 abstract class AppMainPageBaseBuilder {
   @protected
@@ -11,6 +14,8 @@ abstract class AppMainPageBaseBuilder {
   PreferredSizeWidget? _appBar;
   @protected
   Widget? _endDrawer;
+  @protected
+  Widget? _floatActionButton;
   @protected
   Color? _backgroundColor;
   @protected
@@ -33,6 +38,8 @@ abstract class AppMainPageBaseBuilder {
 
   AppMainPageBaseBuilder setResizeToAvoidBottomInset(
       bool? resizeToAvoidBottomInset);
+
+  AppMainPageBaseBuilder setFloatActionButton(Widget? floatActionButton);
 
   Widget build(BuildContext context);
 }

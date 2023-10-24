@@ -71,9 +71,12 @@ samples, guidance on mobile development, and a full API reference.
 ### MacOs
 
 - One time: `make denied` (Mac OS)
-- PreBuild: `make pre-bootstrap`, `make pub-get`, `make build-init flavor=dev`, `make build-init flavor=prod`, `make build-runner`
-- Get Command for run: `make run flavor=dev/staging/prod` -> After running finished, copy command
-- Run Project: `cd app`, paste copied command to run with `fvm` in front. E.g: `fvm <copied-command>`
+-
+PreBuild: `make pre-bootstrap`, `make pub-get`, `make build-init flavor=dev`, `make build-init flavor=prod`, `make build-runner`
+- Get Command for run: `make run flavor=dev/staging/prod` -> After running
+  finished, copy command
+- Run Project: `cd app`, paste copied command to run with `fvm` in front.
+  E.g: `fvm <copied-command>`
 
 ### Windows
 
@@ -81,43 +84,44 @@ samples, guidance on mobile development, and a full API reference.
 - Install **Melos** latest version (Optional)
 - Install **fvm** latest version (Optional)
 
-_If you can not install Melos, Fvm on Windows. You need to follow step by step to ready run source code_
+_If you can not install Melos, Fvm on Windows. You need to follow step by step
+to ready run source code_
 
 - **scripts package**
-  - cd scripts
-  - sh pre-bootstrap.sh
+    - cd scripts
+    - sh pre-bootstrap.sh
 - flutter pub get
 - **utilities package**:
-  - cd utilities
-  - flutter pub get
+    - cd utilities
+    - flutter pub get
 - **resources package**:
-  - cd resources
-  - flutter pub get
-  - flutter packages pub run build_runner build --delete-conflicting-outputs
-  - flutter pub run flutter_launcher_icons
-  - flutter pub run flutter_native_splash:create --flavor dev
-  - flutter pub run flutter_native_splash:create --flavor staging
-  - flutter pub run flutter_native_splash:create --flavor prod
-  - flutter pub run intl_utils:generate
-  - cd resources && flutter pub get
+    - cd resources
+    - flutter pub get
+    - flutter packages pub run build_runner build --delete-conflicting-outputs
+    - flutter pub run flutter_launcher_icons
+    - flutter pub run flutter_native_splash:create --flavor dev
+    - flutter pub run flutter_native_splash:create --flavor staging
+    - flutter pub run flutter_native_splash:create --flavor prod
+    - flutter pub run intl_utils:generate
 - **domain package**
-  - cd domain
-  - flutter pub get
-  - flutter packages pub run build_runner build --delete-conflicting-outputs
+    - cd domain
+    - flutter pub get
+    - flutter packages pub run build_runner build --delete-conflicting-outputs
 - **data package**
-  - cd data
-  - flutter pub get
-  - flutter packages pub run build_runner build --delete-conflicting-outputs
+    - cd data
+    - flutter pub get
+    - flutter packages pub run build_runner build --delete-conflicting-outputs
 - **config package**
-  - cd configs
-  - flutter pub get
+    - cd configs
+    - flutter pub get
 - **app package**
-  - cd app
-  - flutter pub get
+    - cd app
+    - flutter pub get
 - Run source
-  - cd configs
-  - dart run lib/src/env.json.dart [dev|staging|prod]
-  - cd ..
-  - dart run scripts/build.dart [dev|staging|prod] -> Run complete and copy command on console
-  - cd app
-  - parse command and run
+    - cd configs
+    - dart run lib/src/env.json.dart [dev|staging|prod]
+    - cd ..
+    - dart run scripts/build.dart [dev|staging|prod] -> Run complete and copy
+      command on console
+    - cd app
+    - parse command and run

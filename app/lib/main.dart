@@ -1,43 +1,53 @@
+import 'dart:developer';
+
 import 'package:app/configs/di/di.dart';
-import 'package:app/configs/exts/app_constants_ext.dart';
-import 'package:app/configs/theme/app_theme.dart';
-import 'package:app/features/onboarding/presentation/page/onboarding_page.dart';
+import 'package:app/features/app/app.dart';
 import 'package:configs/configs.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Fsplash.preserve(widgetsBinding: WidgetsBinding.instance);
   configureAllPackagesDependencies();
+  Bloc.observer = AppObserver();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   Fsplash.remove();
-  runApp(const MyApp());
+  runApp(const App());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
+class AppObserver extends BlocObserver {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      supportedLocales: R.appLocalizationDelegate.supportedLocales,
-      localizationsDelegates: const [
-        R.appLocalizationDelegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      navigatorKey: AppKeys.navigatorKey,
-      theme: AppThemeData.lightThemeData(),
-      darkTheme: AppThemeData.darkThemeData(),
-      home: const OnboardingPage(),
-    );
+  void onEvent(Bloc bloc, Object? event) {
+    super.onEvent(bloc, event);
+    log(event.toString());
+  }
+
+  @override
+  void onChange(BlocBase bloc, Change change) {
+    super.onChange(bloc, change);
+    log(change.toString(), name: "BLOC");
+  }
+
+  @override
+  void onCreate(BlocBase bloc) {
+    super.onCreate(bloc);
+    log(bloc.toString());
+  }
+
+  @override
+  void onTransition(Bloc bloc, Transition transition) {
+    super.onTransition(bloc, transition);
+    log(transition.toString());
+  }
+
+  @override
+  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
+    log(error.toString());
+    super.onError(bloc, error, stackTrace);
   }
 }

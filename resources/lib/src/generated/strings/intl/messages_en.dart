@@ -28,18 +28,60 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "back": MessageLookupByLibrary.simpleMessage("Back"),
+        "backToWelcome":
+            MessageLookupByLibrary.simpleMessage("Back to Welcome"),
         "bridgeTheGap": m0,
+        "close": MessageLookupByLibrary.simpleMessage("Close"),
+        "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "confirmPassword":
+            MessageLookupByLibrary.simpleMessage("Confirm Password"),
         "connectingPeopleAnytimeAnywhere": MessageLookupByLibrary.simpleMessage(
             "Connecting People, Anytime, Anywhere"),
+        "dataConflict": MessageLookupByLibrary.simpleMessage(
+            "Input data has already existed!"),
         "discoverSeamlessMessaging": MessageLookupByLibrary.simpleMessage(
             "Discover seamless messaging and high-quality video calls. Stay connected with friends and loved ones like never before."),
+        "doYouWantToLogOut":
+            MessageLookupByLibrary.simpleMessage("Do you want to log out?"),
+        "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "error": MessageLookupByLibrary.simpleMessage("Error"),
         "experienceThePower": MessageLookupByLibrary.simpleMessage(
             "Experience the power of instant messaging and crystal-clear video calls. Connect with people across the globe with ease."),
+        "forgotPassword":
+            MessageLookupByLibrary.simpleMessage("Forgot password"),
+        "friends": MessageLookupByLibrary.simpleMessage("Friends"),
+        "groups": MessageLookupByLibrary.simpleMessage("Groups"),
+        "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "invalidInput": MessageLookupByLibrary.simpleMessage("Invalid Input"),
         "language": MessageLookupByLibrary.simpleMessage("English"),
+        "login": MessageLookupByLibrary.simpleMessage("Login"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
+        "noData": MessageLookupByLibrary.simpleMessage("No Data!"),
+        "openEmailApp": MessageLookupByLibrary.simpleMessage("Open Email app"),
+        "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "pleaseCheckYourEmailToRecovery": MessageLookupByLibrary.simpleMessage(
+            "Please check your email to recovery your password"),
+        "pleaseLoginAgain":
+            MessageLookupByLibrary.simpleMessage("Please login again"),
+        "register": MessageLookupByLibrary.simpleMessage("Register"),
+        "retry": MessageLookupByLibrary.simpleMessage("Retry"),
+        "sendEmailSuccess":
+            MessageLookupByLibrary.simpleMessage("Send email success"),
+        "serverError": MessageLookupByLibrary.simpleMessage("Server error"),
+        "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "signInYourAccountToSeeYourChatting":
+            MessageLookupByLibrary.simpleMessage(
+                "Sign in your account to see your chatting"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+        "startChattingWithANewAccount": MessageLookupByLibrary.simpleMessage(
+            "Start chatting with a new account"),
         "stayCloseNoMatterDistance": MessageLookupByLibrary.simpleMessage(
             "Stay Close, No Matter the Distance"),
+        "systemIsCurrentlyErrorPleaseTryAgainLater":
+            MessageLookupByLibrary.simpleMessage(
+                "System is currently error, please try again later"),
+        "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
+        "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
         "welcomeToApp": m1
       };
 }
