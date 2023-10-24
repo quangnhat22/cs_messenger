@@ -27,7 +27,7 @@ class AppButtonFilledWidget extends AppButtonBaseBuilder {
           if (_buttonText != null)
             AppTextBodyLargeWidget()
                 .setTextStyle(_textStyle)
-                .setColor(Theme.of(context).colorScheme.surfaceVariant)
+                // .setColor(Theme.of(context).colorScheme.surfaceVariant)
                 .setText(_buttonText!)
                 .build(context),
           // if (_suffixIcon != null)
@@ -58,6 +58,13 @@ class AppButtonFilledWidget extends AppButtonBaseBuilder {
               ),
               child: Container(
                 padding: EdgeInsets.all(buttonPadding),
+                decoration: BoxDecoration(
+                  color:
+                      _backgroundColor ?? Theme.of(context).colorScheme.primary,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(AppSizeExt.of.majorScale(7)),
+                  ),
+                ),
                 child: _prefixIcon,
               ),
             ),
@@ -65,7 +72,7 @@ class AppButtonFilledWidget extends AppButtonBaseBuilder {
         : Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Theme.of(context).colorScheme.primary,
+              color: _backgroundColor ?? Theme.of(context).colorScheme.primary,
             ),
             child: InkWell(
               borderRadius: BorderRadius.all(
@@ -138,7 +145,7 @@ class AppButtonFilledWidget extends AppButtonBaseBuilder {
     double horizontalPadding = AppSizeExt.of.majorScale(4);
     double verticalPadding = AppSizeExt.of.majorScale(9 / 4);
 
-    final textColor = Theme.of(context).colorScheme.surfaceVariant;
+    final textColor = Theme.of(context).colorScheme.primary;
 
     TextStyle? textStyle = _textStyle?.copyWith(color: textColor) ??
         Theme.of(context).textTheme.bodyMedium!.copyWith(color: textColor);
@@ -165,6 +172,14 @@ class AppButtonFilledWidget extends AppButtonBaseBuilder {
           ),
           textStyle: MaterialStateProperty.resolveWith<TextStyle?>(
             (Set<MaterialState> states) => textStyle,
+          ),
+          backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return AppColorPalette.of.grayColor[5];
+              }
+              return _backgroundColor ?? Theme.of(context).colorScheme.primary;
+            },
           ),
         );
   }
@@ -216,6 +231,12 @@ class AppButtonFilledWidget extends AppButtonBaseBuilder {
   @override
   AppButtonFilledWidget setAppButtonType(AppButtonType? appButtonType) {
     _appButtonType = appButtonType;
+    return this;
+  }
+
+  @override
+  AppButtonFilledWidget setBackgroundColor(Color? backgroundColor) {
+    _backgroundColor = backgroundColor;
     return this;
   }
 }

@@ -17,6 +17,14 @@ class $AssetsPngsGen {
   /// File path: assets/pngs/app_icon.png
   AssetGenImage get appIcon => const AssetGenImage('assets/pngs/app_icon.png');
 
+  /// File path: assets/pngs/google_logo.png
+  AssetGenImage get googleLogo =>
+      const AssetGenImage('assets/pngs/google_logo.png');
+
+  /// File path: assets/pngs/mail_sent_success.png
+  AssetGenImage get mailSentSuccess =>
+      const AssetGenImage('assets/pngs/mail_sent_success.png');
+
   /// File path: assets/pngs/onboarding_first_step.png
   AssetGenImage get onboardingFirstStep =>
       const AssetGenImage('assets/pngs/onboarding_first_step.png');
@@ -29,9 +37,30 @@ class $AssetsPngsGen {
   AssetGenImage get onboardingThirdStep =>
       const AssetGenImage('assets/pngs/onboarding_third_step.png');
 
+  /// File path: assets/pngs/verify_email.png
+  AssetGenImage get verifyEmail =>
+      const AssetGenImage('assets/pngs/verify_email.png');
+
+  /// File path: assets/pngs/welcome_banner.png
+  AssetGenImage get welcomeBanner =>
+      const AssetGenImage('assets/pngs/welcome_banner.png');
+
+  /// File path: assets/pngs/welldone_green.png
+  AssetGenImage get welldoneGreen =>
+      const AssetGenImage('assets/pngs/welldone_green.png');
+
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [appIcon, onboardingFirstStep, onboardingSecondStep, onboardingThirdStep];
+  List<AssetGenImage> get values => [
+        appIcon,
+        googleLogo,
+        mailSentSuccess,
+        onboardingFirstStep,
+        onboardingSecondStep,
+        onboardingThirdStep,
+        verifyEmail,
+        welcomeBanner,
+        welldoneGreen
+      ];
 }
 
 class $AssetsSvgsGen {
@@ -40,14 +69,22 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/ic_error.svg
   SvgGenImage get icError => const SvgGenImage('assets/svgs/ic_error.svg');
 
+  /// File path: assets/svgs/ic_ongoing.svg
+  SvgGenImage get icOngoing => const SvgGenImage('assets/svgs/ic_ongoing.svg');
+
   /// File path: assets/svgs/ic_success.svg
   SvgGenImage get icSuccess => const SvgGenImage('assets/svgs/ic_success.svg');
+
+  /// File path: assets/svgs/ic_upcoming.svg
+  SvgGenImage get icUpcoming =>
+      const SvgGenImage('assets/svgs/ic_upcoming.svg');
 
   /// File path: assets/svgs/ic_warning.svg
   SvgGenImage get icWarning => const SvgGenImage('assets/svgs/ic_warning.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [icError, icSuccess, icWarning];
+  List<SvgGenImage> get values =>
+      [icError, icOngoing, icSuccess, icUpcoming, icWarning];
 }
 
 class Assets {

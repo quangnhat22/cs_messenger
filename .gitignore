@@ -35,3 +35,4 @@ build/
 .flutter-plugins-dependencies
 .fvm/
 *.g.dart
+*.freezed.dart

@@ -3,7 +3,9 @@ import 'package:app/configs/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 part 'app_button_filled_widget.dart';
+
 part 'app_button_outline_widget.dart';
+
 part 'app_button_text_widget.dart';
 
 enum AppButtonSize {
@@ -43,6 +45,8 @@ abstract class AppButtonBaseBuilder {
   @protected
   AppButtonType? _appButtonType;
   @protected
+  Color? _backgroundColor;
+  @protected
   void Function()? _onPressed;
 
   AppButtonBaseBuilder setButtonText(String? buttonText);
@@ -60,6 +64,8 @@ abstract class AppButtonBaseBuilder {
   AppButtonBaseBuilder setOnPressed(void Function()? onPressed);
 
   AppButtonBaseBuilder setTextStyle(TextStyle? textStyle);
+
+  AppButtonBaseBuilder setBackgroundColor(Color? backgroundColor);
 
   Widget build(BuildContext context);
 }

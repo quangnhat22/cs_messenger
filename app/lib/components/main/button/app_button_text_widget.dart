@@ -16,7 +16,7 @@ class AppButtonTextWidget extends AppButtonBaseBuilder {
         children: [
           if (_prefixIcon != null) _prefixIcon!,
           if (_prefixIcon != null && _buttonText != null)
-            SizedBox(width: AppSizeExt.of.majorPaddingScale(6 / 4)),
+            SizedBox(width: AppSizeExt.of.majorPaddingScale(2)),
           if (_buttonText != null)
             AppTextBodyLargeWidget()
                 .setText(_buttonText!)
@@ -139,6 +139,13 @@ class AppButtonTextWidget extends AppButtonBaseBuilder {
   @override
   AppButtonTextWidget setTextStyle(TextStyle? textStyle) {
     _textStyle = textStyle;
+    return this;
+  }
+
+  @Deprecated('It\'s not working! Please using it with [AppButtonFilledWidget]')
+  @override
+  AppButtonTextWidget setBackgroundColor(Color? backgroundColor) {
+    _backgroundColor = backgroundColor;
     return this;
   }
 }

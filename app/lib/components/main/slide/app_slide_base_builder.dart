@@ -1,13 +1,5 @@
-import 'dart:async';
-
-import 'package:app/components/features/slide/app_dot_indicator_widget.dart';
 import 'package:app/components/features/slide/app_slide_basic_widget.dart';
-import 'package:app/components/features/slide/app_slide_button_widget.dart';
-import 'package:app/components/main/button/app_button_base_builder.dart';
-import 'package:app/components/main/text/app_text_base_builder.dart';
-import 'package:app/configs/theme/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:resources/resources.dart';
 
 part 'app_slide_widget.dart';
 
@@ -17,7 +9,7 @@ abstract class AppSlideBaseBuilder {
   @protected
   int? _indexInit;
   @protected
-  Duration? _dutationAuto;
+  Duration? _durationAuto;
   @protected
   Duration? _durationNextPage;
   @protected

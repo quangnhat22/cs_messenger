@@ -24,5 +24,34 @@
         "example": "Demo App"
       }
     }
-  }
+  },
+  "welcomeBack": "Chào mừng bạn trở lại!",
+  "signInYourAccountToSeeYourChatting": "Đăng nhập để kết nối với bạn bè",
+  "welcome": "Chào mừng bạn",
+  "startChattingWithANewAccount": "Tạo tài khoản để bắt đầu kết nối với những người bạn",
+  "email": "Email",
+  "password": "Mật khẩu",
+  "confirmPassword": "Xác nhận mật khẩu",
+  "forgotPassword": "Quên mật khẩu",
+  "login": "Đăng nhập",
+  "register": "Đăng ký",
+  "sendEmailSuccess": "Gửi email thành công",
+  "pleaseCheckYourEmailToRecovery": "Bạn hãy kiểm tra email để khôi phục mật khẩu nhé",
+  "backToWelcome": "Trở về trang chính",
+  "openEmailApp": "Mở ứng dụng Email",
+  "confirm": "Xác nhận",
+  "close": "Đóng",
+  "pleaseLoginAgain": "Vui lòng đăng nhập lại",
+  "error": "Lỗi",
+  "systemIsCurrentlyErrorPleaseTryAgainLater": "Hệ thống đang lỗi, vui lòng thử lại sau",
+  "dataConflict": "Dữ liệu đã tồn tại",
+  "doYouWantToLogOut": "Bạn có muốn đăng xuất?",
+  "invalidInput": "Input không hợp lệ",
+  "home": "Trang chủ",
+  "friends": "Bạn bè",
+  "groups": "Nhóm",
+  "settings": "Cài đặt",
+  "noData": " Không có dữ liệu!",
+  "retry": "Thử lại",
+  "serverError": "Lỗi hệ thống"
 }

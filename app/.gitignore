@@ -46,3 +46,4 @@ app.*.map.json
 # Generated Code & File
 /lib/generated/
 *.config.dart
+*.gr.dart

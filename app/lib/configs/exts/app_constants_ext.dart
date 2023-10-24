@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
+part of 'app_exts.dart';
 
 class AppKeys {
   AppKeys._();
 
-  static final navigatorKey = GlobalKey<NavigatorState>();
+  static final navigatorKey = getIt<AppRouter>().navigatorKey;
 }
 
 class AppConstants {

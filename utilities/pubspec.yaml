@@ -8,8 +8,11 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  cryptography_flutter: ^2.3.2
   flutter:
     sdk: flutter
+  intl: ^0.18.1
+  logger: ^2.0.2+1
 
 dev_dependencies:
   flutter_test:
