@@ -27,6 +27,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "addNewContact":
+            MessageLookupByLibrary.simpleMessage("Add new contact"),
         "back": MessageLookupByLibrary.simpleMessage("Back"),
         "backToWelcome":
             MessageLookupByLibrary.simpleMessage("Back to Welcome"),
@@ -37,6 +39,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
         "connectingPeopleAnytimeAnywhere": MessageLookupByLibrary.simpleMessage(
             "Connecting People, Anytime, Anywhere"),
+        "createNewGroup":
+            MessageLookupByLibrary.simpleMessage("Create new group"),
         "dataConflict": MessageLookupByLibrary.simpleMessage(
             "Input data has already existed!"),
         "discoverSeamlessMessaging": MessageLookupByLibrary.simpleMessage(
@@ -54,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "invalidInput": MessageLookupByLibrary.simpleMessage("Invalid Input"),
         "language": MessageLookupByLibrary.simpleMessage("English"),
+        "listFriend": MessageLookupByLibrary.simpleMessage("List Friends"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "noData": MessageLookupByLibrary.simpleMessage("No Data!"),
@@ -63,8 +68,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please check your email to recovery your password"),
         "pleaseLoginAgain":
             MessageLookupByLibrary.simpleMessage("Please login again"),
+        "recentCall": MessageLookupByLibrary.simpleMessage("Recent calls"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
+        "requestFriend": MessageLookupByLibrary.simpleMessage("Request friend"),
+        "requestGroup": MessageLookupByLibrary.simpleMessage("Request Group"),
         "retry": MessageLookupByLibrary.simpleMessage("Retry"),
+        "search": MessageLookupByLibrary.simpleMessage("Search"),
+        "searchFriend": MessageLookupByLibrary.simpleMessage("Search friend"),
         "sendEmailSuccess":
             MessageLookupByLibrary.simpleMessage("Send email success"),
         "serverError": MessageLookupByLibrary.simpleMessage("Server error"),

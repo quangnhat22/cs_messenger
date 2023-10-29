@@ -15,9 +15,10 @@ class FriendCallListCallHistoryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppListWidget<HistoryCallModel, AppListViewState<HistoryCallModel>,
         ListCallHistoryCubit>(
+      physics: const BouncingScrollPhysics(),
       childWidget: _buildCardMissionItem,
-      emptyView: SizedBox(),
-      retryView: SizedBox(),
+      emptyView: const SizedBox(),
+      retryView: const SizedBox(),
     );
   }
 

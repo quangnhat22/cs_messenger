@@ -439,6 +439,86 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Tìm kiếm`
+  String get search {
+    return Intl.message(
+      'Tìm kiếm',
+      name: 'search',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cuộc gọi gần đây`
+  String get recentCall {
+    return Intl.message(
+      'Cuộc gọi gần đây',
+      name: 'recentCall',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Danh sách bạn bè`
+  String get listFriend {
+    return Intl.message(
+      'Danh sách bạn bè',
+      name: 'listFriend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thêm liên hệ mới`
+  String get addNewContact {
+    return Intl.message(
+      'Thêm liên hệ mới',
+      name: 'addNewContact',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lời mời kết bạn`
+  String get requestFriend {
+    return Intl.message(
+      'Lời mời kết bạn',
+      name: 'requestFriend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tìm kiếm bạn bè`
+  String get searchFriend {
+    return Intl.message(
+      'Tìm kiếm bạn bè',
+      name: 'searchFriend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tạo nhóm mới`
+  String get createNewGroup {
+    return Intl.message(
+      'Tạo nhóm mới',
+      name: 'createNewGroup',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lời mời nhóm`
+  String get requestGroup {
+    return Intl.message(
+      'Lời mời nhóm',
+      name: 'requestGroup',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

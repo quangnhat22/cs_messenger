@@ -53,5 +53,13 @@
   "settings": "Cài đặt",
   "noData": " Không có dữ liệu!",
   "retry": "Thử lại",
-  "serverError": "Lỗi hệ thống"
+  "serverError": "Lỗi hệ thống",
+  "search": "Tìm kiếm",
+  "recentCall": "Cuộc gọi gần đây",
+  "listFriend": "Danh sách bạn bè",
+  "addNewContact": "Thêm liên hệ mới",
+  "requestFriend": "Lời mời kết bạn",
+  "searchFriend": "Tìm kiếm bạn bè",
+  "createNewGroup": "Tạo nhóm mới",
+  "requestGroup": "Lời mời nhóm"
 }

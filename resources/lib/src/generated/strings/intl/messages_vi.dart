@@ -27,6 +27,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "addNewContact":
+            MessageLookupByLibrary.simpleMessage("Thêm liên hệ mới"),
         "back": MessageLookupByLibrary.simpleMessage("Quay lại"),
         "backToWelcome":
             MessageLookupByLibrary.simpleMessage("Trở về trang chính"),
@@ -37,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Xác nhận mật khẩu"),
         "connectingPeopleAnytimeAnywhere": MessageLookupByLibrary.simpleMessage(
             "Kết nối với bạn bè ở mọi lúc, mọi Nơi"),
+        "createNewGroup": MessageLookupByLibrary.simpleMessage("Tạo nhóm mới"),
         "dataConflict":
             MessageLookupByLibrary.simpleMessage("Dữ liệu đã tồn tại"),
         "discoverSeamlessMessaging": MessageLookupByLibrary.simpleMessage(
@@ -54,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "invalidInput":
             MessageLookupByLibrary.simpleMessage("Input không hợp lệ"),
         "language": MessageLookupByLibrary.simpleMessage("Vietnamese"),
+        "listFriend": MessageLookupByLibrary.simpleMessage("Danh sách bạn bè"),
         "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
         "next": MessageLookupByLibrary.simpleMessage("Tiếp tục"),
         "noData": MessageLookupByLibrary.simpleMessage(" Không có dữ liệu!"),
@@ -64,8 +68,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bạn hãy kiểm tra email để khôi phục mật khẩu nhé"),
         "pleaseLoginAgain":
             MessageLookupByLibrary.simpleMessage("Vui lòng đăng nhập lại"),
+        "recentCall": MessageLookupByLibrary.simpleMessage("Cuộc gọi gần đây"),
         "register": MessageLookupByLibrary.simpleMessage("Đăng ký"),
+        "requestFriend":
+            MessageLookupByLibrary.simpleMessage("Lời mời kết bạn"),
+        "requestGroup": MessageLookupByLibrary.simpleMessage("Lời mời nhóm"),
         "retry": MessageLookupByLibrary.simpleMessage("Thử lại"),
+        "search": MessageLookupByLibrary.simpleMessage("Tìm kiếm"),
+        "searchFriend": MessageLookupByLibrary.simpleMessage("Tìm kiếm bạn bè"),
         "sendEmailSuccess":
             MessageLookupByLibrary.simpleMessage("Gửi email thành công"),
         "serverError": MessageLookupByLibrary.simpleMessage("Lỗi hệ thống"),

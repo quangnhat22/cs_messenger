@@ -3,6 +3,8 @@ part of 'app_main_page_base_builder.dart';
 class AppNestedScrollPageWidget extends AppMainPageBaseBuilder {
   ScrollController? _scrollController;
 
+  Widget? _sliverAppBar;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -22,13 +24,7 @@ class AppNestedScrollPageWidget extends AppMainPageBaseBuilder {
             controller: _scrollController,
             headerSliverBuilder:
                 (BuildContext context, bool innerBoxIsScrolled) {
-              return <Widget>[
-                SliverAppBar(
-                  title: const Text('Weight Tracker'),
-                  floating: true,
-                  forceElevated: innerBoxIsScrolled,
-                ),
-              ];
+              return [_sliverAppBar ?? const SizedBox()];
             },
             body: _body ?? const SizedBox(),
           ),
@@ -36,6 +32,11 @@ class AppNestedScrollPageWidget extends AppMainPageBaseBuilder {
         ),
       ),
     );
+  }
+
+  AppNestedScrollPageWidget setSliverAppBar(Widget? sliverAppBar) {
+    _sliverAppBar = sliverAppBar;
+    return this;
   }
 
   @override
