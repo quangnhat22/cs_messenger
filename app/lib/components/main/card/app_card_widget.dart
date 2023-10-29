@@ -7,6 +7,7 @@ class AppCardWidget extends AppCardBaseBuilder {
       children: [
         InkWell(
           onTap: _onTap,
+          borderRadius: BorderRadius.circular(AppSizeExt.of.majorScale(4)),
           child: Card(
             surfaceTintColor:
                 _backgroundColor ?? Theme.of(context).colorScheme.background,
@@ -19,9 +20,19 @@ class AppCardWidget extends AppCardBaseBuilder {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   if (_leading != null) _leading!,
-                  if (_leading != null && _subtitle != null)
+                  if ((_leading != null && _title != null) ||
+                      (_leading != null && _subtitle != null))
                     SizedBox(width: AppSizeExt.of.majorScale(4)),
-                  if (_subtitle != null) Expanded(child: _subtitle!),
+                  if (_title != null || _subtitle != null)
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          _title ?? const SizedBox(),
+                          _subtitle ?? const SizedBox(),
+                        ],
+                      ),
+                    ),
                   if (_actions != null) Row(children: _actions!)
                 ],
               ),

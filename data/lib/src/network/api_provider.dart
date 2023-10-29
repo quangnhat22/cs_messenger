@@ -6,7 +6,9 @@ class ApiProvider {
 
   //auth
   //TODO: mockApi
-  static const String callHistory = "$mockServerUrl/friend/call-history";
+  static const String friendCallHistory = "$mockServerUrl/friend/call-history";
+  static const String friendRequest = "$mockServerUrl/friend/friend-request";
+  static const String groupList = "$mockServerUrl/group/group-list";
 }
 
 class ApiExternal {}

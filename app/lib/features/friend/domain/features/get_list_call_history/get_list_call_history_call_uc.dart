@@ -14,6 +14,6 @@ class GetListCallHistoryUseCaseImpl extends GetListCallHistoryUseCase {
 
   @override
   Future<AppListResultModel<HistoryCallModel>> executeList(
-          {GetListCallHistoryParam? request}) =>
-      _repo.getListCallHistory(query: request?.toJson() ?? {});
+          {GetListCallHistoryParam? request}) async =>
+      await _repo.getListCallHistory(query: request?.toJson() ?? {});
 }

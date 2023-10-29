@@ -11,7 +11,7 @@ part 'exts/app_size_ext.dart';
 class AppThemeData {
   AppThemeData._();
 
-  static ThemeData lightThemeData() {
+  static ThemeData lightThemeData(BuildContext context) {
     return ThemeData(
       useMaterial3: true,
       colorScheme: lightColorScheme,
@@ -27,10 +27,13 @@ class AppThemeData {
           borderRadius: BorderRadius.circular(AppSizeExt.of.majorScale(3)),
         ),
       ),
+      // listTileTheme: ListTileThemeData(
+      //   tileColor: Theme.of(context).colorScheme.onBackground,
+      // ),
     );
   }
 
-  static ThemeData darkThemeData() {
+  static ThemeData darkThemeData(BuildContext context) {
     return ThemeData(
       useMaterial3: true,
       colorScheme: darkColorScheme,

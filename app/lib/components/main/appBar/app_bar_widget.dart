@@ -30,7 +30,7 @@ class AppBarWidget extends AppBarBaseBuilder {
   }
 
   @override
-  AppBarWidget setBottom(Widget? bottom) {
+  AppBarWidget setBottom(PreferredSizeWidget? bottom) {
     _bottom = _bottom;
     return this;
   }

@@ -1,7 +1,6 @@
 import 'package:app/components/main/button/app_button_base_builder.dart';
 import 'package:app/components/main/listView/controllers/app_list_view_cubit.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
-import 'package:app/configs/di/di.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
@@ -35,26 +34,22 @@ class AppListWidget<BM extends BaseModel, BS extends AppListViewState<BM>,
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<BC>(),
-      child: BlocBuilder<BC, BS>(
-        builder: (BuildContext ctx, BS state) {
-          return SmartRefresher(
-            enablePullDown: true,
-            enablePullUp: true,
-            header: const MaterialClassicHeader(),
-            footer: const ClassicFooter(
-              loadStyle: LoadStyle.ShowWhenLoading,
-            ),
-            controller: _refreshController,
-            onRefresh: () => _onRefresh(ctx),
-            onLoading: () => _onLoadMore(ctx),
-            child: state.appException != null
-                ? _retry(ctx)
-                : _main(ctx, state.data),
-          );
-        },
-      ),
+    return BlocBuilder<BC, BS>(
+      builder: (BuildContext ctx, BS state) {
+        return SmartRefresher(
+          enablePullDown: true,
+          enablePullUp: true,
+          header: const MaterialClassicHeader(),
+          footer: const ClassicFooter(
+            loadStyle: LoadStyle.ShowWhenLoading,
+          ),
+          controller: _refreshController,
+          onRefresh: () => _onRefresh(ctx),
+          onLoading: () => _onLoadMore(ctx),
+          child:
+              state.appException != null ? _retry(ctx) : _main(ctx, state.data),
+        );
+      },
     );
   }
 
@@ -67,6 +62,7 @@ class AppListWidget<BM extends BaseModel, BS extends AppListViewState<BM>,
                     .setTextAlign(TextAlign.center)
                     .build(context))
         : ListView.builder(
+            shrinkWrap: true,
             controller: scrollController,
             scrollDirection: scrollDirection,
             reverse: reverse,

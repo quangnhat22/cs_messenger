@@ -37,7 +37,7 @@ abstract class AppBarBaseBuilder {
 
   AppBarBaseBuilder setFlexibleSpace(Widget? flexibleSpace);
 
-  AppBarBaseBuilder setBottom(Widget? bottom);
+  AppBarBaseBuilder setBottom(PreferredSizeWidget? bottom);
 
   PreferredSizeWidget build(BuildContext context);
 }

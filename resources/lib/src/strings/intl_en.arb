@@ -53,5 +53,13 @@
   "settings": "Settings",
   "noData": "No Data!",
   "retry": "Retry",
-  "serverError": "Server error"
+  "serverError": "Server error",
+  "search": "Search",
+  "recentCall": "Recent calls",
+  "listFriend": "List Friends",
+  "addNewContact": "Add new contact",
+  "requestFriend": "Request friend",
+  "searchFriend": "Search friend",
+  "createNewGroup": "Create new group",
+  "requestGroup": "Request Group"
 }

@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'app_router.gr.dart';
 
 @Singleton()
-@AutoRouterConfig()
+@AutoRouterConfig(replaceInRouteName: 'Page|Screen|View,Route')
 class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes => [
@@ -21,6 +21,7 @@ class AppRouter extends $AppRouter {
               page: FriendDashBoardRoute.page,
               children: [
                 AutoRoute(page: FriendListCallHistoryRoute.page),
+                AutoRoute(page: FriendListRoute.page),
               ],
             ),
             AutoRoute(page: GroupDashBoardRoute.page),
@@ -28,5 +29,12 @@ class AppRouter extends $AppRouter {
           ],
         ),
         AutoRoute(page: EditProfileRoute.page),
+        AutoRoute(page: FriendAddNewContactRoute.page),
+        AutoRoute(page: FriendRequestRoute.page, children: [
+          AutoRoute(page: FriendSentRequestRoute.page),
+          AutoRoute(page: FriendReceivedRequestRoute.page),
+        ]),
+        AutoRoute(page: GroupCreateRoute.page),
+        AutoRoute(page: GroupRequestRoute.page),
       ];
 }

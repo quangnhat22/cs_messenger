@@ -22,8 +22,8 @@ class App extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      theme: AppThemeData.lightThemeData(),
-      darkTheme: AppThemeData.darkThemeData(),
+      theme: AppThemeData.lightThemeData(context),
+      darkTheme: AppThemeData.darkThemeData(context),
       routerConfig: getIt<AppRouter>().config(),
       builder: AppLoadingOverlayWidget.init(),
     );

@@ -74,7 +74,8 @@ class AppTapBarWidget extends AppTabBaseBuilder {
                     ? Theme.of(context).colorScheme.background
                     : null)
                 .build(context),
-            SizedBox(width: AppSizeExt.of.majorScale(4)),
+            if (_numbers?[index] != null && _numbers![index] != 0)
+              SizedBox(width: AppSizeExt.of.majorScale(4)),
             if (_numbers?[index] != null && _numbers![index] != 0)
               Container(
                 decoration: BoxDecoration(

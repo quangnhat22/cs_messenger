@@ -10,10 +10,11 @@ class AppCardBorderWidget extends AppCardBaseBuilder {
       children: [
         InkWell(
           customBorder: RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(
-            top: _buildTopRadius(),
-            bottom: _buildBottomRadius(),
-          )),
+            borderRadius: BorderRadius.vertical(
+              top: _buildTopRadius(),
+              bottom: _buildBottomRadius(),
+            ),
+          ),
           onTap: _onTap,
           child: ListTile(
             enabled: _isDisabled ?? false,
@@ -25,7 +26,7 @@ class AppCardBorderWidget extends AppCardBaseBuilder {
         ),
         if (_isShowBottomDivider == true)
           AppDividerSpaceLeftWidget()
-              .setSpaceLeft(AppSizeExt.of.majorScale(17))
+              .setSpaceLeft(AppSizeExt.of.majorScale(14))
               .build(context)
       ],
     );

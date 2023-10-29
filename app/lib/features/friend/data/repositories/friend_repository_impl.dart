@@ -2,7 +2,6 @@ import 'package:app/features/friend/data/resources/friend_remote_data_source.dar
 import 'package:app/features/friend/domain/repositories/friend_repository.dart';
 import 'package:data/data.dart';
 import 'package:domain/domain.dart';
-
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: FriendRepository)
@@ -17,6 +16,18 @@ class FriendRepositoryImpl extends FriendRepository {
     try {
       final AppListResultRaw<HistoryCallRaw> remoteData =
           await _remote.fetchListCallHistory(query: query);
+      return remoteData.raw2Model();
+    } on NetworkException catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<AppListResultModel<RequestModel>> getListFriendRequest(
+      {required Map<String, dynamic> query}) async {
+    try {
+      final AppListResultRaw<RequestRaw> remoteData =
+          await _remote.fetchListFriendRequest(query: query);
       return remoteData.raw2Model();
     } on NetworkException catch (_) {
       rethrow;
