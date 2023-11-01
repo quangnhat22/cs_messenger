@@ -61,5 +61,9 @@
   "requestFriend": "Lời mời kết bạn",
   "searchFriend": "Tìm kiếm bạn bè",
   "createNewGroup": "Tạo nhóm mới",
-  "requestGroup": "Lời mời nhóm"
+  "requestGroup": "Lời mời nhóm",
+  "getConnectWithYourFriends": "Kết nối với \"network\" của bạn",
+  "signInWithEmail": "Đăng nhập với email",
+  "signInWithGoogle": "Đăng nhập với Google",
+  "signUpWithEmail": "Đăng ký với email"
 }

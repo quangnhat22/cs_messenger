@@ -52,6 +52,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Trải nghiệm sức mạnh của việc nhắn tin tức thời và cuộc gọi video rõ nét. Kết nối với mọi người trên toàn thế giới dễ dàng."),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("Quên mật khẩu"),
         "friends": MessageLookupByLibrary.simpleMessage("Bạn bè"),
+        "getConnectWithYourFriends": MessageLookupByLibrary.simpleMessage(
+            "Kết nối với \"network\" của bạn"),
         "groups": MessageLookupByLibrary.simpleMessage("Nhóm"),
         "home": MessageLookupByLibrary.simpleMessage("Trang chủ"),
         "invalidInput":
@@ -80,9 +82,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gửi email thành công"),
         "serverError": MessageLookupByLibrary.simpleMessage("Lỗi hệ thống"),
         "settings": MessageLookupByLibrary.simpleMessage("Cài đặt"),
+        "signInWithEmail":
+            MessageLookupByLibrary.simpleMessage("Đăng nhập với email"),
+        "signInWithGoogle":
+            MessageLookupByLibrary.simpleMessage("Đăng nhập với Google"),
         "signInYourAccountToSeeYourChatting":
             MessageLookupByLibrary.simpleMessage(
                 "Đăng nhập để kết nối với bạn bè"),
+        "signUpWithEmail":
+            MessageLookupByLibrary.simpleMessage("Đăng ký với email"),
         "skip": MessageLookupByLibrary.simpleMessage("Bỏ qua"),
         "startChattingWithANewAccount": MessageLookupByLibrary.simpleMessage(
             "Tạo tài khoản để bắt đầu kết nối với những người bạn"),

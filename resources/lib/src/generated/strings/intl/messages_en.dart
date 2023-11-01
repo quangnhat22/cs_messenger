@@ -54,6 +54,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password"),
         "friends": MessageLookupByLibrary.simpleMessage("Friends"),
+        "getConnectWithYourFriends": MessageLookupByLibrary.simpleMessage(
+            "Get connect with your friends"),
         "groups": MessageLookupByLibrary.simpleMessage("Groups"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "invalidInput": MessageLookupByLibrary.simpleMessage("Invalid Input"),
@@ -79,9 +81,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Send email success"),
         "serverError": MessageLookupByLibrary.simpleMessage("Server error"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "signInWithEmail":
+            MessageLookupByLibrary.simpleMessage("Sign in with email"),
+        "signInWithGoogle":
+            MessageLookupByLibrary.simpleMessage("Sign in with Google"),
         "signInYourAccountToSeeYourChatting":
             MessageLookupByLibrary.simpleMessage(
                 "Sign in your account to see your chatting"),
+        "signUpWithEmail":
+            MessageLookupByLibrary.simpleMessage("Sign up with email"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
         "startChattingWithANewAccount": MessageLookupByLibrary.simpleMessage(
             "Start chatting with a new account"),

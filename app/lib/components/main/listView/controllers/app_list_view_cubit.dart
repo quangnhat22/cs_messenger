@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:utilities/utilities.dart';
 
-part '../../../../generated/components/main/listView/controllers/app_list_view_cubit.freezed.dart';
+part 'app_list_view_cubit.freezed.dart';
 part 'app_list_view_state.dart';
 
 abstract class AppListViewCubit<BM extends BaseModel>

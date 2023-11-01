@@ -519,6 +519,46 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Kết nối với "network" của bạn`
+  String get getConnectWithYourFriends {
+    return Intl.message(
+      'Kết nối với "network" của bạn',
+      name: 'getConnectWithYourFriends',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Đăng nhập với email`
+  String get signInWithEmail {
+    return Intl.message(
+      'Đăng nhập với email',
+      name: 'signInWithEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Đăng nhập với Google`
+  String get signInWithGoogle {
+    return Intl.message(
+      'Đăng nhập với Google',
+      name: 'signInWithGoogle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Đăng ký với email`
+  String get signUpWithEmail {
+    return Intl.message(
+      'Đăng ký với email',
+      name: 'signUpWithEmail',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

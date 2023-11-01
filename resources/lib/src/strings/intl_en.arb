@@ -61,5 +61,9 @@
   "requestFriend": "Request friend",
   "searchFriend": "Search friend",
   "createNewGroup": "Create new group",
-  "requestGroup": "Request Group"
+  "requestGroup": "Request Group",
+  "getConnectWithYourFriends": "Get connect with your friends",
+  "signInWithEmail": "Sign in with email",
+  "signInWithGoogle": "Sign in with Google",
+  "signUpWithEmail": "Sign up with email"
 }
