@@ -1,7 +1,6 @@
 import 'package:app/components/main/listView/controllers/app_list_view_cubit.dart';
 import 'package:app/configs/exts/app_enum_exts.dart';
-import 'package:app/features/friend/domain/features/get_list_friend_request/get_list_friend_request_param.dart';
-import 'package:app/features/friend/domain/features/get_list_friend_request/get_list_friend_request_uc.dart';
+import 'package:app/features/friend/domain/usecases/get_list_friend_request_uc.dart';
 import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
 

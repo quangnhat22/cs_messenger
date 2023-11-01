@@ -1,106 +1,81 @@
 import 'package:app/components/features/scroll_view/scroll_view_widget.dart';
-import 'package:app/components/main/button/app_button_base_builder.dart';
-import 'package:app/components/main/divider/app_divider_base_builder.dart';
 import 'package:app/components/main/page/app_main_page_base_builder.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
+import 'package:app/configs/di/di.dart';
 import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/configs/theme/app_theme.dart';
+import 'package:app/features/auth/presentation/welcome/controllers/welcome/welcome_bloc.dart';
+import 'package:app/features/auth/presentation/welcome/widgets/welcome_buttons_widget.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
 
 @RoutePage()
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
 
-  void _handleSignInWithEmailBtn(BuildContext ctx) async {
-    await ctx.router.push(const LoginRoute());
-  }
-
-  void _handleSignInWithGoogle(BuildContext ctx) async {
-    await ctx.router.push(const HomeRoute());
-  }
-
-  void _handleSignUpWithEmailBtn(BuildContext ctx) async {
-    await ctx.router.push(const SignUpRoute());
-  }
-
   @override
   Widget build(BuildContext context) {
-    return AppStackPageWidget()
-        .setShowCircleBackgroundWidget(true)
-        .setBackgroundColorCircle(
-            Theme.of(context).colorScheme.tertiaryContainer)
-        .setBackgroundColor(Theme.of(context).colorScheme.background)
-        .setBody(_body(context))
-        .build(context);
+    return BlocProvider(
+      create: (_) => getIt<WelcomeBloc>()..add(const WelcomeEvent.started()),
+      child: AppStackPageWidget()
+          .setShowCircleBackgroundWidget(true)
+          .setBackgroundColorCircle(
+              Theme.of(context).colorScheme.tertiaryContainer)
+          .setBackgroundColor(Theme.of(context).colorScheme.background)
+          .setBody(_body(context))
+          .build(context),
+    );
   }
 
   Widget _body(BuildContext context) {
-    return SafeArea(
-      child: ScrollViewWidget(
-        child: Center(
-          child: Padding(
-            padding: EdgeInsets.all(
-              AppSizeExt.of.majorPaddingScale(6),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                R.pngs.welcomeBanner.image(
-                  height: AppSizeExt.of.majorScale(250 / 4),
+    return BlocConsumer<WelcomeBloc, WelcomeState>(
+      listener: (context, state) {
+        if (state.isFirstInstall) {
+          context.router.replace(const OnboardingRoute());
+        }
+      },
+      builder: (context, state) {
+        return SafeArea(
+          child: ScrollViewWidget(
+            child: Center(
+              child: Padding(
+                padding: EdgeInsets.all(
+                  AppSizeExt.of.majorPaddingScale(6),
                 ),
-                SizedBox(
-                  height: AppSizeExt.of.majorScale(4),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    R.pngs.welcomeBanner.image(
+                      height: AppSizeExt.of.majorScale(250 / 4),
+                    ),
+                    SizedBox(
+                      height: AppSizeExt.of.majorScale(4),
+                    ),
+                    AppTextHeadlineMediumWidget()
+                        .setText(R.strings.getConnectWithYourFriends)
+                        .setTextAlign(TextAlign.center)
+                        .setTextStyle(TextStyle(
+                            color: Theme.of(context).colorScheme.primary))
+                        .build(context),
+                    SizedBox(
+                      height: AppSizeExt.of.majorScale(8),
+                    ),
+                    (state.isLoading)
+                        ? Padding(
+                            padding: EdgeInsets.only(
+                                top: AppSizeExt.of.majorPaddingScale(10)),
+                            child: const CircularProgressIndicator(),
+                          )
+                        : const WelcomeButtonsWidget()
+                  ],
                 ),
-                AppTextHeadlineMediumWidget()
-                    .setText('Get connect with your friend')
-                    .setTextStyle(
-                        TextStyle(color: Theme.of(context).colorScheme.primary))
-                    .build(context),
-                SizedBox(
-                  height: AppSizeExt.of.majorScale(8),
-                ),
-                AppButtonOutlineWidget()
-                    .setButtonText('Sign in with email')
-                    .setPrefixIcon(
-                      Icon(
-                        Icons.email_outlined,
-                        size: AppSizeExt.of.majorScale(4),
-                      ),
-                    )
-                    .setBorderColor(Theme.of(context).colorScheme.primary)
-                    .setOnPressed(() => _handleSignInWithEmailBtn(context))
-                    .build(context),
-                SizedBox(
-                  height: AppSizeExt.of.majorScale(4),
-                ),
-                AppButtonOutlineWidget()
-                    .setButtonText('Sign in with Google')
-                    .setPrefixIcon(
-                        R.pngs.googleLogo.image(width: 16, height: 16))
-                    .setTextStyle(TextStyle(
-                        color: Theme.of(context).colorScheme.onSurface))
-                    .setOnPressed(() => _handleSignInWithGoogle(context))
-                    .build(context),
-                SizedBox(
-                  height: AppSizeExt.of.majorScale(5),
-                ),
-                AppDividerTextWidget().setText('Or').build(context),
-                SizedBox(
-                  height: AppSizeExt.of.majorScale(4),
-                ),
-                AppButtonTextWidget()
-                    .setButtonText('Sign up with your Email')
-                    .setTextStyle(
-                        TextStyle(color: Theme.of(context).colorScheme.primary))
-                    .setOnPressed(() => _handleSignUpWithEmailBtn(context))
-                    .build(context)
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

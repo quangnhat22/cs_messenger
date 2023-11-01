@@ -1,4 +1,3 @@
-import 'package:app/features/friend/domain/features/get_list_call_history/get_list_call_history_param.dart';
 import 'package:app/features/friend/domain/repositories/friend_repository.dart';
 import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';

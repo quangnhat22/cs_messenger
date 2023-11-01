@@ -33,9 +33,9 @@ dependencies:
   extended_image: ^8.1.1
   flutter_loadingindicator: ^1.0.1
   pull_to_refresh_flutter3: ^2.0.2
-  json_annotation: ^4.8.1
-  json_serializable: ^6.7.1
   flutter_speed_dial: ^7.0.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -43,8 +43,9 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   build_runner: ^2.4.6
   injectable_generator: ^2.4.0
-  freezed: ^2.4.1
   auto_route_generator: ^7.3.2
+  hive_generator: ^2.0.1
+  freezed: ^2.4.1
 
 flutter:
   uses-material-design: true
