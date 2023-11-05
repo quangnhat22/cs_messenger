@@ -1,9 +1,8 @@
 import 'package:domain/domain.dart';
 
 abstract class AuthRepository {
-  Future<AppObjResultModel<WelcomeModel>> checkIsFirstInstall();
-
-  Future<AppObjResultModel<EmptyModel>> updateValueFirstInstall();
+  
+  Future<AppObjResultModel<TokenModel>> getTokenFromLocal();
 
   Future<AppObjResultModel<EmptyModel>> signUpNewAccount(
       {required Map<String, dynamic> query});

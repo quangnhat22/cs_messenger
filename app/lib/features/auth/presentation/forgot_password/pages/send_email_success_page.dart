@@ -35,6 +35,5 @@ class SendEmailSuccessPage extends StatelessWidget {
             .build(context)
       ],
     );
-    ;
   }
 }

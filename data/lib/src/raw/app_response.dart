@@ -13,7 +13,7 @@ class Metadata {
 
   factory Metadata.fromJson(Map<String, dynamic> json) => Metadata(
         statusCode: json["statusCode"] ?? 0,
-        code: json["code"] ?? '',
+        code: json["code"]?.toString() ?? json["message"],
         message: json["message"] ?? '',
       );
 }
@@ -39,14 +39,14 @@ class AppResponse {
 
   factory AppResponse.fromJson(Map<String, dynamic> json) {
     return AppResponse(
-      meta: Metadata.fromJson(json['meta']),
+      meta: Metadata.fromJson(json['metadata']),
       data: json['result']['data'],
     );
   }
 
   static AppResponse fromJsonToList(Map<String, dynamic> json) {
     return AppResponse(
-      meta: Metadata.fromJson(json['meta']),
+      meta: Metadata.fromJson(json['metadata']),
       data: json['result']['data'] ?? List.empty(),
       extra: json['result']['extra'],
       page: json['result']['meta']['page'] ?? 0,

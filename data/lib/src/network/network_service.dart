@@ -66,7 +66,7 @@ class NetworkServiceImpl extends NetworkService {
     } on DioException catch (e) {
       Metadata? meta = (e.response?.data is Map<String, dynamic>)
           ? Metadata(
-              code: e.response?.data['code'],
+              code: e.response?.data['code'].toString(),
               message: e.response?.data['message'],
             )
           : Metadata(

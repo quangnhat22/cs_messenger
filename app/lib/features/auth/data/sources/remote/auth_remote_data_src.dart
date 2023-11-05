@@ -1,16 +1,21 @@
 import 'package:data/data.dart';
+import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class AuthRemoteDataSource {
   Future<AppObjResultRaw<TokenRaw>> registerNewAccount(
       {required Map<String, dynamic> body});
 
-  Future<AppObjResultRaw<TokenRaw>> loginWithGoogle(
-      {required Map<String, dynamic> body});
+  Future<AppObjResultRaw<TokenRaw>> loginUsingFirebaseToken(
+      {String? idToken, String? deviceId});
 }
 
 @Injectable(as: AuthRemoteDataSource)
 class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
+  late final NetworkService _networkService;
+
+  AuthRemoteDataSourceImpl(this._networkService);
+
   @override
   Future<AppObjResultRaw<TokenRaw>> registerNewAccount(
       {required Map<String, dynamic> body}) {
@@ -32,9 +37,22 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   }
 
   @override
-  Future<AppObjResultRaw<TokenRaw>> loginWithGoogle(
-      {required Map<String, dynamic> body}) {
-    // TODO: implement loginWithGoogle
-    throw UnimplementedError();
+  Future<AppObjResultRaw<TokenRaw>> loginUsingFirebaseToken(
+      {String? idToken, String? deviceId}) async {
+    try {
+      final AppResponse response = await _networkService.request(
+        clientRequest: ClientRequest(
+          url: ApiProvider.friendCallHistory,
+          method: HttpMethod.post,
+          body: {
+            "id_token": idToken,
+            "device_id": deviceId,
+          },
+        ),
+      );
+      return response.toRaw((data) => TokenRaw.fromJson(data));
+    } on NetworkException catch (_) {
+      rethrow;
+    }
   }
 }

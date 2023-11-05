@@ -14,7 +14,8 @@ class WelcomeButtonsWidget extends StatelessWidget {
   }
 
   void _handleSignInWithGoogle(BuildContext ctx) async {
-    await ctx.router.push(const HomeRoute());
+    // ctx.read<WelcomeBloc>().add(const WelcomeLoginWithGoogle());
+    await ctx.router.push(const MainRoute());
   }
 
   void _handleSignUpWithEmailBtn(BuildContext ctx) async {

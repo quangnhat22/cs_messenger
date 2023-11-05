@@ -6,7 +6,7 @@ class ApiProvider {
 
   //device
   static const String _deviceUrl = '/device';
-  static const String deviceRegister = '/$_deviceUrl/register';
+  static const String deviceRegister = '$_deviceUrl/register';
 
   //auth
   //TODO: mockApi
@@ -24,7 +24,7 @@ class Code extends HttpStatus {
 class ErrorCode {
   ErrorCode._();
 
-  static const String hiveError = 'hive_error';
-  static const String dioError = 'dio_error';
+  static const String hiveError = 'hive_error'; 
+  static const String dioError = 'dio_error';   
   static const String networkServiceError = 'network_service_error';
 }

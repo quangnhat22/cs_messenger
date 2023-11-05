@@ -31,9 +31,17 @@ class WelcomePage extends StatelessWidget {
 
   Widget _body(BuildContext context) {
     return BlocConsumer<WelcomeBloc, WelcomeState>(
-      listener: (context, state) {
+      listenWhen: (prev, current) =>
+          prev.isFirstInstall != current.isFirstInstall ||
+          prev.isAuthenticated != current.isAuthenticated,
+      listener: (context, state) async {
         if (state.isFirstInstall) {
-          context.router.replace(const OnboardingRoute());
+          await context.router.push(const OnboardingRoute());
+        }
+        if (state.isAuthenticated) {
+          if (context.mounted) {
+            await context.router.replace(const MainRoute());
+          }
         }
       },
       builder: (context, state) {

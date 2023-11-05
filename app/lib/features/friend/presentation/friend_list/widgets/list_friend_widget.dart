@@ -1,6 +1,5 @@
 import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/configs/theme/app_theme.dart';
-import 'package:app/features/friend/presentation/friend_calls/widgets/friend_call_list_call_history_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:resources/resources.dart';
 

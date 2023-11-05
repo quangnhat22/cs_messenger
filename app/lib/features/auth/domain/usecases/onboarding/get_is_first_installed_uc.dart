@@ -1,4 +1,4 @@
-import 'package:app/features/auth/domain/repositories/auth_repository.dart';
+import 'package:app/features/auth/domain/repositories/first_open_app_repository.dart';
 import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
 
@@ -7,7 +7,7 @@ abstract class GetIsFirstInstalledUseCase
 
 @Injectable(as: GetIsFirstInstalledUseCase)
 class GetIsFirstInstalledUseCaseImpl extends GetIsFirstInstalledUseCase {
-  final AuthRepository _repo;
+  final FirstOpenAppRepository _repo;
 
   GetIsFirstInstalledUseCaseImpl(this._repo);
 

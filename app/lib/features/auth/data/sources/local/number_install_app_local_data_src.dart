@@ -2,14 +2,14 @@ import 'package:data/data.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:injectable/injectable.dart';
 
-abstract class NumberInstallAppDataSource extends BaseObjectDao {
+abstract class NumberInstallAppLocalDataSource extends BaseObjectDao {
   Future<bool> getIsFirstInstall();
 
   Future<void> updateIsFirstInstall({bool? value = false});
 }
 
-@Singleton(as: NumberInstallAppDataSource)
-class NumberInstallAppDataSourceImpl extends NumberInstallAppDataSource {
+@Singleton(as: NumberInstallAppLocalDataSource)
+class NumberInstallAppDataSourceImpl extends NumberInstallAppLocalDataSource {
   static Box? _box;
   final String _boxName = "number_install_box";
 

@@ -1,37 +1,51 @@
-import 'package:app/features/auth/data/sources/number_install_app_data_src.dart';
+import 'package:app/features/auth/data/sources/firebase/auth_firebase_data_source.dart';
+import 'package:app/features/auth/data/sources/local/auth_local_data_src.dart';
+import 'package:app/features/auth/data/sources/remote/auth_remote_data_src.dart';
 import 'package:app/features/auth/domain/repositories/auth_repository.dart';
-import 'package:data/data.dart';
+import 'package:configs/configs.dart';
 import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: AuthRepository)
 class AuthRepositoryImpl extends AuthRepository {
-  final NumberInstallAppDataSource _numberInstallAppLocal;
+  late final AuthFirebaseDataSource _authFirebaseDataSource;
+  late final AuthRemoteDataSource _authRemoteDataSource;
+  late final AuthLocalDataSource _authLocalDataSource;
 
-  AuthRepositoryImpl(this._numberInstallAppLocal);
+  AuthRepositoryImpl(
+    this._authFirebaseDataSource,
+    this._authRemoteDataSource,
+    this._authLocalDataSource,
+  );
 
   @override
-  Future<AppObjResultModel<WelcomeModel>> checkIsFirstInstall() async {
+  Future<AppObjResultModel<TokenModel>> getTokenFromLocal() async {
     try {
-      final isFirstInstallApp =
-          await _numberInstallAppLocal.getIsFirstInstall();
-      return Future.value(
-        AppObjResultRaw(netData: WelcomeRaw(isFirstInstall: isFirstInstallApp))
-            .raw2Model(),
-      );
-    } catch (_) {
+      final tokenRaw = await _authLocalDataSource.getToken();
+      return tokenRaw.raw2Model();
+    } on LocalException catch (_) {
       rethrow;
     }
   }
 
   @override
-  Future<AppObjResultModel<EmptyModel>> updateValueFirstInstall() async {
+  Future<AppObjResultModel<EmptyModel>> loginWithGoogle() async {
     try {
-      await _numberInstallAppLocal.updateIsFirstInstall();
-      return Future.value(
-        AppObjResultRaw(netData: EmptyRaw()).raw2Model(),
-      );
-    } catch (_) {
+      final userCredential = await _authFirebaseDataSource.signInWithGoogle();
+      final idToken = await userCredential.user?.getIdToken();
+      if (idToken != null) {
+        final deviceInfo = await DeviceInfo.getDeviceInfo();
+        final deviceId = deviceInfo["deviceID"];
+
+        final remoteData = await _authRemoteDataSource.loginUsingFirebaseToken(
+            idToken: idToken, deviceId: deviceId);
+
+        await _authLocalDataSource.saveToken(
+            token: remoteData.netData?.accessToken ?? '',
+            refreshToken: remoteData.netData?.refreshToken ?? '');
+      }
+      return AppObjResultModel<EmptyModel>(netData: EmptyModel());
+    } on NetworkException catch (_) {
       rethrow;
     }
   }
@@ -47,12 +61,6 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<AppObjResultModel<EmptyModel>> loginWithEmail(
       {required Map<String, dynamic> query}) {
     // TODO: implement loginWithEmail
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<AppObjResultModel<EmptyModel>> loginWithGoogle() {
-    // TODO: implement loginWithGoogle
     throw UnimplementedError();
   }
 

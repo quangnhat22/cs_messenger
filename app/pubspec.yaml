@@ -36,6 +36,8 @@ dependencies:
   flutter_speed_dial: ^7.0.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  firebase_auth: ^4.12.1
+  google_sign_in: ^6.1.5
 
 dev_dependencies:
   flutter_test:
