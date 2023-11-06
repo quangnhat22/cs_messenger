@@ -94,12 +94,12 @@ class AppExceptionExt {
   }
 
   Future<void> _handleForceLogOut() async {
-    // try {
-    //   final forceLogOutUseCase = Get.find<ForceLogOutUseCase>();
-    //   await forceLogOutUseCase.executeObj();
-    //   Get.offAllNamed(Routes.welcome);
-    // } on LocalException catch (e) {
-    //   AppExceptionExt(appException: e).detected();
-    // }
+    try {
+      final forceLogOutUseCase = getIt<ForceLogOutUseCase>();
+      await forceLogOutUseCase.executeObj();
+      await getIt<AppRouter>().replace(const WelcomeRoute());
+    } on LocalException catch (e) {
+      AppExceptionExt(appException: e).detected();
+    }
   }
 }

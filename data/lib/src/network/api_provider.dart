@@ -2,7 +2,7 @@ part of 'network_service.dart';
 
 class ApiProvider {
   static const String mockServerUrl =
-      'https://a1afaa79-1f27-4121-978a-ec6e2ef712d4.mock.pstmn.io';
+      'https://166706c7-b0dd-4262-a9a8-9e7b5f3dd1be.mock.pstmn.io';
 
   //device
   static const String _deviceUrl = '/device';
@@ -24,7 +24,7 @@ class Code extends HttpStatus {
 class ErrorCode {
   ErrorCode._();
 
-  static const String hiveError = 'hive_error'; 
-  static const String dioError = 'dio_error';   
+  static const String hiveError = 'hive_error';
+  static const String dioError = 'dio_error';
   static const String networkServiceError = 'network_service_error';
 }

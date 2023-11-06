@@ -29,6 +29,16 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
+  Future<AppObjResultModel<EmptyModel>> forceLogOut() async {
+    try {
+      await _authLocalDataSource.clearToken();
+      return AppObjResultModel(netData: EmptyModel());
+    } on LocalException catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
   Future<AppObjResultModel<EmptyModel>> loginWithGoogle() async {
     try {
       final userCredential = await _authFirebaseDataSource.signInWithGoogle();

@@ -1,6 +1,8 @@
 import 'package:app/components/main/card/app_card_base_builder.dart';
 import 'package:app/components/main/page/app_main_page_base_builder.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
+import 'package:app/configs/di/di.dart';
+import 'package:app/configs/routes/app_router.dart';
 import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:app/features/setting/presentation/dashboard/widgets/setting_short_user_info_widget.dart';
@@ -60,7 +62,7 @@ class SettingDashBoardPage extends StatelessWidget {
                               .build(ctx))
                           .setIsShowBottomDivider(true)
                           .setOnTap(() {
-                        ctx.router.push(const EditProfileRoute());
+                        getIt<AppRouter>().push(const EditProfileRoute());
                       }).build(ctx),
                       AppCardBorderWidget()
                           .setLeading(

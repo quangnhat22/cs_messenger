@@ -96,6 +96,9 @@ class AppDefaultDialogWidget extends AppDialogBaseBuilder {
                     ? Expanded(
                         child: AppButtonFilledWidget()
                             .setButtonText(_positiveText)
+                            .setTextStyle(TextStyle(
+                                color:
+                                    Theme.of(context).colorScheme.background))
                             .setAppButtonSize(AppButtonSize.large)
                             .setAppButtonType(AppButtonType.danger)
                             .setOnPressed(() {

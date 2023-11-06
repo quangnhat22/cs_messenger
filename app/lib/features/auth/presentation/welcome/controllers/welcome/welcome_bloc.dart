@@ -1,6 +1,6 @@
 import 'package:app/components/main/dialog/app_dialog_base_builder.dart';
 import 'package:app/configs/exts/app_exts.dart';
-import 'package:app/features/auth/domain/usecases/auth/check_authenticated_usecase.dart';
+import 'package:app/features/auth/domain/usecases/auth/check_authenticated_uc.dart';
 import 'package:app/features/auth/domain/usecases/auth/login_with_google_uc.dart';
 import 'package:app/features/auth/domain/usecases/onboarding/get_id_remote_device.dart';
 import 'package:app/features/auth/domain/usecases/onboarding/get_is_first_installed_uc.dart';
@@ -58,8 +58,8 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
           await _registerDeviceUseCase.executeObj();
         }
         final tokenModel = await _checkAuthenticatedUseCase.executeObj();
-        if (tokenModel.netData?.accessToken == '' &&
-            tokenModel.netData?.refreshToken == '') {
+        if (tokenModel.netData?.accessToken != '' &&
+            tokenModel.netData?.refreshToken != '') {
           emit(state.copyWith(isAuthenticated: true));
         }
       }
