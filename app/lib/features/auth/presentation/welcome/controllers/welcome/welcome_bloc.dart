@@ -50,20 +50,13 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
           idRemoteDeviceModel.netData?.id != '';
 
       if (isFirstInstall) {
-        emit(state.copyWith(
-          isFirstInstall: isFirstInstall,
-        ));
+        emit(state.copyWith(isFirstInstall: isFirstInstall));
       } else {
         if (!isHasDeviceId) {
           await _registerDeviceUseCase.executeObj();
         }
-        final tokenModel = await _checkAuthenticatedUseCase.executeObj();
-        if (tokenModel.netData?.accessToken != '' &&
-            tokenModel.netData?.refreshToken != '') {
-          emit(state.copyWith(isAuthenticated: true));
-        }
+        await _checkAuthenticated();
       }
-
       emit(state.copyWith(isLoading: false));
     } on AppException catch (e) {
       emit(state.copyWith(isLoading: false));
@@ -86,13 +79,10 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
   Future<void> _loginWithGoogle(
       WelcomeLoginWithGoogle event, Emitter<WelcomeState> emit) async {
     try {
-      emit(state.copyWith(
-        isLoading: true,
-      ));
+      emit(state.copyWith(isLoading: true));
       _loginWithGoogleUseCase.executeObj();
-      emit(state.copyWith(
-        isLoading: false,
-      ));
+      await _checkAuthenticated();
+      emit(state.copyWith(isLoading: false));
     } on AppException catch (e) {
       AppExceptionExt(
         appException: e,
@@ -102,6 +92,18 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
           ));
         },
       ).detected();
+    }
+  }
+
+  Future<void> _checkAuthenticated() async {
+    try {
+      final tokenModel = await _checkAuthenticatedUseCase.executeObj();
+      if (tokenModel.netData?.accessToken != '' &&
+          tokenModel.netData?.refreshToken != '') {
+        emit(state.copyWith(isAuthenticated: true));
+      }
+    } catch (_) {
+      rethrow;
     }
   }
 }

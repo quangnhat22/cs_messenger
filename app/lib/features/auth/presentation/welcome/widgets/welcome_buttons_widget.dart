@@ -2,8 +2,10 @@ import 'package:app/components/main/button/app_button_base_builder.dart';
 import 'package:app/components/main/divider/app_divider_base_builder.dart';
 import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/configs/theme/app_theme.dart';
+import 'package:app/features/auth/presentation/welcome/controllers/welcome/welcome_bloc.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
 
 class WelcomeButtonsWidget extends StatelessWidget {
@@ -14,8 +16,8 @@ class WelcomeButtonsWidget extends StatelessWidget {
   }
 
   void _handleSignInWithGoogle(BuildContext ctx) async {
-    // ctx.read<WelcomeBloc>().add(const WelcomeLoginWithGoogle());
-    await ctx.router.push(const MainRoute());
+    ctx.read<WelcomeBloc>().add(const WelcomeLoginWithGoogle());
+
   }
 
   void _handleSignUpWithEmailBtn(BuildContext ctx) async {

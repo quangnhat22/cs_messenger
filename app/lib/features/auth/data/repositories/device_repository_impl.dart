@@ -34,7 +34,7 @@ class DeviceRepositoryImpl implements DeviceRepository {
   @override
   Future<AppObjResultModel<DeviceIdModel>> getIdRemoteDevice() async {
     try {
-      final idRemoteDevice = await _local.getDevideId();
+      final idRemoteDevice = await _local.getDeviceId();
 
       return AppObjResultModel(
           netData: DeviceIdModel(id: idRemoteDevice ?? ''));

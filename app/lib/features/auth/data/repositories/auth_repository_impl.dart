@@ -1,8 +1,8 @@
 import 'package:app/features/auth/data/sources/firebase/auth_firebase_data_source.dart';
 import 'package:app/features/auth/data/sources/local/auth_local_data_src.dart';
+import 'package:app/features/auth/data/sources/local/device_info_local_data_src.dart';
 import 'package:app/features/auth/data/sources/remote/auth_remote_data_src.dart';
 import 'package:app/features/auth/domain/repositories/auth_repository.dart';
-import 'package:configs/configs.dart';
 import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
 
@@ -11,11 +11,13 @@ class AuthRepositoryImpl extends AuthRepository {
   late final AuthFirebaseDataSource _authFirebaseDataSource;
   late final AuthRemoteDataSource _authRemoteDataSource;
   late final AuthLocalDataSource _authLocalDataSource;
+  late final DeviceInfoLocalDataSource _deviceInfoLocalDataSource;
 
   AuthRepositoryImpl(
     this._authFirebaseDataSource,
     this._authRemoteDataSource,
     this._authLocalDataSource,
+    this._deviceInfoLocalDataSource,
   );
 
   @override
@@ -44,8 +46,7 @@ class AuthRepositoryImpl extends AuthRepository {
       final userCredential = await _authFirebaseDataSource.signInWithGoogle();
       final idToken = await userCredential.user?.getIdToken();
       if (idToken != null) {
-        final deviceInfo = await DeviceInfo.getDeviceInfo();
-        final deviceId = deviceInfo["deviceID"];
+        final deviceId = await _deviceInfoLocalDataSource.getDeviceId();
 
         final remoteData = await _authRemoteDataSource.loginUsingFirebaseToken(
             idToken: idToken, deviceId: deviceId);

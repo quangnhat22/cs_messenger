@@ -4,7 +4,8 @@ import 'package:injectable/injectable.dart';
 
 abstract class DeviceInfoLocalDataSource extends BaseObjectDao {
   Future<void> setDeviceId(String? deviceId);
-  Future<String?> getDevideId();
+
+  Future<String?> getDeviceId();
 }
 
 @LazySingleton(as: DeviceInfoLocalDataSource)
@@ -29,7 +30,7 @@ class DeviceInfoLocalDataSourceImpl extends DeviceInfoLocalDataSource {
   }
 
   @override
-  Future<String?> getDevideId() async {
+  Future<String?> getDeviceId() async {
     return await openBox().then((box) {
       return box.get(_deviceInfoKey, defaultValue: null);
     });

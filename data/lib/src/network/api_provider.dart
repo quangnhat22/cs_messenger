@@ -1,14 +1,17 @@
 part of 'network_service.dart';
 
 class ApiProvider {
-  static const String mockServerUrl =
-      'https://166706c7-b0dd-4262-a9a8-9e7b5f3dd1be.mock.pstmn.io';
+  //auth
+  static const String _auth = '/auth';
+  static const String loginFirebase = '$_auth/firebase/login';
 
   //device
   static const String _deviceUrl = '/device';
   static const String deviceRegister = '$_deviceUrl/register';
 
-  //auth
+  static const String mockServerUrl =
+      'https://166706c7-b0dd-4262-a9a8-9e7b5f3dd1be.mock.pstmn.io';
+
   //TODO: mockApi
   static const String friendCallHistory = "$mockServerUrl/friend/call-history";
   static const String friendRequest = "$mockServerUrl/friend/friend-request";

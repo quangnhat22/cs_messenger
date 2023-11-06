@@ -42,7 +42,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
     try {
       final AppResponse response = await _networkService.request(
         clientRequest: ClientRequest(
-          url: ApiProvider.friendCallHistory,
+          url: ApiProvider.loginFirebase,
           method: HttpMethod.post,
           body: {
             "id_token": idToken,
