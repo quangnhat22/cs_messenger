@@ -65,5 +65,6 @@
   "getConnectWithYourFriends": "Get connect with your friends",
   "signInWithEmail": "Sign in with email",
   "signInWithGoogle": "Sign in with Google",
-  "signUpWithEmail": "Sign up with email"
+  "signUpWithEmail": "Sign up with email",
+  "emailValidate": "The email address is badly formatted."
 }

@@ -65,5 +65,6 @@
   "getConnectWithYourFriends": "Kết nối với \"network\" của bạn",
   "signInWithEmail": "Đăng nhập với email",
   "signInWithGoogle": "Đăng nhập với Google",
-  "signUpWithEmail": "Đăng ký với email"
+  "signUpWithEmail": "Đăng ký với email",
+  "emailValidate": "Địa chỉ email khong hợp lệ."
 }

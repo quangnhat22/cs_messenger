@@ -559,6 +559,16 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Địa chỉ email khong hợp lệ.`
+  String get emailValidate {
+    return Intl.message(
+      'Địa chỉ email khong hợp lệ.',
+      name: 'emailValidate',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

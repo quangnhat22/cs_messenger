@@ -47,6 +47,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "doYouWantToLogOut":
             MessageLookupByLibrary.simpleMessage("Bạn có muốn đăng xuất?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "emailValidate":
+            MessageLookupByLibrary.simpleMessage("Địa chỉ email khong hợp lệ."),
         "error": MessageLookupByLibrary.simpleMessage("Lỗi"),
         "experienceThePower": MessageLookupByLibrary.simpleMessage(
             "Trải nghiệm sức mạnh của việc nhắn tin tức thời và cuộc gọi video rõ nét. Kết nối với mọi người trên toàn thế giới dễ dàng."),

@@ -51,7 +51,7 @@ class SignUpPage extends StatelessWidget {
                         height: AppSizeExt.of.majorScale(4),
                       ),
                       AppTextFieldWidget()
-                          .setBloc(context.read<SignUpFormBloc>().email)
+                          .setBloc(context.read<SignUpFormBloc>().password)
                           .setSuffixButton(SuffixButton.obscureText)
                           .setAutoFillHints([AutofillHints.password])
                           .setDecoration(
@@ -65,7 +65,8 @@ class SignUpPage extends StatelessWidget {
                         height: AppSizeExt.of.majorScale(4),
                       ),
                       AppTextFieldWidget()
-                          .setBloc(context.read<SignUpFormBloc>().email)
+                          .setBloc(
+                              context.read<SignUpFormBloc>().confirmPassword)
                           .setSuffixButton(SuffixButton.obscureText)
                           .setAutoFillHints([AutofillHints.password])
                           .setDecoration(

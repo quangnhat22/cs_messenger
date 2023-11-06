@@ -48,6 +48,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "doYouWantToLogOut":
             MessageLookupByLibrary.simpleMessage("Do you want to log out?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "emailValidate": MessageLookupByLibrary.simpleMessage(
+            "The email address is badly formatted."),
         "error": MessageLookupByLibrary.simpleMessage("Error"),
         "experienceThePower": MessageLookupByLibrary.simpleMessage(
             "Experience the power of instant messaging and crystal-clear video calls. Connect with people across the globe with ease."),
