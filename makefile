@@ -22,6 +22,9 @@ build-runner:
 	@melos build-resources
 	@melos gen-strings
 
+app-build-runner:
+	@melos build-app
+
 build-string: 
 	@melos gen-strings
 

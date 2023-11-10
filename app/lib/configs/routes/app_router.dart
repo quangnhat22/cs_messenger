@@ -13,7 +13,9 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: WelcomeRoute.page, initial: true),
         AutoRoute(page: OnboardingRoute.page),
         AutoRoute(page: LoginRoute.page),
+        AutoRoute(page: VerifyEmailRoute.page),
         AutoRoute(page: ForgotPasswordRoute.page),
+        AutoRoute(page: SendEmailSuccessRoute.page),
         AutoRoute(page: SignUpRoute.page),
         AutoRoute(page: UIKitDemoRoute.page),
         AutoRoute(

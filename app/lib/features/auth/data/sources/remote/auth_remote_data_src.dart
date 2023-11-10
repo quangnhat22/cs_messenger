@@ -3,11 +3,19 @@ import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class AuthRemoteDataSource {
-  Future<AppObjResultRaw<TokenRaw>> registerNewAccount(
+  Future<AppObjResultRaw<EmptyRaw>> registerNewAccount(
       {required Map<String, dynamic> body});
 
   Future<AppObjResultRaw<TokenRaw>> loginUsingFirebaseToken(
       {String? idToken, String? deviceId});
+
+  Future<AppObjResultRaw<TokenRaw>> loginByEmailAndPassword(
+      {required Map<String, dynamic> body});
+
+  Future<AppObjResultRaw<EmptyRaw>> verifyEmail(String code);
+
+  Future<AppObjResultRaw<EmptyRaw>> forgotPassword(
+      {required Map<String, dynamic> body});
 }
 
 @Injectable(as: AuthRemoteDataSource)
@@ -17,23 +25,20 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   AuthRemoteDataSourceImpl(this._networkService);
 
   @override
-  Future<AppObjResultRaw<TokenRaw>> registerNewAccount(
-      {required Map<String, dynamic> body}) {
-    // try {
-    //   final AppResponse response = await _service.request(
-    //     clientRequest: ClientRequest(
-    //       url: ApiProvider.friendCallHistory,
-    //       method: HttpMethod.get,
-    //       query: query,
-    //       isRequestForList: true,
-    //     ),
-    //   );
-    //   return response.toRawList((data) => (data as List<dynamic>)
-    //       .map((item) => HistoryCallRaw.fromJson(item))
-    //       .toList());
-    // } on NetworkException catch (_) {
-    //   rethr
-    throw UnimplementedError();
+  Future<AppObjResultRaw<EmptyRaw>> registerNewAccount(
+      {required Map<String, dynamic> body}) async {
+    try {
+      final AppResponse response = await _networkService.request(
+        clientRequest: ClientRequest(
+          url: ApiProvider.signUpWithEmail,
+          method: HttpMethod.post,
+          body: body,
+        ),
+      );
+      return response.toRaw((data) => EmptyRaw());
+    } on NetworkException catch (e) {
+      rethrow;
+    }
   }
 
   @override
@@ -51,6 +56,57 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
         ),
       );
       return response.toRaw((data) => TokenRaw.fromJson(data));
+    } on NetworkException catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<AppObjResultRaw<TokenRaw>> loginByEmailAndPassword(
+      {required Map<String, dynamic> body}) async {
+    try {
+      final AppResponse response = await _networkService.request(
+        clientRequest: ClientRequest(
+          url: ApiProvider.loginByEmailAndPassword,
+          method: HttpMethod.post,
+          body: body,
+        ),
+      );
+      return response.toRaw((data) => TokenRaw.fromJson(data));
+    } on NetworkException catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<AppObjResultRaw<EmptyRaw>> verifyEmail(String code) async {
+    // try {
+    //   final AppResponse response = await _networkService.request(
+    //     clientRequest: ClientRequest(
+    //       url: ApiProvider.verifyEmail,
+    //       method: HttpMethod.get,
+    //       query: {"code": code},
+    //     ),
+    //   );
+    //   return response.toRaw((data) => EmptyRaw());
+    // } on NetworkException catch (_) {
+    //   rethrow;
+    // }
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<AppObjResultRaw<EmptyRaw>> forgotPassword(
+      {required Map<String, dynamic> body}) async {
+    try {
+      final AppResponse response = await _networkService.request(
+        clientRequest: ClientRequest(
+          url: ApiProvider.forgetPassword,
+          method: HttpMethod.post,
+          body: body,
+        ),
+      );
+      return response.toRaw((data) => EmptyRaw());
     } on NetworkException catch (_) {
       rethrow;
     }

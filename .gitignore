@@ -36,3 +36,4 @@ build/
 .fvm/
 *.g.dart
 *.freezed.dart
+*.config.dart

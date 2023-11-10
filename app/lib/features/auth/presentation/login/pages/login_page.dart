@@ -3,8 +3,11 @@ import 'package:app/components/main/button/app_button_base_builder.dart';
 import 'package:app/components/main/page/app_main_page_base_builder.dart';
 import 'package:app/components/main/textField/app_field_base_builder.dart';
 import 'package:app/configs/di/di.dart';
+import 'package:app/configs/exts/app_exts.dart';
+import 'package:app/configs/routes/app_router.dart';
+import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/configs/theme/app_theme.dart';
-import 'package:app/features/auth/presentation/login/controllers/login_form_bloc/login_form_bloc.dart';
+import 'package:app/features/auth/presentation/login/controllers/login_form_bloc.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
@@ -17,9 +20,17 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<LoginFormBloc>(),
+      create: (_) => getIt<LoginFormBloc>(),
       child: AppMainPageWidget().setBody(_body(context)).build(context),
     );
+  }
+
+  void _handleOnSubmitButton(BuildContext context) {
+    context.read<LoginFormBloc>().submit();
+  }
+
+  void _handleForgotPasswordButton(BuildContext context) async {
+    await getIt<AppRouter>().push(const ForgotPasswordRoute());
   }
 
   Widget _body(BuildContext context) {
@@ -51,13 +62,14 @@ class LoginPage extends StatelessWidget {
                         height: AppSizeExt.of.majorScale(4),
                       ),
                       AppTextFieldWidget()
-                          .setBloc(context.read<LoginFormBloc>().email)
+                          .setBloc(context.read<LoginFormBloc>().password)
                           .setSuffixButton(SuffixButton.obscureText)
                           .setAutoFillHints([AutofillHints.password])
                           .setDecoration(
                             InputDecoration(
                               labelText: R.strings.password,
                               prefixIcon: const Icon(Icons.lock_outline),
+                              errorMaxLines: AppFormKeys.maxLineErrorText,
                             ),
                           )
                           .build(context),
@@ -72,7 +84,8 @@ class LoginPage extends StatelessWidget {
                               .setTextStyle(TextStyle(
                                 color: Theme.of(context).colorScheme.primary,
                               ))
-                              .setOnPressed(() {})
+                              .setOnPressed(
+                                  () => _handleForgotPasswordButton(context))
                               .build(context),
                         ],
                       )
@@ -85,7 +98,7 @@ class LoginPage extends StatelessWidget {
                   .setTextStyle(TextStyle(
                       color: Theme.of(context).colorScheme.background))
                   .setAppButtonSize(AppButtonSize.large)
-                  .setOnPressed(() {})
+                  .setOnPressed(() => _handleOnSubmitButton(context))
                   .build(context),
             ],
           ),

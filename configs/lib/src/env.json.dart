@@ -346,7 +346,8 @@ class _SampleEnvGenerator extends _FileGenerator {
       "dartDefine": {
         "flavor": "dev",
         "apiDomain": "https://sample.io",
-        "secureStorageName": "sample"
+        "secureStorageName": "sample".
+        "googleClientId":"",
       },
       "nativeDefine": {
         "appName": "Sample",

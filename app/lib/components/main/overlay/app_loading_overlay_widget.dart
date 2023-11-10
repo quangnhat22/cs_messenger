@@ -10,7 +10,7 @@ class AppLoadingOverlayWidget {
   static void configure(BuildContext context) {
     EasyLoading.instance
       ..displayDuration = const Duration(milliseconds: 2000)
-      ..indicatorType = EasyLoadingIndicatorType.ring
+      ..indicatorType = EasyLoadingIndicatorType.fadingCube
       ..loadingStyle = EasyLoadingStyle.custom
       ..maskType = EasyLoadingMaskType.custom
       ..indicatorSize = AppSizeExt.of.majorScale(12)

@@ -1,7 +1,11 @@
 import 'package:app/components/main/dialog/app_dialog_base_builder.dart';
+import 'package:app/configs/di/di.dart';
 import 'package:app/configs/exts/app_exts.dart';
+import 'package:app/configs/routes/app_router.dart';
+import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/features/auth/domain/usecases/auth/check_authenticated_uc.dart';
 import 'package:app/features/auth/domain/usecases/auth/login_with_google_uc.dart';
+import 'package:app/features/auth/domain/usecases/email/get_verify_email_token_uc.dart';
 import 'package:app/features/auth/domain/usecases/onboarding/get_id_remote_device.dart';
 import 'package:app/features/auth/domain/usecases/onboarding/get_is_first_installed_uc.dart';
 import 'package:app/features/auth/domain/usecases/onboarding/register_device_uc.dart';
@@ -22,6 +26,7 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
   late final RegisterDeviceUseCase _registerDeviceUseCase;
   late final CheckAuthenticatedUseCase _checkAuthenticatedUseCase;
   late final LoginWithGoogleUseCase _loginWithGoogleUseCase;
+  late final GetVerifyEmailTokenUseCase _getVerifyEmailTokenUseCase;
 
   WelcomeBloc(
     this._getIsFirstInstalledUseCase,
@@ -29,6 +34,7 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
     this._getIdRemoteDeviceUseCase,
     this._checkAuthenticatedUseCase,
     this._registerDeviceUseCase,
+    this._getVerifyEmailTokenUseCase,
   ) : super(const WelcomeState.initial()) {
     on<WelcomeEvent>((event, emit) async {
       await event.map(
@@ -55,7 +61,17 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
         if (!isHasDeviceId) {
           await _registerDeviceUseCase.executeObj();
         }
-        await _checkAuthenticated();
+
+        final verifyEmailToken = await _getVerifyEmailTokenUseCase.executeObj();
+
+        if (verifyEmailToken.netData?.token?.accessToken != null &&
+            verifyEmailToken.netData!.token!.accessToken!.isNotEmpty) {
+          //open verify email page
+          getIt<AppRouter>()
+              .push(VerifyEmailRoute(isFirstRequestSendEmail: false));
+        } else {
+          await _checkAuthenticated();
+        }
       }
       emit(state.copyWith(isLoading: false));
     } on AppException catch (e) {

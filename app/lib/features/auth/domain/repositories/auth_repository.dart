@@ -13,18 +13,13 @@ abstract class AuthRepository {
   Future<AppObjResultModel<EmptyModel>> loginWithEmail(
       {required Map<String, dynamic> query});
 
-  Future<AppObjResultModel<EmptyModel>> sendEmailResetPassword(
+  Future<AppObjResultModel<EmptyModel>> loginWithEmailUnVerify(
       {required Map<String, dynamic> query});
 
-  Future<AppObjResultModel<EmptyModel>> reSendEmailResetPassword(
-      {required Map<String, dynamic> query});
+  Future<AppObjResultModel<EmailVerifyModel>> getEmailVerifyToken();
 
-  Future<AppObjResultModel<EmptyModel>> updateAccountPassword(
-      {required Map<String, dynamic> query});
+  Future<AppObjResultModel<EmptyModel>> verifyEmail();
 
-  Future<AppObjResultModel<EmptyModel>> updateNewPassword(
-      {required Map<String, dynamic> query});
-
-  Future<AppObjResultModel<EmptyModel>> logOut(
+  Future<AppObjResultModel<EmptyModel>> forgotPassword(
       {required Map<String, dynamic> query});
 }

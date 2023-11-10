@@ -23,7 +23,10 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m0(app) =>
       "Bỏ qua khoảng cách với ${app}. Chia sẻ những kỉ niệm, gửi tin nhắn và video call, bất kể bạn đang ở đâu.";
 
-  static String m1(app) => "Chào mừng đến với ${app}";
+  static String m1(email, expireTime) =>
+      "Vui lòng mở \"${email}\" để xác minh tài khoản. Vui lòng xác nhận tài khoản trước \$${expireTime}, nếu không tài khoản của bạn có thể bị mất!";
+
+  static String m2(app) => "Chào mừng đến với ${app}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -37,8 +40,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("Xác nhận"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Xác nhận mật khẩu"),
+        "confirmPasswordNotMatch": MessageLookupByLibrary.simpleMessage(
+            "Xác nhận mật khẩu không trùng với Mật khẩu"),
         "connectingPeopleAnytimeAnywhere": MessageLookupByLibrary.simpleMessage(
             "Kết nối với bạn bè ở mọi lúc, mọi Nơi"),
+        "createAccountSuccess": MessageLookupByLibrary.simpleMessage(
+            "Tạo tài khoản thành công! Vui lòng đăng nhập để tiếp tục."),
         "createNewGroup": MessageLookupByLibrary.simpleMessage("Tạo nhóm mới"),
         "dataConflict":
             MessageLookupByLibrary.simpleMessage("Dữ liệu đã tồn tại"),
@@ -50,36 +57,49 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailValidate":
             MessageLookupByLibrary.simpleMessage("Địa chỉ email khong hợp lệ."),
         "error": MessageLookupByLibrary.simpleMessage("Lỗi"),
+        "errorOccurred": MessageLookupByLibrary.simpleMessage(
+            "Đã có lỗi xảy ra! Vui lòng thử lại sau."),
         "experienceThePower": MessageLookupByLibrary.simpleMessage(
             "Trải nghiệm sức mạnh của việc nhắn tin tức thời và cuộc gọi video rõ nét. Kết nối với mọi người trên toàn thế giới dễ dàng."),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("Quên mật khẩu"),
         "friends": MessageLookupByLibrary.simpleMessage("Bạn bè"),
         "getConnectWithYourFriends": MessageLookupByLibrary.simpleMessage(
             "Kết nối với \"network\" của bạn"),
+        "gotIt": MessageLookupByLibrary.simpleMessage("Hiểu rồi"),
         "groups": MessageLookupByLibrary.simpleMessage("Nhóm"),
         "home": MessageLookupByLibrary.simpleMessage("Trang chủ"),
         "invalidInput":
             MessageLookupByLibrary.simpleMessage("Input không hợp lệ"),
         "language": MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "listFriend": MessageLookupByLibrary.simpleMessage("Danh sách bạn bè"),
+        "logOut": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
         "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
         "next": MessageLookupByLibrary.simpleMessage("Tiếp tục"),
         "noData": MessageLookupByLibrary.simpleMessage(" Không có dữ liệu!"),
         "openEmailApp":
             MessageLookupByLibrary.simpleMessage("Mở ứng dụng Email"),
+        "or": MessageLookupByLibrary.simpleMessage("Hoặc"),
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
+        "passwordValidate": MessageLookupByLibrary.simpleMessage(
+            "Mật khẩu phải có ít nhất 8 ký tự và chứa ít nhất 1 chữ cái, 1 số và 1 ký tự đặc biệt. (e.g @,#,\$,...)"),
+        "pleaseCheckYourEmail": m1,
         "pleaseCheckYourEmailToRecovery": MessageLookupByLibrary.simpleMessage(
             "Bạn hãy kiểm tra email để khôi phục mật khẩu nhé"),
         "pleaseLoginAgain":
             MessageLookupByLibrary.simpleMessage("Vui lòng đăng nhập lại"),
         "recentCall": MessageLookupByLibrary.simpleMessage("Cuộc gọi gần đây"),
         "register": MessageLookupByLibrary.simpleMessage("Đăng ký"),
+        "registerEmailToReceivePasswordReset": MessageLookupByLibrary.simpleMessage(
+            "Bạn vui lòng nhập email đã đăng ký bên dưới, và chúng tôi sẽ gửi hướng dẫn khôi phục mật khẩu đến cho bạn"),
         "requestFriend":
             MessageLookupByLibrary.simpleMessage("Lời mời kết bạn"),
         "requestGroup": MessageLookupByLibrary.simpleMessage("Lời mời nhóm"),
+        "resendEmailAfter":
+            MessageLookupByLibrary.simpleMessage("Gửi lại email sau"),
         "retry": MessageLookupByLibrary.simpleMessage("Thử lại"),
         "search": MessageLookupByLibrary.simpleMessage("Tìm kiếm"),
         "searchFriend": MessageLookupByLibrary.simpleMessage("Tìm kiếm bạn bè"),
+        "sendEmail": MessageLookupByLibrary.simpleMessage("Gửi email"),
         "sendEmailSuccess":
             MessageLookupByLibrary.simpleMessage("Gửi email thành công"),
         "serverError": MessageLookupByLibrary.simpleMessage("Lỗi hệ thống"),
@@ -101,9 +121,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "systemIsCurrentlyErrorPleaseTryAgainLater":
             MessageLookupByLibrary.simpleMessage(
                 "Hệ thống đang lỗi, vui lòng thử lại sau"),
+        "verifyYourEmail":
+            MessageLookupByLibrary.simpleMessage("Xác minh email"),
         "welcome": MessageLookupByLibrary.simpleMessage("Chào mừng bạn"),
         "welcomeBack":
             MessageLookupByLibrary.simpleMessage("Chào mừng bạn trở lại!"),
-        "welcomeToApp": m1
+        "welcomeToApp": m2
       };
 }

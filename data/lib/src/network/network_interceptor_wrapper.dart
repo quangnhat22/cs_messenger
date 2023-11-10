@@ -3,7 +3,9 @@ part of 'network_service.dart';
 class NetworkInterceptorWrapper extends QueuedInterceptorsWrapper {
   late final Dio diO;
 
-  NetworkInterceptorWrapper({required this.diO});
+  late final AppSharedPref pref;
+
+  NetworkInterceptorWrapper({required this.diO, required this.pref});
 
   @override
   void onRequest(
@@ -18,10 +20,11 @@ class NetworkInterceptorWrapper extends QueuedInterceptorsWrapper {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     // Go Next when call api login || refreshToken
-    // if (err.requestOptions.path.contains(ApiProvider.loginWithOtable) ||
-    //     err.requestOptions.path.contains(ApiProvider.refreshToken)) {
-    //   return handler.next(err);
-    // }
+    if (err.requestOptions.path.contains(ApiProvider.loginByEmailAndPassword) ||
+        err.requestOptions.path.contains(ApiProvider.signUpWithEmail) ||
+        err.requestOptions.path.contains(ApiProvider.deviceRegister)) {
+      return handler.next(err);
+    }
     // Do something with response error
     if (err.response?.statusCode == HttpStatus.unauthorized) {
       final isHasToken = await _refreshToken();
@@ -62,31 +65,29 @@ class NetworkInterceptorWrapper extends QueuedInterceptorsWrapper {
     return {"token": "null"};
   }
 
-  //TODO: handle this
   Future<bool> _refreshToken() async {
-    // final newDio = NetworkService.newDio();
-    // try {
-    //   final refreshToken = _pref.getString(AppPrefKey.refreshToken, '');
-    //   final headerToken = _headerToken();
-    //   final response = await newDio.get(
-    //     ApiProvider.refreshToken,
-    //     queryParameters: {AppPrefKey.refreshToken: refreshToken},
-    //     options: Options(headers: headerToken),
-    //   );
-    //   final AppResponse appResponse = AppResponse.fromJson(response.data);
-    //
-    //   if (HttpStatus(response.statusCode).isOk) {
-    //     final tokenVo = TokenRaw.fromJson(appResponse.data);
-    //     await _pref.setString(AppPrefKey.token, tokenVo.accessToken);
-    //     await _pref.setString(AppPrefKey.refreshToken, tokenVo.refreshToken);
-    //   }
-    //   newDio.close(force: true);
-    //
-    //   return HttpStatus(response.statusCode).isOk;
-    // } catch (_) {
-    //   newDio.close(force: true);
-    //
-    //   return false;
-    return false;
+    final newDio = NetworkService.newDio();
+    try {
+      final refreshToken = pref.getString(AppPrefKey.refreshToken, '');
+      final headerToken = _headerToken();
+      final response = await newDio.post(ApiProvider.getNewAccessToken, data: {
+        "refresh_token": refreshToken,
+      });
+      final AppResponse appResponse = AppResponse.fromJson(response.data);
+
+      if (response.isOk) {
+        final newToken = TokenRaw.fromJson(appResponse.data);
+        await pref.setString(AppPrefKey.token, newToken.accessToken!);
+        //TODO: handle this
+        await pref.setString(AppPrefKey.refreshToken, refreshToken);
+      }
+      newDio.close(force: true);
+
+      return response.isOk;
+    } catch (_) {
+      newDio.close(force: true);
+
+      return false;
+    }
   }
 }

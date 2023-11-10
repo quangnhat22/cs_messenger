@@ -69,11 +69,23 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/ic_error.svg
   SvgGenImage get icError => const SvgGenImage('assets/svgs/ic_error.svg');
 
+  /// File path: assets/svgs/ic_error_circle.svg
+  SvgGenImage get icErrorCircle =>
+      const SvgGenImage('assets/svgs/ic_error_circle.svg');
+
+  /// File path: assets/svgs/ic_filled_info_circle.svg
+  SvgGenImage get icFilledInfoCircle =>
+      const SvgGenImage('assets/svgs/ic_filled_info_circle.svg');
+
   /// File path: assets/svgs/ic_ongoing.svg
   SvgGenImage get icOngoing => const SvgGenImage('assets/svgs/ic_ongoing.svg');
 
   /// File path: assets/svgs/ic_success.svg
   SvgGenImage get icSuccess => const SvgGenImage('assets/svgs/ic_success.svg');
+
+  /// File path: assets/svgs/ic_success_circle.svg
+  SvgGenImage get icSuccessCircle =>
+      const SvgGenImage('assets/svgs/ic_success_circle.svg');
 
   /// File path: assets/svgs/ic_upcoming.svg
   SvgGenImage get icUpcoming =>
@@ -82,9 +94,22 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/ic_warning.svg
   SvgGenImage get icWarning => const SvgGenImage('assets/svgs/ic_warning.svg');
 
+  /// File path: assets/svgs/ic_warning_circle.svg
+  SvgGenImage get icWarningCircle =>
+      const SvgGenImage('assets/svgs/ic_warning_circle.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values =>
-      [icError, icOngoing, icSuccess, icUpcoming, icWarning];
+  List<SvgGenImage> get values => [
+        icError,
+        icErrorCircle,
+        icFilledInfoCircle,
+        icOngoing,
+        icSuccess,
+        icSuccessCircle,
+        icUpcoming,
+        icWarning,
+        icWarningCircle
+      ];
 }
 
 class Assets {

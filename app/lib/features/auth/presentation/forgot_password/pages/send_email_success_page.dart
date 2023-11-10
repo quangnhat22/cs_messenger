@@ -1,11 +1,23 @@
 import 'package:app/components/features/screens/app_notice_full_screen_widget.dart';
 import 'package:app/components/main/button/app_button_base_builder.dart';
+import 'package:app/configs/di/di.dart';
+import 'package:app/configs/routes/app_router.dart';
 import 'package:app/configs/theme/app_theme.dart';
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:resources/resources.dart';
 
+@RoutePage()
 class SendEmailSuccessPage extends StatelessWidget {
-  const SendEmailSuccessPage({super.key});
+  final String? email;
+
+  const SendEmailSuccessPage({super.key, this.email});
+
+  void _handleButtonBackToWelcome() {
+    getIt<AppRouter>().popUntilRoot();
+  }
+
+  void _handleButtonOpenMailApp() async {}
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +36,7 @@ class SendEmailSuccessPage extends StatelessWidget {
               color: Theme.of(context).colorScheme.background,
               fontWeight: FontWeight.bold,
             ))
-            .setOnPressed(() {})
+            .setOnPressed(() => _handleButtonBackToWelcome())
             .build(context),
         const SizedBox(
           height: 8,

@@ -3,7 +3,12 @@ part of 'network_service.dart';
 class ApiProvider {
   //auth
   static const String _auth = '/auth';
+  static const String getNewAccessToken = '$_auth/access-token';
+  static const String signUpWithEmail = '$_auth/email/signup';
   static const String loginFirebase = '$_auth/firebase/login';
+  static const String loginByEmailAndPassword = '$_auth/email/login';
+  static const String verifyEmail = '$_auth/email/verify-email';
+  static const String forgetPassword = '$_auth/email/forget-password';
 
   //device
   static const String _deviceUrl = '/device';

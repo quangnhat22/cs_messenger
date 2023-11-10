@@ -46,10 +46,10 @@ class AppDefaultDialogWidget extends AppDialogBaseBuilder {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
-          AppSizeExt.of.majorScale(6),
+          AppSizeExt.of.majorScale(10),
         ),
       ),
-      padding: EdgeInsets.all(AppSizeExt.of.majorPaddingScale(4)),
+      padding: EdgeInsets.all(AppSizeExt.of.majorPaddingScale(5)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -83,6 +83,7 @@ class AppDefaultDialogWidget extends AppDialogBaseBuilder {
                 Expanded(
                   child: AppButtonOutlineWidget()
                       .setButtonText(_negativeText)
+                      .setBorderColor(Theme.of(context).colorScheme.primary)
                       .setOnPressed(() {
                     //TODO: set up auto_route
                     Navigator.of(context).pop();
@@ -110,6 +111,9 @@ class AppDefaultDialogWidget extends AppDialogBaseBuilder {
                     : Expanded(
                         child: AppButtonFilledWidget()
                             .setButtonText(_positiveText)
+                            .setTextStyle(TextStyle(
+                                color:
+                                    Theme.of(context).colorScheme.background))
                             .setOnPressed(() {
                           //TODO: implement auto route
                           Navigator.of(context).pop();
