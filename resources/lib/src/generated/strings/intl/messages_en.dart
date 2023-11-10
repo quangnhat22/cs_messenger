@@ -23,7 +23,10 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m0(app) =>
       "Bridge the gap with ${app}. Share moments, send messages, and have face-to-face conversations, regardless of where you are.";
 
-  static String m1(app) => "Welcome to ${app}";
+  static String m1(email, expireTime) =>
+      "Please check your email \"${email}\" to verify your account. Please confirm your email before ${expireTime}., otherwise your account will not be deleted in the future";
+
+  static String m2(app) => "Welcome to ${app}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -37,8 +40,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
+        "confirmPasswordNotMatch": MessageLookupByLibrary.simpleMessage(
+            "Password confirmation and Password must match."),
         "connectingPeopleAnytimeAnywhere": MessageLookupByLibrary.simpleMessage(
             "Connecting People, Anytime, Anywhere"),
+        "createAccountSuccess": MessageLookupByLibrary.simpleMessage(
+            "Create account success! Please login to continue."),
         "createNewGroup":
             MessageLookupByLibrary.simpleMessage("Create new group"),
         "dataConflict": MessageLookupByLibrary.simpleMessage(
@@ -51,6 +58,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailValidate": MessageLookupByLibrary.simpleMessage(
             "The email address is badly formatted."),
         "error": MessageLookupByLibrary.simpleMessage("Error"),
+        "errorOccurred": MessageLookupByLibrary.simpleMessage(
+            "An error occurred, please try again later"),
         "experienceThePower": MessageLookupByLibrary.simpleMessage(
             "Experience the power of instant messaging and crystal-clear video calls. Connect with people across the globe with ease."),
         "forgotPassword":
@@ -58,27 +67,38 @@ class MessageLookup extends MessageLookupByLibrary {
         "friends": MessageLookupByLibrary.simpleMessage("Friends"),
         "getConnectWithYourFriends": MessageLookupByLibrary.simpleMessage(
             "Get connect with your friends"),
+        "gotIt": MessageLookupByLibrary.simpleMessage("Got it"),
         "groups": MessageLookupByLibrary.simpleMessage("Groups"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "invalidInput": MessageLookupByLibrary.simpleMessage("Invalid Input"),
         "language": MessageLookupByLibrary.simpleMessage("English"),
         "listFriend": MessageLookupByLibrary.simpleMessage("List Friends"),
+        "logOut": MessageLookupByLibrary.simpleMessage("Log out"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "noData": MessageLookupByLibrary.simpleMessage("No Data!"),
         "openEmailApp": MessageLookupByLibrary.simpleMessage("Open Email app"),
+        "or": MessageLookupByLibrary.simpleMessage("Or"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "passwordValidate": MessageLookupByLibrary.simpleMessage(
+            "Password must be at least 8 characters long, and contain at least 1 letter, 1 number, and 1 special character (e.g @,#,\$,...)."),
+        "pleaseCheckYourEmail": m1,
         "pleaseCheckYourEmailToRecovery": MessageLookupByLibrary.simpleMessage(
             "Please check your email to recovery your password"),
         "pleaseLoginAgain":
             MessageLookupByLibrary.simpleMessage("Please login again"),
         "recentCall": MessageLookupByLibrary.simpleMessage("Recent calls"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
+        "registerEmailToReceivePasswordReset": MessageLookupByLibrary.simpleMessage(
+            "Enter you registered email below to receive password reset instruction"),
         "requestFriend": MessageLookupByLibrary.simpleMessage("Request friend"),
         "requestGroup": MessageLookupByLibrary.simpleMessage("Request Group"),
+        "resendEmailAfter":
+            MessageLookupByLibrary.simpleMessage("Resend email after"),
         "retry": MessageLookupByLibrary.simpleMessage("Retry"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "searchFriend": MessageLookupByLibrary.simpleMessage("Search friend"),
+        "sendEmail": MessageLookupByLibrary.simpleMessage("Send email"),
         "sendEmailSuccess":
             MessageLookupByLibrary.simpleMessage("Send email success"),
         "serverError": MessageLookupByLibrary.simpleMessage("Server error"),
@@ -100,8 +120,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "systemIsCurrentlyErrorPleaseTryAgainLater":
             MessageLookupByLibrary.simpleMessage(
                 "System is currently error, please try again later"),
+        "verifyYourEmail":
+            MessageLookupByLibrary.simpleMessage("Verify your email"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
-        "welcomeToApp": m1
+        "welcomeToApp": m2
       };
 }

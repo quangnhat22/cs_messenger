@@ -340,6 +340,16 @@ class Strings {
     );
   }
 
+  /// `Đã có lỗi xảy ra! Vui lòng thử lại sau.`
+  String get errorOccurred {
+    return Intl.message(
+      'Đã có lỗi xảy ra! Vui lòng thử lại sau.',
+      name: 'errorOccurred',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Dữ liệu đã tồn tại`
   String get dataConflict {
     return Intl.message(
@@ -565,6 +575,116 @@ class Strings {
     return Intl.message(
       'Địa chỉ email khong hợp lệ.',
       name: 'emailValidate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mật khẩu phải có ít nhất 8 ký tự và chứa ít nhất 1 chữ cái, 1 số và 1 ký tự đặc biệt. (e.g @,#,$,...)`
+  String get passwordValidate {
+    return Intl.message(
+      'Mật khẩu phải có ít nhất 8 ký tự và chứa ít nhất 1 chữ cái, 1 số và 1 ký tự đặc biệt. (e.g @,#,\$,...)',
+      name: 'passwordValidate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hiểu rồi`
+  String get gotIt {
+    return Intl.message(
+      'Hiểu rồi',
+      name: 'gotIt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tạo tài khoản thành công! Vui lòng đăng nhập để tiếp tục.`
+  String get createAccountSuccess {
+    return Intl.message(
+      'Tạo tài khoản thành công! Vui lòng đăng nhập để tiếp tục.',
+      name: 'createAccountSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hoặc`
+  String get or {
+    return Intl.message(
+      'Hoặc',
+      name: 'or',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Xác nhận mật khẩu không trùng với Mật khẩu`
+  String get confirmPasswordNotMatch {
+    return Intl.message(
+      'Xác nhận mật khẩu không trùng với Mật khẩu',
+      name: 'confirmPasswordNotMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Xác minh email`
+  String get verifyYourEmail {
+    return Intl.message(
+      'Xác minh email',
+      name: 'verifyYourEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vui lòng mở "{email}" để xác minh tài khoản. Vui lòng xác nhận tài khoản trước ${expireTime}, nếu không tài khoản của bạn có thể bị mất!`
+  String pleaseCheckYourEmail(String email, String expireTime) {
+    return Intl.message(
+      'Vui lòng mở "$email" để xác minh tài khoản. Vui lòng xác nhận tài khoản trước \$$expireTime, nếu không tài khoản của bạn có thể bị mất!',
+      name: 'pleaseCheckYourEmail',
+      desc: '',
+      args: [email, expireTime],
+    );
+  }
+
+  /// `Đăng xuất`
+  String get logOut {
+    return Intl.message(
+      'Đăng xuất',
+      name: 'logOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gửi email`
+  String get sendEmail {
+    return Intl.message(
+      'Gửi email',
+      name: 'sendEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gửi lại email sau`
+  String get resendEmailAfter {
+    return Intl.message(
+      'Gửi lại email sau',
+      name: 'resendEmailAfter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bạn vui lòng nhập email đã đăng ký bên dưới, và chúng tôi sẽ gửi hướng dẫn khôi phục mật khẩu đến cho bạn`
+  String get registerEmailToReceivePasswordReset {
+    return Intl.message(
+      'Bạn vui lòng nhập email đã đăng ký bên dưới, và chúng tôi sẽ gửi hướng dẫn khôi phục mật khẩu đến cho bạn',
+      name: 'registerEmailToReceivePasswordReset',
       desc: '',
       args: [],
     );

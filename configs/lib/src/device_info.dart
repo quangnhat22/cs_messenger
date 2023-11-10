@@ -44,7 +44,7 @@ class DeviceInfo {
       if (kIsWeb) {
         WebBrowserInfo webBrowserInfo = await deviceInfoPlugin.webBrowserInfo;
 
-        deviceInfo.putIfAbsent('OS', () => webBrowserInfo.platform ?? '-');
+        deviceInfo.putIfAbsent('OS', () => 'android');
         deviceInfo.putIfAbsent('isPhysicalDevice', () => "${true}");
         deviceInfo.putIfAbsent('model', () => webBrowserInfo.platform ?? '-');
         deviceInfo.putIfAbsent('OSVersion', () => "${webBrowserInfo.platform}");

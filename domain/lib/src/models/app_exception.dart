@@ -5,7 +5,7 @@ abstract class AppException implements Exception {
   final String? errorCode;
   final String? message;
 
-  AppException({required this.code, required this.message, this.errorCode});
+  AppException({this.code, this.message, this.errorCode});
 
   @override
   String toString() {
@@ -14,11 +14,15 @@ abstract class AppException implements Exception {
 }
 
 class NetworkException extends AppException {
-  NetworkException(
-      {required super.code, required super.message, super.errorCode});
+  NetworkException({super.code, super.message, super.errorCode});
+}
+
+class GrpcException extends AppException {
+  final Map<String, dynamic>? data;
+
+  GrpcException({super.code, super.message, super.errorCode, this.data});
 }
 
 class LocalException extends AppException {
-  LocalException(
-      {required super.code, required super.message, super.errorCode});
+  LocalException({super.code, super.message, super.errorCode});
 }

@@ -8,6 +8,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:data/data.dart' as _i5;
 import 'package:data/src/local/app_share_pref.dart' as _i3;
 import 'package:data/src/network/network_service.dart' as _i4;
 import 'package:get_it/get_it.dart' as _i1;
@@ -25,7 +26,8 @@ extension GetItInjectableX on _i1.GetIt {
       environmentFilter,
     );
     gh.singleton<_i3.AppSharedPref>(_i3.AppSharedPrefImpl());
-    gh.singleton<_i4.NetworkService>(_i4.NetworkServiceImpl());
+    gh.singleton<_i4.NetworkService>(
+        _i4.NetworkServiceImpl(gh<_i5.AppSharedPref>()));
     return this;
   }
 }

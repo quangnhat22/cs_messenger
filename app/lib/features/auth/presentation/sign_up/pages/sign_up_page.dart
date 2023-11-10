@@ -3,8 +3,9 @@ import 'package:app/components/main/button/app_button_base_builder.dart';
 import 'package:app/components/main/page/app_main_page_base_builder.dart';
 import 'package:app/components/main/textField/app_field_base_builder.dart';
 import 'package:app/configs/di/di.dart';
+import 'package:app/configs/exts/app_exts.dart';
 import 'package:app/configs/theme/app_theme.dart';
-import 'package:app/features/auth/presentation/sign_up/controllers/sign_up_form_bloc/sign_up_form_bloc.dart';
+import 'package:app/features/auth/presentation/sign_up/controllers/sign_up_form_bloc.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
@@ -20,6 +21,10 @@ class SignUpPage extends StatelessWidget {
       create: (context) => getIt<SignUpFormBloc>(),
       child: AppMainPageWidget().setBody(_body(context)).build(context),
     );
+  }
+
+  void _handleOnSubmitButton(BuildContext context) {
+    context.read<SignUpFormBloc>().submit();
   }
 
   Widget _body(BuildContext context) {
@@ -58,6 +63,7 @@ class SignUpPage extends StatelessWidget {
                             InputDecoration(
                               labelText: R.strings.password,
                               prefixIcon: const Icon(Icons.lock_outline),
+                              errorMaxLines: 4,
                             ),
                           )
                           .build(context),
@@ -73,6 +79,7 @@ class SignUpPage extends StatelessWidget {
                             InputDecoration(
                               labelText: R.strings.confirmPassword,
                               prefixIcon: const Icon(Icons.lock_outline),
+                              errorMaxLines: AppFormKeys.maxLineErrorText,
                             ),
                           )
                           .build(context),
@@ -87,7 +94,7 @@ class SignUpPage extends StatelessWidget {
                       Theme.of(context).colorScheme.primaryContainer)
                   .setTextStyle(
                       TextStyle(color: Theme.of(context).colorScheme.primary))
-                  .setOnPressed(() {})
+                  .setOnPressed(() => _handleOnSubmitButton(context))
                   .build(context),
             ],
           ),

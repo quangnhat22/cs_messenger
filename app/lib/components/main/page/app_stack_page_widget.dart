@@ -42,7 +42,7 @@ class AppStackPageWidget extends AppMainPageBaseBuilder {
       left: 0,
       right: 0,
       child: Container(
-        height: AppSizeExt.of.majorScale(200),
+        height: AppSizeExt.of.majorScale(180),
         decoration: BoxDecoration(
           color: _backgroundColorCircle,
           borderRadius: BorderRadius.vertical(

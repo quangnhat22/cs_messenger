@@ -44,6 +44,7 @@
   "pleaseLoginAgain": "Vui lòng đăng nhập lại",
   "error": "Lỗi",
   "systemIsCurrentlyErrorPleaseTryAgainLater": "Hệ thống đang lỗi, vui lòng thử lại sau",
+  "errorOccurred": "Đã có lỗi xảy ra! Vui lòng thử lại sau.",
   "dataConflict": "Dữ liệu đã tồn tại",
   "doYouWantToLogOut": "Bạn có muốn đăng xuất?",
   "invalidInput": "Input không hợp lệ",
@@ -66,5 +67,28 @@
   "signInWithEmail": "Đăng nhập với email",
   "signInWithGoogle": "Đăng nhập với Google",
   "signUpWithEmail": "Đăng ký với email",
-  "emailValidate": "Địa chỉ email khong hợp lệ."
+  "emailValidate": "Địa chỉ email khong hợp lệ.",
+  "passwordValidate": "Mật khẩu phải có ít nhất 8 ký tự và chứa ít nhất 1 chữ cái, 1 số và 1 ký tự đặc biệt. (e.g @,#,$,...)",
+  "gotIt": "Hiểu rồi",
+  "createAccountSuccess": "Tạo tài khoản thành công! Vui lòng đăng nhập để tiếp tục.",
+  "or": "Hoặc",
+  "confirmPasswordNotMatch": "Xác nhận mật khẩu không trùng với Mật khẩu",
+  "verifyYourEmail": "Xác minh email",
+  "pleaseCheckYourEmail": "Vui lòng mở \"{email}\" để xác minh tài khoản. Vui lòng xác nhận tài khoản trước ${expireTime}, nếu không tài khoản của bạn có thể bị mất!",
+  "@pleaseCheckYourEmail": {
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "abc@gmail.com"
+      },
+      "expireTime": {
+        "type": "String",
+        "example": "11:59"
+      }
+    }
+  },
+  "logOut": "Đăng xuất",
+  "sendEmail": "Gửi email",
+  "resendEmailAfter": "Gửi lại email sau",
+  "registerEmailToReceivePasswordReset": "Bạn vui lòng nhập email đã đăng ký bên dưới, và chúng tôi sẽ gửi hướng dẫn khôi phục mật khẩu đến cho bạn"
 }

@@ -44,6 +44,7 @@
   "pleaseLoginAgain": "Please login again",
   "error": "Error",
   "systemIsCurrentlyErrorPleaseTryAgainLater": "System is currently error, please try again later",
+  "errorOccurred": "An error occurred, please try again later",
   "dataConflict": "Input data has already existed!",
   "doYouWantToLogOut": "Do you want to log out?",
   "invalidInput": "Invalid Input",
@@ -66,5 +67,28 @@
   "signInWithEmail": "Sign in with email",
   "signInWithGoogle": "Sign in with Google",
   "signUpWithEmail": "Sign up with email",
-  "emailValidate": "The email address is badly formatted."
+  "emailValidate": "The email address is badly formatted.",
+  "passwordValidate": "Password must be at least 8 characters long, and contain at least 1 letter, 1 number, and 1 special character (e.g @,#,$,...).",
+  "gotIt": "Got it",
+  "createAccountSuccess": "Create account success! Please login to continue.",
+  "or": "Or",
+  "confirmPasswordNotMatch": "Password confirmation and Password must match.",
+  "verifyYourEmail": "Verify your email",
+  "pleaseCheckYourEmail": "Please check your email \"{email}\" to verify your account. Please confirm your email before {expireTime}., otherwise your account will not be deleted in the future",
+  "@pleaseCheckYourEmail": {
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "abc@gmail.com"
+      },
+      "expireTime": {
+        "type": "String",
+        "example": "11:59"
+      }
+    }
+  },
+  "logOut": "Log out",
+  "sendEmail": "Send email",
+  "resendEmailAfter": "Resend email after",
+  "registerEmailToReceivePasswordReset": "Enter you registered email below to receive password reset instruction"
 }

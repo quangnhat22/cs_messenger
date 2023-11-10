@@ -74,6 +74,27 @@ class AppExceptionExt {
       }
     }
 
+    if (appException is GrpcException) {
+      switch (appException!.errorCode) {
+        case "17":
+          {
+            AppDefaultDialogWidget()
+                .setTitle(R.strings.error)
+                .setContent(R.strings.systemIsCurrentlyErrorPleaseTryAgainLater)
+                .setAppDialogType(AppDialogType.error)
+                .setNegativeText(R.strings.close)
+                .setPositiveText(R.strings.confirm)
+                .buildDialog(AppKeys.navigatorKey.currentContext!)
+                .show();
+            getIt<AppRouter>()
+                .replace(VerifyEmailRoute(isFirstRequestSendEmail: true));
+            break;
+          }
+      }
+      Logs.d(
+          'GrpcException: ${appException?.message} - ${appException?.code} - ${appException?.errorCode}');
+    }
+
     if (appException is LocalException) {
       Logs.d('LocalException: ${appException?.message}');
       onError?.call(appException!);
@@ -99,7 +120,18 @@ class AppExceptionExt {
       await forceLogOutUseCase.executeObj();
       await getIt<AppRouter>().replace(const WelcomeRoute());
     } on LocalException catch (e) {
-      AppExceptionExt(appException: e).detected();
+      AppExceptionExt(
+          appException: e,
+          onError: (_) {
+            AppDefaultDialogWidget()
+                .setTitle(R.strings.error)
+                .setContent(R.strings.systemIsCurrentlyErrorPleaseTryAgainLater)
+                .setAppDialogType(AppDialogType.error)
+                .setNegativeText(R.strings.close)
+                .setPositiveText(R.strings.confirm)
+                .buildDialog(AppKeys.navigatorKey.currentContext!)
+                .show();
+          }).detected();
     }
   }
 }

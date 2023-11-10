@@ -1,6 +1,7 @@
 import 'package:app/features/auth/data/sources/firebase/auth_firebase_data_source.dart';
 import 'package:app/features/auth/data/sources/local/auth_local_data_src.dart';
 import 'package:app/features/auth/data/sources/local/device_info_local_data_src.dart';
+import 'package:app/features/auth/data/sources/local/first_install_app_local_data_src.dart';
 import 'package:app/features/auth/data/sources/remote/auth_remote_data_src.dart';
 import 'package:app/features/auth/domain/repositories/auth_repository.dart';
 import 'package:domain/domain.dart';
@@ -12,13 +13,25 @@ class AuthRepositoryImpl extends AuthRepository {
   late final AuthRemoteDataSource _authRemoteDataSource;
   late final AuthLocalDataSource _authLocalDataSource;
   late final DeviceInfoLocalDataSource _deviceInfoLocalDataSource;
+  late final FirstInstallAppLocalDataSource _firstInstallAppLocalDataSource;
 
   AuthRepositoryImpl(
     this._authFirebaseDataSource,
     this._authRemoteDataSource,
     this._authLocalDataSource,
     this._deviceInfoLocalDataSource,
+    this._firstInstallAppLocalDataSource,
   );
+
+  Future<void> _removeLocal() async {
+    try {
+      await _authLocalDataSource.clearToken();
+      await _firstInstallAppLocalDataSource.deleteBox();
+      await _deviceInfoLocalDataSource.deleteBox();
+    } on LocalException catch (_) {
+      rethrow;
+    }
+  }
 
   @override
   Future<AppObjResultModel<TokenModel>> getTokenFromLocal() async {
@@ -33,9 +46,12 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<AppObjResultModel<EmptyModel>> forceLogOut() async {
     try {
-      await _authLocalDataSource.clearToken();
+      await _removeLocal();
+      await _authFirebaseDataSource.logOut();
       return AppObjResultModel(netData: EmptyModel());
     } on LocalException catch (_) {
+      rethrow;
+    } on NetworkException catch (_) {
       rethrow;
     }
   }
@@ -62,51 +78,101 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<AppObjResultModel<EmptyModel>> logOut(
-      {required Map<String, dynamic> query}) {
-    // TODO: implement logOut
-    throw UnimplementedError();
+  Future<AppObjResultModel<EmptyModel>> signUpNewAccount(
+      {required Map<String, dynamic> query}) async {
+    try {
+      await _authRemoteDataSource.registerNewAccount(body: query);
+
+      return AppObjResultModel<EmptyModel>(netData: EmptyModel());
+    } on NetworkException catch (_) {
+      rethrow;
+    }
   }
 
   @override
   Future<AppObjResultModel<EmptyModel>> loginWithEmail(
-      {required Map<String, dynamic> query}) {
-    // TODO: implement loginWithEmail
-    throw UnimplementedError();
+      {required Map<String, dynamic> query}) async {
+    try {
+      final deviceId = await _deviceInfoLocalDataSource.getDeviceId();
+
+      query.putIfAbsent('device_id', () => deviceId);
+
+      await _authRemoteDataSource.loginByEmailAndPassword(body: query);
+
+      return AppObjResultModel<EmptyModel>(netData: EmptyModel());
+    } on NetworkException catch (_) {
+      rethrow;
+    }
   }
 
   @override
-  Future<AppObjResultModel<EmptyModel>> reSendEmailResetPassword(
-      {required Map<String, dynamic> query}) {
-    // TODO: implement reSendEmailResetPassword
-    throw UnimplementedError();
+  Future<AppObjResultModel<EmptyModel>> loginWithEmailUnVerify(
+      {required Map<String, dynamic> query}) async {
+    try {
+      final deviceId = await _deviceInfoLocalDataSource.getDeviceId();
+
+      query.putIfAbsent('device_id', () => deviceId);
+
+      await _firstInstallAppLocalDataSource.setTempEmail(query['email']);
+      await _firstInstallAppLocalDataSource
+          .setExpireTime(DateTime.now().add(const Duration(hours: 1)));
+
+      await _authRemoteDataSource.loginByEmailAndPassword(body: query);
+
+      return AppObjResultModel<EmptyModel>(netData: EmptyModel());
+    } on GrpcException catch (e) {
+      if (e.data?["access_token"] != null) {
+        await _authLocalDataSource.saveToken(
+          token: e.data!["access_token"],
+          refreshToken: '',
+        );
+      }
+      rethrow;
+    } on NetworkException catch (_) {
+      rethrow;
+    }
   }
 
   @override
-  Future<AppObjResultModel<EmptyModel>> sendEmailResetPassword(
-      {required Map<String, dynamic> query}) {
-    // TODO: implement sendEmailResetPassword
-    throw UnimplementedError();
+  Future<AppObjResultModel<EmailVerifyModel>> getEmailVerifyToken() async {
+    try {
+      final token = await _authLocalDataSource.getToken();
+      final email = await _firstInstallAppLocalDataSource.getTempEmail();
+      return AppObjResultModel(
+        netData: EmailVerifyModel(
+          token: token.netData?.raw2Model(),
+          email: email,
+        ),
+      );
+    } on LocalException catch (_) {
+      rethrow;
+    }
+  }
+
+  @Deprecated('Need to implement in the future')
+  @override
+  Future<AppObjResultModel<EmptyModel>> verifyEmail() async {
+    try {
+      final token = await _authLocalDataSource.getToken();
+      if (token.netData?.accessToken != null) {
+        // await _authRemoteDataSource.verifyEmail(token.netData!.accessToken!);
+        await _firstInstallAppLocalDataSource.removeTempEmail();
+      }
+      return AppObjResultModel<EmptyModel>(netData: EmptyModel());
+    } on NetworkException catch (_) {
+      rethrow;
+    }
   }
 
   @override
-  Future<AppObjResultModel<EmptyModel>> signUpNewAccount(
-      {required Map<String, dynamic> query}) {
-    // TODO: implement signUpNewAccount
-    throw UnimplementedError();
-  }
+  Future<AppObjResultModel<EmptyModel>> forgotPassword(
+      {required Map<String, dynamic> query}) async {
+    try {
+      await _authRemoteDataSource.forgotPassword(body: query);
 
-  @override
-  Future<AppObjResultModel<EmptyModel>> updateAccountPassword(
-      {required Map<String, dynamic> query}) {
-    // TODO: implement updateAccountPassword
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<AppObjResultModel<EmptyModel>> updateNewPassword(
-      {required Map<String, dynamic> query}) {
-    // TODO: implement updateNewPassword
-    throw UnimplementedError();
+      return AppObjResultModel<EmptyModel>(netData: EmptyModel());
+    } on NetworkException catch (_) {
+      rethrow;
+    }
   }
 }

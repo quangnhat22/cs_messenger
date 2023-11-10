@@ -40,7 +40,7 @@ class AppResponse {
   factory AppResponse.fromJson(Map<String, dynamic> json) {
     return AppResponse(
       meta: Metadata.fromJson(json['metadata']),
-      data: json['result']['data'],
+      data: json['result']?['data'] ?? {},
     );
   }
 

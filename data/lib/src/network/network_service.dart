@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:configs/configs.dart';
-import 'package:data/src/raw/base_raw.dart';
+import 'package:data/data.dart';
 import 'package:dio/dio.dart';
 import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
@@ -32,10 +32,11 @@ abstract class NetworkService {
 @Singleton(as: NetworkService)
 class NetworkServiceImpl extends NetworkService {
   late final Dio _dio;
+  late final AppSharedPref _pref;
 
-  NetworkServiceImpl() {
+  NetworkServiceImpl(this._pref) {
     _dio = NetworkService.newDio();
-    _dio.interceptors.add(NetworkInterceptorWrapper(diO: _dio));
+    _dio.interceptors.add(NetworkInterceptorWrapper(diO: _dio, pref: _pref));
   }
 
   @override
@@ -56,6 +57,16 @@ class NetworkServiceImpl extends NetworkService {
       final AppResponse appResponse = clientRequest.isRequestForList
           ? AppResponse.fromJsonToList(response.data)
           : AppResponse.fromJson(response.data);
+
+      if (appResponse.meta?.code != null && appResponse.meta!.code != 'OK') {
+        throw GrpcException(
+          code: appResponse.meta?.statusCode,
+          message: appResponse.meta?.message,
+          errorCode: appResponse.meta?.code,
+          data: appResponse.data,
+        );
+      }
+
       return response.isOk
           ? appResponse
           : throw NetworkException(
@@ -80,6 +91,14 @@ class NetworkServiceImpl extends NetworkService {
         errorCode: ErrorCode.dioError,
       );
     } catch (e) {
+      if (e is GrpcException) {
+        throw GrpcException(
+          code: e.code,
+          message: e.message,
+          errorCode: e.errorCode,
+          data: e.data,
+        );
+      }
       throw NetworkException(
         code: Code.code999,
         message: 'SomeThingsWrong: ${e.toString()}',
