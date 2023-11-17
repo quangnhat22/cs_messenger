@@ -56,7 +56,7 @@ class LoginFormBloc extends FormBloc<String, String> {
           .showSnackBar();
 
       //go to login page after creating new account success
-      getIt<AppRouter>().replace(const HomeRoute());
+      await getIt<AppRouter>().replace(const WelcomeRoute());
     } on AppException catch (e) {
       AppLoadingOverlayWidget.dismiss();
       emitFailure();

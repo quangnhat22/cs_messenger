@@ -9,6 +9,7 @@ import 'package:app/features/auth/domain/usecases/email/get_verify_email_token_u
 import 'package:app/features/auth/domain/usecases/onboarding/get_id_remote_device.dart';
 import 'package:app/features/auth/domain/usecases/onboarding/get_is_first_installed_uc.dart';
 import 'package:app/features/auth/domain/usecases/onboarding/register_device_uc.dart';
+import 'package:app/features/user/domain/usecases/get_user_profile_uc.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -27,6 +28,7 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
   late final CheckAuthenticatedUseCase _checkAuthenticatedUseCase;
   late final LoginWithGoogleUseCase _loginWithGoogleUseCase;
   late final GetVerifyEmailTokenUseCase _getVerifyEmailTokenUseCase;
+  late final GetUserProfileUseCase _getUserProfileUseCase;
 
   WelcomeBloc(
     this._getIsFirstInstalledUseCase,
@@ -35,6 +37,7 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
     this._checkAuthenticatedUseCase,
     this._registerDeviceUseCase,
     this._getVerifyEmailTokenUseCase,
+    this._getUserProfileUseCase,
   ) : super(const WelcomeState.initial()) {
     on<WelcomeEvent>((event, emit) async {
       await event.map(
@@ -125,6 +128,7 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
     try {
       final tokenModel = await _checkAuthenticatedUseCase.executeObj();
       if (tokenModel.netData?.accessToken != '') {
+        await _getUserProfileUseCase.executeObj();
         emit(state.copyWith(isAuthenticated: true));
       }
     } catch (_) {

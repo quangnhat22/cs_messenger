@@ -29,6 +29,7 @@ class AppFormKeys {
 class AppLocalBoxKeys {
   AppLocalBoxKeys._();
 
+  static const userBox = 'user_box';
   static const firstInstallAppBox = 'first_install_app_box';
   static const themeLanguageBox = 'theme_language_box';
   static const deviceInfoBox = 'device_info_box';

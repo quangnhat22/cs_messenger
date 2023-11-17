@@ -1,12 +1,15 @@
 import 'dart:async';
 
 import 'package:app/configs/exts/app_exts.dart';
+import 'package:app/features/user/domain/usecases/update_user_profile_uc.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable()
 class EditProfileFormBloc extends FormBloc<String, String> {
-  EditProfileFormBloc() {
+  late final UpdateUserProfileUseCase _updateUserProfileUseCase;
+
+  EditProfileFormBloc(this._updateUserProfileUseCase) {
     addFieldBlocs(fieldBlocs: [name, phone, dateOfBirth, gender, bio]);
   }
 
