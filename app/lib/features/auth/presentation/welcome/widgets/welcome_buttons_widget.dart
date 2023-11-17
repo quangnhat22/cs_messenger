@@ -5,11 +5,8 @@ import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:app/features/auth/presentation/welcome/controllers/welcome/welcome_bloc.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_sign_in_platform_interface/google_sign_in_platform_interface.dart';
-import 'package:google_sign_in_web/google_sign_in_web.dart' as web;
 import 'package:resources/resources.dart';
 
 class WelcomeButtonsWidget extends StatelessWidget {
