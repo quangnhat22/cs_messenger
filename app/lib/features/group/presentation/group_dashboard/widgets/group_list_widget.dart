@@ -35,28 +35,15 @@ class GroupListWidget extends StatelessWidget {
     return AppCardBorderWidget()
         .setLeading(const CircleAvatar(radius: 24))
         .setTitle(AppTextTitleMediumWidget().setText(group.name).build(context))
-        // .setSubtitle(
-        //   Row(
-        //     children: [
-        //       R.svgs.icOngoing.svg(),
-        //       SizedBox(
-        //         width: AppSizeExt.of.majorScale(2),
-        //       ),
-        //       AppTextBodyMediumWidget()
-        //           .setText('22/09/2023 - 11:30')
-        //           .build(context)
-        //     ],
-        //   ),
-        // )
         .setHasTopBorderRadius(index == 0)
         .setHasBottomBorderRadius(index == 99)
-        // .setActions([
-        //   IconButton(
-        //     onPressed: () {},
-        //     icon: const Icon(Icons.phone_outlined),
-        //   )
-        // ])
-        .setIsShowBottomDivider(false)
+        .setActions([
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.message_outlined),
+          )
+        ])
+        .setIsShowBottomDivider(true)
         .setOnTap(() {})
         .build(context);
   }

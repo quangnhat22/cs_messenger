@@ -5,6 +5,8 @@ abstract class AuthRepository {
 
   Future<AppObjResultModel<EmptyModel>> forceLogOut();
 
+  Future<AppObjResultModel<EmptyModel>> logOut();
+
   Future<AppObjResultModel<EmptyModel>> loginWithGoogle();
 
   Future<AppObjResultModel<EmptyModel>> signUpNewAccount(
@@ -18,7 +20,9 @@ abstract class AuthRepository {
 
   Future<AppObjResultModel<EmailVerifyModel>> getEmailVerifyToken();
 
-  Future<AppObjResultModel<EmptyModel>> verifyEmail();
+  Future<AppObjResultModel<EmptyModel>> requestResendEmailVerify();
+
+  Future<AppObjResultModel<StatusVerifyEmailModel>> checkVerifyEmail();
 
   Future<AppObjResultModel<EmptyModel>> forgotPassword(
       {required Map<String, dynamic> query});

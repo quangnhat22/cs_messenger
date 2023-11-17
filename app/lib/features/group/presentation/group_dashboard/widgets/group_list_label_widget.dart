@@ -16,8 +16,8 @@ class GroupListLabelWidget extends StatelessWidget {
       builder: (context, state) {
         return Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: AppSizeExt.of.majorPaddingScale(2),
-            vertical: AppSizeExt.of.majorPaddingScale(3),
+            horizontal: AppSizeExt.of.majorPaddingScale(3),
+            vertical: AppSizeExt.of.majorPaddingScale(2),
           ),
           child: AppTextTitleMediumWidget()
               .setText("${R.strings.groups} (${state.total.toString()})")

@@ -1,5 +1,5 @@
 import 'package:app/configs/di/di.dart';
-import 'package:app/features/app/app.dart';
+import 'package:app/features/app/presentation/app.dart';
 import 'package:configs/configs.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -17,4 +17,3 @@ void main() async {
   Fsplash.remove();
   runApp(const App());
 }
-

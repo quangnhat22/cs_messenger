@@ -62,10 +62,9 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
           await _registerDeviceUseCase.executeObj();
         }
 
-        final verifyEmailToken = await _getVerifyEmailTokenUseCase.executeObj();
+        final isVerifyEmail = await _checkIsVerifyingEmail();
 
-        if (verifyEmailToken.netData?.token?.accessToken != null &&
-            verifyEmailToken.netData!.token!.accessToken!.isNotEmpty) {
+        if (isVerifyEmail) {
           //open verify email page
           getIt<AppRouter>()
               .push(VerifyEmailRoute(isFirstRequestSendEmail: false));
@@ -111,11 +110,21 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
     }
   }
 
+  Future<bool> _checkIsVerifyingEmail() async {
+    try {
+      final verifyEmailToken = await _getVerifyEmailTokenUseCase.executeObj();
+      return verifyEmailToken.netData?.token?.accessToken != null &&
+          verifyEmailToken.netData!.token!.accessToken!.isNotEmpty &&
+          verifyEmailToken.netData?.email != null;
+    } catch (_) {
+      rethrow;
+    }
+  }
+
   Future<void> _checkAuthenticated() async {
     try {
       final tokenModel = await _checkAuthenticatedUseCase.executeObj();
-      if (tokenModel.netData?.accessToken != '' &&
-          tokenModel.netData?.refreshToken != '') {
+      if (tokenModel.netData?.accessToken != '') {
         emit(state.copyWith(isAuthenticated: true));
       }
     } catch (_) {

@@ -1,3 +1,4 @@
+import 'package:app/configs/exts/app_exts.dart';
 import 'package:data/data.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:injectable/injectable.dart';
@@ -11,7 +12,7 @@ abstract class DeviceInfoLocalDataSource extends BaseObjectDao {
 @LazySingleton(as: DeviceInfoLocalDataSource)
 class DeviceInfoLocalDataSourceImpl extends DeviceInfoLocalDataSource {
   static Box? _box;
-  final String _boxName = "device_info_box";
+  final String _boxName = AppLocalBoxKeys.deviceInfoBox;
 
   final String _deviceInfoKey = "device_info_key";
 

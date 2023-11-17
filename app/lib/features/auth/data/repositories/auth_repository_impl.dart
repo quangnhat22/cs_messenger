@@ -27,7 +27,7 @@ class AuthRepositoryImpl extends AuthRepository {
     try {
       await _authLocalDataSource.clearToken();
       await _firstInstallAppLocalDataSource.deleteBox();
-      await _deviceInfoLocalDataSource.deleteBox();
+      // await _deviceInfoLocalDataSource.deleteBox();
     } on LocalException catch (_) {
       rethrow;
     }
@@ -51,6 +51,18 @@ class AuthRepositoryImpl extends AuthRepository {
       return AppObjResultModel(netData: EmptyModel());
     } on LocalException catch (_) {
       rethrow;
+    } on NetworkException catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<AppObjResultModel<EmptyModel>> logOut() async {
+    try {
+      await _authRemoteDataSource.logOut();
+      await _authFirebaseDataSource.logOut();
+      await _removeLocal();
+      return AppObjResultModel<EmptyModel>(netData: EmptyModel());
     } on NetworkException catch (_) {
       rethrow;
     }
@@ -97,9 +109,27 @@ class AuthRepositoryImpl extends AuthRepository {
 
       query.putIfAbsent('device_id', () => deviceId);
 
-      await _authRemoteDataSource.loginByEmailAndPassword(body: query);
+      final tokenRaw =
+          await _authRemoteDataSource.loginByEmailAndPassword(body: query);
 
+      final accessToken = tokenRaw.netData?.accessToken;
+      final refreshToken = tokenRaw.netData?.refreshToken;
+
+      if (accessToken != null && refreshToken != null) {
+        await _authLocalDataSource.saveToken(
+          token: accessToken,
+          refreshToken: refreshToken,
+        );
+      }
       return AppObjResultModel<EmptyModel>(netData: EmptyModel());
+    } on GrpcException catch (e) {
+      if (e.data?["access_token"] != null) {
+        await _firstInstallAppLocalDataSource.setTempEmail(query['email']);
+        await _firstInstallAppLocalDataSource
+            .setExpireTime(DateTime.now().add(const Duration(hours: 1)));
+        await _authLocalDataSource.saveToken(token: e.data!["access_token"]);
+      }
+      rethrow;
     } on NetworkException catch (_) {
       rethrow;
     }
@@ -113,19 +143,15 @@ class AuthRepositoryImpl extends AuthRepository {
 
       query.putIfAbsent('device_id', () => deviceId);
 
-      await _firstInstallAppLocalDataSource.setTempEmail(query['email']);
-      await _firstInstallAppLocalDataSource
-          .setExpireTime(DateTime.now().add(const Duration(hours: 1)));
-
       await _authRemoteDataSource.loginByEmailAndPassword(body: query);
 
       return AppObjResultModel<EmptyModel>(netData: EmptyModel());
     } on GrpcException catch (e) {
       if (e.data?["access_token"] != null) {
-        await _authLocalDataSource.saveToken(
-          token: e.data!["access_token"],
-          refreshToken: '',
-        );
+        await _firstInstallAppLocalDataSource.setTempEmail(query['email']);
+        await _firstInstallAppLocalDataSource
+            .setExpireTime(DateTime.now().add(const Duration(hours: 1)));
+        await _authLocalDataSource.saveToken(token: e.data!["access_token"]);
       }
       rethrow;
     } on NetworkException catch (_) {
@@ -138,10 +164,12 @@ class AuthRepositoryImpl extends AuthRepository {
     try {
       final token = await _authLocalDataSource.getToken();
       final email = await _firstInstallAppLocalDataSource.getTempEmail();
+      final expireTime = await _firstInstallAppLocalDataSource.getExpireTime();
       return AppObjResultModel(
         netData: EmailVerifyModel(
           token: token.netData?.raw2Model(),
           email: email,
+          expireTime: expireTime,
         ),
       );
     } on LocalException catch (_) {
@@ -149,16 +177,11 @@ class AuthRepositoryImpl extends AuthRepository {
     }
   }
 
-  @Deprecated('Need to implement in the future')
   @override
-  Future<AppObjResultModel<EmptyModel>> verifyEmail() async {
+  Future<AppObjResultModel<StatusVerifyEmailModel>> checkVerifyEmail() async {
     try {
-      final token = await _authLocalDataSource.getToken();
-      if (token.netData?.accessToken != null) {
-        // await _authRemoteDataSource.verifyEmail(token.netData!.accessToken!);
-        await _firstInstallAppLocalDataSource.removeTempEmail();
-      }
-      return AppObjResultModel<EmptyModel>(netData: EmptyModel());
+      final remoteData = await _authRemoteDataSource.checkVerifyEmail();
+      return remoteData.raw2Model();
     } on NetworkException catch (_) {
       rethrow;
     }
@@ -169,7 +192,16 @@ class AuthRepositoryImpl extends AuthRepository {
       {required Map<String, dynamic> query}) async {
     try {
       await _authRemoteDataSource.forgotPassword(body: query);
+      return AppObjResultModel<EmptyModel>(netData: EmptyModel());
+    } on NetworkException catch (_) {
+      rethrow;
+    }
+  }
 
+  @override
+  Future<AppObjResultModel<EmptyModel>> requestResendEmailVerify() async {
+    try {
+      await _authRemoteDataSource.requestResendEmail();
       return AppObjResultModel<EmptyModel>(netData: EmptyModel());
     } on NetworkException catch (_) {
       rethrow;

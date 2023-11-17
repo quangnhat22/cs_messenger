@@ -15,8 +15,8 @@ abstract class NetworkService {
   static Dio newDio() {
     final dio = Dio(BaseOptions(
       baseUrl: BuildConfig.apiDomain,
-      connectTimeout: const Duration(seconds: 15),
-      receiveTimeout: const Duration(seconds: 15),
+      connectTimeout: const Duration(seconds: 10),
+      receiveTimeout: const Duration(seconds: 10),
     ));
     dio.interceptors.add(PrettyDioLogger(
       requestBody: true,
@@ -58,7 +58,7 @@ class NetworkServiceImpl extends NetworkService {
           ? AppResponse.fromJsonToList(response.data)
           : AppResponse.fromJson(response.data);
 
-      if (appResponse.meta?.code != null && appResponse.meta!.code != 'OK') {
+      if (appResponse.meta?.code != null && appResponse.meta!.code != '0') {
         throw GrpcException(
           code: appResponse.meta?.statusCode,
           message: appResponse.meta?.message,
@@ -111,5 +111,14 @@ class NetworkServiceImpl extends NetworkService {
 extension IsOk on Response {
   bool get isOk {
     return (statusCode! ~/ 100) == 2;
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

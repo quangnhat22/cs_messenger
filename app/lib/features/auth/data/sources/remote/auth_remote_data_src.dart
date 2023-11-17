@@ -12,10 +12,14 @@ abstract class AuthRemoteDataSource {
   Future<AppObjResultRaw<TokenRaw>> loginByEmailAndPassword(
       {required Map<String, dynamic> body});
 
-  Future<AppObjResultRaw<EmptyRaw>> verifyEmail(String code);
-
   Future<AppObjResultRaw<EmptyRaw>> forgotPassword(
       {required Map<String, dynamic> body});
+
+  Future<AppObjResultRaw<EmptyRaw>> requestResendEmail();
+
+  Future<AppObjResultRaw<EmptyRaw>> logOut();
+
+  Future<AppObjResultRaw<StatusVerifyEmailRaw>> checkVerifyEmail();
 }
 
 @Injectable(as: AuthRemoteDataSource)
@@ -79,20 +83,18 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   }
 
   @override
-  Future<AppObjResultRaw<EmptyRaw>> verifyEmail(String code) async {
-    // try {
-    //   final AppResponse response = await _networkService.request(
-    //     clientRequest: ClientRequest(
-    //       url: ApiProvider.verifyEmail,
-    //       method: HttpMethod.get,
-    //       query: {"code": code},
-    //     ),
-    //   );
-    //   return response.toRaw((data) => EmptyRaw());
-    // } on NetworkException catch (_) {
-    //   rethrow;
-    // }
-    throw UnimplementedError();
+  Future<AppObjResultRaw<StatusVerifyEmailRaw>> checkVerifyEmail() async {
+    try {
+      final AppResponse response = await _networkService.request(
+        clientRequest: ClientRequest(
+          url: ApiProvider.verifyEmail,
+          method: HttpMethod.get,
+        ),
+      );
+      return response.toRaw((data) => StatusVerifyEmailRaw.fromJson(data));
+    } on NetworkException catch (_) {
+      rethrow;
+    }
   }
 
   @override
@@ -104,6 +106,36 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
           url: ApiProvider.forgetPassword,
           method: HttpMethod.post,
           body: body,
+        ),
+      );
+      return response.toRaw((data) => EmptyRaw());
+    } on NetworkException catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<AppObjResultRaw<EmptyRaw>> requestResendEmail() async {
+    try {
+      final AppResponse response = await _networkService.request(
+        clientRequest: ClientRequest(
+          url: ApiProvider.requestResendEmail,
+          method: HttpMethod.post,
+        ),
+      );
+      return response.toRaw((data) => EmptyRaw());
+    } on NetworkException catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<AppObjResultRaw<EmptyRaw>> logOut() async {
+    try {
+      final AppResponse response = await _networkService.request(
+        clientRequest: ClientRequest(
+          url: ApiProvider.logOut,
+          method: HttpMethod.delete,
         ),
       );
       return response.toRaw((data) => EmptyRaw());

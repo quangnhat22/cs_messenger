@@ -2,16 +2,17 @@ import 'package:app/features/auth/domain/repositories/auth_repository.dart';
 import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
 
-abstract class VerifyEmailUseCase extends BaseUseCase<BaseParam, EmptyModel> {}
+abstract class CheckVerifyEmailUseCase
+    extends BaseUseCase<BaseParam, StatusVerifyEmailModel> {}
 
-@Injectable(as: VerifyEmailUseCase)
-class VerifyEmailUseCaseImpl extends VerifyEmailUseCase {
+@Injectable(as: CheckVerifyEmailUseCase)
+class VerifyEmailUseCaseImpl extends CheckVerifyEmailUseCase {
   final AuthRepository _repo;
 
   VerifyEmailUseCaseImpl(this._repo);
 
   @override
-  Future<AppObjResultModel<EmptyModel>> executeObj(
+  Future<AppObjResultModel<StatusVerifyEmailModel>> executeObj(
           {BaseParam? request}) async =>
-      await _repo.verifyEmail();
+      await _repo.checkVerifyEmail();
 }

@@ -17,6 +17,7 @@ class SendEmailSuccessPage extends StatelessWidget {
     getIt<AppRouter>().popUntilRoot();
   }
 
+  //TODO: improve this features
   void _handleButtonOpenMailApp() async {}
 
   @override

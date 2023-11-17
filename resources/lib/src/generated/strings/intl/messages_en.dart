@@ -30,14 +30,23 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "about": MessageLookupByLibrary.simpleMessage("About us"),
+        "account": MessageLookupByLibrary.simpleMessage("Account"),
         "addNewContact":
             MessageLookupByLibrary.simpleMessage("Add new contact"),
+        "app": MessageLookupByLibrary.simpleMessage("App"),
         "back": MessageLookupByLibrary.simpleMessage("Back"),
         "backToWelcome":
             MessageLookupByLibrary.simpleMessage("Back to Welcome"),
+        "bio": MessageLookupByLibrary.simpleMessage("Bio"),
         "bridgeTheGap": m0,
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "changePassword":
+            MessageLookupByLibrary.simpleMessage("Change Password"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "confirmNewPassword":
+            MessageLookupByLibrary.simpleMessage("Confirm new password"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
         "confirmPasswordNotMatch": MessageLookupByLibrary.simpleMessage(
@@ -48,15 +57,24 @@ class MessageLookup extends MessageLookupByLibrary {
             "Create account success! Please login to continue."),
         "createNewGroup":
             MessageLookupByLibrary.simpleMessage("Create new group"),
+        "currentDevices": MessageLookupByLibrary.simpleMessage("Current"),
+        "currentPassword":
+            MessageLookupByLibrary.simpleMessage("Current password"),
+        "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
         "dataConflict": MessageLookupByLibrary.simpleMessage(
             "Input data has already existed!"),
+        "dateOfBirth": MessageLookupByLibrary.simpleMessage("Date of Birth"),
+        "deleteAccount": MessageLookupByLibrary.simpleMessage("Delete account"),
+        "devices": MessageLookupByLibrary.simpleMessage("Devices"),
         "discoverSeamlessMessaging": MessageLookupByLibrary.simpleMessage(
             "Discover seamless messaging and high-quality video calls. Stay connected with friends and loved ones like never before."),
         "doYouWantToLogOut":
             MessageLookupByLibrary.simpleMessage("Do you want to log out?"),
+        "editProfile": MessageLookupByLibrary.simpleMessage("Edit Profile"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailValidate": MessageLookupByLibrary.simpleMessage(
             "The email address is badly formatted."),
+        "en": MessageLookupByLibrary.simpleMessage("English"),
         "error": MessageLookupByLibrary.simpleMessage("Error"),
         "errorOccurred": MessageLookupByLibrary.simpleMessage(
             "An error occurred, please try again later"),
@@ -64,29 +82,41 @@ class MessageLookup extends MessageLookupByLibrary {
             "Experience the power of instant messaging and crystal-clear video calls. Connect with people across the globe with ease."),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password"),
+        "friendRequest": MessageLookupByLibrary.simpleMessage("Friend Request"),
         "friends": MessageLookupByLibrary.simpleMessage("Friends"),
+        "gender": MessageLookupByLibrary.simpleMessage("Gender"),
         "getConnectWithYourFriends": MessageLookupByLibrary.simpleMessage(
             "Get connect with your friends"),
         "gotIt": MessageLookupByLibrary.simpleMessage("Got it"),
         "groups": MessageLookupByLibrary.simpleMessage("Groups"),
+        "historyDevices": MessageLookupByLibrary.simpleMessage("History"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "invalidInput": MessageLookupByLibrary.simpleMessage("Invalid Input"),
-        "language": MessageLookupByLibrary.simpleMessage("English"),
+        "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "lightMode": MessageLookupByLibrary.simpleMessage("Light Mode"),
         "listFriend": MessageLookupByLibrary.simpleMessage("List Friends"),
         "logOut": MessageLookupByLibrary.simpleMessage("Log out"),
+        "logOutFail": MessageLookupByLibrary.simpleMessage("Log out fail!"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "name": MessageLookupByLibrary.simpleMessage("Name"),
+        "newPassword": MessageLookupByLibrary.simpleMessage("New password"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "noData": MessageLookupByLibrary.simpleMessage("No Data!"),
+        "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "openEmailApp": MessageLookupByLibrary.simpleMessage("Open Email app"),
         "or": MessageLookupByLibrary.simpleMessage("Or"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordValidate": MessageLookupByLibrary.simpleMessage(
             "Password must be at least 8 characters long, and contain at least 1 letter, 1 number, and 1 special character (e.g @,#,\$,...)."),
+        "phone": MessageLookupByLibrary.simpleMessage("Phone"),
+        "pickFromGallery":
+            MessageLookupByLibrary.simpleMessage("Pick from gallery"),
         "pleaseCheckYourEmail": m1,
         "pleaseCheckYourEmailToRecovery": MessageLookupByLibrary.simpleMessage(
             "Please check your email to recovery your password"),
         "pleaseLoginAgain":
             MessageLookupByLibrary.simpleMessage("Please login again"),
+        "receive": MessageLookupByLibrary.simpleMessage("Receive"),
         "recentCall": MessageLookupByLibrary.simpleMessage("Recent calls"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "registerEmailToReceivePasswordReset": MessageLookupByLibrary.simpleMessage(
@@ -101,6 +131,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendEmail": MessageLookupByLibrary.simpleMessage("Send email"),
         "sendEmailSuccess":
             MessageLookupByLibrary.simpleMessage("Send email success"),
+        "sent": MessageLookupByLibrary.simpleMessage("Sent"),
         "serverError": MessageLookupByLibrary.simpleMessage("Server error"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "signInWithEmail":
@@ -117,11 +148,24 @@ class MessageLookup extends MessageLookupByLibrary {
             "Start chatting with a new account"),
         "stayCloseNoMatterDistance": MessageLookupByLibrary.simpleMessage(
             "Stay Close, No Matter the Distance"),
+        "system": MessageLookupByLibrary.simpleMessage("System"),
         "systemIsCurrentlyErrorPleaseTryAgainLater":
             MessageLookupByLibrary.simpleMessage(
                 "System is currently error, please try again later"),
+        "takeAPhoto": MessageLookupByLibrary.simpleMessage("Take a photo"),
+        "thankForVerifyEmail": MessageLookupByLibrary.simpleMessage(
+            "Thanks for the verification email. Please log in again to use your application"),
+        "theme": MessageLookupByLibrary.simpleMessage("Theme"),
+        "themeAndLanguage":
+            MessageLookupByLibrary.simpleMessage("Theme and Language"),
+        "turnOnOffNotification":
+            MessageLookupByLibrary.simpleMessage("Turn on/off notification"),
+        "update": MessageLookupByLibrary.simpleMessage("Update"),
+        "updateAvatar": MessageLookupByLibrary.simpleMessage("Update avatar"),
         "verifyYourEmail":
             MessageLookupByLibrary.simpleMessage("Verify your email"),
+        "verifying": MessageLookupByLibrary.simpleMessage("Verifying"),
+        "vn": MessageLookupByLibrary.simpleMessage("Vietnam"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
         "welcomeToApp": m2

@@ -43,7 +43,9 @@ class FirstInstallAppLocalDataSourceImpl
 
   @override
   Future<void> deleteBox() async {
-    await openBox().then((box) => box.clear());
+    // await openBox().then((box) => box.clear());
+    await removeExpireTime();
+    await removeTempEmail();
   }
 
   @override

@@ -22,6 +22,8 @@ abstract class AppCardBaseBuilder {
   Color? _backgroundColor;
   @protected
   bool? _isShowBottomDivider;
+  @protected
+  EdgeInsetsGeometry? _contentPadding;
 
   Widget build(BuildContext context);
 
@@ -40,4 +42,6 @@ abstract class AppCardBaseBuilder {
   AppCardBaseBuilder setBackgroundColor(Color? backgroundColor);
 
   AppCardBaseBuilder setIsShowBottomDivider(bool? isShowBottomDivider);
+
+  AppCardBaseBuilder setContentPadding(EdgeInsetsGeometry? contentPadding);
 }

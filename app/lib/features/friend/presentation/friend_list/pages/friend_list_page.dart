@@ -32,6 +32,8 @@ class FriendListPage extends StatelessWidget {
               .setLeading(const CircleAvatar(
                 child: Icon(Icons.person_add_outlined),
               ))
+              .setContentPadding(
+                  EdgeInsets.all(AppSizeExt.of.majorPaddingScale(3)))
               .setTitle(AppTextTitleMediumWidget()
                   .setText(R.strings.addNewContact)
                   .build(context))
@@ -39,7 +41,7 @@ class FriendListPage extends StatelessWidget {
               .setOnTap(() => _handleAddNewContactButton(context))
               .build(context),
           SizedBox(
-            height: AppSizeExt.of.majorScale(1),
+            height: AppSizeExt.of.majorScale(1 / 4),
           ),
           AppCardWidget()
               .setLeading(CircleAvatar(
@@ -52,13 +54,33 @@ class FriendListPage extends StatelessWidget {
               .setTitle(AppTextTitleMediumWidget()
                   .setText(R.strings.requestFriend)
                   .build(context))
+              .setContentPadding(
+                  EdgeInsets.all(AppSizeExt.of.majorPaddingScale(3)))
               .setActions([const Icon(Icons.chevron_right)])
               .setOnTap(() => _handleFriendRequestButton(context))
               .build(context),
           SizedBox(
-            height: AppSizeExt.of.majorScale(2),
+            height: AppSizeExt.of.majorScale(1),
           ),
-          const Expanded(child: ListFriendWidget())
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: AppSizeExt.of.majorPaddingScale(3),
+              vertical: AppSizeExt.of.majorPaddingScale(2),
+            ),
+            child: AppTextTitleMediumWidget()
+                .setText("${R.strings.friends} (${4})")
+                .setTextStyle(TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontWeight: FontWeight.bold,
+                ))
+                .build(context),
+          ),
+          const Expanded(
+            child: Card(
+              elevation: 0,
+              child: ListFriendWidget(),
+            ),
+          )
         ],
       ),
     );

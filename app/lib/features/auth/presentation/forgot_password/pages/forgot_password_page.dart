@@ -29,6 +29,7 @@ class ForgotPasswordPage extends StatelessWidget {
               Theme.of(context).colorScheme.tertiaryContainer)
           .setBackgroundColor(Theme.of(context).colorScheme.background)
           .setBody(_body(context))
+          .setResizeToAvoidBottomInset(true)
           .build(context),
     );
   }

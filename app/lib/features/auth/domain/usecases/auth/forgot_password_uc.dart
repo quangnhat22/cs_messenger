@@ -13,6 +13,6 @@ class ForgotPasswordUseCaseImpl extends ForgotPasswordUseCase {
 
   @override
   Future<AppObjResultModel<EmptyModel>> executeObj(
-          {BaseParam? request}) async =>
-      await _repo.forceLogOut();
+          {ForgotPasswordParam? request}) async =>
+      await _repo.forgotPassword(query: request?.toJson() ?? {});
 }

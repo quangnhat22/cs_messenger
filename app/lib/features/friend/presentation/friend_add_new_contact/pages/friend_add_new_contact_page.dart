@@ -24,13 +24,10 @@ class FriendAddNewContactPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => getIt<SearchInputBloc>(),
       child: AppMainPageWidget()
-          .setAppBar(
-              AppBarWidget().setTextTitle(R.strings.addNewContact).setActions([
-            IconButton(
-              onPressed: () => _handleDoneButton(context),
-              icon: const Icon(Icons.check_outlined),
-            )
-          ]).build(context))
+          .setAppBar(AppBarWidget()
+              .setTextTitle(R.strings.addNewContact)
+              .setBackgroundColor(Colors.transparent)
+              .build(context))
           .setBody(_body(context))
           .build(context),
     );
@@ -46,17 +43,16 @@ class FriendAddNewContactPage extends StatelessWidget {
             height: AppSizeExt.of.majorScale(4),
           ),
           Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                border: Border.all(width: 1),
-                borderRadius:
-                    BorderRadius.circular(AppSizeExt.of.majorScale(4)),
+            child: Card(
+              elevation: 0,
+              child: Padding(
+                padding: EdgeInsets.all(
+                  AppSizeExt.of.majorPaddingScale(2),
+                ),
+                child: const FriendInfoPage(),
               ),
-              padding: EdgeInsets.all(AppSizeExt.of.majorPaddingScale(2)),
-              child: const FriendInfoPage(),
             ),
-          )
+          ),
         ],
       ),
     );

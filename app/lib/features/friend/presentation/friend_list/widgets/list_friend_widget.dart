@@ -1,7 +1,10 @@
+import 'package:app/components/main/card/app_card_base_builder.dart';
+import 'package:app/components/main/listView/app_list_view_widget.dart';
+import 'package:app/components/main/listView/controllers/app_list_view_cubit.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
-import 'package:app/configs/theme/app_theme.dart';
+import 'package:app/features/friend/presentation/friend_list/controllers/friend_list_cubit.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
-import 'package:resources/resources.dart';
 
 //TODO: refactor code
 class ListFriendWidget extends StatelessWidget {
@@ -9,35 +12,34 @@ class ListFriendWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: AppSizeExt.of.majorPaddingScale(2),
-            vertical: AppSizeExt.of.majorPaddingScale(3),
-          ),
-          child: AppTextTitleMediumWidget()
-              .setText(R.strings.friends)
-              .setTextStyle(TextStyle(
-                color: Theme.of(context).colorScheme.primary,
-                fontWeight: FontWeight.bold,
-              ))
-              .build(context),
-        ),
-        // Expanded(
-        //   child: Card(
-        //     elevation: 0,
-        //     child: Padding(
-        //       padding: EdgeInsets.symmetric(
-        //         vertical: AppSizeExt.of.majorPaddingScale(1),
-        //         horizontal: AppSizeExt.of.majorPaddingScale(1),
-        //       ),
-        //       child: const FriendCallListCallHistoryWidget(),
-        //     ),
-        //   ),
-        // )
-      ],
+    return AppListWidget<UserModel, AppListViewState<UserModel>,
+        GetListFriendCubit>(
+      physics: const BouncingScrollPhysics(),
+      childWidget: _buildCardFriendItem,
+      emptyView: const SizedBox(),
+      retryView: const SizedBox(),
     );
+  }
+
+  Widget _buildCardFriendItem(
+      BuildContext context, UserModel friend, int index) {
+    return AppCardBorderWidget()
+        .setLeading(const CircleAvatar(radius: 24))
+        .setTitle(
+            AppTextTitleMediumWidget().setText(friend.name).build(context))
+        .setSubtitle(AppTextBodyMediumWidget()
+            .setText("Phone: ${friend.phone}")
+            .build(context))
+        .setHasTopBorderRadius(index == 0)
+        .setHasBottomBorderRadius(index == 99)
+        .setActions([
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.message_outlined),
+          )
+        ])
+        .setIsShowBottomDivider(true)
+        .setOnTap(() {})
+        .build(context);
   }
 }

@@ -14,6 +14,8 @@ class AppConstants {
   static int timeDurationSwitchPage = 300;
 
   static int timeDelaySendEmail = 30;
+
+  static int timeRepeatCallCheckVerifyEmail = 15000;
 }
 
 class AppFormKeys {
@@ -28,4 +30,12 @@ class AppLocalBoxKeys {
   AppLocalBoxKeys._();
 
   static const firstInstallAppBox = 'first_install_app_box';
+  static const themeLanguageBox = 'theme_language_box';
+  static const deviceInfoBox = 'device_info_box';
+}
+
+class AppNavigationKeys {
+  AppNavigationKeys._();
+
+  static const timeSwitchPage = 400;
 }
