@@ -69,7 +69,7 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
 
         if (isVerifyEmail) {
           //open verify email page
-          getIt<AppRouter>()
+          await getIt<AppRouter>()
               .push(VerifyEmailRoute(isFirstRequestSendEmail: false));
         } else {
           await _checkAuthenticated();

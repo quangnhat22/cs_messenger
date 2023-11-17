@@ -1,4 +1,4 @@
-part of 'base_model.dart';
+part of '../base_model.dart';
 
 class TokenModel extends BaseModel {
   final String? accessToken;

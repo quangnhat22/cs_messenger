@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:app/configs/di/di.dart';
 import 'package:app/features/app/presentation/app.dart';
 import 'package:configs/configs.dart';
+import 'package:data/data.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,8 +19,13 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  _registerAdapterHive();
   Fsplash.remove();
   runApp(const App());
+}
+
+void _registerAdapterHive() {
+  Hive.registerAdapter(UserRawAdapter());
 }
 
 class AppObserver extends BlocObserver {

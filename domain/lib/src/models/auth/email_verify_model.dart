@@ -1,4 +1,4 @@
-part of 'base_model.dart';
+part of '../base_model.dart';
 
 class EmailVerifyModel extends BaseModel {
   final TokenModel? token;
