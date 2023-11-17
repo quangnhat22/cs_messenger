@@ -1,4 +1,4 @@
-part of 'base_model.dart';
+part of '../base_model.dart';
 
 class DeviceIdModel extends BaseModel {
   final String id;

@@ -21,6 +21,9 @@ class UserRepositoryImpl extends UserRepository {
       return response.raw2Model();
     } on AppException catch (_) {
       rethrow;
+    } catch (e) {
+      print(e);
+      throw Exception();
     }
   }
 

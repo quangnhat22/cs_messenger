@@ -1,19 +1,20 @@
 part of 'base_raw.dart';
 
 @freezed
+@HiveType(typeId: 0)
 class UserRaw extends BaseRaw<UserModel> with _$UserRaw {
   UserRaw._();
 
   factory UserRaw({
-    required String id,
-    String? name,
-    String? email,
-    String? avatar,
-    String? phone,
-    String? gender,
-    int? birthday,
-    String? bio,
-    String? relation,
+    @HiveField(0) required String id,
+    @HiveField(1) String? name,
+    @HiveField(2) String? email,
+    @HiveField(3) String? avatar,
+    @HiveField(4) String? phone,
+    @HiveField(5) String? gender,
+    @HiveField(6) int? birthday,
+    @HiveField(7) String? bio,
+    RelationRaw? relation,
   }) = _UserRaw;
 
   factory UserRaw.fromJson(Map<String, Object?> json) =>
@@ -31,7 +32,9 @@ class UserRaw extends BaseRaw<UserModel> with _$UserRaw {
           ? DateTimeExt.convertTimeStampToDateTime(birthday!)
           : null,
       bio: bio,
-      relation: RelationType.convertStringToRelationType(relation),
+      // relation: RelationModel(
+      //   requestId: relation
+      // ),
     );
   }
 }

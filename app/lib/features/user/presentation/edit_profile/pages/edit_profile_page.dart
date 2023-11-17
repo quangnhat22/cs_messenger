@@ -17,7 +17,7 @@ class EditProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<EditProfileFormBloc>(),
+      create: (_) => getIt<EditProfileFormBloc>()..initPage(),
       child: AppMainPageWidget()
           .setAppBar(_appBar(context))
           .setBackgroundColor(Theme.of(context).colorScheme.background)
