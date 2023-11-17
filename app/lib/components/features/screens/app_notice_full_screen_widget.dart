@@ -9,6 +9,7 @@ class AppNoticeFullScreenWidget extends StatelessWidget {
     required this.image,
     this.title,
     this.subTitle,
+    this.subWidget,
     this.actions,
     this.backgroundColor,
   });
@@ -16,6 +17,7 @@ class AppNoticeFullScreenWidget extends StatelessWidget {
   final Image image;
   final String? title;
   final String? subTitle;
+  final Widget? subWidget;
   final List<Widget>? actions;
   final Color? backgroundColor;
 
@@ -31,7 +33,7 @@ class AppNoticeFullScreenWidget extends StatelessWidget {
 
   Widget _body(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(AppSizeExt.of.majorScale(5)),
+      padding: EdgeInsets.all(AppSizeExt.of.majorPaddingScale(5)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -65,6 +67,11 @@ class AppNoticeFullScreenWidget extends StatelessWidget {
                               .setText(subTitle)
                               .setTextAlign(TextAlign.center)
                               .build(context),
+                          if (subWidget != null)
+                            SizedBox(
+                              height: AppSizeExt.of.majorScale(6),
+                            ),
+                          subWidget ?? const SizedBox(),
                         ],
                       ),
                     ),

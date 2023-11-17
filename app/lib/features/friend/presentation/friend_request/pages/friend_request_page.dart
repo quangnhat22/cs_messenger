@@ -26,8 +26,10 @@ class FriendRequestPage extends StatelessWidget {
         ),
       ],
       child: AppMainPageWidget()
-          .setAppBar(
-              AppBarWidget().setTextTitle('Request Friend').build(context))
+          .setAppBar(AppBarWidget()
+              .setTextTitle(R.strings.friendRequest)
+              .setBackgroundColor(Colors.transparent)
+              .build(context))
           .setBody(_body(context))
           .build(context),
     );
@@ -35,9 +37,9 @@ class FriendRequestPage extends StatelessWidget {
 
   Widget _body(BuildContext context) {
     return AppTapBarWidget().setRoutes(const [
-      FriendSentRequestRoute(),
       FriendReceivedRequestRoute(),
-    ]).setNumbers([0, 1]).setLabels(
-        [R.strings.recentCall, R.strings.listFriend]).build(context);
+      FriendSentRequestRoute(),
+    ]).setNumbers([1, 1]).setLabels([R.strings.receive, R.strings.sent]).build(
+        context);
   }
 }

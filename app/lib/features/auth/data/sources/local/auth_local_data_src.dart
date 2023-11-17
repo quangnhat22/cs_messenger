@@ -2,7 +2,7 @@ import 'package:data/data.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class AuthLocalDataSource {
-  Future<void> saveToken({required String token, required String refreshToken});
+  Future<void> saveToken({required String token, String? refreshToken});
 
   Future<void> clearToken();
 
@@ -18,10 +18,11 @@ class AuthLocalDataSourceImpl extends AuthLocalDataSource {
   }
 
   @override
-  Future<void> saveToken(
-      {required String token, required String refreshToken}) async {
+  Future<void> saveToken({required String token, String? refreshToken}) async {
     await _pref.setString(AppPrefKey.token, token);
-    await _pref.setString(AppPrefKey.refreshToken, refreshToken);
+    if (refreshToken != null) {
+      await _pref.setString(AppPrefKey.refreshToken, refreshToken);
+    }
   }
 
   @override

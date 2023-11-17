@@ -10,6 +10,7 @@ part 'device_id_raw.dart';
 part 'group_raw.dart';
 part 'history_call_raw.dart';
 part 'request_raw.dart';
+part 'status_verify_email_raw.dart';
 part 'token_raw.dart';
 part 'user_raw.dart';
 part 'welcome_raw.dart';

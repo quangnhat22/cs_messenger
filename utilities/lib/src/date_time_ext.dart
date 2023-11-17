@@ -8,6 +8,7 @@ class DateTimeExt {
 
   static const String ddMMyyy = 'dd/MM/yyy';
   static const String hm = 'HH:mm';
+  static const String hHmmddMMyyyy = 'HH:mm dd-MM-yyyy';
 
   static String dateTimeToDisplay(
       {required DateTime? dateTime, String pattern = ddMMyyy}) {
@@ -40,6 +41,11 @@ class DateTimeExt {
 
   static String timeToDisplay(
       {required DateTime? dateTime, String pattern = hm}) {
+    return dateTime != null ? DateFormat(pattern).format(dateTime) : '--:--';
+  }
+
+  static String dateTimeToDisplayHHmmddMMyyyy(
+      {required DateTime? dateTime, String pattern = hHmmddMMyyyy}) {
     return dateTime != null ? DateFormat(pattern).format(dateTime) : '--:--';
   }
 

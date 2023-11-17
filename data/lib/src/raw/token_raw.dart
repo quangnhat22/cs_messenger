@@ -5,8 +5,8 @@ class TokenRaw extends BaseRaw<TokenModel> with _$TokenRaw {
   TokenRaw._();
 
   factory TokenRaw({
-    String? accessToken,
-    String? refreshToken,
+    @JsonKey(name: 'access_token') String? accessToken,
+    @JsonKey(name: 'refresh_token') String? refreshToken,
   }) = _TokenRaw;
 
   factory TokenRaw.fromJson(Map<String, Object?> json) =>

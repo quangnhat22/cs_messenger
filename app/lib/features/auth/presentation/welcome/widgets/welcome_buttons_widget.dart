@@ -1,3 +1,4 @@
+import 'package:app/components/features/button/login_with_google/login_with_google.dart';
 import 'package:app/components/main/button/app_button_base_builder.dart';
 import 'package:app/components/main/divider/app_divider_base_builder.dart';
 import 'package:app/configs/routes/app_router.gr.dart';
@@ -44,16 +45,20 @@ class WelcomeButtonsWidget extends StatelessWidget {
         SizedBox(
           height: AppSizeExt.of.majorScale(4),
         ),
-        kIsWeb
-            ? (GoogleSignInPlatform.instance as web.GoogleSignInPlugin)
-                .renderButton()
-            : AppButtonOutlineWidget()
-                .setButtonText(R.strings.signInWithGoogle)
-                .setPrefixIcon(R.pngs.googleLogo.image(width: 16, height: 16))
-                .setTextStyle(
-                    TextStyle(color: Theme.of(context).colorScheme.onSurface))
-                .setOnPressed(() => _handleSignInWithGoogle(context))
-                .build(context),
+        // kIsWeb
+        //     ? (GoogleSignInPlatform.instance as web.GoogleSignInPlugin)
+        //         .renderButton()
+        //     : AppButtonOutlineWidget()
+        //         .setButtonText(R.strings.signInWithGoogle)
+        //         .setPrefixIcon(R.pngs.googleLogo.image(width: 16, height: 16))
+        //         .setTextStyle(
+        //             TextStyle(color: Theme.of(context).colorScheme.onSurface))
+        //         .setOnPressed(() => _handleSignInWithGoogle(context))
+        //         .build(context),
+        buildSignInButton(
+          context: context,
+          onPressed: () => _handleSignInWithGoogle(context),
+        ),
         SizedBox(
           height: AppSizeExt.of.majorScale(5),
         ),

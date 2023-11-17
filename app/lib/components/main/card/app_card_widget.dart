@@ -12,10 +12,11 @@ class AppCardWidget extends AppCardBaseBuilder {
             surfaceTintColor:
                 _backgroundColor ?? Theme.of(context).colorScheme.background,
             child: Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: AppSizeExt.of.majorPaddingScale(4),
-                horizontal: AppSizeExt.of.majorPaddingScale(3),
-              ),
+              padding: _contentPadding ??
+                  EdgeInsets.symmetric(
+                    vertical: AppSizeExt.of.majorPaddingScale(4),
+                    horizontal: AppSizeExt.of.majorPaddingScale(3),
+                  ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
@@ -92,6 +93,12 @@ class AppCardWidget extends AppCardBaseBuilder {
   @override
   AppCardWidget setIsShowBottomDivider(bool? isShowBottomDivider) {
     _isShowBottomDivider = isShowBottomDivider;
+    return this;
+  }
+
+  @override
+  AppCardWidget setContentPadding(EdgeInsetsGeometry? contentPadding) {
+    _contentPadding = contentPadding;
     return this;
   }
 }

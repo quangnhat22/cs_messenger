@@ -6,6 +6,7 @@ import 'package:app/components/main/page/app_main_page_base_builder.dart';
 import 'package:app/configs/di/di.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:app/features/auth/presentation/verify_email/controllers/bloc_verify_email/verify_email_cubit.dart';
+import 'package:app/features/auth/presentation/verify_email/widgets/verify_email_waiting_widget.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +17,7 @@ import 'package:utilities/utilities.dart';
 class VerifyEmailPage extends StatelessWidget {
   const VerifyEmailPage({
     super.key,
-    this.isFirstRequestSendEmail = false,
+    this.isFirstRequestSendEmail = true,
   });
 
   final bool isFirstRequestSendEmail;
@@ -47,10 +48,13 @@ class VerifyEmailPage extends StatelessWidget {
         .show();
   }
 
+  void _handleRequestResendEmail(BuildContext context) async {
+    await context.read<VerifyEmailCubit>().requestSendVerifyEmail();
+  }
+
   Widget _body(BuildContext context) {
     return BlocBuilder<VerifyEmailCubit, VerifyEmailState>(
-      buildWhen: (prev, current) =>
-          prev.email != current.email || prev.expireTime != current.expireTime,
+      buildWhen: (prev, current) => prev != current,
       builder: (context, state) {
         return AppNoticeFullScreenWidget(
           image: R.pngs.verifyEmail.image(),
@@ -58,16 +62,18 @@ class VerifyEmailPage extends StatelessWidget {
           backgroundColor: Theme.of(context).colorScheme.primary,
           subTitle: R.strings.pleaseCheckYourEmail(
               state.email ?? '-',
-              DateTimeExt.dateTimeToDisplay(
-                  dateTime: state.expireTime, pattern: "{0:g}")),
+              DateTimeExt.dateTimeToDisplayHHmmddMMyyyy(
+                  dateTime: state.expireTime)),
+          subWidget:
+              state.isVerifying ? const VerifyEmailWaitingWidget() : null,
           actions: [
             AppButtonCountDownWidget(
               titleActive: R.strings.sendEmail,
               titleNonActive: R.strings.resendEmailAfter,
-              onPressed: () {},
+              onPressed: () => _handleRequestResendEmail(context),
             ),
             SizedBox(
-              height: AppSizeExt.of.majorScale(2),
+              height: AppSizeExt.of.majorScale(1),
             ),
             AppButtonOutlineWidget()
                 .setButtonText(R.strings.logOut)

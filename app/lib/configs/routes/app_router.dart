@@ -1,4 +1,5 @@
 import 'package:app/configs/di/di.dart';
+import 'package:app/configs/exts/app_exts.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:injectable/injectable.dart';
 
@@ -10,14 +11,16 @@ import 'guard/auth_guard.dart';
 class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes => [
-        AutoRoute(page: WelcomeRoute.page, initial: true),
+        AutoRoute(
+          page: WelcomeRoute.page,
+          initial: true,
+        ),
         AutoRoute(page: OnboardingRoute.page),
         AutoRoute(page: LoginRoute.page),
         AutoRoute(page: VerifyEmailRoute.page),
         AutoRoute(page: ForgotPasswordRoute.page),
         AutoRoute(page: SendEmailSuccessRoute.page),
         AutoRoute(page: SignUpRoute.page),
-        AutoRoute(page: UIKitDemoRoute.page),
         AutoRoute(
           page: MainRoute.page,
           guards: [getIt<AuthGuard>()],
@@ -38,7 +41,6 @@ class AppRouter extends $AppRouter {
                 AutoRoute(page: SettingDashBoardRoute.page),
               ],
             ),
-            AutoRoute(page: EditProfileRoute.page),
             AutoRoute(page: FriendAddNewContactRoute.page),
             AutoRoute(
               page: FriendRequestRoute.page,
@@ -49,7 +51,20 @@ class AppRouter extends $AppRouter {
             ),
             AutoRoute(page: GroupCreateRoute.page),
             AutoRoute(page: GroupRequestRoute.page),
+            _customRoute(page: EditProfileRoute.page),
+            _customRoute(page: ThemeAndLanguageRoute.page),
+            _customRoute(page: NotificationSettingRoute.page),
+            _customRoute(page: ListDevicesRoute.page),
+            _customRoute(page: ChangePasswordRoute.page),
           ],
         )
       ];
+
+  CustomRoute _customRoute({required PageInfo<dynamic> page}) {
+    return CustomRoute(
+      page: page,
+      transitionsBuilder: TransitionsBuilders.slideLeft,
+      durationInMilliseconds: AppNavigationKeys.timeSwitchPage,
+    );
+  }
 }

@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:app/configs/di/di.dart';
-import 'package:app/features/app/app.dart';
+import 'package:app/features/app/presentation/app.dart';
 import 'package:configs/configs.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -53,4 +53,3 @@ class AppObserver extends BlocObserver {
     super.onError(bloc, error, stackTrace);
   }
 }
-

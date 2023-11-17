@@ -8,5 +8,6 @@ class VerifyEmailState with _$VerifyEmailState {
     @Default(true) bool isFirstRequestSendEmail,
     @Default(false) bool isSendEmailSuccess,
     @Default(false) bool isEmailVerified,
+    @Default(false) bool isVerifying,
   }) = _Initial;
 }

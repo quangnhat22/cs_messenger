@@ -38,6 +38,8 @@ class GroupDashBoardPage extends StatelessWidget {
               .setLeading(const CircleAvatar(
                 child: Icon(Icons.person_add_outlined),
               ))
+              .setContentPadding(
+                  EdgeInsets.all(AppSizeExt.of.majorPaddingScale(3)))
               .setTitle(AppTextTitleMediumWidget()
                   .setText(R.strings.createNewGroup)
                   .build(context))
@@ -45,7 +47,7 @@ class GroupDashBoardPage extends StatelessWidget {
               .setOnTap(() => _handleAddNewContactButton(context))
               .build(context),
           SizedBox(
-            height: AppSizeExt.of.majorScale(1),
+            height: AppSizeExt.of.majorScale(1 / 4),
           ),
           AppCardWidget()
               .setLeading(CircleAvatar(
@@ -55,6 +57,8 @@ class GroupDashBoardPage extends StatelessWidget {
                   color: Theme.of(context).colorScheme.background,
                 ),
               ))
+              .setContentPadding(
+                  EdgeInsets.all(AppSizeExt.of.majorPaddingScale(3)))
               .setTitle(AppTextTitleMediumWidget()
                   .setText(R.strings.requestGroup)
                   .build(context))
@@ -62,7 +66,7 @@ class GroupDashBoardPage extends StatelessWidget {
               .setOnTap(() => _handleFriendRequestButton(context))
               .build(context),
           SizedBox(
-            height: AppSizeExt.of.majorScale(2),
+            height: AppSizeExt.of.majorScale(1),
           ),
           const GroupListLabelWidget(),
           const Expanded(child: GroupListWidget()),

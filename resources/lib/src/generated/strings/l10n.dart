@@ -50,16 +50,6 @@ class Strings {
     return Localizations.of<Strings>(context, Strings);
   }
 
-  /// `Vietnamese`
-  String get language {
-    return Intl.message(
-      'Vietnamese',
-      name: 'language',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Quay lại`
   String get back {
     return Intl.message(
@@ -685,6 +675,386 @@ class Strings {
     return Intl.message(
       'Bạn vui lòng nhập email đã đăng ký bên dưới, và chúng tôi sẽ gửi hướng dẫn khôi phục mật khẩu đến cho bạn',
       name: 'registerEmailToReceivePasswordReset',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Theme and Language`
+  String get themeAndLanguage {
+    return Intl.message(
+      'Theme and Language',
+      name: 'themeAndLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chủ đề`
+  String get theme {
+    return Intl.message(
+      'Chủ đề',
+      name: 'theme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ngôn ngữ`
+  String get language {
+    return Intl.message(
+      'Ngôn ngữ',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chế độ sáng`
+  String get lightMode {
+    return Intl.message(
+      'Chế độ sáng',
+      name: 'lightMode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chế độ tối`
+  String get darkMode {
+    return Intl.message(
+      'Chế độ tối',
+      name: 'darkMode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hệ thống`
+  String get system {
+    return Intl.message(
+      'Hệ thống',
+      name: 'system',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tiếng Việt`
+  String get vn {
+    return Intl.message(
+      'Tiếng Việt',
+      name: 'vn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tiếng Anh`
+  String get en {
+    return Intl.message(
+      'Tiếng Anh',
+      name: 'en',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Danh sách thiết bị`
+  String get devices {
+    return Intl.message(
+      'Danh sách thiết bị',
+      name: 'devices',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Về chún tôi`
+  String get about {
+    return Intl.message(
+      'Về chún tôi',
+      name: 'about',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Xóa tài khoản`
+  String get deleteAccount {
+    return Intl.message(
+      'Xóa tài khoản',
+      name: 'deleteAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thông báo`
+  String get notification {
+    return Intl.message(
+      'Thông báo',
+      name: 'notification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bật/tắt mở thông báo`
+  String get turnOnOffNotification {
+    return Intl.message(
+      'Bật/tắt mở thông báo',
+      name: 'turnOnOffNotification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thiết bị hiện tại`
+  String get currentDevices {
+    return Intl.message(
+      'Thiết bị hiện tại',
+      name: 'currentDevices',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thiết bị đã đăng nhập`
+  String get historyDevices {
+    return Intl.message(
+      'Thiết bị đã đăng nhập',
+      name: 'historyDevices',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tài khoản`
+  String get account {
+    return Intl.message(
+      'Tài khoản',
+      name: 'account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ứng dụng`
+  String get app {
+    return Intl.message(
+      'Ứng dụng',
+      name: 'app',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thay đổi thông tin`
+  String get editProfile {
+    return Intl.message(
+      'Thay đổi thông tin',
+      name: 'editProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tên`
+  String get name {
+    return Intl.message(
+      'Tên',
+      name: 'name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Số điện thoại`
+  String get phone {
+    return Intl.message(
+      'Số điện thoại',
+      name: 'phone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ngày tháng năm sinh`
+  String get dateOfBirth {
+    return Intl.message(
+      'Ngày tháng năm sinh',
+      name: 'dateOfBirth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Giới tính`
+  String get gender {
+    return Intl.message(
+      'Giới tính',
+      name: 'gender',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Giới thiệu bản thân`
+  String get bio {
+    return Intl.message(
+      'Giới thiệu bản thân',
+      name: 'bio',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cập nhật`
+  String get update {
+    return Intl.message(
+      'Cập nhật',
+      name: 'update',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thay đổi mật khẩu`
+  String get changePassword {
+    return Intl.message(
+      'Thay đổi mật khẩu',
+      name: 'changePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mật khẩu hiện tại`
+  String get currentPassword {
+    return Intl.message(
+      'Mật khẩu hiện tại',
+      name: 'currentPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mật khẩu mới`
+  String get newPassword {
+    return Intl.message(
+      'Mật khẩu mới',
+      name: 'newPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Xác nhận mật khẩu mới`
+  String get confirmNewPassword {
+    return Intl.message(
+      'Xác nhận mật khẩu mới',
+      name: 'confirmNewPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cập nhật ảnh đại diện`
+  String get updateAvatar {
+    return Intl.message(
+      'Cập nhật ảnh đại diện',
+      name: 'updateAvatar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chụp ảnh`
+  String get takeAPhoto {
+    return Intl.message(
+      'Chụp ảnh',
+      name: 'takeAPhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lấy từ thư viện`
+  String get pickFromGallery {
+    return Intl.message(
+      'Lấy từ thư viện',
+      name: 'pickFromGallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Đóng`
+  String get cancel {
+    return Intl.message(
+      'Đóng',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Đã nhận`
+  String get receive {
+    return Intl.message(
+      'Đã nhận',
+      name: 'receive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Đã gửi`
+  String get sent {
+    return Intl.message(
+      'Đã gửi',
+      name: 'sent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yêu cầu kết bạn`
+  String get friendRequest {
+    return Intl.message(
+      'Yêu cầu kết bạn',
+      name: 'friendRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Đăng xuất thất bại!`
+  String get logOutFail {
+    return Intl.message(
+      'Đăng xuất thất bại!',
+      name: 'logOutFail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Đang xác thực`
+  String get verifying {
+    return Intl.message(
+      'Đang xác thực',
+      name: 'verifying',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cảm ơn bạn đã xác thực email. Bạn hãy đăng nhập lại để tiếp tục bạn nhé!`
+  String get thankForVerifyEmail {
+    return Intl.message(
+      'Cảm ơn bạn đã xác thực email. Bạn hãy đăng nhập lại để tiếp tục bạn nhé!',
+      name: 'thankForVerifyEmail',
       desc: '',
       args: [],
     );

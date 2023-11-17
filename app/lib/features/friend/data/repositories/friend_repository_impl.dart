@@ -33,4 +33,16 @@ class FriendRepositoryImpl extends FriendRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<AppListResultModel<UserModel>> getListFriend(
+      {required Map<String, dynamic> query}) async {
+    try {
+      final AppListResultRaw<UserRaw> remoteData =
+          await _remote.fetchListFriend(query: query);
+      return remoteData.raw2Model();
+    } on NetworkException catch (_) {
+      rethrow;
+    }
+  }
 }

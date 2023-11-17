@@ -12,14 +12,17 @@ class FriendInfoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppMainPageWidget().setBody(_body(context)).build(context);
+    return AppMainPageWidget()
+        .setBackgroundColor(Theme.of(context).colorScheme.surface)
+        .setBody(_body(context))
+        .build(context);
   }
 
   Widget _body(BuildContext context) {
     return Center(
       child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             children: <Widget>[
               AppAvatarCircleWidget()
@@ -34,7 +37,7 @@ class FriendInfoPage extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     vertical: AppSizeExt.of.majorPaddingScale(5),
-                    horizontal: AppSizeExt.of.majorPaddingScale(4),
+                    horizontal: AppSizeExt.of.majorPaddingScale(3),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

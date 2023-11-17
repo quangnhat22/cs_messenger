@@ -84,9 +84,8 @@ class AppDefaultDialogWidget extends AppDialogBaseBuilder {
                   child: AppButtonOutlineWidget()
                       .setButtonText(_negativeText)
                       .setBorderColor(Theme.of(context).colorScheme.primary)
-                      .setOnPressed(() {
-                    //TODO: set up auto_route
-                    Navigator.of(context).pop();
+                      .setOnPressed(() async {
+                    await context.router.pop();
                     _onNegative?.call();
                   }).build(context),
                 ),
@@ -102,9 +101,9 @@ class AppDefaultDialogWidget extends AppDialogBaseBuilder {
                                     Theme.of(context).colorScheme.background))
                             .setAppButtonSize(AppButtonSize.large)
                             .setAppButtonType(AppButtonType.danger)
-                            .setOnPressed(() {
+                            .setOnPressed(() async {
                           //TODO: implement auto route
-                          Navigator.of(context).pop();
+                          await context.router.pop();
                           _onPositive?.call();
                         }).build(context),
                       )
@@ -114,9 +113,8 @@ class AppDefaultDialogWidget extends AppDialogBaseBuilder {
                             .setTextStyle(TextStyle(
                                 color:
                                     Theme.of(context).colorScheme.background))
-                            .setOnPressed(() {
-                          //TODO: implement auto route
-                          Navigator.of(context).pop();
+                            .setOnPressed(() async {
+                          await context.router.pop();
                           _onPositive?.call();
                         }).build(context),
                       ),

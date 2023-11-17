@@ -3,7 +3,7 @@ import 'package:app/components/main/listView/app_list_view_widget.dart';
 import 'package:app/components/main/listView/controllers/app_list_view_cubit.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/configs/theme/app_theme.dart';
-import 'package:app/features/friend/presentation/friend_calls/controllers/cubit_list_history_call/list_call_history_cubit.dart';
+import 'package:app/features/friend/presentation/friend_calls/controllers/list_call_history_cubit.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:resources/resources.dart';

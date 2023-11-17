@@ -9,24 +9,44 @@ class AppCardBorderWidget extends AppCardBaseBuilder {
     return Column(
       children: [
         InkWell(
+          onTap: _onTap,
           customBorder: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               top: _buildTopRadius(),
               bottom: _buildBottomRadius(),
             ),
           ),
-          onTap: _onTap,
-          child: ListTile(
-            enabled: _isDisabled ?? false,
-            leading: _leading,
-            title: _title,
-            subtitle: _subtitle,
-            trailing: _actions?[0],
+          child: Padding(
+            padding: _contentPadding ??
+                EdgeInsets.symmetric(
+                  vertical: AppSizeExt.of.majorPaddingScale(4),
+                  horizontal: AppSizeExt.of.majorPaddingScale(3),
+                ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                if (_leading != null) _leading!,
+                if ((_leading != null && _title != null) ||
+                    (_leading != null && _subtitle != null))
+                  SizedBox(width: AppSizeExt.of.majorScale(4)),
+                if (_title != null || _subtitle != null)
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        _title ?? const SizedBox(),
+                        _subtitle ?? const SizedBox(),
+                      ],
+                    ),
+                  ),
+                if (_actions != null) Row(children: _actions!)
+              ],
+            ),
           ),
         ),
         if (_isShowBottomDivider == true)
           AppDividerSpaceLeftWidget()
-              .setSpaceLeft(AppSizeExt.of.majorScale(14))
+              .setSpaceLeft(AppSizeExt.of.majorScale(12))
               .build(context)
       ],
     );
@@ -99,6 +119,12 @@ class AppCardBorderWidget extends AppCardBaseBuilder {
   @override
   AppCardBorderWidget setIsShowBottomDivider(bool? isShowBottomDivider) {
     _isShowBottomDivider = isShowBottomDivider;
+    return this;
+  }
+
+  @override
+  AppCardBorderWidget setContentPadding(EdgeInsetsGeometry? contentPadding) {
+    _contentPadding = contentPadding;
     return this;
   }
 }

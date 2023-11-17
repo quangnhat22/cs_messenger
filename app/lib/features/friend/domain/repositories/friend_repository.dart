@@ -6,4 +6,7 @@ abstract class FriendRepository {
 
   Future<AppListResultModel<RequestModel>> getListFriendRequest(
       {required Map<String, dynamic> query});
+
+  Future<AppListResultModel<UserModel>> getListFriend(
+      {required Map<String, dynamic> query});
 }

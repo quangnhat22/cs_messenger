@@ -1,3 +1,4 @@
+import 'package:app/components/main/button/app_button_base_builder.dart';
 import 'package:app/components/main/card/app_card_base_builder.dart';
 import 'package:app/components/main/listView/app_list_view_widget.dart';
 import 'package:app/components/main/listView/controllers/app_list_view_cubit.dart';
@@ -7,7 +8,6 @@ import 'package:app/features/friend/presentation/friend_request/controllers/cubi
 import 'package:auto_route/annotations.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
-import 'package:resources/resources.dart';
 
 @RoutePage()
 class FriendSentRequestView extends StatelessWidget {
@@ -15,43 +15,38 @@ class FriendSentRequestView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppListWidget<RequestModel, AppListViewState<RequestModel>,
-        ListFriendSentRequestCubit>(
-      physics: const BouncingScrollPhysics(),
-      childWidget: _buildCardMissionItem,
-      emptyView: const SizedBox(),
-      retryView: const SizedBox(),
+    return Padding(
+      padding: EdgeInsets.all(AppSizeExt.of.majorPaddingScale(2)),
+      child: AppListWidget<RequestModel, AppListViewState<RequestModel>,
+          ListFriendSentRequestCubit>(
+        physics: const BouncingScrollPhysics(),
+        childWidget: _buildCardMissionItem,
+        emptyView: const SizedBox(),
+        retryView: const SizedBox(),
+      ),
     );
   }
 
   Widget _buildCardMissionItem(
       BuildContext context, RequestModel request, int index) {
-    return AppCardBorderWidget()
+    return AppCardWidget()
         .setLeading(const CircleAvatar(radius: 24))
-        .setTitle(
-            AppTextTitleMediumWidget().setText('Nguyen Van A').build(context))
-        .setSubtitle(
-          Row(
-            children: [
-              R.svgs.icOngoing.svg(),
-              SizedBox(
-                width: AppSizeExt.of.majorScale(2),
-              ),
-              AppTextBodyMediumWidget()
-                  .setText('22/09/2023 - 11:30')
-                  .build(context)
-            ],
-          ),
-        )
-        .setHasTopBorderRadius(index == 0)
-        .setHasBottomBorderRadius(index == 99)
+        .setTitle(AppTextTitleMediumWidget().setText('Dinh Loc').build(context))
+        .setSubtitle(AppTextBodyMediumWidget()
+            .setText('Sent: 11/11/2023')
+            .build(context))
         .setActions([
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.phone_outlined),
-          )
+          AppButtonFilledWidget()
+              .setAppButtonSize(AppButtonSize.small)
+              .setBackgroundColor(Theme.of(context).colorScheme.primary)
+              .setAppButtonType(AppButtonType.circle)
+              .setPrefixIcon(Icon(
+                Icons.undo_outlined,
+                color: Theme.of(context).colorScheme.background,
+              ))
+              .setOnPressed(() {})
+              .build(context),
         ])
-        .setIsShowBottomDivider(true)
         .setOnTap(() {})
         .build(context);
   }

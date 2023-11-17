@@ -18,6 +18,11 @@ class NetworkInterceptorWrapper extends QueuedInterceptorsWrapper {
   }
 
   @override
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
+    return handler.next(response);
+  }
+
+  @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     // Go Next when call api login || refreshToken
     if (err.requestOptions.path.contains(ApiProvider.loginByEmailAndPassword) ||
@@ -60,9 +65,8 @@ class NetworkInterceptorWrapper extends QueuedInterceptorsWrapper {
 
   //TODO:handle this
   Map<String, String> _headerToken() {
-    // final token = _pref.getString(AppPrefKey.token, '');
-    // return {AppNetworkKey.authorization: '${AppNetworkKey.bearer} $token'};
-    return {"token": "null"};
+    final token = pref.getString(AppPrefKey.token, '');
+    return {AppNetworkKey.authorization: '${AppNetworkKey.bearer} $token'};
   }
 
   Future<bool> _refreshToken() async {

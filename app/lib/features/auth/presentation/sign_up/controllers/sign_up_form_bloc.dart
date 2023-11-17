@@ -71,17 +71,20 @@ class SignUpFormBloc extends FormBloc<String, String> {
       AppLoadingOverlayWidget.show();
       await _createNewAccountUseCase.executeObj(
           request: SignUpParam(email: email.value, password: password.value));
+
       await _loginWithEmailUnVerifyUseCase.executeObj(
         request:
             LoginWithEmailParam(email: email.value, password: password.value),
       );
+
       AppLoadingOverlayWidget.dismiss();
     } on AppException catch (e) {
       AppLoadingOverlayWidget.dismiss();
-      emitFailure();
       AppExceptionExt(
         appException: e,
-        onError: (_) {},
+        onError: (_) {
+          emitFailure();
+        },
       ).detected();
     }
   }

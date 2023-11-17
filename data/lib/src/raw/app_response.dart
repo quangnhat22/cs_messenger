@@ -13,7 +13,7 @@ class Metadata {
 
   factory Metadata.fromJson(Map<String, dynamic> json) => Metadata(
         statusCode: json["statusCode"] ?? 0,
-        code: json["code"]?.toString() ?? json["message"],
+        code: json["code"]?.toString() ?? '0',
         message: json["message"] ?? '',
       );
 }
