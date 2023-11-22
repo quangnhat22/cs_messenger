@@ -4,6 +4,7 @@ import 'package:app/configs/routes/app_router.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:resources/resources.dart';
+import 'package:utilities/utilities.dart';
 
 class AppDialogImagePickerWidget extends StatelessWidget {
   const AppDialogImagePickerWidget({
@@ -53,22 +54,10 @@ class AppDialogImagePickerWidget extends StatelessWidget {
                       children: [
                         InkWell(
                           onTap: () async {
-                            // if (await AppPermissionExt
-                            //     .checkPermissionCamera()) {
-                            //   final image = await pickImage(
-                            //     Get.context ?? context,
-                            //     field,
-                            //     ImageSource.camera,
-                            //     setOnChanged,
-                            //   );
-                            //   field.didChange(image);
-                            //   Get.back();
-                            // } else {
-                            //   Get.back();
-                            //   AppDialogGrantPermissionRequestWidget(
-                            //           permissionName: R.strings.camera)
-                            //       .build(Get.context ?? context);
-                            // }
+                            final filePath =
+                                await AppAssetsPicker.pickImageFromCamera(
+                                    context);
+                            await getIt<AppRouter>().pop(filePath);
                           },
                           child: SizedBox(
                             height: AppSizeExt.of.majorPaddingScale(12),
@@ -84,22 +73,10 @@ class AppDialogImagePickerWidget extends StatelessWidget {
                         const Divider(),
                         InkWell(
                           onTap: () async {
-                            // if (await AppPermissionExt
-                            //     .checkPermissionGallery()) {
-                            //   final image = await pickImage(
-                            //     Get.context ?? context,
-                            //     field,
-                            //     ImageSource.gallery,
-                            //     setOnChanged,
-                            //   );
-                            //   field.didChange(image);
-                            //   Get.back();
-                            // } else {
-                            //   Get.back();
-                            //   AppDialogGrantPermissionRequestWidget(
-                            //           permissionName: R.strings.gallery)
-                            //       .build(Get.context ?? context);
-                            // }
+                            final filePath =
+                                await AppAssetsPicker.pickImageFromGallery(
+                                    context);
+                            await getIt<AppRouter>().pop(filePath);
                           },
                           child: SizedBox(
                             height: AppSizeExt.of.majorPaddingScale(12),
@@ -141,22 +118,5 @@ class AppDialogImagePickerWidget extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  Future<String?> pickImage(
-    BuildContext context,
-    FormFieldState<String?> field,
-    // ImageSource source,
-    void Function()? setSetOnChanged,
-  ) async {
-    // final picker = ImagePicker();
-    // final pickedImage = await picker.pickImage(source: source);
-    //
-    // if (pickedImage != null) {
-    //   field.didChange(pickedImage.path);
-    //   setSetOnChanged!.call();
-    //   return pickedImage.path;
-    // }
-    return null;
   }
 }

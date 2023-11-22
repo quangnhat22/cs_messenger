@@ -1,5 +1,15 @@
+import 'package:app/components/main/button/app_button_base_builder.dart';
+import 'package:app/configs/theme/app_theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
+import 'package:resources/resources.dart';
+import 'package:select_dialog/select_dialog.dart';
+import 'package:utilities/utilities.dart';
+
+part 'app_date_picker_widget.dart';
+
+part 'app_dropdown_widget.dart';
 
 part 'app_text_field_widget.dart';
 
@@ -50,6 +60,12 @@ abstract class AppFieldBaseBuilder {
   int? _maxLength;
   @protected
   InputDecoration? _inputDecoration;
+  @protected
+  String? _labelText;
+  @protected
+  Widget? _prefixIcon;
+  @protected
+  bool? _isRequired;
   @protected
   void Function(String)? _onChanged;
   @protected
@@ -112,6 +128,12 @@ abstract class AppFieldBaseBuilder {
   AppFieldBaseBuilder setOnSubmitted(void Function(String)? onSubmitted);
 
   AppFieldBaseBuilder setDecoration(InputDecoration? inputDecoration);
+
+  AppFieldBaseBuilder setLabelText(String? labelText);
+
+  AppFieldBaseBuilder setPrefixIcon(Widget? prefixIcon);
+
+  AppFieldBaseBuilder setIsRequired(bool? isRequired);
 
   Widget build(BuildContext context);
 }

@@ -12,6 +12,8 @@ dependencies:
     sdk: flutter
   utilities:
     path: ../utilities
+  resources:
+    path: ../resources
   get_it: ^7.6.4
   injectable: ^2.3.0
   json_annotation: ^4.8.1

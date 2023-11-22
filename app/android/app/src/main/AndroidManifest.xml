@@ -2,6 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="xyz.coffeesolution.messenger.app">
 
+    <!--Requesting access to images and videos.-->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"

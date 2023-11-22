@@ -10,16 +10,16 @@ class AppLoadingOverlayWidget {
   static void configure(BuildContext context) {
     EasyLoading.instance
       ..displayDuration = const Duration(milliseconds: 2000)
-      ..indicatorType = EasyLoadingIndicatorType.fadingCube
+      ..indicatorType = EasyLoadingIndicatorType.circle
       ..loadingStyle = EasyLoadingStyle.custom
       ..maskType = EasyLoadingMaskType.custom
       ..indicatorSize = AppSizeExt.of.majorScale(12)
       ..radius = AppSizeExt.of.majorScale(2)
-      ..backgroundColor = AppColorPalette.of.grayColor[2]
+      ..backgroundColor = Colors.black26
       ..indicatorColor = Theme.of(context).colorScheme.primary
       ..progressColor = Theme.of(context).colorScheme.primary
       ..textColor = AppColorPalette.of.grayColor
-      ..maskColor = AppColorPalette.of.grayColor[4]?.withOpacity(0.4)
+      ..maskColor = AppColorPalette.of.grayColor[1]?.withOpacity(0.4)
       ..userInteractions = false
       ..dismissOnTap = false;
   }

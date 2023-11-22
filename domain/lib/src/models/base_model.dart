@@ -1,3 +1,5 @@
+import 'package:resources/resources.dart';
+
 part 'app_exception.dart';
 part 'app_result_model.dart';
 part 'auth/email_verify_model.dart';

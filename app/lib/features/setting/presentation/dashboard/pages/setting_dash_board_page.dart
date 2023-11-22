@@ -31,7 +31,9 @@ class SettingDashBoardPage extends StatelessWidget {
       builder: (context) {
         return const AppDialogImagePickerWidget();
       },
-    );
+    ).then((filePath) => {
+          if (filePath != null) {debugPrint(filePath)}
+        });
   }
 
   Widget _body(BuildContext ctx) {
@@ -58,7 +60,6 @@ class SettingDashBoardPage extends StatelessWidget {
               ),
               Card(
                 surfaceTintColor: Theme.of(ctx).colorScheme.background,
-                elevation: 0,
                 child: Column(
                   children: <Widget>[
                     AppCardBorderWidget()
@@ -106,7 +107,6 @@ class SettingDashBoardPage extends StatelessWidget {
                     .build(ctx),
               ),
               Card(
-                elevation: 0,
                 surfaceTintColor: Theme.of(ctx).colorScheme.background,
                 child: Column(
                   children: <Widget>[

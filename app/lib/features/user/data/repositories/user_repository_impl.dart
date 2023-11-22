@@ -22,7 +22,6 @@ class UserRepositoryImpl extends UserRepository {
     } on AppException catch (_) {
       rethrow;
     } catch (e) {
-      print(e);
       throw Exception();
     }
   }
@@ -32,6 +31,7 @@ class UserRepositoryImpl extends UserRepository {
       {required Map<String, dynamic> body}) async {
     try {
       await _userRemoteDataSource.updateSelfInfo(body: body);
+      await getUserSelf();
       return AppObjResultModel(netData: EmptyModel());
     } on AppException catch (_) {
       rethrow;

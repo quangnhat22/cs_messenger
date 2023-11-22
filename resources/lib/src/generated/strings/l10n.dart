@@ -1059,6 +1059,86 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Số điện thoại không hợp lệ`
+  String get phoneNumberIsNotValid {
+    return Intl.message(
+      'Số điện thoại không hợp lệ',
+      name: 'phoneNumberIsNotValid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nam`
+  String get male {
+    return Intl.message(
+      'Nam',
+      name: 'male',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nữ`
+  String get female {
+    return Intl.message(
+      'Nữ',
+      name: 'female',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Khác`
+  String get other {
+    return Intl.message(
+      'Khác',
+      name: 'other',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hoàn tất`
+  String get done {
+    return Intl.message(
+      'Hoàn tất',
+      name: 'done',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chọn giới tính`
+  String get selectGender {
+    return Intl.message(
+      'Chọn giới tính',
+      name: 'selectGender',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Đã có lỗi xảy ra trong quá trình Cập nhật thông tin! Vui lòng thử lại sau.`
+  String get updateProfileFail {
+    return Intl.message(
+      'Đã có lỗi xảy ra trong quá trình Cập nhật thông tin! Vui lòng thử lại sau.',
+      name: 'updateProfileFail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cập nhật thông tin thành công.`
+  String get updateProfileSuccess {
+    return Intl.message(
+      'Cập nhật thông tin thành công.',
+      name: 'updateProfileSuccess',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {
