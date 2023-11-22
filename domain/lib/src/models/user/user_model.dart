@@ -10,12 +10,22 @@ enum GenderType {
   final String value;
 
   static GenderType convertStringToGenderType(String? type) {
-    if (GenderType.male.value == type) {
+    if (type == GenderType.male.value) {
       return GenderType.male;
-    } else if (GenderType.female.value == type) {
+    } else if (type == GenderType.female.value) {
       return GenderType.female;
     } else {
       return GenderType.other;
+    }
+  }
+
+  static String genderType2Label(GenderType? type) {
+    if (GenderType.male == type) {
+      return R.strings.male;
+    } else if (GenderType.female == type) {
+      return R.strings.female;
+    } else {
+      return R.strings.other;
     }
   }
 }

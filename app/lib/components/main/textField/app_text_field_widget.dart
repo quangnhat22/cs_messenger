@@ -30,7 +30,21 @@ class AppTextFieldWidget extends AppFieldBaseBuilder {
       onChanged: _onChanged,
       onEditingComplete: _onEditingComplete,
       onSubmitted: _onSubmitted,
-      decoration: _inputDecoration ?? const InputDecoration(),
+      decoration: _inputDecoration ??
+          InputDecoration(
+            labelText: _isRequired == true ? '$_labelText (*)' : _labelText,
+            prefixIcon: _prefixIcon,
+            contentPadding: EdgeInsets.all(
+              AppSizeExt.of.majorPaddingScale(4),
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(
+                  AppSizeExt.of.majorScale(4),
+                ),
+              ),
+            ),
+          ),
     );
   }
 
@@ -191,6 +205,24 @@ class AppTextFieldWidget extends AppFieldBaseBuilder {
   @override
   AppTextFieldWidget setDecoration(InputDecoration? inputDecoration) {
     _inputDecoration = inputDecoration;
+    return this;
+  }
+
+  @override
+  AppTextFieldWidget setLabelText(String? labelText) {
+    _labelText = labelText;
+    return this;
+  }
+
+  @override
+  AppTextFieldWidget setPrefixIcon(Widget? prefixIcon) {
+    _prefixIcon = prefixIcon;
+    return this;
+  }
+
+  @override
+  AppTextFieldWidget setIsRequired(bool? isRequired) {
+    _isRequired = isRequired;
     return this;
   }
 }

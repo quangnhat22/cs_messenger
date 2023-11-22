@@ -70,6 +70,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Discover seamless messaging and high-quality video calls. Stay connected with friends and loved ones like never before."),
         "doYouWantToLogOut":
             MessageLookupByLibrary.simpleMessage("Do you want to log out?"),
+        "done": MessageLookupByLibrary.simpleMessage("Done"),
         "editProfile": MessageLookupByLibrary.simpleMessage("Edit Profile"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailValidate": MessageLookupByLibrary.simpleMessage(
@@ -80,6 +81,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "An error occurred, please try again later"),
         "experienceThePower": MessageLookupByLibrary.simpleMessage(
             "Experience the power of instant messaging and crystal-clear video calls. Connect with people across the globe with ease."),
+        "female": MessageLookupByLibrary.simpleMessage("Female"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password"),
         "friendRequest": MessageLookupByLibrary.simpleMessage("Friend Request"),
@@ -98,6 +100,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "logOut": MessageLookupByLibrary.simpleMessage("Log out"),
         "logOutFail": MessageLookupByLibrary.simpleMessage("Log out fail!"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "male": MessageLookupByLibrary.simpleMessage("Male"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "newPassword": MessageLookupByLibrary.simpleMessage("New password"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
@@ -105,10 +108,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "openEmailApp": MessageLookupByLibrary.simpleMessage("Open Email app"),
         "or": MessageLookupByLibrary.simpleMessage("Or"),
+        "other": MessageLookupByLibrary.simpleMessage("Other"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordValidate": MessageLookupByLibrary.simpleMessage(
             "Password must be at least 8 characters long, and contain at least 1 letter, 1 number, and 1 special character (e.g @,#,\$,...)."),
         "phone": MessageLookupByLibrary.simpleMessage("Phone"),
+        "phoneNumberIsNotValid":
+            MessageLookupByLibrary.simpleMessage("Phone number is not valid"),
         "pickFromGallery":
             MessageLookupByLibrary.simpleMessage("Pick from gallery"),
         "pleaseCheckYourEmail": m1,
@@ -128,6 +134,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("Retry"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "searchFriend": MessageLookupByLibrary.simpleMessage("Search friend"),
+        "selectGender": MessageLookupByLibrary.simpleMessage("Select Gender"),
         "sendEmail": MessageLookupByLibrary.simpleMessage("Send email"),
         "sendEmailSuccess":
             MessageLookupByLibrary.simpleMessage("Send email success"),
@@ -162,6 +169,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Turn on/off notification"),
         "update": MessageLookupByLibrary.simpleMessage("Update"),
         "updateAvatar": MessageLookupByLibrary.simpleMessage("Update avatar"),
+        "updateProfileFail": MessageLookupByLibrary.simpleMessage(
+            "An error occurred while updating the Profile! Please try again."),
+        "updateProfileSuccess":
+            MessageLookupByLibrary.simpleMessage("Update Profile success."),
         "verifyYourEmail":
             MessageLookupByLibrary.simpleMessage("Verify your email"),
         "verifying": MessageLookupByLibrary.simpleMessage("Verifying"),

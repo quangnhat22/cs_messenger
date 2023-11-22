@@ -9,10 +9,13 @@ environment:
 
 dependencies:
   cryptography_flutter: ^2.3.2
+  file_picker: ^6.1.1
   flutter:
     sdk: flutter
   intl: ^0.18.1
   logger: ^2.0.2+1
+  wechat_assets_picker: ^8.8.0
+  wechat_camera_picker: ^4.1.1
 
 dev_dependencies:
   flutter_test:

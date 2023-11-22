@@ -127,5 +127,13 @@
   "friendRequest": "Friend Request",
   "logOutFail": "Log out fail!",
   "verifying": "Verifying",
-  "thankForVerifyEmail": "Thanks for the verification email. Please log in again to use your application"
+  "thankForVerifyEmail": "Thanks for the verification email. Please log in again to use your application",
+  "phoneNumberIsNotValid": "Phone number is not valid",
+  "male": "Male",
+  "female": "Female",
+  "other": "Other",
+  "done": "Done",
+  "selectGender": "Select Gender",
+  "updateProfileFail": "An error occurred while updating the Profile! Please try again.",
+  "updateProfileSuccess": "Update Profile success."
 }

@@ -71,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Khám phá tính năng nhắn tin mượt mà và cuộc gọi video chất lượng cao. Giữ kết nối với bạn bè và người thân một cách dễ dàng chưa từng có."),
         "doYouWantToLogOut":
             MessageLookupByLibrary.simpleMessage("Bạn có muốn đăng xuất?"),
+        "done": MessageLookupByLibrary.simpleMessage("Hoàn tất"),
         "editProfile":
             MessageLookupByLibrary.simpleMessage("Thay đổi thông tin"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -82,6 +83,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Đã có lỗi xảy ra! Vui lòng thử lại sau."),
         "experienceThePower": MessageLookupByLibrary.simpleMessage(
             "Trải nghiệm sức mạnh của việc nhắn tin tức thời và cuộc gọi video rõ nét. Kết nối với mọi người trên toàn thế giới dễ dàng."),
+        "female": MessageLookupByLibrary.simpleMessage("Nữ"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("Quên mật khẩu"),
         "friendRequest":
             MessageLookupByLibrary.simpleMessage("Yêu cầu kết bạn"),
@@ -103,6 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "logOutFail":
             MessageLookupByLibrary.simpleMessage("Đăng xuất thất bại!"),
         "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
+        "male": MessageLookupByLibrary.simpleMessage("Nam"),
         "name": MessageLookupByLibrary.simpleMessage("Tên"),
         "newPassword": MessageLookupByLibrary.simpleMessage("Mật khẩu mới"),
         "next": MessageLookupByLibrary.simpleMessage("Tiếp tục"),
@@ -111,10 +114,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "openEmailApp":
             MessageLookupByLibrary.simpleMessage("Mở ứng dụng Email"),
         "or": MessageLookupByLibrary.simpleMessage("Hoặc"),
+        "other": MessageLookupByLibrary.simpleMessage("Khác"),
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
         "passwordValidate": MessageLookupByLibrary.simpleMessage(
             "Mật khẩu phải có ít nhất 8 ký tự và chứa ít nhất 1 chữ cái, 1 số và 1 ký tự đặc biệt. (e.g @,#,\$,...)"),
         "phone": MessageLookupByLibrary.simpleMessage("Số điện thoại"),
+        "phoneNumberIsNotValid":
+            MessageLookupByLibrary.simpleMessage("Số điện thoại không hợp lệ"),
         "pickFromGallery":
             MessageLookupByLibrary.simpleMessage("Lấy từ thư viện"),
         "pleaseCheckYourEmail": m1,
@@ -135,6 +141,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("Thử lại"),
         "search": MessageLookupByLibrary.simpleMessage("Tìm kiếm"),
         "searchFriend": MessageLookupByLibrary.simpleMessage("Tìm kiếm bạn bè"),
+        "selectGender": MessageLookupByLibrary.simpleMessage("Chọn giới tính"),
         "sendEmail": MessageLookupByLibrary.simpleMessage("Gửi email"),
         "sendEmailSuccess":
             MessageLookupByLibrary.simpleMessage("Gửi email thành công"),
@@ -170,6 +177,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "update": MessageLookupByLibrary.simpleMessage("Cập nhật"),
         "updateAvatar":
             MessageLookupByLibrary.simpleMessage("Cập nhật ảnh đại diện"),
+        "updateProfileFail": MessageLookupByLibrary.simpleMessage(
+            "Đã có lỗi xảy ra trong quá trình Cập nhật thông tin! Vui lòng thử lại sau."),
+        "updateProfileSuccess": MessageLookupByLibrary.simpleMessage(
+            "Cập nhật thông tin thành công."),
         "verifyYourEmail":
             MessageLookupByLibrary.simpleMessage("Xác minh email"),
         "verifying": MessageLookupByLibrary.simpleMessage("Đang xác thực"),

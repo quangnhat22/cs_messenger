@@ -127,5 +127,13 @@
   "friendRequest": "Yêu cầu kết bạn",
   "logOutFail": "Đăng xuất thất bại!",
   "verifying": "Đang xác thực",
-  "thankForVerifyEmail": "Cảm ơn bạn đã xác thực email. Bạn hãy đăng nhập lại để tiếp tục bạn nhé!"
+  "thankForVerifyEmail": "Cảm ơn bạn đã xác thực email. Bạn hãy đăng nhập lại để tiếp tục bạn nhé!",
+  "phoneNumberIsNotValid": "Số điện thoại không hợp lệ",
+  "male": "Nam",
+  "female": "Nữ",
+  "other": "Khác",
+  "done": "Hoàn tất",
+  "selectGender": "Chọn giới tính",
+  "updateProfileFail": "Đã có lỗi xảy ra trong quá trình Cập nhật thông tin! Vui lòng thử lại sau.",
+  "updateProfileSuccess": "Cập nhật thông tin thành công."
 }

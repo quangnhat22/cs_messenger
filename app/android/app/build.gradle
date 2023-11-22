@@ -68,7 +68,7 @@ def getCurrentFlavor() {
 }
 
 android {
-    compileSdkVersion 33
+    compileSdkVersion 34
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -115,7 +115,7 @@ android {
 
     flavorDimensions "default"
     productFlavors {
-         ext.loadConfig = { context ->
+        ext.loadConfig = { context ->
             Properties configProps = new Properties()
             configProps.load(project.rootProject.file("native.define.properties").newDataInputStream())
             context.applicationId configProps.getProperty("ANDROID_BUNDLE_ID")

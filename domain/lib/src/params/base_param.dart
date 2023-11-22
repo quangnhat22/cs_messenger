@@ -12,5 +12,6 @@ part 'friends/get_list_friend_param.dart';
 part 'friends/get_list_friend_request_param.dart';
 part 'group/get_list_group_param.dart';
 part 'setting/theme_and_language_param.dart';
+part 'user/update_user_self_param.dart';
 
 abstract class BaseParam {}

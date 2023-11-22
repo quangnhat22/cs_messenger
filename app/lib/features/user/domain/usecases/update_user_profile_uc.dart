@@ -3,7 +3,7 @@ import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class UpdateUserProfileUseCase
-    extends BaseUseCase<BaseParam, UserModel> {}
+    extends BaseUseCase<UpdateUserSelfParam, EmptyModel> {}
 
 @Injectable(as: UpdateUserProfileUseCase)
 class UpdateUserProfileUseCaseImpl extends UpdateUserProfileUseCase {
@@ -12,6 +12,7 @@ class UpdateUserProfileUseCaseImpl extends UpdateUserProfileUseCase {
   UpdateUserProfileUseCaseImpl(this._repo);
 
   @override
-  Future<AppObjResultModel<UserModel>> executeObj({BaseParam? request}) async =>
-      await _repo.getUserSelf();
+  Future<AppObjResultModel<EmptyModel>> executeObj(
+          {UpdateUserSelfParam? request}) async =>
+      await _repo.updateUserProfile(body: request?.toJson() ?? {});
 }

@@ -66,6 +66,10 @@ class $AssetsPngsGen {
 class $AssetsSvgsGen {
   const $AssetsSvgsGen();
 
+  /// File path: assets/svgs/gender_icon.svg
+  SvgGenImage get genderIcon =>
+      const SvgGenImage('assets/svgs/gender_icon.svg');
+
   /// File path: assets/svgs/ic_error.svg
   SvgGenImage get icError => const SvgGenImage('assets/svgs/ic_error.svg');
 
@@ -100,6 +104,7 @@ class $AssetsSvgsGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [
+        genderIcon,
         icError,
         icErrorCircle,
         icFilledInfoCircle,

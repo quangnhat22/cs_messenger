@@ -74,6 +74,12 @@ class DateTimeExt {
   static DateTime convertTimeStampToDateTime(int timeStamp) {
     return DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
   }
+
+  static int? convertDateTime2Timestamp(DateTime? dateTime) {
+    return dateTime == null
+        ? null
+        : (dateTime.toUtc().millisecondsSinceEpoch ~/ 1000).floor();
+  }
 }
 
 extension AppDateTime on DateTime {

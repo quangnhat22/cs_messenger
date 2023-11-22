@@ -16,6 +16,8 @@ class AppConstants {
   static int timeDelaySendEmail = 30;
 
   static int timeRepeatCallCheckVerifyEmail = 15000;
+
+  static double numberElevationContainer = 10;
 }
 
 class AppFormKeys {

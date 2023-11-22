@@ -54,10 +54,11 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
   Future<AppObjResultRaw<EmptyRaw>> updateSelfInfo(
       {required Map<String, dynamic> body}) async {
     try {
+      body.removeWhere((key, value) => value == null);
       final AppResponse response = await _networkService.request(
         clientRequest: ClientRequest(
           url: ApiProvider.userSelfUrl,
-          method: HttpMethod.get,
+          method: HttpMethod.put,
           body: {...body},
         ),
       );

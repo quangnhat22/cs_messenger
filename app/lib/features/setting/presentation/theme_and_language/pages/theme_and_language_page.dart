@@ -64,7 +64,7 @@ class ThemeAndLanguagePage extends StatelessWidget {
                           SizedBox(
                             height: AppSizeExt.of.majorScale(3),
                           ),
-                          RadioListTileWidget(
+                          RadioListTileWidget<String>(
                             groupValue: state.theme,
                             value: ThemeType.light.value,
                             label: R.strings.lightMode,
@@ -72,7 +72,7 @@ class ThemeAndLanguagePage extends StatelessWidget {
                                 _handleThemeChanged(context, value),
                           ),
                           const Divider(),
-                          RadioListTileWidget(
+                          RadioListTileWidget<String>(
                             groupValue: state.theme,
                             value: ThemeType.dark.value,
                             label: R.strings.darkMode,
@@ -80,7 +80,7 @@ class ThemeAndLanguagePage extends StatelessWidget {
                                 _handleThemeChanged(context, value),
                           ),
                           const Divider(),
-                          RadioListTileWidget(
+                          RadioListTileWidget<String>(
                             groupValue: state.theme,
                             value: ThemeType.system.value,
                             label: R.strings.system,
@@ -110,7 +110,7 @@ class ThemeAndLanguagePage extends StatelessWidget {
                           SizedBox(
                             height: AppSizeExt.of.majorScale(3),
                           ),
-                          RadioListTileWidget(
+                          RadioListTileWidget<String>(
                             groupValue: state.language,
                             value: LanguageType.vi.value,
                             label: R.strings.vn,
@@ -118,7 +118,7 @@ class ThemeAndLanguagePage extends StatelessWidget {
                                 _handleLanguageChanged(context, value),
                           ),
                           const Divider(),
-                          RadioListTileWidget(
+                          RadioListTileWidget<String>(
                             groupValue: state.language,
                             value: LanguageType.en.value,
                             label: R.strings.en,
@@ -126,7 +126,7 @@ class ThemeAndLanguagePage extends StatelessWidget {
                                 _handleLanguageChanged(context, value),
                           ),
                           const Divider(),
-                          RadioListTileWidget(
+                          RadioListTileWidget<String>(
                             groupValue: state.language,
                             value: LanguageType.system.value,
                             label: R.strings.system,
