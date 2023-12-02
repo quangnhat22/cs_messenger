@@ -31,7 +31,10 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("Về chún tôi"),
+        "acceptRequestSuccess": MessageLookupByLibrary.simpleMessage(
+            "Chấp nhận lời mời thành công!"),
         "account": MessageLookupByLibrary.simpleMessage("Tài khoản"),
+        "addFriend": MessageLookupByLibrary.simpleMessage("Kết bạn"),
         "addNewContact":
             MessageLookupByLibrary.simpleMessage("Thêm liên hệ mới"),
         "app": MessageLookupByLibrary.simpleMessage("Ứng dụng"),
@@ -43,6 +46,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("Đóng"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Thay đổi mật khẩu"),
+        "changePasswordSuccess":
+            MessageLookupByLibrary.simpleMessage("Đổi mật khẩu thành công"),
         "close": MessageLookupByLibrary.simpleMessage("Đóng"),
         "confirm": MessageLookupByLibrary.simpleMessage("Xác nhận"),
         "confirmNewPassword":
@@ -69,12 +74,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "devices": MessageLookupByLibrary.simpleMessage("Danh sách thiết bị"),
         "discoverSeamlessMessaging": MessageLookupByLibrary.simpleMessage(
             "Khám phá tính năng nhắn tin mượt mà và cuộc gọi video chất lượng cao. Giữ kết nối với bạn bè và người thân một cách dễ dàng chưa từng có."),
+        "doYouWantAcceptFriendRequest": MessageLookupByLibrary.simpleMessage(
+            "Bạn có muốn chấp nhận lời mời kết bạn này không? Hãy đảm bảo bạn có quen biết người này."),
+        "doYouWantRejectFriendRequest": MessageLookupByLibrary.simpleMessage(
+            "Bạn có muốn từ chối lời mời kết bạn này hay không?"),
         "doYouWantToLogOut":
             MessageLookupByLibrary.simpleMessage("Bạn có muốn đăng xuất?"),
+        "doYouWantUndoFriendRequest": MessageLookupByLibrary.simpleMessage(
+            "Bạn có muốn thu hồi lời mời kết bạn này hay không?"),
         "done": MessageLookupByLibrary.simpleMessage("Hoàn tất"),
         "editProfile":
             MessageLookupByLibrary.simpleMessage("Thay đổi thông tin"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "emailPasswordWrong":
+            MessageLookupByLibrary.simpleMessage("Tài khoản hoặc mật khẩu sai"),
         "emailValidate":
             MessageLookupByLibrary.simpleMessage("Địa chỉ email khong hợp lệ."),
         "en": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
@@ -101,10 +114,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
         "lightMode": MessageLookupByLibrary.simpleMessage("Chế độ sáng"),
         "listFriend": MessageLookupByLibrary.simpleMessage("Danh sách bạn bè"),
+        "listUserBlock": MessageLookupByLibrary.simpleMessage("Danh sách chặn"),
         "logOut": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
         "logOutFail":
             MessageLookupByLibrary.simpleMessage("Đăng xuất thất bại!"),
         "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
+        "loginFail": MessageLookupByLibrary.simpleMessage("Đăng nhập thất bại"),
         "male": MessageLookupByLibrary.simpleMessage("Nam"),
         "name": MessageLookupByLibrary.simpleMessage("Tên"),
         "newPassword": MessageLookupByLibrary.simpleMessage("Mật khẩu mới"),
@@ -133,6 +148,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "register": MessageLookupByLibrary.simpleMessage("Đăng ký"),
         "registerEmailToReceivePasswordReset": MessageLookupByLibrary.simpleMessage(
             "Bạn vui lòng nhập email đã đăng ký bên dưới, và chúng tôi sẽ gửi hướng dẫn khôi phục mật khẩu đến cho bạn"),
+        "rejectRequestSuccess":
+            MessageLookupByLibrary.simpleMessage("Từ chối yêu cầu thành công!"),
         "requestFriend":
             MessageLookupByLibrary.simpleMessage("Lời mời kết bạn"),
         "requestGroup": MessageLookupByLibrary.simpleMessage("Lời mời nhóm"),
@@ -145,6 +162,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendEmail": MessageLookupByLibrary.simpleMessage("Gửi email"),
         "sendEmailSuccess":
             MessageLookupByLibrary.simpleMessage("Gửi email thành công"),
+        "sendRequestFail": MessageLookupByLibrary.simpleMessage(
+            "Yêu cầu của bạn gửi thất bại! Vui lòng thử lại."),
+        "sendRequestSuccess": MessageLookupByLibrary.simpleMessage(
+            "Yêu cầu của bạn đã gửi thành công!"),
+        "sending": MessageLookupByLibrary.simpleMessage("Đang gửi"),
         "sent": MessageLookupByLibrary.simpleMessage("Đã gửi"),
         "serverError": MessageLookupByLibrary.simpleMessage("Lỗi hệ thống"),
         "settings": MessageLookupByLibrary.simpleMessage("Cài đặt"),
@@ -174,13 +196,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Theme and Language"),
         "turnOnOffNotification":
             MessageLookupByLibrary.simpleMessage("Bật/tắt mở thông báo"),
+        "undoRequestSuccess":
+            MessageLookupByLibrary.simpleMessage("Thu hồi yêu cầu thành công!"),
         "update": MessageLookupByLibrary.simpleMessage("Cập nhật"),
         "updateAvatar":
             MessageLookupByLibrary.simpleMessage("Cập nhật ảnh đại diện"),
         "updateProfileFail": MessageLookupByLibrary.simpleMessage(
             "Đã có lỗi xảy ra trong quá trình Cập nhật thông tin! Vui lòng thử lại sau."),
         "updateProfileSuccess": MessageLookupByLibrary.simpleMessage(
-            "Cập nhật thông tin thành công."),
+            "Cập nhật thông tin thành công"),
+        "user": MessageLookupByLibrary.simpleMessage("Người dùng"),
         "verifyYourEmail":
             MessageLookupByLibrary.simpleMessage("Xác minh email"),
         "verifying": MessageLookupByLibrary.simpleMessage("Đang xác thực"),

@@ -6,9 +6,6 @@ abstract class FriendRemoteDataSource {
   Future<AppListResultRaw<HistoryCallRaw>> fetchListCallHistory(
       {required Map<String, dynamic> query});
 
-  Future<AppListResultRaw<RequestRaw>> fetchListFriendRequest(
-      {required Map<String, dynamic> query});
-
   Future<AppListResultRaw<UserRaw>> fetchListFriend(
       {required Map<String, dynamic> query});
 }
@@ -33,26 +30,6 @@ class FriendRemoteDataSourceImpl extends FriendRemoteDataSource {
       );
       return response.toRawList((data) => (data as List<dynamic>)
           .map((item) => HistoryCallRaw.fromJson(item))
-          .toList());
-    } on NetworkException catch (_) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<AppListResultRaw<RequestRaw>> fetchListFriendRequest(
-      {required Map<String, dynamic> query}) async {
-    try {
-      final AppResponse response = await _service.request(
-        clientRequest: ClientRequest(
-          url: ApiProvider.friendRequest,
-          method: HttpMethod.get,
-          query: query,
-          isRequestForList: true,
-        ),
-      );
-      return response.toRawList((data) => (data as List<dynamic>)
-          .map((item) => RequestRaw.fromJson(item))
           .toList());
     } on NetworkException catch (_) {
       rethrow;

@@ -31,8 +31,8 @@ class AppDefaultDialogWidget extends AppDialogBaseBuilder {
               right: AppSizeExt.of.majorScale(2),
               child: IconButton(
                 icon: const Icon(Icons.close),
-                onPressed: () {
-                  context.router.pop();
+                onPressed: () async {
+                  await getIt<AppRouter>().pop();
                 },
               ),
             )
@@ -69,7 +69,6 @@ class AppDefaultDialogWidget extends AppDialogBaseBuilder {
           if (_content != null)
             AppTextBodyLargeWidget()
                 .setText(_content)
-                // .setTextStyle(AppTextStyleExt.of.textBody1r)
                 .setTextAlign(TextAlign.center)
                 .build(context),
           SizedBox(height: AppSizeExt.of.majorScale(6)),
@@ -85,8 +84,8 @@ class AppDefaultDialogWidget extends AppDialogBaseBuilder {
                       .setButtonText(_negativeText)
                       .setBorderColor(Theme.of(context).colorScheme.primary)
                       .setOnPressed(() async {
-                    await context.router.pop();
                     _onNegative?.call();
+                    await getIt<AppRouter>().pop();
                   }).build(context),
                 ),
               if (_negativeText != null)
@@ -102,9 +101,8 @@ class AppDefaultDialogWidget extends AppDialogBaseBuilder {
                             .setAppButtonSize(AppButtonSize.large)
                             .setAppButtonType(AppButtonType.danger)
                             .setOnPressed(() async {
-                          //TODO: implement auto route
-                          await context.router.pop();
                           _onPositive?.call();
+                          await getIt<AppRouter>().pop();
                         }).build(context),
                       )
                     : Expanded(
@@ -114,8 +112,8 @@ class AppDefaultDialogWidget extends AppDialogBaseBuilder {
                                 color:
                                     Theme.of(context).colorScheme.background))
                             .setOnPressed(() async {
-                          await context.router.pop();
                           _onPositive?.call();
+                          await getIt<AppRouter>().pop();
                         }).build(context),
                       ),
             ],

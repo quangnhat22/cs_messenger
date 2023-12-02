@@ -1130,11 +1130,161 @@ class Strings {
     );
   }
 
-  /// `Cập nhật thông tin thành công.`
+  /// `Cập nhật thông tin thành công`
   String get updateProfileSuccess {
     return Intl.message(
-      'Cập nhật thông tin thành công.',
+      'Cập nhật thông tin thành công',
       name: 'updateProfileSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Đổi mật khẩu thành công`
+  String get changePasswordSuccess {
+    return Intl.message(
+      'Đổi mật khẩu thành công',
+      name: 'changePasswordSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Người dùng`
+  String get user {
+    return Intl.message(
+      'Người dùng',
+      name: 'user',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Kết bạn`
+  String get addFriend {
+    return Intl.message(
+      'Kết bạn',
+      name: 'addFriend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yêu cầu của bạn đã gửi thành công!`
+  String get sendRequestSuccess {
+    return Intl.message(
+      'Yêu cầu của bạn đã gửi thành công!',
+      name: 'sendRequestSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yêu cầu của bạn gửi thất bại! Vui lòng thử lại.`
+  String get sendRequestFail {
+    return Intl.message(
+      'Yêu cầu của bạn gửi thất bại! Vui lòng thử lại.',
+      name: 'sendRequestFail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Đang gửi`
+  String get sending {
+    return Intl.message(
+      'Đang gửi',
+      name: 'sending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chấp nhận lời mời thành công!`
+  String get acceptRequestSuccess {
+    return Intl.message(
+      'Chấp nhận lời mời thành công!',
+      name: 'acceptRequestSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Từ chối yêu cầu thành công!`
+  String get rejectRequestSuccess {
+    return Intl.message(
+      'Từ chối yêu cầu thành công!',
+      name: 'rejectRequestSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thu hồi yêu cầu thành công!`
+  String get undoRequestSuccess {
+    return Intl.message(
+      'Thu hồi yêu cầu thành công!',
+      name: 'undoRequestSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bạn có muốn chấp nhận lời mời kết bạn này không? Hãy đảm bảo bạn có quen biết người này.`
+  String get doYouWantAcceptFriendRequest {
+    return Intl.message(
+      'Bạn có muốn chấp nhận lời mời kết bạn này không? Hãy đảm bảo bạn có quen biết người này.',
+      name: 'doYouWantAcceptFriendRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bạn có muốn từ chối lời mời kết bạn này hay không?`
+  String get doYouWantRejectFriendRequest {
+    return Intl.message(
+      'Bạn có muốn từ chối lời mời kết bạn này hay không?',
+      name: 'doYouWantRejectFriendRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bạn có muốn thu hồi lời mời kết bạn này hay không?`
+  String get doYouWantUndoFriendRequest {
+    return Intl.message(
+      'Bạn có muốn thu hồi lời mời kết bạn này hay không?',
+      name: 'doYouWantUndoFriendRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Đăng nhập thất bại`
+  String get loginFail {
+    return Intl.message(
+      'Đăng nhập thất bại',
+      name: 'loginFail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tài khoản hoặc mật khẩu sai`
+  String get emailPasswordWrong {
+    return Intl.message(
+      'Tài khoản hoặc mật khẩu sai',
+      name: 'emailPasswordWrong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Danh sách chặn`
+  String get listUserBlock {
+    return Intl.message(
+      'Danh sách chặn',
+      name: 'listUserBlock',
       desc: '',
       args: [],
     );

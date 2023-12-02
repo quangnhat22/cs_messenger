@@ -20,6 +20,9 @@ abstract class AuthRemoteDataSource {
   Future<AppObjResultRaw<EmptyRaw>> logOut();
 
   Future<AppObjResultRaw<StatusVerifyEmailRaw>> checkVerifyEmail();
+
+  Future<AppObjResultRaw<EmptyRaw>> changePassword(
+      {required Map<String, dynamic> body});
 }
 
 @Injectable(as: AuthRemoteDataSource)
@@ -137,6 +140,22 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
           url: ApiProvider.logOut,
           method: HttpMethod.delete,
         ),
+      );
+      return response.toRaw((data) => EmptyRaw());
+    } on NetworkException catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<AppObjResultRaw<EmptyRaw>> changePassword(
+      {required Map<String, dynamic> body}) async {
+    try {
+      final AppResponse response = await _networkService.request(
+        clientRequest: ClientRequest(
+            url: ApiProvider.changePassword,
+            method: HttpMethod.put,
+            body: {...body}),
       );
       return response.toRaw((data) => EmptyRaw());
     } on NetworkException catch (_) {

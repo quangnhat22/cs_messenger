@@ -9,7 +9,7 @@ class AppMainPageWidget extends AppMainPageBaseBuilder {
         child: Scaffold(
           key: _key,
           backgroundColor:
-              _backgroundColor ?? Theme.of(context).colorScheme.surfaceVariant,
+              _backgroundColor ?? Theme.of(context).colorScheme.background,
           appBar: _appBar,
           endDrawer: _endDrawer,
           endDrawerEnableOpenDragGesture: false,

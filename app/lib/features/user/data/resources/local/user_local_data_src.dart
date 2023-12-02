@@ -7,6 +7,8 @@ abstract class UserLocalDataSource extends BaseObjectDao {
   Future<UserRaw?> getUserInfo();
 
   Future<void> updateUserInfo(UserRaw user);
+
+  Stream<UserRaw?> getUserStream();
 }
 
 @LazySingleton(as: UserLocalDataSource)
@@ -41,6 +43,14 @@ class UserLocalDataSourceImpl extends UserLocalDataSource {
   Future<void> updateUserInfo(UserRaw user) async {
     await openBox().then((box) {
       box.put(_userKey, user);
+    });
+  }
+
+  @override
+  Stream<UserRaw?> getUserStream() async* {
+    final box = await openBox();
+    yield* box.watch(key: _userKey).map((event) {
+      return event.value;
     });
   }
 }

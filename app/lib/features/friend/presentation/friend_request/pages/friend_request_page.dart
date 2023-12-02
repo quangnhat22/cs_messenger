@@ -1,11 +1,14 @@
 import 'package:app/components/main/appBar/app_bar_base_builder.dart';
+import 'package:app/components/main/listView/controllers/app_list_view_cubit.dart';
 import 'package:app/components/main/page/app_main_page_base_builder.dart';
 import 'package:app/components/main/tab/app_tab_base_builder.dart';
 import 'package:app/configs/di/di.dart';
 import 'package:app/configs/routes/app_router.gr.dart';
+import 'package:app/features/friend/presentation/friend_request/controllers/cubit_friend_request_action/friend_request_action_cubit.dart';
 import 'package:app/features/friend/presentation/friend_request/controllers/cubit_list_friend_received_request.dart';
 import 'package:app/features/friend/presentation/friend_request/controllers/cubit_list_friend_sent_request.dart';
 import 'package:auto_route/annotations.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
@@ -24,6 +27,9 @@ class FriendRequestPage extends StatelessWidget {
         BlocProvider(
           create: (_) => getIt<ListFriendReceivedRequestCubit>(),
         ),
+        BlocProvider(
+          create: (_) => getIt<FriendRequestActionCubit>(),
+        ),
       ],
       child: AppMainPageWidget()
           .setAppBar(AppBarWidget()
@@ -36,10 +42,22 @@ class FriendRequestPage extends StatelessWidget {
   }
 
   Widget _body(BuildContext context) {
-    return AppTapBarWidget().setRoutes(const [
-      FriendReceivedRequestRoute(),
-      FriendSentRequestRoute(),
-    ]).setNumbers([1, 1]).setLabels([R.strings.receive, R.strings.sent]).build(
-        context);
+    return BlocBuilder<ListFriendSentRequestCubit,
+        AppListViewState<RequestModel>>(
+      buildWhen: (previous, current) => previous.total != current.total,
+      builder: (context, sentState) {
+        return BlocBuilder<ListFriendReceivedRequestCubit,
+            AppListViewState<RequestModel>>(
+          buildWhen: (previous, current) => previous.total != current.total,
+          builder: (context, receiveState) {
+            return AppTapBarWidget().setRoutes(const [
+              FriendReceivedRequestRoute(),
+              FriendSentRequestRoute(),
+            ]).setNumbers([receiveState.total, sentState.total]).setLabels(
+                [R.strings.receive, R.strings.sent]).build(context);
+          },
+        );
+      },
+    );
   }
 }

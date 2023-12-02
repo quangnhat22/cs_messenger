@@ -135,5 +135,20 @@
   "done": "Done",
   "selectGender": "Select Gender",
   "updateProfileFail": "An error occurred while updating the Profile! Please try again.",
-  "updateProfileSuccess": "Update Profile success."
+  "updateProfileSuccess": "Update Profile success",
+  "changePasswordSuccess": "Change Password success",
+  "user": "User",
+  "addFriend": "Add",
+  "sendRequestSuccess": "Sent your request success!",
+  "sendRequestFail": "Sent your request fail! Try again",
+  "sending": "Sending",
+  "acceptRequestSuccess": "Accept request success!",
+  "rejectRequestSuccess": "Reject request success!",
+  "undoRequestSuccess": "Undo request success!",
+  "doYouWantAcceptFriendRequest": "Do you want to accept this friend request? Make sure you know this person.",
+  "doYouWantRejectFriendRequest": "Do you want to reject this friend request?",
+  "doYouWantUndoFriendRequest": "Do you want to undo this friend request?",
+  "loginFail": "Login fail",
+  "emailPasswordWrong": "Email or Password wrong",
+  "listUserBlock": "List User Block"
 }

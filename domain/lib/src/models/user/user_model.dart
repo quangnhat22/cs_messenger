@@ -33,6 +33,7 @@ enum GenderType {
 class UserModel extends BaseModel {
   final String id;
   final String? name;
+  final String? email;
   final String? avatar;
   final String? phone;
   final GenderType? gender;
@@ -43,6 +44,7 @@ class UserModel extends BaseModel {
   UserModel({
     required this.id,
     this.name,
+    this.email,
     this.avatar,
     this.phone,
     this.gender,

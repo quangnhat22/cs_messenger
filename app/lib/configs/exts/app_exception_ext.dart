@@ -76,6 +76,18 @@ class AppExceptionExt {
 
     if (appException is GrpcException) {
       switch (appException!.errorCode) {
+        case "5":
+          {
+            AppDefaultDialogWidget()
+                .setTitle(R.strings.loginFail)
+                .setContent(appException?.message)
+                .setAppDialogType(AppDialogType.error)
+                .setNegativeText(R.strings.close)
+                .setPositiveText(R.strings.confirm)
+                .buildDialog(AppKeys.navigatorKey.currentContext!)
+                .show();
+            break;
+          }
         case "17":
           {
             AppDefaultDialogWidget()

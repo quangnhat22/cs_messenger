@@ -107,7 +107,8 @@ class ChangePasswordPage extends StatelessWidget {
                   .setAppButtonSize(AppButtonSize.large)
                   .setTextStyle(TextStyle(
                       color: Theme.of(context).colorScheme.background))
-                  .setOnPressed(() => {})
+                  .setOnPressed(
+                      () => context.read<ChangePasswordFormBloc>().submit())
                   .build(context),
             ),
           ),

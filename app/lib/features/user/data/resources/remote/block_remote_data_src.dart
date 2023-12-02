@@ -24,9 +24,9 @@ class BlockRemoteDataSourceImpl extends BlockRemoteDataSource {
     try {
       final AppResponse response = await _networkService.request(
         clientRequest: ClientRequest(
-            url: ApiProvider.blockUser,
-            method: HttpMethod.post,
-            query: {...query}),
+          url: ApiProvider.blockUserById(query['id']),
+          method: HttpMethod.post,
+        ),
       );
       return response.toRaw((_) => EmptyRaw());
     } on NetworkException catch (_) {
@@ -40,9 +40,9 @@ class BlockRemoteDataSourceImpl extends BlockRemoteDataSource {
     try {
       final AppResponse response = await _networkService.request(
         clientRequest: ClientRequest(
-            url: ApiProvider.blockUser,
-            method: HttpMethod.delete,
-            query: {...query}),
+          url: ApiProvider.blockUserById(query['id']),
+          method: HttpMethod.delete,
+        ),
       );
       return response.toRaw((_) => EmptyRaw());
     } on NetworkException catch (_) {
@@ -55,10 +55,9 @@ class BlockRemoteDataSourceImpl extends BlockRemoteDataSource {
     try {
       final AppResponse response = await _networkService.request(
         clientRequest: ClientRequest(
-          url: ApiProvider.blockUser,
-          method: HttpMethod.delete,
-          isRequestForList: true,
-        ),
+            url: ApiProvider.blockUser,
+            method: HttpMethod.delete,
+            isRequestForList: true),
       );
       return response.toRawList((data) => (data as List<dynamic>)
           .map((item) => UserRaw.fromJson(item))

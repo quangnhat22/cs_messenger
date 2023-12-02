@@ -73,7 +73,6 @@ class NetworkInterceptorWrapper extends QueuedInterceptorsWrapper {
     final newDio = NetworkService.newDio();
     try {
       final refreshToken = pref.getString(AppPrefKey.refreshToken, '');
-      final headerToken = _headerToken();
       final response = await newDio.post(ApiProvider.getNewAccessToken, data: {
         "refresh_token": refreshToken,
       });
