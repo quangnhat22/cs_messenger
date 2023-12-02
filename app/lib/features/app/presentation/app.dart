@@ -2,6 +2,7 @@ import 'package:app/components/main/overlay/app_loading_overlay_widget.dart';
 import 'package:app/configs/di/di.dart';
 import 'package:app/configs/routes/app_router.dart';
 import 'package:app/configs/theme/app_theme.dart';
+import 'package:app/features/search/presentation/controllers/bloc/search_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -16,8 +17,15 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     AppLoadingOverlayWidget.configure(context);
 
-    return BlocProvider(
-      create: (_) => getIt<AppThemeLanguageCubit>()..initPage(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => getIt<AppThemeLanguageCubit>()..initPage(),
+        ),
+        BlocProvider(
+          create: (_) => getIt<SearchBloc>(),
+        ),
+      ],
       child: BlocBuilder<AppThemeLanguageCubit, AppThemeLanguageState>(
         builder: (context, state) {
           return MaterialApp.router(

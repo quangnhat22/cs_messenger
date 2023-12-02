@@ -6,6 +6,10 @@ class AppBarWidget extends AppBarBaseBuilder {
     return AppBar(
       title: AppTextHeadlineSmallWidget()
           .setText(_textTitle)
+          .setTextStyle(TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).colorScheme.primary,
+          ))
           .setColor(_textTitleColor)
           .build(context),
       centerTitle: _centerTitle ?? true,

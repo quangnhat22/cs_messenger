@@ -5,8 +5,8 @@ import 'package:app/components/main/overlay/app_loading_overlay_widget.dart';
 import 'package:app/components/main/snackBar/app_snack_bar_base_builder.dart';
 import 'package:app/configs/exts/app_exts.dart';
 import 'package:app/configs/exts/app_form_validator_ext.dart';
-import 'package:app/features/user/domain/usecases/get_user_profile_uc.dart';
-import 'package:app/features/user/domain/usecases/update_user_profile_uc.dart';
+import 'package:app/features/user/domain/usecases/profile/get_user_profile_uc.dart';
+import 'package:app/features/user/domain/usecases/profile/update_user_profile_uc.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -96,6 +96,7 @@ class EditProfileFormBloc extends FormBloc<String, String> {
           .setAppSnackBarStatus(AppSnackBarStatus.success)
           .showSnackBar();
     } on AppException catch (e) {
+      AppLoadingOverlayWidget.dismiss();
       AppExceptionExt(
           appException: e,
           onError: (_) {

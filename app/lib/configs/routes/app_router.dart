@@ -29,42 +29,45 @@ class AppRouter extends $AppRouter {
               page: HomeRoute.page,
               initial: true,
               children: [
-                AutoRoute(page: RoomChatDashBoardRoute.page),
-                AutoRoute(
+                _customRoute(page: RoomChatDashBoardRoute.page),
+                _customRoute(
                   page: FriendDashBoardRoute.page,
                   children: [
-                    AutoRoute(page: FriendListCallHistoryRoute.page),
-                    AutoRoute(page: FriendListRoute.page),
+                    _customRoute(page: FriendListCallHistoryRoute.page),
+                    _customRoute(page: FriendListRoute.page),
                   ],
                 ),
-                AutoRoute(page: GroupDashBoardRoute.page),
-                AutoRoute(page: SettingDashBoardRoute.page),
+                _customRoute(page: GroupDashBoardRoute.page),
+                _customRoute(page: SettingDashBoardRoute.page),
               ],
             ),
-            AutoRoute(page: FriendAddNewContactRoute.page),
-            AutoRoute(
+            _customRoute(page: FriendAddNewContactRoute.page),
+            _customRoute(
               page: FriendRequestRoute.page,
               children: [
-                AutoRoute(page: FriendSentRequestRoute.page),
-                AutoRoute(page: FriendReceivedRequestRoute.page),
+                _customRoute(page: FriendSentRequestRoute.page),
+                _customRoute(page: FriendReceivedRequestRoute.page),
               ],
             ),
-            AutoRoute(page: GroupCreateRoute.page),
-            AutoRoute(page: GroupRequestRoute.page),
+            _customRoute(page: SearchRoute.page),
+            _customRoute(page: GroupCreateRoute.page),
+            _customRoute(page: GroupRequestRoute.page),
             _customRoute(page: EditProfileRoute.page),
             _customRoute(page: ThemeAndLanguageRoute.page),
             _customRoute(page: NotificationSettingRoute.page),
             _customRoute(page: ListDevicesRoute.page),
             _customRoute(page: ChangePasswordRoute.page),
+            _customRoute(page: BlockRoute.page),
           ],
         )
       ];
 
-  CustomRoute _customRoute({required PageInfo<dynamic> page}) {
+  CustomRoute _customRoute(
+      {required PageInfo<dynamic> page, List<AutoRoute>? children}) {
     return CustomRoute(
-      page: page,
-      transitionsBuilder: TransitionsBuilders.slideLeft,
-      durationInMilliseconds: AppNavigationKeys.timeSwitchPage,
-    );
+        page: page,
+        transitionsBuilder: TransitionsBuilders.slideLeft,
+        durationInMilliseconds: AppNavigationKeys.timeSwitchPage,
+        children: children);
   }
 }

@@ -1,4 +1,3 @@
-import 'package:app/components/features/scroll_view/scroll_view_widget.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:auto_route/auto_route.dart';

@@ -26,4 +26,7 @@ abstract class AuthRepository {
 
   Future<AppObjResultModel<EmptyModel>> forgotPassword(
       {required Map<String, dynamic> query});
+
+  Future<AppObjResultModel<EmptyModel>> changePassword(
+      {required Map<String, dynamic> query});
 }

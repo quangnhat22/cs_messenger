@@ -11,6 +11,7 @@ class ApiProvider {
   static const String forgetPassword = '$_auth/email/forget-password';
   static const String requestResendEmail = '$_auth/send-verify-email';
   static const String logOut = '$_auth/logout';
+  static const String changePassword = '$_auth/update-password';
 
   //device
   static const String _deviceUrl = '/device';
@@ -25,12 +26,22 @@ class ApiProvider {
   //block user
   static const String blockUser = '/block/user';
 
+  static String blockUserById(String id) => '/block/user/$id';
+
+  //search
+  static const String search = '/search';
+
+  //request
+  static const String request = '/request';
+
+  static String requestById(String id) => '/request/$id';
+
   //TODO: mockApi
   static const String mockServerUrl =
       'https://166706c7-b0dd-4262-a9a8-9e7b5f3dd1be.mock.pstmn.io';
   static const String friendCallHistory = "$mockServerUrl/friend/call-history";
   static const String friendRequest = "$mockServerUrl/friend/friend-request";
-  static const String friendList = "$mockServerUrl/friend/friend-list";
+  static const String friendList = "$mockServerUrl/friend/list";
   static const String groupList = "$mockServerUrl/group/group-list";
 }
 

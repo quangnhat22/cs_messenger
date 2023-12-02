@@ -18,6 +18,8 @@ class AppConstants {
   static int timeRepeatCallCheckVerifyEmail = 15000;
 
   static double numberElevationContainer = 10;
+
+  static int timeDebounceSearch = 1000;
 }
 
 class AppFormKeys {
@@ -40,5 +42,5 @@ class AppLocalBoxKeys {
 class AppNavigationKeys {
   AppNavigationKeys._();
 
-  static const timeSwitchPage = 400;
+  static const timeSwitchPage = 300;
 }

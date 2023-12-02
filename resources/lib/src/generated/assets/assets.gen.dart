@@ -37,6 +37,9 @@ class $AssetsPngsGen {
   AssetGenImage get onboardingThirdStep =>
       const AssetGenImage('assets/pngs/onboarding_third_step.png');
 
+  /// File path: assets/pngs/spinner.gif
+  AssetGenImage get spinner => const AssetGenImage('assets/pngs/spinner.gif');
+
   /// File path: assets/pngs/verify_email.png
   AssetGenImage get verifyEmail =>
       const AssetGenImage('assets/pngs/verify_email.png');
@@ -57,6 +60,7 @@ class $AssetsPngsGen {
         onboardingFirstStep,
         onboardingSecondStep,
         onboardingThirdStep,
+        spinner,
         verifyEmail,
         welcomeBanner,
         welldoneGreen
@@ -102,6 +106,9 @@ class $AssetsSvgsGen {
   SvgGenImage get icWarningCircle =>
       const SvgGenImage('assets/svgs/ic_warning_circle.svg');
 
+  /// File path: assets/svgs/no_data.svg
+  SvgGenImage get noData => const SvgGenImage('assets/svgs/no_data.svg');
+
   /// List of all assets
   List<SvgGenImage> get values => [
         genderIcon,
@@ -113,7 +120,8 @@ class $AssetsSvgsGen {
         icSuccessCircle,
         icUpcoming,
         icWarning,
-        icWarningCircle
+        icWarningCircle,
+        noData
       ];
 }
 

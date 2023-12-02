@@ -20,7 +20,7 @@ class SettingDashBoardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<SettingDashboardCubit>(),
+      create: (_) => getIt<SettingDashboardCubit>()..initPage(),
       child: AppMainPageWidget().setBody(_body(context)).build(context),
     );
   }
@@ -153,6 +153,26 @@ class SettingDashBoardPage extends StatelessWidget {
                             .build(ctx))
                         .setIsShowBottomDivider(true)
                         .build(ctx),
+                    AppCardBorderWidget()
+                        .setLeading(Icon(Icons.block_outlined,
+                            color: Theme.of(ctx).colorScheme.error))
+                        .setTitle(AppTextBodyLargeWidget()
+                            .setText(R.strings.listUserBlock)
+                            .setTextStyle(TextStyle(
+                              color: Theme.of(ctx).colorScheme.error,
+                            ))
+                            .build(ctx))
+                        .setIsShowBottomDivider(true)
+                        .setActions([
+                      Icon(
+                        Icons.chevron_right,
+                        color: Theme.of(ctx).colorScheme.error,
+                      )
+                    ]).setOnTap(
+                      () {
+                        getIt<AppRouter>().push(const BlockRoute());
+                      },
+                    ).build(ctx),
                     AppCardBorderWidget()
                         .setLeading(
                             const Icon(Icons.photo_camera_front_outlined))

@@ -19,17 +19,7 @@ class FriendRepositoryImpl extends FriendRepository {
       return remoteData.raw2Model();
     } on NetworkException catch (_) {
       rethrow;
-    }
-  }
-
-  @override
-  Future<AppListResultModel<RequestModel>> getListFriendRequest(
-      {required Map<String, dynamic> query}) async {
-    try {
-      final AppListResultRaw<RequestRaw> remoteData =
-          await _remote.fetchListFriendRequest(query: query);
-      return remoteData.raw2Model();
-    } on NetworkException catch (_) {
+    } on GrpcException catch (_) {
       rethrow;
     }
   }
@@ -42,6 +32,8 @@ class FriendRepositoryImpl extends FriendRepository {
           await _remote.fetchListFriend(query: query);
       return remoteData.raw2Model();
     } on NetworkException catch (_) {
+      rethrow;
+    } on GrpcException catch (_) {
       rethrow;
     }
   }

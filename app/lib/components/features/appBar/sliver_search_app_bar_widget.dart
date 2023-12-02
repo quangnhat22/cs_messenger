@@ -1,3 +1,4 @@
+import 'package:app/components/features/search/search_delegate.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:resources/resources.dart';
@@ -6,7 +7,10 @@ class SliverSearchAppBarWidget extends StatelessWidget {
   const SliverSearchAppBarWidget({super.key});
 
   void _handleSearchInputPressed(BuildContext context) {
-    //TODO: implement search input onPress at AppBar
+    showSearch(
+      context: context,
+      delegate: CustomSearchDelegate(),
+    );
   }
 
   void _handleNotificationIconButtonPressed(BuildContext context) {
@@ -20,6 +24,7 @@ class SliverSearchAppBarWidget extends StatelessWidget {
       elevation: 0,
       centerTitle: true,
       surfaceTintColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Colors.transparent,
       title: _buildSearchInput(context),
       actions: [
         IconButton(
@@ -50,7 +55,7 @@ class SliverSearchAppBarWidget extends StatelessWidget {
             prefixIcon: const Icon(Icons.search),
             filled: true,
             fillColor:
-                Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.8),
+                Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.6),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(AppSizeExt.of.majorScale(8)),

@@ -20,7 +20,7 @@ class AppCardBorderWidget extends AppCardBaseBuilder {
             padding: _contentPadding ??
                 EdgeInsets.symmetric(
                   vertical: AppSizeExt.of.majorPaddingScale(4),
-                  horizontal: AppSizeExt.of.majorPaddingScale(3),
+                  horizontal: AppSizeExt.of.majorPaddingScale(4),
                 ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -125,6 +125,12 @@ class AppCardBorderWidget extends AppCardBaseBuilder {
   @override
   AppCardBorderWidget setContentPadding(EdgeInsetsGeometry? contentPadding) {
     _contentPadding = contentPadding;
+    return this;
+  }
+
+  @override
+  AppCardBorderWidget setElevation(double? elevation) {
+    _elevation = elevation;
     return this;
   }
 }

@@ -9,8 +9,9 @@ class AppCardWidget extends AppCardBaseBuilder {
           onTap: _onTap,
           borderRadius: BorderRadius.circular(AppSizeExt.of.majorScale(4)),
           child: Card(
+            elevation: _elevation,
             surfaceTintColor:
-                _backgroundColor ?? Theme.of(context).colorScheme.background,
+                _backgroundColor ?? Theme.of(context).colorScheme.secondary,
             child: Padding(
               padding: _contentPadding ??
                   EdgeInsets.symmetric(
@@ -33,6 +34,10 @@ class AppCardWidget extends AppCardBaseBuilder {
                           _subtitle ?? const SizedBox(),
                         ],
                       ),
+                    ),
+                  if (_actions != null)
+                    SizedBox(
+                      width: AppSizeExt.of.majorScale(1),
                     ),
                   if (_actions != null) Row(children: _actions!)
                 ],
@@ -99,6 +104,12 @@ class AppCardWidget extends AppCardBaseBuilder {
   @override
   AppCardWidget setContentPadding(EdgeInsetsGeometry? contentPadding) {
     _contentPadding = contentPadding;
+    return this;
+  }
+
+  @override
+  AppCardBaseBuilder setElevation(double? elevation) {
+    _elevation = elevation;
     return this;
   }
 }

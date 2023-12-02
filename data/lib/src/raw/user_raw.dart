@@ -25,6 +25,7 @@ class UserRaw extends BaseRaw<UserModel> with _$UserRaw {
     return UserModel(
       id: id,
       name: name,
+      email: email,
       avatar: avatar,
       phone: phone,
       gender: GenderType.convertStringToGenderType(gender),

@@ -9,4 +9,8 @@ abstract class BaseUseCase<In extends BaseParam, Out extends BaseModel> {
     return Future.value(
         AppListResultModel<Out>(netData: null, total: 0, hasMore: false));
   }
+
+  Stream<Out?> getStream() {
+    throw UnimplementedError();
+  }
 }

@@ -135,5 +135,20 @@
   "done": "Hoàn tất",
   "selectGender": "Chọn giới tính",
   "updateProfileFail": "Đã có lỗi xảy ra trong quá trình Cập nhật thông tin! Vui lòng thử lại sau.",
-  "updateProfileSuccess": "Cập nhật thông tin thành công."
+  "updateProfileSuccess": "Cập nhật thông tin thành công",
+  "changePasswordSuccess": "Đổi mật khẩu thành công",
+  "user": "Người dùng",
+  "addFriend": "Kết bạn",
+  "sendRequestSuccess": "Yêu cầu của bạn đã gửi thành công!",
+  "sendRequestFail": "Yêu cầu của bạn gửi thất bại! Vui lòng thử lại.",
+  "sending": "Đang gửi",
+  "acceptRequestSuccess": "Chấp nhận lời mời thành công!",
+  "rejectRequestSuccess": "Từ chối yêu cầu thành công!",
+  "undoRequestSuccess": "Thu hồi yêu cầu thành công!",
+  "doYouWantAcceptFriendRequest": "Bạn có muốn chấp nhận lời mời kết bạn này không? Hãy đảm bảo bạn có quen biết người này.",
+  "doYouWantRejectFriendRequest": "Bạn có muốn từ chối lời mời kết bạn này hay không?",
+  "doYouWantUndoFriendRequest": "Bạn có muốn thu hồi lời mời kết bạn này hay không?",
+  "loginFail": "Đăng nhập thất bại",
+  "emailPasswordWrong": "Tài khoản hoặc mật khẩu sai",
+  "listUserBlock": "Danh sách chặn"
 }

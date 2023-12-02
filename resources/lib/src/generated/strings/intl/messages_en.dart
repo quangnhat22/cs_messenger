@@ -31,7 +31,10 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("About us"),
+        "acceptRequestSuccess":
+            MessageLookupByLibrary.simpleMessage("Accept request success!"),
         "account": MessageLookupByLibrary.simpleMessage("Account"),
+        "addFriend": MessageLookupByLibrary.simpleMessage("Add"),
         "addNewContact":
             MessageLookupByLibrary.simpleMessage("Add new contact"),
         "app": MessageLookupByLibrary.simpleMessage("App"),
@@ -43,6 +46,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change Password"),
+        "changePasswordSuccess":
+            MessageLookupByLibrary.simpleMessage("Change Password success"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirmNewPassword":
@@ -68,11 +73,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "devices": MessageLookupByLibrary.simpleMessage("Devices"),
         "discoverSeamlessMessaging": MessageLookupByLibrary.simpleMessage(
             "Discover seamless messaging and high-quality video calls. Stay connected with friends and loved ones like never before."),
+        "doYouWantAcceptFriendRequest": MessageLookupByLibrary.simpleMessage(
+            "Do you want to accept this friend request? Make sure you know this person."),
+        "doYouWantRejectFriendRequest": MessageLookupByLibrary.simpleMessage(
+            "Do you want to reject this friend request?"),
         "doYouWantToLogOut":
             MessageLookupByLibrary.simpleMessage("Do you want to log out?"),
+        "doYouWantUndoFriendRequest": MessageLookupByLibrary.simpleMessage(
+            "Do you want to undo this friend request?"),
         "done": MessageLookupByLibrary.simpleMessage("Done"),
         "editProfile": MessageLookupByLibrary.simpleMessage("Edit Profile"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "emailPasswordWrong":
+            MessageLookupByLibrary.simpleMessage("Email or Password wrong"),
         "emailValidate": MessageLookupByLibrary.simpleMessage(
             "The email address is badly formatted."),
         "en": MessageLookupByLibrary.simpleMessage("English"),
@@ -97,9 +110,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "lightMode": MessageLookupByLibrary.simpleMessage("Light Mode"),
         "listFriend": MessageLookupByLibrary.simpleMessage("List Friends"),
+        "listUserBlock":
+            MessageLookupByLibrary.simpleMessage("List User Block"),
         "logOut": MessageLookupByLibrary.simpleMessage("Log out"),
         "logOutFail": MessageLookupByLibrary.simpleMessage("Log out fail!"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "loginFail": MessageLookupByLibrary.simpleMessage("Login fail"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "newPassword": MessageLookupByLibrary.simpleMessage("New password"),
@@ -127,6 +143,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "registerEmailToReceivePasswordReset": MessageLookupByLibrary.simpleMessage(
             "Enter you registered email below to receive password reset instruction"),
+        "rejectRequestSuccess":
+            MessageLookupByLibrary.simpleMessage("Reject request success!"),
         "requestFriend": MessageLookupByLibrary.simpleMessage("Request friend"),
         "requestGroup": MessageLookupByLibrary.simpleMessage("Request Group"),
         "resendEmailAfter":
@@ -138,6 +156,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendEmail": MessageLookupByLibrary.simpleMessage("Send email"),
         "sendEmailSuccess":
             MessageLookupByLibrary.simpleMessage("Send email success"),
+        "sendRequestFail": MessageLookupByLibrary.simpleMessage(
+            "Sent your request fail! Try again"),
+        "sendRequestSuccess":
+            MessageLookupByLibrary.simpleMessage("Sent your request success!"),
+        "sending": MessageLookupByLibrary.simpleMessage("Sending"),
         "sent": MessageLookupByLibrary.simpleMessage("Sent"),
         "serverError": MessageLookupByLibrary.simpleMessage("Server error"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
@@ -167,12 +190,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Theme and Language"),
         "turnOnOffNotification":
             MessageLookupByLibrary.simpleMessage("Turn on/off notification"),
+        "undoRequestSuccess":
+            MessageLookupByLibrary.simpleMessage("Undo request success!"),
         "update": MessageLookupByLibrary.simpleMessage("Update"),
         "updateAvatar": MessageLookupByLibrary.simpleMessage("Update avatar"),
         "updateProfileFail": MessageLookupByLibrary.simpleMessage(
             "An error occurred while updating the Profile! Please try again."),
         "updateProfileSuccess":
-            MessageLookupByLibrary.simpleMessage("Update Profile success."),
+            MessageLookupByLibrary.simpleMessage("Update Profile success"),
+        "user": MessageLookupByLibrary.simpleMessage("User"),
         "verifyYourEmail":
             MessageLookupByLibrary.simpleMessage("Verify your email"),
         "verifying": MessageLookupByLibrary.simpleMessage("Verifying"),

@@ -15,9 +15,11 @@ class AppBottomTabBuilder extends AppTabBaseBuilder {
           body: child,
           bottomNavigationBar: NavigationBar(
             selectedIndex: tabsRouter.activeIndex,
+            elevation: 2,
             onDestinationSelected: (value) {
               tabsRouter.setActiveIndex(value);
             },
+            indicatorColor: Theme.of(context).colorScheme.tertiaryContainer,
             destinations: _labels!.map((label) {
               final index = _labels!.indexOf(label);
               return _buildDestination(context, index);

@@ -3,6 +3,7 @@ import 'package:app/configs/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 part 'app_card_border_widget.dart';
+part 'app_card_chat_room_widget.dart';
 part 'app_card_widget.dart';
 
 abstract class AppCardBaseBuilder {
@@ -24,6 +25,8 @@ abstract class AppCardBaseBuilder {
   bool? _isShowBottomDivider;
   @protected
   EdgeInsetsGeometry? _contentPadding;
+  @protected
+  double? _elevation;
 
   Widget build(BuildContext context);
 
@@ -44,4 +47,6 @@ abstract class AppCardBaseBuilder {
   AppCardBaseBuilder setIsShowBottomDivider(bool? isShowBottomDivider);
 
   AppCardBaseBuilder setContentPadding(EdgeInsetsGeometry? contentPadding);
+
+  AppCardBaseBuilder setElevation(double? elevation);
 }

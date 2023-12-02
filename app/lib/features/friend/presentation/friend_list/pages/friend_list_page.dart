@@ -28,37 +28,49 @@ class FriendListPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          AppCardWidget()
-              .setLeading(const CircleAvatar(
-                child: Icon(Icons.person_add_outlined),
-              ))
-              .setContentPadding(
-                  EdgeInsets.all(AppSizeExt.of.majorPaddingScale(3)))
-              .setTitle(AppTextTitleMediumWidget()
-                  .setText(R.strings.addNewContact)
-                  .build(context))
-              .setActions([const Icon(Icons.chevron_right)])
-              .setOnTap(() => _handleAddNewContactButton(context))
-              .build(context),
-          SizedBox(
-            height: AppSizeExt.of.majorScale(1 / 4),
+          Card(
+            margin: EdgeInsets.symmetric(
+              vertical: AppSizeExt.of.majorMarginScale(2),
+              horizontal: AppSizeExt.of.majorMarginScale(2),
+            ),
+            elevation: 0,
+            color: Theme.of(context).colorScheme.surfaceVariant,
+            child: Column(
+              children: <Widget>[
+                // AppCardBorderWidget()
+                //     .setLeading(const CircleAvatar(
+                //       child: Icon(Icons.person_add_outlined),
+                //     ))
+                //     .setContentPadding(
+                //         EdgeInsets.all(AppSizeExt.of.majorPaddingScale(3)))
+                //     .setTitle(AppTextTitleMediumWidget()
+                //         .setText(R.strings.addNewContact)
+                //         .build(context))
+                //     .setActions([const Icon(Icons.chevron_right)])
+                //     .setIsShowBottomDivider(true)
+                //     .setHasTopBorderRadius(true)
+                //     .setOnTap(() => _handleAddNewContactButton(context))
+                //     .build(context),
+                AppCardBorderWidget()
+                    .setLeading(CircleAvatar(
+                      backgroundColor:
+                          Theme.of(context).colorScheme.surfaceTint,
+                      child: Icon(
+                        Icons.people_outline,
+                        color: Theme.of(context).colorScheme.background,
+                      ),
+                    ))
+                    .setTitle(AppTextTitleMediumWidget()
+                        .setText(R.strings.requestFriend)
+                        .build(context))
+                    .setContentPadding(
+                        EdgeInsets.all(AppSizeExt.of.majorPaddingScale(3)))
+                    .setActions([const Icon(Icons.chevron_right)])
+                    .setOnTap(() => _handleFriendRequestButton(context))
+                    .build(context),
+              ],
+            ),
           ),
-          AppCardWidget()
-              .setLeading(CircleAvatar(
-                backgroundColor: Theme.of(context).colorScheme.tertiary,
-                child: Icon(
-                  Icons.people_outline,
-                  color: Theme.of(context).colorScheme.background,
-                ),
-              ))
-              .setTitle(AppTextTitleMediumWidget()
-                  .setText(R.strings.requestFriend)
-                  .build(context))
-              .setContentPadding(
-                  EdgeInsets.all(AppSizeExt.of.majorPaddingScale(3)))
-              .setActions([const Icon(Icons.chevron_right)])
-              .setOnTap(() => _handleFriendRequestButton(context))
-              .build(context),
           SizedBox(
             height: AppSizeExt.of.majorScale(1),
           ),
@@ -75,12 +87,7 @@ class FriendListPage extends StatelessWidget {
                 ))
                 .build(context),
           ),
-          const Expanded(
-            child: Card(
-              elevation: 0,
-              child: ListFriendWidget(),
-            ),
-          )
+          const Expanded(child: ListFriendWidget())
         ],
       ),
     );

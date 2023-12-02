@@ -5,6 +5,7 @@ import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/features/friend/presentation/friend_list/controllers/friend_list_cubit.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:resources/resources.dart';
 
 //TODO: refactor code
 class ListFriendWidget extends StatelessWidget {
@@ -28,7 +29,7 @@ class ListFriendWidget extends StatelessWidget {
         .setTitle(
             AppTextTitleMediumWidget().setText(friend.name).build(context))
         .setSubtitle(AppTextBodyMediumWidget()
-            .setText("Phone: ${friend.phone}")
+            .setText("${R.strings.email}: ${friend.email}")
             .build(context))
         .setHasTopBorderRadius(index == 0)
         .setHasBottomBorderRadius(index == 99)
