@@ -41,7 +41,6 @@ class AppRouter extends $AppRouter {
                 _customRoute(page: SettingDashBoardRoute.page),
               ],
             ),
-            _customRoute(page: FriendAddNewContactRoute.page),
             _customRoute(
               page: FriendRequestRoute.page,
               children: [
@@ -49,15 +48,23 @@ class AppRouter extends $AppRouter {
                 _customRoute(page: FriendReceivedRequestRoute.page),
               ],
             ),
+            _customRoute(page: FriendInfoRoute.page),
             _customRoute(page: SearchRoute.page),
             _customRoute(page: GroupCreateRoute.page),
-            _customRoute(page: GroupRequestRoute.page),
+            _customRoute(
+              page: GroupRequestRoute.page,
+              children: [
+                _customRoute(page: GroupSentRequestRoute.page),
+                _customRoute(page: GroupReceivedRequestRoute.page),
+              ],
+            ),
             _customRoute(page: EditProfileRoute.page),
             _customRoute(page: ThemeAndLanguageRoute.page),
             _customRoute(page: NotificationSettingRoute.page),
             _customRoute(page: ListDevicesRoute.page),
             _customRoute(page: ChangePasswordRoute.page),
             _customRoute(page: BlockRoute.page),
+            _customRoute(page: ChatRoute.page),
           ],
         )
       ];

@@ -17,9 +17,7 @@ class FriendRepositoryImpl extends FriendRepository {
       final AppListResultRaw<HistoryCallRaw> remoteData =
           await _remote.fetchListCallHistory(query: query);
       return remoteData.raw2Model();
-    } on NetworkException catch (_) {
-      rethrow;
-    } on GrpcException catch (_) {
+    } on AppException catch (_) {
       rethrow;
     }
   }
@@ -31,9 +29,19 @@ class FriendRepositoryImpl extends FriendRepository {
       final AppListResultRaw<UserRaw> remoteData =
           await _remote.fetchListFriend(query: query);
       return remoteData.raw2Model();
-    } on NetworkException catch (_) {
+    } on AppException catch (_) {
       rethrow;
-    } on GrpcException catch (_) {
+    }
+  }
+
+  @override
+  Future<AppObjResultModel<EmptyModel>> deleteFriendRequest(
+      {required Map<String, dynamic> query}) async {
+    try {
+      final AppObjResultRaw<EmptyRaw> remoteData =
+          await _remote.deleteFriend(query: query);
+      return remoteData.raw2Model();
+    } on AppException catch (_) {
       rethrow;
     }
   }

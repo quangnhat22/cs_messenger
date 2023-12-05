@@ -19,7 +19,7 @@ class UserRepositoryImpl extends UserRepository {
         await _userLocalDataSource.updateUserInfo(response.netData!);
       }
       return response.raw2Model();
-    } on NetworkException catch (_) {
+    } on AppException catch (_) {
       rethrow;
     }
   }
@@ -28,10 +28,11 @@ class UserRepositoryImpl extends UserRepository {
   Future<AppObjResultModel<EmptyModel>> updateUserProfile(
       {required Map<String, dynamic> body}) async {
     try {
+      body.removeWhere((key, value) => value == null || value == "");
       await _userRemoteDataSource.updateSelfInfo(body: body);
       await getUserSelf();
       return AppObjResultModel(netData: EmptyModel());
-    } on NetworkException catch (_) {
+    } on AppException catch (_) {
       rethrow;
     }
   }
@@ -46,7 +47,7 @@ class UserRepositoryImpl extends UserRepository {
       } else {
         return AppObjResultModel(netData: response.raw2Model());
       }
-    } on LocalException catch (_) {
+    } on AppException catch (_) {
       rethrow;
     }
   }
@@ -56,5 +57,16 @@ class UserRepositoryImpl extends UserRepository {
     return _userLocalDataSource.getUserStream().map((userRaw) {
       return userRaw?.raw2Model();
     });
+  }
+
+  @override
+  Future<AppObjResultModel<UserModel>> getUserById(
+      {required Map<String, dynamic> request}) async {
+    try {
+      final response = await _userRemoteDataSource.getUserById(query: request);
+      return response.raw2Model();
+    } on AppException catch (_) {
+      rethrow;
+    }
   }
 }

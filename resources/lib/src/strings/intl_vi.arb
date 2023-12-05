@@ -150,5 +150,16 @@
   "doYouWantUndoFriendRequest": "Bạn có muốn thu hồi lời mời kết bạn này hay không?",
   "loginFail": "Đăng nhập thất bại",
   "emailPasswordWrong": "Tài khoản hoặc mật khẩu sai",
-  "listUserBlock": "Danh sách chặn"
+  "listUserBlock": "Danh sách chặn",
+  "unBlockSuccess": "Bỏ chặn người dùng thành công",
+  "doYouWantUnBlockThisUser": "Bạn có muốn bỏ chặn người dùng này hay không?",
+  "loginInExpired": "Đăng nhập hết hạn. Vui lòng đăng nhập lại!",
+  "block": "Chặn người dùng",
+  "removeFriend": "Xóa kết bạn",
+  "undoFriendRequest": "Thu hồi lời mời kết bạn",
+  "unFriendSuccess": "Xóa kết bạn thành công!",
+  "blockSuccess": "Chặn người dùng thành công!",
+  "uploadImageSuccess": "Tải hình ảnh lên thành công!",
+  "uploadImageFail": "Tải hình ảnh lên thất bại! Vui lòng thử lại",
+  "groupRequest": "Lời mời nhóm"
 }

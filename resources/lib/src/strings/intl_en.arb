@@ -150,5 +150,16 @@
   "doYouWantUndoFriendRequest": "Do you want to undo this friend request?",
   "loginFail": "Login fail",
   "emailPasswordWrong": "Email or Password wrong",
-  "listUserBlock": "List User Block"
+  "listUserBlock": "List User Block",
+  "unBlockSuccess": "Unblock user success",
+  "doYouWantUnBlockThisUser": "Do you want unblock this user?",
+  "loginInExpired": "Login expired. Please log in again!",
+  "block": "Block",
+  "removeFriend": "Remove Friend",
+  "undoFriendRequest": "Undo Friend Request",
+  "unFriendSuccess": "Unfriend success!",
+  "blockSuccess": "Block user success!",
+  "uploadImageSuccess": "Upload image success",
+  "uploadImageFail": "Upload image fail! Try again.",
+  "groupRequest": "Group request"
 }

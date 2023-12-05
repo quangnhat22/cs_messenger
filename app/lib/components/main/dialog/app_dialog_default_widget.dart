@@ -84,8 +84,8 @@ class AppDefaultDialogWidget extends AppDialogBaseBuilder {
                       .setButtonText(_negativeText)
                       .setBorderColor(Theme.of(context).colorScheme.primary)
                       .setOnPressed(() async {
-                    _onNegative?.call();
                     await getIt<AppRouter>().pop();
+                    _onNegative?.call();
                   }).build(context),
                 ),
               if (_negativeText != null)
@@ -101,8 +101,8 @@ class AppDefaultDialogWidget extends AppDialogBaseBuilder {
                             .setAppButtonSize(AppButtonSize.large)
                             .setAppButtonType(AppButtonType.danger)
                             .setOnPressed(() async {
-                          _onPositive?.call();
                           await getIt<AppRouter>().pop();
+                          _onPositive?.call();
                         }).build(context),
                       )
                     : Expanded(
@@ -112,8 +112,8 @@ class AppDefaultDialogWidget extends AppDialogBaseBuilder {
                                 color:
                                     Theme.of(context).colorScheme.background))
                             .setOnPressed(() async {
-                          _onPositive?.call();
                           await getIt<AppRouter>().pop();
+                          _onPositive?.call();
                         }).build(context),
                       ),
             ],

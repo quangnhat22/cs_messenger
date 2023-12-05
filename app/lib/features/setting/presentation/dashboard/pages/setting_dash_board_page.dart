@@ -25,15 +25,17 @@ class SettingDashBoardPage extends StatelessWidget {
     );
   }
 
-  void _showDialogChangeAvatar(BuildContext context) {
-    showDialog(
+  Future<void> _showDialogChangeAvatar(BuildContext context) async {
+    final filePath = await showDialog(
       context: context,
-      builder: (context) {
+      builder: (_) {
         return const AppDialogImagePickerWidget();
       },
-    ).then((filePath) => {
-          if (filePath != null) {debugPrint(filePath)}
-        });
+    );
+
+    if (filePath != null && context.mounted) {
+      await context.read<SettingDashboardCubit>().updateAvatar(filePath);
+    }
   }
 
   Widget _body(BuildContext ctx) {
@@ -47,7 +49,7 @@ class SettingDashBoardPage extends StatelessWidget {
               const SettingShortUserInfo(),
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: AppSizeExt.of.majorPaddingScale(2),
+                  horizontal: AppSizeExt.of.majorPaddingScale(3),
                   vertical: AppSizeExt.of.majorPaddingScale(3),
                 ),
                 child: AppTextTitleMediumWidget()
@@ -59,19 +61,21 @@ class SettingDashBoardPage extends StatelessWidget {
                     .build(ctx),
               ),
               Card(
-                surfaceTintColor: Theme.of(ctx).colorScheme.background,
                 child: Column(
                   children: <Widget>[
-                    AppCardBorderWidget()
-                        .setLeading(
-                            const Icon(Icons.photo_camera_front_outlined))
-                        .setTitle(AppTextBodyLargeWidget()
-                            .setText(R.strings.updateAvatar)
-                            .build(ctx))
-                        .setHasTopBorderRadius(true)
-                        .setIsShowBottomDivider(true)
-                        .setOnTap(() => _showDialogChangeAvatar(ctx))
-                        .build(ctx),
+                    Builder(builder: (context) {
+                      return AppCardBorderWidget()
+                          .setLeading(
+                              const Icon(Icons.photo_camera_front_outlined))
+                          .setTitle(AppTextBodyLargeWidget()
+                              .setText(R.strings.updateAvatar)
+                              .build(context))
+                          .setHasTopBorderRadius(true)
+                          .setIsShowBottomDivider(true)
+                          .setOnTap(() async =>
+                              await _showDialogChangeAvatar(context))
+                          .build(context);
+                    }),
                     AppCardBorderWidget()
                         .setLeading(const Icon(Icons.person_outlined))
                         .setTitle(AppTextBodyLargeWidget()
@@ -95,7 +99,7 @@ class SettingDashBoardPage extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: AppSizeExt.of.majorPaddingScale(2),
+                  horizontal: AppSizeExt.of.majorPaddingScale(3),
                   vertical: AppSizeExt.of.majorPaddingScale(3),
                 ),
                 child: AppTextTitleMediumWidget()
@@ -107,7 +111,6 @@ class SettingDashBoardPage extends StatelessWidget {
                     .build(ctx),
               ),
               Card(
-                surfaceTintColor: Theme.of(ctx).colorScheme.background,
                 child: Column(
                   children: <Widget>[
                     AppCardBorderWidget()

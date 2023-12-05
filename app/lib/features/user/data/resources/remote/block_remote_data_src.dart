@@ -3,7 +3,8 @@ import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class BlockRemoteDataSource {
-  Future<AppListResultRaw<UserRaw>> getListBlock();
+  Future<AppListResultRaw<UserRaw>> getListBlock(
+      {required Map<String, dynamic> query});
 
   Future<AppObjResultRaw<EmptyRaw>> blockUser(
       {required Map<String, dynamic> query});
@@ -51,13 +52,16 @@ class BlockRemoteDataSourceImpl extends BlockRemoteDataSource {
   }
 
   @override
-  Future<AppListResultRaw<UserRaw>> getListBlock() async {
+  Future<AppListResultRaw<UserRaw>> getListBlock(
+      {required Map<String, dynamic> query}) async {
     try {
       final AppResponse response = await _networkService.request(
         clientRequest: ClientRequest(
-            url: ApiProvider.blockUser,
-            method: HttpMethod.delete,
-            isRequestForList: true),
+          url: ApiProvider.mockBlockUser,
+          method: HttpMethod.get,
+          query: {...query},
+          isRequestForList: true,
+        ),
       );
       return response.toRawList((data) => (data as List<dynamic>)
           .map((item) => UserRaw.fromJson(item))

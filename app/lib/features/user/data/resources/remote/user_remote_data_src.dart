@@ -30,6 +30,8 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
       return response.toRaw((data) => UserRaw.fromJson(data));
     } on NetworkException catch (_) {
       rethrow;
+    } on GrpcException catch (_) {
+      rethrow;
     }
   }
 
@@ -39,13 +41,14 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
     try {
       final AppResponse response = await _networkService.request(
         clientRequest: ClientRequest(
-          url: ApiProvider.user,
+          url: ApiProvider.userById(query['id']),
           method: HttpMethod.get,
-          query: {...query},
         ),
       );
       return response.toRaw((data) => UserRaw.fromJson(data));
     } on NetworkException catch (_) {
+      rethrow;
+    } on GrpcException catch (_) {
       rethrow;
     }
   }
@@ -64,6 +67,8 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
       );
       return response.toRaw((_) => EmptyRaw());
     } on NetworkException catch (_) {
+      rethrow;
+    } on GrpcException catch (_) {
       rethrow;
     }
   }

@@ -35,20 +35,17 @@ class GroupDashBoardPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           AppCardWidget()
-              .setLeading(const CircleAvatar(
-                child: Icon(Icons.person_add_outlined),
-              ))
+              .setLeading(
+                  const CircleAvatar(child: Icon(Icons.person_add_outlined)))
               .setContentPadding(
                   EdgeInsets.all(AppSizeExt.of.majorPaddingScale(3)))
               .setTitle(AppTextTitleMediumWidget()
                   .setText(R.strings.createNewGroup)
                   .build(context))
               .setActions([const Icon(Icons.chevron_right)])
-              .setOnTap(() => _handleAddNewContactButton(context))
+              .setOnTap(() => _handleCreateNewGroupButton(context))
               .build(context),
-          SizedBox(
-            height: AppSizeExt.of.majorScale(1 / 4),
-          ),
+          SizedBox(height: AppSizeExt.of.majorScale(1 / 4)),
           AppCardWidget()
               .setLeading(CircleAvatar(
                 backgroundColor: Theme.of(context).colorScheme.tertiary,
@@ -63,7 +60,7 @@ class GroupDashBoardPage extends StatelessWidget {
                   .setText(R.strings.requestGroup)
                   .build(context))
               .setActions([const Icon(Icons.chevron_right)])
-              .setOnTap(() => _handleFriendRequestButton(context))
+              .setOnTap(() => _handleGroupRequestButton(context))
               .build(context),
           SizedBox(
             height: AppSizeExt.of.majorScale(1),
@@ -76,11 +73,11 @@ class GroupDashBoardPage extends StatelessWidget {
     );
   }
 
-  void _handleAddNewContactButton(BuildContext context) async {
-    await context.router.push(const FriendAddNewContactRoute());
+  void _handleCreateNewGroupButton(BuildContext context) async {
+    await context.router.push(const GroupCreateRoute());
   }
 
-  void _handleFriendRequestButton(BuildContext context) async {
-    await context.router.push(const FriendRequestRoute());
+  void _handleGroupRequestButton(BuildContext context) async {
+    await context.router.push(const GroupRequestRoute());
   }
 }

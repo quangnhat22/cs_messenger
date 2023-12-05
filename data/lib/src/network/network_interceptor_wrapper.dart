@@ -31,7 +31,7 @@ class NetworkInterceptorWrapper extends QueuedInterceptorsWrapper {
       return handler.next(err);
     }
     // Do something with response error
-    if (err.response?.statusCode == HttpStatus.unauthorized) {
+    if (err.response?.data["metadata"]["code"] == 16) {
       final isHasToken = await _refreshToken();
       if (!isHasToken) {
         return handler.next(err);

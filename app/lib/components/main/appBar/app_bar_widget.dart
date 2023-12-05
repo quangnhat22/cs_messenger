@@ -15,7 +15,7 @@ class AppBarWidget extends AppBarBaseBuilder {
       centerTitle: _centerTitle ?? true,
       leading: _leading,
       actions: _actions,
-      backgroundColor: _backgroundColor,
+      backgroundColor: _backgroundColor ?? Colors.transparent,
       flexibleSpace: _flexibleSpace,
       bottom: _bottom,
     );

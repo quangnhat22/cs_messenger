@@ -8,6 +8,9 @@ abstract class FriendRemoteDataSource {
 
   Future<AppListResultRaw<UserRaw>> fetchListFriend(
       {required Map<String, dynamic> query});
+
+  Future<AppObjResultRaw<EmptyRaw>> deleteFriend(
+      {required Map<String, dynamic> query});
 }
 
 @Injectable(as: FriendRemoteDataSource)
@@ -24,7 +27,7 @@ class FriendRemoteDataSourceImpl extends FriendRemoteDataSource {
         clientRequest: ClientRequest(
           url: ApiProvider.friendCallHistory,
           method: HttpMethod.get,
-          query: query,
+          query: {...query},
           isRequestForList: true,
         ),
       );
@@ -32,6 +35,8 @@ class FriendRemoteDataSourceImpl extends FriendRemoteDataSource {
           .map((item) => HistoryCallRaw.fromJson(item))
           .toList());
     } on NetworkException catch (_) {
+      rethrow;
+    } on GrpcException catch (_) {
       rethrow;
     }
   }
@@ -42,9 +47,9 @@ class FriendRemoteDataSourceImpl extends FriendRemoteDataSource {
     try {
       final AppResponse response = await _service.request(
         clientRequest: ClientRequest(
-          url: ApiProvider.friendList,
+          url: ApiProvider.friend,
           method: HttpMethod.get,
-          query: query,
+          query: {...query},
           isRequestForList: true,
         ),
       );
@@ -52,6 +57,26 @@ class FriendRemoteDataSourceImpl extends FriendRemoteDataSource {
           .map((item) => UserRaw.fromJson(item))
           .toList());
     } on NetworkException catch (_) {
+      rethrow;
+    } on GrpcException catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<AppObjResultRaw<EmptyRaw>> deleteFriend(
+      {required Map<String, dynamic> query}) async {
+    try {
+      await _service.request(
+        clientRequest: ClientRequest(
+          url: ApiProvider.friendById(query['id']),
+          method: HttpMethod.delete,
+        ),
+      );
+      return AppObjResultRaw(netData: EmptyRaw());
+    } on NetworkException catch (_) {
+      rethrow;
+    } on GrpcException catch (_) {
       rethrow;
     }
   }

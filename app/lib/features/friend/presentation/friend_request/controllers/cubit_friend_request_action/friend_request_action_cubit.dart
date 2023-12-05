@@ -1,9 +1,7 @@
 import 'package:app/components/main/dialog/app_dialog_base_builder.dart';
 import 'package:app/components/main/overlay/app_loading_overlay_widget.dart';
 import 'package:app/components/main/snackBar/app_snack_bar_base_builder.dart';
-import 'package:app/configs/di/di.dart';
 import 'package:app/configs/exts/app_exts.dart';
-import 'package:app/configs/routes/app_router.dart';
 import 'package:app/features/user/domain/usecases/request/accept_request_uc.dart';
 import 'package:app/features/user/domain/usecases/request/delete_request_uc.dart';
 import 'package:domain/domain.dart';
@@ -26,7 +24,7 @@ class FriendRequestActionCubit extends Cubit<FriendRequestActionState> {
 
   Future<void> acceptRequest(String requestId) async {
     try {
-      AppLoadingOverlayWidget.show(message: R.strings.sending);
+      AppLoadingOverlayWidget.show();
       await _acceptRequestUseCase.executeObj(
           request: ActionRequestParam(id: requestId));
       AppSnackBarWidget()
@@ -35,7 +33,6 @@ class FriendRequestActionCubit extends Cubit<FriendRequestActionState> {
           .setAppSnackBarStatus(AppSnackBarStatus.success)
           .showSnackBar();
       AppLoadingOverlayWidget.dismiss();
-      await getIt<AppRouter>().pop();
     } on AppException catch (e) {
       AppLoadingOverlayWidget.dismiss();
       AppExceptionExt(
@@ -55,7 +52,7 @@ class FriendRequestActionCubit extends Cubit<FriendRequestActionState> {
 
   Future<void> rejectRequest(String requestId) async {
     try {
-      AppLoadingOverlayWidget.show(message: R.strings.sending);
+      AppLoadingOverlayWidget.show();
       await _deleteRequestUseCase.executeObj(
           request: ActionRequestParam(id: requestId));
       AppSnackBarWidget()
@@ -64,7 +61,6 @@ class FriendRequestActionCubit extends Cubit<FriendRequestActionState> {
           .setAppSnackBarStatus(AppSnackBarStatus.success)
           .showSnackBar();
       AppLoadingOverlayWidget.dismiss();
-      await getIt<AppRouter>().pop();
     } on AppException catch (e) {
       AppLoadingOverlayWidget.dismiss();
       AppExceptionExt(
@@ -84,7 +80,7 @@ class FriendRequestActionCubit extends Cubit<FriendRequestActionState> {
 
   Future<void> undoRequest(String requestId) async {
     try {
-      AppLoadingOverlayWidget.show(message: R.strings.sending);
+      AppLoadingOverlayWidget.show();
       await _deleteRequestUseCase.executeObj(
           request: ActionRequestParam(id: requestId));
       AppSnackBarWidget()
@@ -93,7 +89,6 @@ class FriendRequestActionCubit extends Cubit<FriendRequestActionState> {
           .setAppSnackBarStatus(AppSnackBarStatus.success)
           .showSnackBar();
       AppLoadingOverlayWidget.dismiss();
-      await getIt<AppRouter>().pop();
     } on AppException catch (e) {
       AppLoadingOverlayWidget.dismiss();
       AppExceptionExt(

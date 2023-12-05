@@ -31,8 +31,7 @@ class SettingShortUserInfo extends StatelessWidget {
         return AppCardBorderWidget()
             .setLeading(
               AppAvatarCircleWidget()
-                  .setUrl(
-                      'https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg')
+                  .setUrl(state.userInfo?.avatar)
                   .setSize(AppAvatarSize.large)
                   .build(context),
             )

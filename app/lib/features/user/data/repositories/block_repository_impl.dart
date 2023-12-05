@@ -22,10 +22,11 @@ class BlockRepositoryImpl extends BlockRepository {
   }
 
   @override
-  Future<AppListResultModel<UserModel>> getListUserBlock() async {
+  Future<AppListResultModel<UserModel>> getListUserBlock(
+      {required Map<String, dynamic> query}) async {
     try {
       final AppListResultRaw<UserRaw> remoteData =
-          await _blockRemoteDataSource.getListBlock();
+          await _blockRemoteDataSource.getListBlock(query: query);
       return remoteData.raw2Model();
     } on NetworkException catch (_) {
       rethrow;

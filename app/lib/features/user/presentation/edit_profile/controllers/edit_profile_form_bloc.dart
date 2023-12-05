@@ -70,6 +70,7 @@ class EditProfileFormBloc extends FormBloc<String, String> {
       bio.updateInitialValue(userInfo?.bio ?? '');
       AppLoadingOverlayWidget.dismiss();
     } on AppException catch (e) {
+      AppLoadingOverlayWidget.dismiss();
       AppExceptionExt(appException: e, onError: (_) {}).detected();
     }
   }

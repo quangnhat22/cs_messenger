@@ -104,14 +104,13 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
       emit(state.copyWith(isAuthenticated: isAuthenticated));
       emit(state.copyWith(isLoading: false));
     } on AppException catch (e) {
+      emit(state.copyWith(isLoading: false));
       AppExceptionExt(
         appException: e,
-        onError: (_) {
-          emit(state.copyWith(
-            isLoading: false,
-          ));
-        },
+        onError: (_) {},
       ).detected();
+    } catch (e) {
+      emit(state.copyWith(isLoading: false));
     }
   }
 
