@@ -42,6 +42,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "backToWelcome":
             MessageLookupByLibrary.simpleMessage("Trở về trang chính"),
         "bio": MessageLookupByLibrary.simpleMessage("Giới thiệu bản thân"),
+        "block": MessageLookupByLibrary.simpleMessage("Chặn người dùng"),
+        "blockSuccess":
+            MessageLookupByLibrary.simpleMessage("Chặn người dùng thành công!"),
         "bridgeTheGap": m0,
         "cancel": MessageLookupByLibrary.simpleMessage("Đóng"),
         "changePassword":
@@ -80,6 +83,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bạn có muốn từ chối lời mời kết bạn này hay không?"),
         "doYouWantToLogOut":
             MessageLookupByLibrary.simpleMessage("Bạn có muốn đăng xuất?"),
+        "doYouWantUnBlockThisUser": MessageLookupByLibrary.simpleMessage(
+            "Bạn có muốn bỏ chặn người dùng này hay không?"),
         "doYouWantUndoFriendRequest": MessageLookupByLibrary.simpleMessage(
             "Bạn có muốn thu hồi lời mời kết bạn này hay không?"),
         "done": MessageLookupByLibrary.simpleMessage("Hoàn tất"),
@@ -105,6 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "getConnectWithYourFriends": MessageLookupByLibrary.simpleMessage(
             "Kết nối với \"network\" của bạn"),
         "gotIt": MessageLookupByLibrary.simpleMessage("Hiểu rồi"),
+        "groupRequest": MessageLookupByLibrary.simpleMessage("Lời mời nhóm"),
         "groups": MessageLookupByLibrary.simpleMessage("Nhóm"),
         "historyDevices":
             MessageLookupByLibrary.simpleMessage("Thiết bị đã đăng nhập"),
@@ -120,6 +126,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đăng xuất thất bại!"),
         "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
         "loginFail": MessageLookupByLibrary.simpleMessage("Đăng nhập thất bại"),
+        "loginInExpired": MessageLookupByLibrary.simpleMessage(
+            "Đăng nhập hết hạn. Vui lòng đăng nhập lại!"),
         "male": MessageLookupByLibrary.simpleMessage("Nam"),
         "name": MessageLookupByLibrary.simpleMessage("Tên"),
         "newPassword": MessageLookupByLibrary.simpleMessage("Mật khẩu mới"),
@@ -150,6 +158,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bạn vui lòng nhập email đã đăng ký bên dưới, và chúng tôi sẽ gửi hướng dẫn khôi phục mật khẩu đến cho bạn"),
         "rejectRequestSuccess":
             MessageLookupByLibrary.simpleMessage("Từ chối yêu cầu thành công!"),
+        "removeFriend": MessageLookupByLibrary.simpleMessage("Xóa kết bạn"),
         "requestFriend":
             MessageLookupByLibrary.simpleMessage("Lời mời kết bạn"),
         "requestGroup": MessageLookupByLibrary.simpleMessage("Lời mời nhóm"),
@@ -196,6 +205,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Theme and Language"),
         "turnOnOffNotification":
             MessageLookupByLibrary.simpleMessage("Bật/tắt mở thông báo"),
+        "unBlockSuccess": MessageLookupByLibrary.simpleMessage(
+            "Bỏ chặn người dùng thành công"),
+        "unFriendSuccess":
+            MessageLookupByLibrary.simpleMessage("Xóa kết bạn thành công!"),
+        "undoFriendRequest":
+            MessageLookupByLibrary.simpleMessage("Thu hồi lời mời kết bạn"),
         "undoRequestSuccess":
             MessageLookupByLibrary.simpleMessage("Thu hồi yêu cầu thành công!"),
         "update": MessageLookupByLibrary.simpleMessage("Cập nhật"),
@@ -205,6 +220,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Đã có lỗi xảy ra trong quá trình Cập nhật thông tin! Vui lòng thử lại sau."),
         "updateProfileSuccess": MessageLookupByLibrary.simpleMessage(
             "Cập nhật thông tin thành công"),
+        "uploadImageFail": MessageLookupByLibrary.simpleMessage(
+            "Tải hình ảnh lên thất bại! Vui lòng thử lại"),
+        "uploadImageSuccess": MessageLookupByLibrary.simpleMessage(
+            "Tải hình ảnh lên thành công!"),
         "user": MessageLookupByLibrary.simpleMessage("Người dùng"),
         "verifyYourEmail":
             MessageLookupByLibrary.simpleMessage("Xác minh email"),

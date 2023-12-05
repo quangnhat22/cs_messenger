@@ -2,6 +2,9 @@ import 'package:app/components/main/card/app_card_base_builder.dart';
 import 'package:app/components/main/listView/app_list_view_widget.dart';
 import 'package:app/components/main/listView/controllers/app_list_view_cubit.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
+import 'package:app/configs/di/di.dart';
+import 'package:app/configs/routes/app_router.dart';
+import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/features/friend/presentation/friend_list/controllers/friend_list_cubit.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +35,6 @@ class ListFriendWidget extends StatelessWidget {
             .setText("${R.strings.email}: ${friend.email}")
             .build(context))
         .setHasTopBorderRadius(index == 0)
-        .setHasBottomBorderRadius(index == 99)
         .setActions([
           IconButton(
             onPressed: () {},
@@ -40,7 +42,9 @@ class ListFriendWidget extends StatelessWidget {
           )
         ])
         .setIsShowBottomDivider(true)
-        .setOnTap(() {})
+        .setOnTap(() async {
+          await getIt<AppRouter>().push(FriendInfoRoute(userId: friend.id));
+        })
         .build(context);
   }
 }

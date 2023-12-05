@@ -40,6 +40,8 @@ class UserModel extends BaseModel {
   final DateTime? birthday;
   final String? bio;
   final RelationModel? relation;
+  final int? friendCommon;
+  final int? groupCommon;
 
   UserModel({
     required this.id,
@@ -51,5 +53,7 @@ class UserModel extends BaseModel {
     this.birthday,
     this.bio,
     this.relation,
+    this.friendCommon,
+    this.groupCommon,
   });
 }

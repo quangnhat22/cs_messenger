@@ -1,10 +1,10 @@
+import 'package:app/components/main/avatar/app_avatar_base_builder.dart';
 import 'package:app/components/main/button/app_button_base_builder.dart';
 import 'package:app/components/main/card/app_card_base_builder.dart';
 import 'package:app/components/main/dialog/app_dialog_base_builder.dart';
 import 'package:app/components/main/listView/app_list_view_widget.dart';
 import 'package:app/components/main/listView/controllers/app_list_view_cubit.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
-import 'package:app/configs/exts/app_exts.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:app/features/friend/presentation/friend_request/controllers/cubit_friend_request_action/friend_request_action_cubit.dart';
 import 'package:app/features/friend/presentation/friend_request/controllers/cubit_list_friend_received_request.dart';
@@ -37,7 +37,10 @@ class FriendReceivedRequestView extends StatelessWidget {
       BuildContext context, RequestModel request, int index) {
     return AppCardWidget()
         .setElevation(1)
-        .setLeading(const CircleAvatar(radius: 24))
+        .setLeading(AppAvatarCircleWidget()
+            .setUrl(request.sender?.avatar)
+            .setSize(AppAvatarSize.large)
+            .build(context))
         .setTitle(AppTextTitleMediumWidget()
             .setText(request.sender?.name)
             .build(context))
@@ -65,8 +68,8 @@ class FriendReceivedRequestView extends StatelessWidget {
                 Icons.close_outlined,
                 color: Theme.of(context).colorScheme.background,
               ))
-              .setOnPressed(
-                  () => _handleRejectRequestButton(context, request.id))
+              .setOnPressed(() async =>
+                  await _handleRejectRequestButton(context, request.id))
               .build(context),
           SizedBox(
             width: AppSizeExt.of.majorScale(2),
@@ -78,8 +81,8 @@ class FriendReceivedRequestView extends StatelessWidget {
                 Icons.done_outline,
                 color: Theme.of(context).colorScheme.background,
               ))
-              .setOnPressed(
-                  () => _handleAcceptRequestButton(context, request.id))
+              .setOnPressed(() async =>
+                  await _handleAcceptRequestButton(context, request.id))
               .build(context),
         ])
         .setOnTap(() {})
@@ -98,6 +101,11 @@ class FriendReceivedRequestView extends StatelessWidget {
             await context
                 .read<FriendRequestActionCubit>()
                 .rejectRequest(requestId);
+            if (context.mounted) {
+              await context
+                  .read<ListFriendReceivedRequestCubit>()
+                  .onRefreshCall();
+            }
           })
           .buildDialog(context)
           .show();
@@ -118,6 +126,11 @@ class FriendReceivedRequestView extends StatelessWidget {
             await context
                 .read<FriendRequestActionCubit>()
                 .acceptRequest(requestId);
+            if (context.mounted) {
+              await context
+                  .read<ListFriendReceivedRequestCubit>()
+                  .onRefreshCall();
+            }
           })
           .buildDialog(context)
           .show();

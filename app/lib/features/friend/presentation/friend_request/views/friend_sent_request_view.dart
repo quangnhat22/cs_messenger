@@ -66,7 +66,8 @@ class FriendSentRequestView extends StatelessWidget {
                 Icons.undo_outlined,
                 color: Theme.of(context).colorScheme.background,
               ))
-              .setOnPressed(() => _handleUndoRequestButton(context, request.id))
+              .setOnPressed(() async =>
+                  await _handleUndoRequestButton(context, request.id))
               .build(context),
         ])
         .setOnTap(() {})
@@ -85,6 +86,9 @@ class FriendSentRequestView extends StatelessWidget {
             await context
                 .read<FriendRequestActionCubit>()
                 .undoRequest(requestId);
+            if (context.mounted) {
+              await context.read<ListFriendSentRequestCubit>().onRefreshCall();
+            }
           })
           .buildDialog(context)
           .show();

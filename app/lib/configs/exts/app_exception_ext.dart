@@ -88,6 +88,34 @@ class AppExceptionExt {
                 .show();
             break;
           }
+        case "14":
+          {
+            AppDefaultDialogWidget()
+                .setTitle(R.strings.error)
+                .setContent(R.strings.systemIsCurrentlyErrorPleaseTryAgainLater)
+                .setAppDialogType(AppDialogType.error)
+                .setNegativeText(R.strings.close)
+                .setPositiveText(R.strings.confirm)
+                .buildDialog(AppKeys.navigatorKey.currentContext!)
+                .show();
+            break;
+          }
+        case "16":
+          {
+            AppDefaultDialogWidget()
+                .setTitle(R.strings.error)
+                .setContent(R.strings.loginInExpired)
+                .setAppDialogType(AppDialogType.error)
+                .setNegativeText(R.strings.close)
+                .setPositiveText(R.strings.confirm)
+                .setOnPositive(() async {
+                  _handleForceLogOut();
+                })
+                .buildDialog(AppKeys.navigatorKey.currentContext!)
+                .show();
+            break;
+          }
+
         case "17":
           {
             AppDefaultDialogWidget()

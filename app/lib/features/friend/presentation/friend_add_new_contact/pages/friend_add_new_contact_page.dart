@@ -16,7 +16,7 @@ class FriendAddNewContactPage extends StatelessWidget {
   const FriendAddNewContactPage({super.key});
 
   void _handleDoneButton(BuildContext context) {
-    context.router.push(const FriendInfoRoute());
+    // context.router.push(const FriendInfoRoute());
   }
 
   @override
@@ -49,7 +49,7 @@ class FriendAddNewContactPage extends StatelessWidget {
                 padding: EdgeInsets.all(
                   AppSizeExt.of.majorPaddingScale(2),
                 ),
-                child: const FriendInfoPage(),
+                // child: const FriendInfoPage(),
               ),
             ),
           ),

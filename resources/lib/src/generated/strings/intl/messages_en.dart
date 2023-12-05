@@ -42,6 +42,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "backToWelcome":
             MessageLookupByLibrary.simpleMessage("Back to Welcome"),
         "bio": MessageLookupByLibrary.simpleMessage("Bio"),
+        "block": MessageLookupByLibrary.simpleMessage("Block"),
+        "blockSuccess":
+            MessageLookupByLibrary.simpleMessage("Block user success!"),
         "bridgeTheGap": m0,
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "changePassword":
@@ -79,6 +82,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Do you want to reject this friend request?"),
         "doYouWantToLogOut":
             MessageLookupByLibrary.simpleMessage("Do you want to log out?"),
+        "doYouWantUnBlockThisUser": MessageLookupByLibrary.simpleMessage(
+            "Do you want unblock this user?"),
         "doYouWantUndoFriendRequest": MessageLookupByLibrary.simpleMessage(
             "Do you want to undo this friend request?"),
         "done": MessageLookupByLibrary.simpleMessage("Done"),
@@ -103,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "getConnectWithYourFriends": MessageLookupByLibrary.simpleMessage(
             "Get connect with your friends"),
         "gotIt": MessageLookupByLibrary.simpleMessage("Got it"),
+        "groupRequest": MessageLookupByLibrary.simpleMessage("Group request"),
         "groups": MessageLookupByLibrary.simpleMessage("Groups"),
         "historyDevices": MessageLookupByLibrary.simpleMessage("History"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
@@ -116,6 +122,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "logOutFail": MessageLookupByLibrary.simpleMessage("Log out fail!"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "loginFail": MessageLookupByLibrary.simpleMessage("Login fail"),
+        "loginInExpired": MessageLookupByLibrary.simpleMessage(
+            "Login expired. Please log in again!"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "newPassword": MessageLookupByLibrary.simpleMessage("New password"),
@@ -145,6 +153,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Enter you registered email below to receive password reset instruction"),
         "rejectRequestSuccess":
             MessageLookupByLibrary.simpleMessage("Reject request success!"),
+        "removeFriend": MessageLookupByLibrary.simpleMessage("Remove Friend"),
         "requestFriend": MessageLookupByLibrary.simpleMessage("Request friend"),
         "requestGroup": MessageLookupByLibrary.simpleMessage("Request Group"),
         "resendEmailAfter":
@@ -190,6 +199,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Theme and Language"),
         "turnOnOffNotification":
             MessageLookupByLibrary.simpleMessage("Turn on/off notification"),
+        "unBlockSuccess":
+            MessageLookupByLibrary.simpleMessage("Unblock user success"),
+        "unFriendSuccess":
+            MessageLookupByLibrary.simpleMessage("Unfriend success!"),
+        "undoFriendRequest":
+            MessageLookupByLibrary.simpleMessage("Undo Friend Request"),
         "undoRequestSuccess":
             MessageLookupByLibrary.simpleMessage("Undo request success!"),
         "update": MessageLookupByLibrary.simpleMessage("Update"),
@@ -198,6 +213,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "An error occurred while updating the Profile! Please try again."),
         "updateProfileSuccess":
             MessageLookupByLibrary.simpleMessage("Update Profile success"),
+        "uploadImageFail": MessageLookupByLibrary.simpleMessage(
+            "Upload image fail! Try again."),
+        "uploadImageSuccess":
+            MessageLookupByLibrary.simpleMessage("Upload image success"),
         "user": MessageLookupByLibrary.simpleMessage("User"),
         "verifyYourEmail":
             MessageLookupByLibrary.simpleMessage("Verify your email"),

@@ -1289,6 +1289,116 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Bỏ chặn người dùng thành công`
+  String get unBlockSuccess {
+    return Intl.message(
+      'Bỏ chặn người dùng thành công',
+      name: 'unBlockSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bạn có muốn bỏ chặn người dùng này hay không?`
+  String get doYouWantUnBlockThisUser {
+    return Intl.message(
+      'Bạn có muốn bỏ chặn người dùng này hay không?',
+      name: 'doYouWantUnBlockThisUser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Đăng nhập hết hạn. Vui lòng đăng nhập lại!`
+  String get loginInExpired {
+    return Intl.message(
+      'Đăng nhập hết hạn. Vui lòng đăng nhập lại!',
+      name: 'loginInExpired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chặn người dùng`
+  String get block {
+    return Intl.message(
+      'Chặn người dùng',
+      name: 'block',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Xóa kết bạn`
+  String get removeFriend {
+    return Intl.message(
+      'Xóa kết bạn',
+      name: 'removeFriend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thu hồi lời mời kết bạn`
+  String get undoFriendRequest {
+    return Intl.message(
+      'Thu hồi lời mời kết bạn',
+      name: 'undoFriendRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Xóa kết bạn thành công!`
+  String get unFriendSuccess {
+    return Intl.message(
+      'Xóa kết bạn thành công!',
+      name: 'unFriendSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chặn người dùng thành công!`
+  String get blockSuccess {
+    return Intl.message(
+      'Chặn người dùng thành công!',
+      name: 'blockSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tải hình ảnh lên thành công!`
+  String get uploadImageSuccess {
+    return Intl.message(
+      'Tải hình ảnh lên thành công!',
+      name: 'uploadImageSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tải hình ảnh lên thất bại! Vui lòng thử lại`
+  String get uploadImageFail {
+    return Intl.message(
+      'Tải hình ảnh lên thất bại! Vui lòng thử lại',
+      name: 'uploadImageFail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lời mời nhóm`
+  String get groupRequest {
+    return Intl.message(
+      'Lời mời nhóm',
+      name: 'groupRequest',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

@@ -15,8 +15,8 @@ abstract class NetworkService {
   static Dio newDio() {
     final dio = Dio(BaseOptions(
       baseUrl: BuildConfig.apiDomain,
-      connectTimeout: const Duration(seconds: 10),
-      receiveTimeout: const Duration(seconds: 10),
+      connectTimeout: const Duration(seconds: 15),
+      receiveTimeout: const Duration(seconds: 15),
     ));
     dio.interceptors.add(PrettyDioLogger(
       requestBody: true,
@@ -77,8 +77,8 @@ class NetworkServiceImpl extends NetworkService {
     } on DioException catch (e) {
       Metadata? meta = (e.response?.data is Map<String, dynamic>)
           ? Metadata(
-              code: e.response?.data['code'].toString(),
-              message: e.response?.data['message'],
+              code: e.response?.data['metadata']['code'].toString(),
+              message: e.response?.data['metadata']['message'],
             )
           : Metadata(
               code: ErrorCode.dioError,

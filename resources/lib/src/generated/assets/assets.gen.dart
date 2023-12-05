@@ -21,6 +21,41 @@ class $AssetsPngsGen {
   AssetGenImage get googleLogo =>
       const AssetGenImage('assets/pngs/google_logo.png');
 
+  /// File path: assets/pngs/icon-arrow.png
+  AssetGenImage get iconArrow =>
+      const AssetGenImage('assets/pngs/icon-arrow.png');
+
+  /// File path: assets/pngs/icon-attachment.png
+  AssetGenImage get iconAttachment =>
+      const AssetGenImage('assets/pngs/icon-attachment.png');
+
+  /// File path: assets/pngs/icon-delivered.png
+  AssetGenImage get iconDelivered =>
+      const AssetGenImage('assets/pngs/icon-delivered.png');
+
+  /// File path: assets/pngs/icon-document.png
+  AssetGenImage get iconDocument =>
+      const AssetGenImage('assets/pngs/icon-document.png');
+
+  /// File path: assets/pngs/icon-error.png
+  AssetGenImage get iconError =>
+      const AssetGenImage('assets/pngs/icon-error.png');
+
+  /// File path: assets/pngs/icon-reply.png
+  AssetGenImage get iconReply =>
+      const AssetGenImage('assets/pngs/icon-reply.png');
+
+  /// File path: assets/pngs/icon-seen.png
+  AssetGenImage get iconSeen =>
+      const AssetGenImage('assets/pngs/icon-seen.png');
+
+  /// File path: assets/pngs/icon-send.png
+  AssetGenImage get iconSend =>
+      const AssetGenImage('assets/pngs/icon-send.png');
+
+  /// File path: assets/pngs/icon-x.png
+  AssetGenImage get iconX => const AssetGenImage('assets/pngs/icon-x.png');
+
   /// File path: assets/pngs/mail_sent_success.png
   AssetGenImage get mailSentSuccess =>
       const AssetGenImage('assets/pngs/mail_sent_success.png');
@@ -56,6 +91,15 @@ class $AssetsPngsGen {
   List<AssetGenImage> get values => [
         appIcon,
         googleLogo,
+        iconArrow,
+        iconAttachment,
+        iconDelivered,
+        iconDocument,
+        iconError,
+        iconReply,
+        iconSeen,
+        iconSend,
+        iconX,
         mailSentSuccess,
         onboardingFirstStep,
         onboardingSecondStep,

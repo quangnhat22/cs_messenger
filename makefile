@@ -3,8 +3,8 @@ denied:
 
 pre-bootstrap:
 	cd scripts && ./pre-bootstrap.sh
-	fvm install 3.13.1
-	fvm use 3.13.1 --force
+	fvm install 3.13.9
+	fvm use 3.13.9 --force
 	fvm flutter --version
 
 pub-get:
