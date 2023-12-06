@@ -125,9 +125,9 @@ class _InputWidgetState extends State<InputWidget> {
       child: Padding(
         padding: EdgeInsets.zero,
         child: Material(
-          borderRadius: const BorderRadius.vertical(
-            top: Radius.circular(20),
-          ),
+          // borderRadius: const BorderRadius.vertical(
+          //   top: Radius.circular(20),
+          // ),
           color: Theme.of(context).colorScheme.onBackground,
           surfaceTintColor: Theme.of(context).colorScheme.surfaceTint,
           elevation: 0,

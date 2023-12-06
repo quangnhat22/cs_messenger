@@ -58,7 +58,7 @@ class _ImageMessageState extends State<ImageMessage> {
           );
 
     //custom image
-    _size = const Size(120, 120);
+    _size = const Size(540, 360);
   }
 
   void _getImage() {
@@ -118,7 +118,7 @@ class _ImageMessageState extends State<ImageMessage> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child: Image(
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                   image: _image!,
                 ),
               ),

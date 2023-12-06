@@ -11,7 +11,6 @@ import 'package:flutter_chat_types/flutter_chat_types.dart'
 import 'package:flutter_link_previewer/flutter_link_previewer.dart';
 import 'package:flutter_parsed_text/flutter_parsed_text.dart';
 
-/// Widget to reuse the markdown capabilities, e.g., for previews.
 class TextMessageText extends StatelessWidget {
   const TextMessageText({
     super.key,
@@ -25,28 +24,20 @@ class TextMessageText extends StatelessWidget {
     required this.text,
   });
 
-  /// Style to apply to anything that matches a link.
   final TextStyle? bodyLinkTextStyle;
 
-  /// Regular style to use for any unmatched text. Also used as basis for the fallback options.
   final TextStyle? bodyTextStyle;
 
-  /// Style to apply to anything that matches bold markdown.
   final TextStyle? boldTextStyle;
 
-  /// Style to apply to anything that matches code markdown.
   final TextStyle? codeTextStyle;
 
-  /// See [ParsedText.maxLines].
   final int? maxLines;
 
-  /// See [TextMessage.options].
   final TextMessageOptions options;
 
-  /// See [ParsedText.overflow].
   final TextOverflow overflow;
 
-  /// Text that is shown as markdown.
   final String text;
 
   @override
@@ -55,30 +46,42 @@ class TextMessageText extends StatelessWidget {
           ...options.matchers,
           mailToMatcher(
             style: bodyLinkTextStyle ??
-                bodyTextStyle?.copyWith(
-                  decoration: TextDecoration.underline,
-                ),
+                Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      decoration: TextDecoration.underline,
+                    ),
           ),
           urlMatcher(
             onLinkPressed: options.onLinkPressed,
             style: bodyLinkTextStyle ??
-                bodyTextStyle?.copyWith(
-                  decoration: TextDecoration.underline,
-                ),
+                Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      decoration: TextDecoration.underline,
+                    ),
           ),
           boldMatcher(
             style: boldTextStyle ??
-                bodyTextStyle?.merge(PatternStyle.bold.textStyle),
+                Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.merge(PatternStyle.bold.textStyle),
           ),
           italicMatcher(
-            style: bodyTextStyle?.merge(PatternStyle.italic.textStyle),
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium
+                ?.merge(PatternStyle.italic.textStyle),
           ),
           lineThroughMatcher(
-            style: bodyTextStyle?.merge(PatternStyle.lineThrough.textStyle),
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium
+                ?.merge(PatternStyle.lineThrough.textStyle),
           ),
           codeMatcher(
             style: codeTextStyle ??
-                bodyTextStyle?.merge(PatternStyle.code.textStyle),
+                Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.merge(PatternStyle.code.textStyle),
           ),
         ],
         maxLines: maxLines,
@@ -188,8 +191,8 @@ class TextMessage extends StatelessWidget {
         description: message.previewData?.description,
         image: message.previewData?.image != null
             ? flutter_chat_types.PreviewDataImage(
-                height: 100,
-                width: 100,
+                height: 400,
+                width: 400,
                 url: message.previewData!.image!,
               )
             : null,
@@ -214,20 +217,20 @@ class TextMessage extends StatelessWidget {
     BuildContext context,
     bool enlargeEmojis,
   ) {
-    final bodyLinkTextStyle = Theme.of(context)
-        .textTheme
-        .bodyMedium
-        ?.copyWith(fontStyle: FontStyle.italic);
-    final bodyTextStyle = Theme.of(context).textTheme.bodyMedium;
-    final boldTextStyle = Theme.of(context)
-        .textTheme
-        .bodyMedium
-        ?.copyWith(fontWeight: FontWeight.bold);
-    final codeTextStyle = Theme.of(context)
-        .textTheme
-        .bodyMedium
-        ?.copyWith(fontWeight: FontWeight.w200);
-    const emojiTextStyle = TextStyle(fontSize: 40);
+    // final bodyLinkTextStyle = Theme.of(context)
+    //     .textTheme
+    //     .bodyMedium
+    //     ?.copyWith(fontStyle: FontStyle.italic);
+    // final bodyTextStyle = Theme.of(context).textTheme.bodyMedium;
+    // final boldTextStyle = Theme.of(context)
+    //     .textTheme
+    //     .bodyMedium
+    //     ?.copyWith(fontWeight: FontWeight.bold);
+    // final codeTextStyle = Theme.of(context)
+    //     .textTheme
+    //     .bodyMedium
+    //     ?.copyWith(fontWeight: FontWeight.w200);
+    final emojiTextStyle = TextStyle(fontSize: AppSizeExt.of.majorScale(10));
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -240,10 +243,6 @@ class TextMessage extends StatelessWidget {
             Text(message.text, style: emojiTextStyle)
         else
           TextMessageText(
-            bodyLinkTextStyle: bodyLinkTextStyle,
-            bodyTextStyle: bodyTextStyle,
-            boldTextStyle: boldTextStyle,
-            codeTextStyle: codeTextStyle,
             options: options,
             text: message.text,
           ),
