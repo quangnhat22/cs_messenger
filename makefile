@@ -20,6 +20,7 @@ build-runner:
 	@melos build-data
 	@melos build-app
 	@melos build-resources
+	@melos build-flutter-launcher-icons
 	@melos gen-strings
 
 app-build-runner:
