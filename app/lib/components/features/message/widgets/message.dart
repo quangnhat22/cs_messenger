@@ -190,8 +190,8 @@ class Message extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: borderRadius,
                 color: !currentUserIsAuthor || message.type == MessageType.image
-                    ? Theme.of(context).colorScheme.secondary
-                    : Theme.of(context).colorScheme.primary,
+                    ? Theme.of(context).colorScheme.outline.withOpacity(0.2)
+                    : Theme.of(context).colorScheme.secondaryContainer,
               ),
               child: ClipRRect(
                 borderRadius: borderRadius,
@@ -322,7 +322,8 @@ class Message extends StatelessWidget {
               bottom: AppSizeExt.of.majorScale(1),
               left: AppSizeExt.of.majorScale(5) +
                   (MessageUtils.isMobile ? query.padding.left : 0),
-              right: MessageUtils.isMobile ? query.padding.right : 0,
+              right: AppSizeExt.of.majorScale(2) +
+                  (MessageUtils.isMobile ? query.padding.right : 0),
             ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,

@@ -17,6 +17,7 @@ class SystemMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
         alignment: Alignment.center,
+        color: Theme.of(context).colorScheme.outline.withOpacity(0.4),
         margin: const EdgeInsets.only(
           bottom: 24,
           top: 8,

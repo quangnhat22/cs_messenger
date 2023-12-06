@@ -14,7 +14,7 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 
 import 'conditional/conditional.dart';
 import 'image_gallery.dart';
-import 'input/input.dart';
+import 'input/input_widget.dart';
 import 'model/bubble_rtl_alignment.dart';
 import 'model/emoji_enlargement_behavior.dart';
 
@@ -26,6 +26,7 @@ class Chat extends StatefulWidget {
     required this.messages,
     required this.currentUserId,
     this.isLastPage,
+    this.isFirstPage,
     this.scrollController,
     this.scrollPhysics,
     this.useTopSafeAreaInset,
@@ -35,6 +36,8 @@ class Chat extends StatefulWidget {
     this.listBottomWidget,
     this.onEndReached,
     this.onEndReachedThreshold,
+    this.onStartReached,
+    this.onStartReachedThreshold,
     this.bubbleRtlAlignment = BubbleRtlAlignment.right,
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
     this.emojiEnlargementBehavior = EmojiEnlargementBehavior.multi,
@@ -77,6 +80,7 @@ class Chat extends StatefulWidget {
   final List<IMessageModel> messages;
   final bool showUserAvatars;
   final bool? isLastPage;
+  final bool? isFirstPage;
   final bool? useTopSafeAreaInset;
   final String? userAgent;
   final Map<String, String>? imageHeaders;
@@ -86,6 +90,8 @@ class Chat extends StatefulWidget {
   final ScrollPhysics? scrollPhysics;
   final Future<void> Function()? onEndReached;
   final double? onEndReachedThreshold;
+  final Future<void> Function()? onStartReached;
+  final double? onStartReachedThreshold;
   final BubbleRtlAlignment? bubbleRtlAlignment;
   final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
   final EmojiEnlargementBehavior emojiEnlargementBehavior;
@@ -96,7 +102,7 @@ class Chat extends StatefulWidget {
   final ImageGalleryOptions imageGalleryOptions;
 
   //TODO: fix bug
-  final void Function(TextMessageModel) onSendPressed;
+  final void Function(TextMessageParam) onSendPressed;
   final void Function(BuildContext context, IMessageModel)? onMessageTap;
   final void Function(BuildContext context, IMessageModel)? onMessageDoubleTap;
   final void Function(BuildContext context, IMessageModel)? onMessageLongPress;
@@ -221,6 +227,7 @@ class _ChatState extends State<Chat> {
                             bottomWidget: widget.listBottomWidget,
                             bubbleRtlAlignment: widget.bubbleRtlAlignment!,
                             isLastPage: widget.isLastPage,
+                            isFirstPage: widget.isFirstPage,
                             itemBuilder: (Object item, int? index) =>
                                 _messageBuilder(item, constraints, index),
                             items: _chatMessages,
@@ -228,6 +235,9 @@ class _ChatState extends State<Chat> {
                                 widget.keyboardDismissBehavior,
                             onEndReached: widget.onEndReached,
                             onEndReachedThreshold: widget.onEndReachedThreshold,
+                            onStartReached: widget.onStartReached,
+                            onStartReachedThreshold:
+                                widget.onStartReachedThreshold,
                             scrollController: _scrollController,
                             scrollPhysics: widget.scrollPhysics,
                             // typingIndicatorOptions:
@@ -238,13 +248,13 @@ class _ChatState extends State<Chat> {
                         ),
                       ),
               ),
-              // widget.customBottomWidget ??
-              //     Input(
-              //       isAttachmentUploading: widget.isAttachmentUploading,
-              //       onAttachmentPressed: widget.onAttachmentPressed,
-              //       onSendPressed: widget.onSendPressed,
-              //       options: widget.inputOptions,
-              //     ),
+              widget.customBottomWidget ??
+                  InputWidget(
+                    isAttachmentUploading: widget.isAttachmentUploading,
+                    onAttachmentPressed: widget.onAttachmentPressed,
+                    onSendPressed: widget.onSendPressed,
+                    options: widget.inputOptions,
+                  ),
             ],
           ),
         ),

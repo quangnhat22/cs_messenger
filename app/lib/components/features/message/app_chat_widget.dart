@@ -11,10 +11,13 @@ class AppChatWidget extends StatefulWidget {
     this.bottomWidget,
     required this.bubbleRtlAlignment,
     this.isLastPage,
+    this.isFirstPage,
     required this.itemBuilder,
     required this.items,
     this.onEndReached,
     this.onEndReachedThreshold,
+    this.onStartReached,
+    this.onStartReachedThreshold,
     required this.keyboardDismissBehavior,
     required this.scrollController,
     this.scrollPhysics,
@@ -34,6 +37,11 @@ class AppChatWidget extends StatefulWidget {
   /// When true, indicates that there are no more pages to load and
   /// pagination will not be triggered.
   final bool? isLastPage;
+
+  // Used for pagination (infinite scroll) together with [onEndReached].
+  /// When true, indicates that there are no more pages to load and
+  /// pagination will not be triggered.
+  final bool? isFirstPage;
 
   /// Item builder.
   final Widget Function(Object, int? index) itemBuilder;
@@ -65,6 +73,13 @@ class AppChatWidget extends StatefulWidget {
   /// Whether to use top safe area inset for the list.
   final bool useTopSafeAreaInset;
 
+  /// Used for pagination (infinite scroll). Called when user scrolls
+  /// to the very end of the list (minus [onStartReachedThreshold]).
+  final Future<void> Function()? onStartReached;
+
+  /// Used for pagination (infinite scroll) together with [onStartReached]. Can be anything from 0 to 1, where 0 is immediate load of the next page as soon as scroll starts, and 1 is load of the next page only if scrolled to the very end of the list. Default value is 0.75, e.g. start loading next page when scrolled through about 3/4 of the available content.
+  final double? onStartReachedThreshold;
+
   @override
   State<AppChatWidget> createState() => _AppChatWidgetState();
 }
@@ -80,6 +95,8 @@ class _AppChatWidgetState extends State<AppChatWidget>
   // bool _indicatorOnScrollStatus = false;
 
   bool _isNextPageLoading = false;
+
+  bool _isNextBottomPageLoading = false;
 
   final GlobalKey<SliverAnimatedListState> _listKey =
       GlobalKey<SliverAnimatedListState>();
@@ -233,6 +250,10 @@ class _AppChatWidgetState extends State<AppChatWidget>
             return false;
           }
 
+          if (widget.onStartReached == null || widget.isFirstPage == true) {
+            return false;
+          }
+
           if (notification.metrics.pixels >=
               (notification.metrics.maxScrollExtent *
                   (widget.onEndReachedThreshold ?? 0.75))) {
@@ -257,6 +278,29 @@ class _AppChatWidgetState extends State<AppChatWidget>
             });
           }
 
+          if (notification.metrics.pixels ==
+              notification.metrics.minScrollExtent) {
+            if (widget.items.isEmpty || _isNextBottomPageLoading) return false;
+
+            _controller.duration = Duration.zero;
+            _controller.forward();
+
+            setState(() {
+              _isNextBottomPageLoading = true;
+            });
+
+            widget.onStartReached!().whenComplete(() {
+              if (mounted) {
+                _controller.duration = const Duration(milliseconds: 300);
+                _controller.reverse();
+
+                setState(() {
+                  _isNextBottomPageLoading = false;
+                });
+              }
+            });
+          }
+
           return false;
         },
         child: CustomScrollView(
@@ -267,6 +311,39 @@ class _AppChatWidgetState extends State<AppChatWidget>
           slivers: [
             if (widget.bottomWidget != null)
               SliverToBoxAdapter(child: widget.bottomWidget),
+            SliverPadding(
+              padding: EdgeInsets.only(
+                top: 16 +
+                    (widget.useTopSafeAreaInset
+                        ? MediaQuery.of(context).padding.bottom
+                        : 0),
+              ),
+              sliver: SliverToBoxAdapter(
+                child: SizeTransition(
+                  axisAlignment: 1,
+                  sizeFactor: _animation,
+                  child: Center(
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 32,
+                      width: 32,
+                      child: SizedBox(
+                        height: 16,
+                        width: 16,
+                        child: _isNextBottomPageLoading
+                            ? CircularProgressIndicator(
+                                backgroundColor: Colors.transparent,
+                                strokeWidth: 1.5,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                    Theme.of(context).colorScheme.primary),
+                              )
+                            : null,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
             // SliverPadding(
             //   padding: const EdgeInsets.only(bottom: 4),
             //   sliver: SliverToBoxAdapter(
