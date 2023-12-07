@@ -1,12 +1,8 @@
 part of '../base_model.dart';
 
 class AudioMessageModel extends IMessageModel {
-  final int duration;
-  final String? mimeType;
   final String? name;
   final String uri;
-  final List<double>? waveForm;
-  final double? size;
 
   AudioMessageModel({
     required super.id,
@@ -18,11 +14,7 @@ class AudioMessageModel extends IMessageModel {
     super.status,
     super.type,
     super.metadata,
-    required this.duration,
-    this.mimeType,
     this.name,
     required this.uri,
-    this.waveForm,
-    this.size,
   });
 }

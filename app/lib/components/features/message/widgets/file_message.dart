@@ -24,7 +24,7 @@ class FileMessage extends StatelessWidget {
         : Theme.of(context).colorScheme.secondaryContainer;
 
     return Semantics(
-      label: 'File',
+      label: R.strings.file,
       child: Container(
         padding: EdgeInsetsDirectional.fromSTEB(
           AppSizeExt.of.majorPaddingScale(4),

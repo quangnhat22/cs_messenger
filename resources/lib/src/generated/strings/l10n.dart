@@ -1399,6 +1399,76 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Đang tải`
+  String get loading {
+    return Intl.message(
+      'Đang tải',
+      name: 'loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Video`
+  String get video {
+    return Intl.message(
+      'Video',
+      name: 'video',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Audio`
+  String get audio {
+    return Intl.message(
+      'Audio',
+      name: 'audio',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hình ảnh`
+  String get image {
+    return Intl.message(
+      'Hình ảnh',
+      name: 'image',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tệp`
+  String get file {
+    return Intl.message(
+      'Tệp',
+      name: 'file',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vị trí`
+  String get location {
+    return Intl.message(
+      'Vị trí',
+      name: 'location',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mở vị trí`
+  String get openLocation {
+    return Intl.message(
+      'Mở vị trí',
+      name: 'openLocation',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

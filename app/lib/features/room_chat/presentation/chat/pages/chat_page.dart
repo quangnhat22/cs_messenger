@@ -109,6 +109,14 @@ class ChatPage extends StatelessWidget {
         type: MessageType.file,
         isLoading: true,
       ),
+      AudioMessageModel(
+        id: '10',
+        author: UserModel(id: '2'),
+        name: 'city-guide-image1872y1772717627627.png',
+        uri:
+            'https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3',
+        type: MessageType.audio,
+      ),
     ];
 
     return Chat(

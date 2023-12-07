@@ -161,5 +161,12 @@
   "blockSuccess": "Block user success!",
   "uploadImageSuccess": "Upload image success",
   "uploadImageFail": "Upload image fail! Try again.",
-  "groupRequest": "Group request"
+  "groupRequest": "Group request",
+  "loading": "Loading",
+  "video": "Video",
+  "audio": "Audio",
+  "image": "Image",
+  "file": "File",
+  "location": "Location",
+  "openLocation": "Open location"
 }

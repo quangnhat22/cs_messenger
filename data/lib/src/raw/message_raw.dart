@@ -90,12 +90,8 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
           status: StatusMessageType.convertString2StatusMessageType(status),
           type: MessageType.convertString2MessageType(type),
           metadata: metadata,
-          size: size ?? 0,
           uri: uri ?? '',
           name: name ?? '',
-          duration: duration ?? 0,
-          mimeType: mimeType,
-          waveForm: waveForm,
         );
       case "video":
         return VideoMessageModel(

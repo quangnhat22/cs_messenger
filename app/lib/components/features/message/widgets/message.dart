@@ -2,8 +2,11 @@ import 'package:app/components/features/message/conditional/conditional.dart';
 import 'package:app/components/features/message/model/bubble_rtl_alignment.dart';
 import 'package:app/components/features/message/model/emoji_enlargement_behavior.dart';
 import 'package:app/components/features/message/utils/message_utils.dart';
+import 'package:app/components/features/message/widgets/map_message.dart';
 import 'package:app/components/features/message/widgets/text_message.dart';
 import 'package:app/components/features/message/widgets/user_avatar.dart';
+import 'package:app/components/features/message/widgets/video_message.dart';
+import 'package:app/components/features/message/widgets/voice_message.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
@@ -185,7 +188,7 @@ class Message extends StatelessWidget {
     bool enlargeEmojis,
   ) =>
       enlargeEmojis && hideBackgroundOnEmojiMessages
-          ? _messageBuilder()
+          ? _messageBuilder(context)
           : Container(
               decoration: BoxDecoration(
                 borderRadius: borderRadius,
@@ -195,17 +198,12 @@ class Message extends StatelessWidget {
               ),
               child: ClipRRect(
                 borderRadius: borderRadius,
-                child: _messageBuilder(),
+                child: _messageBuilder(context),
               ),
             );
 
-  Widget _messageBuilder() {
+  Widget _messageBuilder(BuildContext context) {
     switch (message.type) {
-      case MessageType.audio:
-        final audioMessage = message as AudioMessageModel;
-        return audioMessageBuilder != null
-            ? audioMessageBuilder!(audioMessage, messageWidth: messageWidth)
-            : const SizedBox();
       // case MessageType.custom:
       //   final customMessage = message as types.CustomMessage;
       //   return customMessageBuilder != null
@@ -251,15 +249,28 @@ class Message extends StatelessWidget {
               );
       case MessageType.video:
         final videoMessage = message as VideoMessageModel;
-        return videoMessageBuilder != null
-            ? videoMessageBuilder!(videoMessage, messageWidth: messageWidth)
-            : const SizedBox();
+        return VideoMessage(
+          currentUserId: currentUserId,
+          message: videoMessage,
+          messageWidth: messageWidth,
+          isMe: videoMessage.author.id == currentUserId,
+        );
+
+      case MessageType.audio:
+        final audioMessage = message as AudioMessageModel;
+        return VoiceMessage(
+          message: audioMessage,
+          isMe: audioMessage.author.id == currentUserId,
+          screenWidth: MediaQuery.sizeOf(context).width,
+        );
 
       case MessageType.map:
         final mapMessage = message as MapMessageModel;
-        return mapMessageBuilder != null
-            ? mapMessageBuilder!(mapMessage, messageWidth: messageWidth)
-            : const SizedBox();
+        return MapMessage(
+          message: mapMessage,
+          currentUserId: currentUserId,
+          screenWidth: MediaQuery.sizeOf(context).width,
+        );
       default:
         return const SizedBox();
     }

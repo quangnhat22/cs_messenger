@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addNewContact":
             MessageLookupByLibrary.simpleMessage("Thêm liên hệ mới"),
         "app": MessageLookupByLibrary.simpleMessage("Ứng dụng"),
+        "audio": MessageLookupByLibrary.simpleMessage("Audio"),
         "back": MessageLookupByLibrary.simpleMessage("Quay lại"),
         "backToWelcome":
             MessageLookupByLibrary.simpleMessage("Trở về trang chính"),
@@ -102,6 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "experienceThePower": MessageLookupByLibrary.simpleMessage(
             "Trải nghiệm sức mạnh của việc nhắn tin tức thời và cuộc gọi video rõ nét. Kết nối với mọi người trên toàn thế giới dễ dàng."),
         "female": MessageLookupByLibrary.simpleMessage("Nữ"),
+        "file": MessageLookupByLibrary.simpleMessage("Tệp"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("Quên mật khẩu"),
         "friendRequest":
             MessageLookupByLibrary.simpleMessage("Yêu cầu kết bạn"),
@@ -115,12 +117,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "historyDevices":
             MessageLookupByLibrary.simpleMessage("Thiết bị đã đăng nhập"),
         "home": MessageLookupByLibrary.simpleMessage("Trang chủ"),
+        "image": MessageLookupByLibrary.simpleMessage("Hình ảnh"),
         "invalidInput":
             MessageLookupByLibrary.simpleMessage("Input không hợp lệ"),
         "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
         "lightMode": MessageLookupByLibrary.simpleMessage("Chế độ sáng"),
         "listFriend": MessageLookupByLibrary.simpleMessage("Danh sách bạn bè"),
         "listUserBlock": MessageLookupByLibrary.simpleMessage("Danh sách chặn"),
+        "loading": MessageLookupByLibrary.simpleMessage("Đang tải"),
+        "location": MessageLookupByLibrary.simpleMessage("Vị trí"),
         "logOut": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
         "logOutFail":
             MessageLookupByLibrary.simpleMessage("Đăng xuất thất bại!"),
@@ -136,6 +141,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notification": MessageLookupByLibrary.simpleMessage("Thông báo"),
         "openEmailApp":
             MessageLookupByLibrary.simpleMessage("Mở ứng dụng Email"),
+        "openLocation": MessageLookupByLibrary.simpleMessage("Mở vị trí"),
         "or": MessageLookupByLibrary.simpleMessage("Hoặc"),
         "other": MessageLookupByLibrary.simpleMessage("Khác"),
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
@@ -228,6 +234,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "verifyYourEmail":
             MessageLookupByLibrary.simpleMessage("Xác minh email"),
         "verifying": MessageLookupByLibrary.simpleMessage("Đang xác thực"),
+        "video": MessageLookupByLibrary.simpleMessage("Video"),
         "vn": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
         "welcome": MessageLookupByLibrary.simpleMessage("Chào mừng bạn"),
         "welcomeBack":

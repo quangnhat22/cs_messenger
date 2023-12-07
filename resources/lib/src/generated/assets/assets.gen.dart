@@ -132,6 +132,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/ic_ongoing.svg
   SvgGenImage get icOngoing => const SvgGenImage('assets/svgs/ic_ongoing.svg');
 
+  /// File path: assets/svgs/ic_sticker.svg
+  SvgGenImage get icSticker => const SvgGenImage('assets/svgs/ic_sticker.svg');
+
   /// File path: assets/svgs/ic_success.svg
   SvgGenImage get icSuccess => const SvgGenImage('assets/svgs/ic_success.svg');
 
@@ -160,6 +163,7 @@ class $AssetsSvgsGen {
         icErrorCircle,
         icFilledInfoCircle,
         icOngoing,
+        icSticker,
         icSuccess,
         icSuccessCircle,
         icUpcoming,

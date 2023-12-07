@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addNewContact":
             MessageLookupByLibrary.simpleMessage("Add new contact"),
         "app": MessageLookupByLibrary.simpleMessage("App"),
+        "audio": MessageLookupByLibrary.simpleMessage("Audio"),
         "back": MessageLookupByLibrary.simpleMessage("Back"),
         "backToWelcome":
             MessageLookupByLibrary.simpleMessage("Back to Welcome"),
@@ -100,6 +101,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "experienceThePower": MessageLookupByLibrary.simpleMessage(
             "Experience the power of instant messaging and crystal-clear video calls. Connect with people across the globe with ease."),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
+        "file": MessageLookupByLibrary.simpleMessage("File"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password"),
         "friendRequest": MessageLookupByLibrary.simpleMessage("Friend Request"),
@@ -112,12 +114,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "groups": MessageLookupByLibrary.simpleMessage("Groups"),
         "historyDevices": MessageLookupByLibrary.simpleMessage("History"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "image": MessageLookupByLibrary.simpleMessage("Image"),
         "invalidInput": MessageLookupByLibrary.simpleMessage("Invalid Input"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "lightMode": MessageLookupByLibrary.simpleMessage("Light Mode"),
         "listFriend": MessageLookupByLibrary.simpleMessage("List Friends"),
         "listUserBlock":
             MessageLookupByLibrary.simpleMessage("List User Block"),
+        "loading": MessageLookupByLibrary.simpleMessage("Loading"),
+        "location": MessageLookupByLibrary.simpleMessage("Location"),
         "logOut": MessageLookupByLibrary.simpleMessage("Log out"),
         "logOutFail": MessageLookupByLibrary.simpleMessage("Log out fail!"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
@@ -131,6 +136,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noData": MessageLookupByLibrary.simpleMessage("No Data!"),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "openEmailApp": MessageLookupByLibrary.simpleMessage("Open Email app"),
+        "openLocation": MessageLookupByLibrary.simpleMessage("Open location"),
         "or": MessageLookupByLibrary.simpleMessage("Or"),
         "other": MessageLookupByLibrary.simpleMessage("Other"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
@@ -221,6 +227,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "verifyYourEmail":
             MessageLookupByLibrary.simpleMessage("Verify your email"),
         "verifying": MessageLookupByLibrary.simpleMessage("Verifying"),
+        "video": MessageLookupByLibrary.simpleMessage("Video"),
         "vn": MessageLookupByLibrary.simpleMessage("Vietnam"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),

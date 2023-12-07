@@ -3,6 +3,7 @@ part of '../base_model.dart';
 class VideoMessageModel extends IMessageModel {
   final double size;
   final String uri;
+  final String? thumbnailUrl;
   final String? name;
 
   VideoMessageModel({
@@ -18,5 +19,6 @@ class VideoMessageModel extends IMessageModel {
     required this.size,
     required this.uri,
     this.name,
+    this.thumbnailUrl,
   });
 }
