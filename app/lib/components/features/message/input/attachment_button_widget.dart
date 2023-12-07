@@ -1,3 +1,4 @@
+import 'package:app/configs/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:resources/resources.dart';
 
@@ -15,21 +16,17 @@ class AttachmentButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        margin: const EdgeInsetsDirectional.fromSTEB(
-          8,
-          0,
-          0,
-          0,
-        ),
+        margin: EdgeInsetsDirectional.fromSTEB(
+            AppSizeExt.of.majorScale(2), 0, 0, 0),
         child: IconButton(
-          constraints: const BoxConstraints(
-            minHeight: 24,
-            minWidth: 24,
+          constraints: BoxConstraints(
+            minHeight: AppSizeExt.of.majorScale(7),
+            minWidth: AppSizeExt.of.majorScale(7),
           ),
           icon: isLoading
               ? SizedBox(
-                  height: 20,
-                  width: 20,
+                  height: AppSizeExt.of.majorScale(5),
+                  width: AppSizeExt.of.majorScale(5),
                   child: CircularProgressIndicator(
                     backgroundColor: Colors.transparent,
                     strokeWidth: 1.5,
@@ -38,10 +35,12 @@ class AttachmentButton extends StatelessWidget {
                     ),
                   ),
                 )
-              : R.pngs.iconAttachment.image(),
+              : R.pngs.iconAttachment.image(
+                  color: Theme.of(context).colorScheme.onBackground,
+                ),
           onPressed: isLoading ? null : onPressed,
           padding: padding,
-          splashRadius: 24,
+          splashRadius: AppSizeExt.of.majorScale(7),
           tooltip: 'Send media',
         ),
       );

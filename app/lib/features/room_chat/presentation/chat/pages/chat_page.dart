@@ -21,6 +21,7 @@ class ChatPage extends StatelessWidget {
         ],
         child: AppMainPageWidget()
             .setAppBar(AppBarWidget().setTextTitle('Chat').build(context))
+            .setResizeToAvoidBottomInset(true)
             .setBody(_body(context))
             .build(context));
   }
@@ -36,14 +37,14 @@ class ChatPage extends StatelessWidget {
       ),
       TextMessageModel(
         id: '2',
-        author: UserModel(id: '2'),
-        text: '123 https://fb.com',
+        author: UserModel(id: '1'),
+        text: '123 https://source.unsplash.com/WBGjg0DsO_g/1920x1280',
         type: MessageType.text,
         createdAt: DateTime.now(),
         previewData: PreviewDataModel(
           title: 'hihi',
           description: '12122',
-          link: 'https://fb.com',
+          link: 'https://source.unsplash.com/WBGjg0DsO_g/1920x1280',
           image:
               'https://media.istockphoto.com/id/1184692500/vi/anh/ho%C3%A0ng-h%C3%B4n-r%E1%BB%B1c-r%E1%BB%A1-s%E1%BA%AFc-m%C3%A0u-t%E1%BA%A1i-h%E1%BB%93-davis.jpg?s=2048x2048&w=is&k=20&c=7_nKoJfpTHairg8iam7eYhhq99EcBa42xOIq56mJIRI=',
         ),
@@ -97,6 +98,16 @@ class ChatPage extends StatelessWidget {
         uri:
             'https://media.istockphoto.com/id/1184692500/vi/anh/ho%C3%A0ng-h%C3%B4n-r%E1%BB%B1c-r%E1%BB%A1-s%E1%BA%AFc-m%C3%A0u-t%E1%BA%A1i-h%E1%BB%93-davis.jpg?s=2048x2048&w=is&k=20&c=7_nKoJfpTHairg8iam7eYhhq99EcBa42xOIq56mJIRI=',
         type: MessageType.image,
+      ),
+      FileMessageModel(
+        id: '9',
+        author: UserModel(id: '2'),
+        name: 'city-guide-image1872y1772717627627.png',
+        size: 18278,
+        uri:
+            'https://media.istockphoto.com/id/1184692500/vi/anh/ho%C3%A0ng-h%C3%B4n-r%E1%BB%B1c-r%E1%BB%A1-s%E1%BA%AFc-m%C3%A0u-t%E1%BA%A1i-h%E1%BB%93-davis.jpg?s=2048x2048&w=is&k=20&c=7_nKoJfpTHairg8iam7eYhhq99EcBa42xOIq56mJIRI=',
+        type: MessageType.file,
+        isLoading: true,
       ),
     ];
 

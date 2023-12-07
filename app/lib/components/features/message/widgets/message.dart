@@ -190,7 +190,7 @@ class Message extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: borderRadius,
                 color: !currentUserIsAuthor || message.type == MessageType.image
-                    ? Theme.of(context).colorScheme.outline.withOpacity(0.2)
+                    ? Theme.of(context).colorScheme.outline.withOpacity(0.1)
                     : Theme.of(context).colorScheme.secondaryContainer,
               ),
               child: ClipRRect(

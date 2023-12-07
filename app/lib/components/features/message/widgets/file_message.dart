@@ -38,51 +38,63 @@ class FileMessage extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 color: color.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(21),
+                borderRadius:
+                    BorderRadius.circular(AppSizeExt.of.majorScale(21 / 4)),
               ),
-              height: 42,
-              width: 42,
+              height: AppSizeExt.of.majorScale(12),
+              width: AppSizeExt.of.majorScale(12),
               child: Stack(
                 alignment: Alignment.center,
                 children: [
                   if (message.isLoading ?? false)
                     Positioned.fill(
                       child: CircularProgressIndicator(
-                        color: color,
-                        strokeWidth: 2,
+                        color: currentUserId != message.author.id
+                            ? Theme.of(context).colorScheme.secondary
+                            : Theme.of(context).colorScheme.surfaceTint,
+                        strokeWidth: 4,
                       ),
                     ),
-                  // Image.asset(
-                  //   'assets/icon-document.png',
-                  //   color: color,
-                  // ),
-                  R.pngs.iconDocument.image(
-                    width: 4,
-                    height: 4,
+                  Container(
+                    decoration: BoxDecoration(
+                      color: currentUserId != message.author.id
+                          ? Theme.of(context)
+                              .colorScheme
+                              .secondary
+                              .withOpacity(0.6)
+                          : Theme.of(context)
+                              .colorScheme
+                              .primary
+                              .withOpacity(0.6),
+                      borderRadius: BorderRadius.circular(21),
+                    ),
+                    child: R.pngs.iconDocument.image(
+                      width: AppSizeExt.of.majorScale(15),
+                      height: AppSizeExt.of.majorScale(15),
+                      color: Theme.of(context).colorScheme.background,
+                    ),
                   ),
                 ],
               ),
             ),
             Flexible(
               child: Container(
-                margin: const EdgeInsetsDirectional.only(
-                  start: 16,
-                ),
+                margin: EdgeInsetsDirectional.only(
+                    start: AppSizeExt.of.majorScale(4)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    if (currentUserId != message.author.id)
-                      AppTextBodyMediumWidget()
-                          .setText(message.author.name)
-                          //TODO: textWidthBasis
-                          .build(context),
+                    AppTextBodyMediumWidget()
+                        .setText(message.name)
+                        .setTextStyle(
+                            const TextStyle(fontWeight: FontWeight.bold))
+                        .build(context),
                     Container(
                       margin: EdgeInsets.only(
                           top: AppSizeExt.of.majorPaddingScale(1)),
-                      child: AppTextBodyMediumWidget()
+                      child: AppTextLabelSmallWidget()
                           .setText(
                               MessageUtils.formatBytes(message.size.truncate()))
-                          //TODO: textWidthBasis
                           .build(context),
                     ),
                   ],

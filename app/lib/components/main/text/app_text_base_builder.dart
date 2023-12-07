@@ -51,6 +51,7 @@ abstract class AppTextBaseBuilder {
       style: textStyle,
       maxLines: _maxLines,
       overflow: _textOverflow,
+      textWidthBasis: TextWidthBasis.longestLine,
     );
   }
 }

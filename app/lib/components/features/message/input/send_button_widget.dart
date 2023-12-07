@@ -17,25 +17,20 @@ class SendButton extends StatelessWidget {
   final EdgeInsets padding;
 
   @override
-  Widget build(BuildContext context) => Container(
-        margin: const EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
-        child: Semantics(
-          label: 'Send',
-          child: IconButton(
-            constraints: const BoxConstraints(
-              minHeight: 48,
-              minWidth: 48,
-            ),
-            icon: R.pngs.iconSend.image(
-              color: Theme.of(context).colorScheme.background,
-              height: 20,
-              width: 20,
-            ),
-            onPressed: onPressed,
-            padding: padding,
-            splashRadius: 24,
-            tooltip: 'Send text message',
+  Widget build(BuildContext context) => Semantics(
+        label: 'Send',
+        child: IconButton(
+          constraints: const BoxConstraints(
+            minHeight: 28,
+            minWidth: 28,
           ),
+          icon: R.pngs.iconSend.image(
+            color: Theme.of(context).colorScheme.onBackground,
+          ),
+          onPressed: onPressed,
+          padding: padding,
+          splashRadius: 24,
+          tooltip: 'Send text message',
         ),
       );
 }

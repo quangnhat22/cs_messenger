@@ -4,6 +4,7 @@ import 'package:app/components/features/message/input/send_button_widget.dart';
 import 'package:app/components/features/message/model/input_clear_mode.dart';
 import 'package:app/components/features/message/model/send_button_visibility_mode.dart';
 import 'package:app/components/features/message/utils/message_utils.dart';
+import 'package:app/configs/theme/app_theme.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -103,32 +104,18 @@ class _InputWidgetState extends State<InputWidget> {
     final safeAreaInsets = MessageUtils.isMobile
         ? EdgeInsets.fromLTRB(
             query.padding.left,
-            0,
+            AppSizeExt.of.majorPaddingScale(1),
             query.padding.right,
-            query.viewInsets.bottom + query.padding.bottom,
+            AppSizeExt.of.majorPaddingScale(1) + query.padding.bottom,
           )
         : EdgeInsets.zero;
-
-    final textPadding = const EdgeInsets.fromLTRB(24, 20, 24, 20)
-        .copyWith(left: 0, right: 0)
-        .add(
-          EdgeInsets.fromLTRB(
-            widget.onAttachmentPressed != null ? 0 : 24,
-            0,
-            _sendButtonVisible ? 0 : 24,
-            0,
-          ),
-        );
 
     return Focus(
       autofocus: !widget.options.autofocus,
       child: Padding(
         padding: EdgeInsets.zero,
         child: Material(
-          // borderRadius: const BorderRadius.vertical(
-          //   top: Radius.circular(20),
-          // ),
-          color: Theme.of(context).colorScheme.onBackground,
+          color: Theme.of(context).colorScheme.outline.withOpacity(0.2),
           surfaceTintColor: Theme.of(context).colorScheme.surfaceTint,
           elevation: 0,
           child: Container(
@@ -137,7 +124,7 @@ class _InputWidgetState extends State<InputWidget> {
             child: Row(
               textDirection: TextDirection.ltr,
               children: [
-                if (widget.onAttachmentPressed != null)
+                if (widget.onAttachmentPressed != null && !_sendButtonVisible)
                   AttachmentButton(
                     isLoading: widget.isAttachmentUploading ?? false,
                     onPressed: widget.onAttachmentPressed,
@@ -145,48 +132,83 @@ class _InputWidgetState extends State<InputWidget> {
                   ),
                 Expanded(
                   child: Padding(
-                    padding: textPadding,
-                    child: TextField(
-                      enabled: widget.options.enabled,
-                      autocorrect: widget.options.autocorrect,
-                      autofocus: widget.options.autofocus,
-                      enableSuggestions: widget.options.enableSuggestions,
-                      controller: _textController,
-                      cursorColor: Theme.of(context).colorScheme.outline,
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.zero,
-                        isCollapsed: true,
-                      ),
+                    padding: EdgeInsets.fromLTRB(
+                      widget.onAttachmentPressed != null
+                          ? _sendButtonVisible
+                              ? AppSizeExt.of.majorPaddingScale(2)
+                              : AppSizeExt.of.majorPaddingScale(4)
+                          : AppSizeExt.of.majorPaddingScale(6),
+                      AppSizeExt.of.majorScale(0),
+                      widget.onAttachmentPressed != null
+                          ? _sendButtonVisible
+                              ? AppSizeExt.of.majorPaddingScale(0)
+                              : AppSizeExt.of.majorPaddingScale(4)
+                          : AppSizeExt.of.majorPaddingScale(6),
+                      AppSizeExt.of.majorScale(0),
+                    ),
+                    child: AnimatedSize(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                      child: TextField(
+                        enabled: widget.options.enabled,
+                        autocorrect: widget.options.autocorrect,
+                        autofocus: widget.options.autofocus,
+                        enableSuggestions: widget.options.enableSuggestions,
+                        controller: _textController,
+                        cursorColor: Theme.of(context).colorScheme.outline,
 
-                      //  InheritedChatTheme.of(context)
-                      //     .theme
-                      //     .inputTextDecoration
-                      //     .copyWith(
-                      //       hintStyle: InheritedChatTheme.of(context)
-                      //           .theme
-                      //           .inputTextStyle
-                      //           .copyWith(
-                      //             color: InheritedChatTheme.of(context)
-                      //                 .theme
-                      //                 .inputTextColor
-                      //                 .withOpacity(0.5),
-                      //           ),
-                      //       hintText:
-                      //           InheritedL10n.of(context).l10n.inputPlaceholder,
-                      //     ),
-                      focusNode: _inputFocusNode,
-                      keyboardType: widget.options.keyboardType,
-                      maxLines: 5,
-                      minLines: 1,
-                      onChanged: widget.options.onTextChanged,
-                      onTap: widget.options.onTextFieldTap,
-                      style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          height: 1.5,
-                          color: Color(0xfff5f5f7)),
-                      textCapitalization: TextCapitalization.sentences,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              width: 0.0,
+                              style: BorderStyle.none,
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(
+                                AppSizeExt.of.majorScale(4),
+                              ),
+                            ),
+                          ),
+                          contentPadding: EdgeInsets.symmetric(
+                            vertical: AppSizeExt.of.majorPaddingScale(1),
+                            horizontal: AppSizeExt.of.majorPaddingScale(3),
+                          ),
+                          isCollapsed: true,
+                          filled: true,
+                          fillColor: Theme.of(context).colorScheme.background,
+                          hintText: 'Type a message',
+                        ),
+
+                        //  InheritedChatTheme.of(context)
+                        //     .theme
+                        //     .inputTextDecoration
+                        //     .copyWith(
+                        //       hintStyle: InheritedChatTheme.of(context)
+                        //           .theme
+                        //           .inputTextStyle
+                        //           .copyWith(
+                        //             color: InheritedChatTheme.of(context)
+                        //                 .theme
+                        //                 .inputTextColor
+                        //                 .withOpacity(0.5),
+                        //           ),
+                        //       hintText:
+                        //           InheritedL10n.of(context).l10n.inputPlaceholder,
+                        //     ),
+                        focusNode: _inputFocusNode,
+                        keyboardType: widget.options.keyboardType,
+                        maxLines: 5,
+                        minLines: 1,
+                        onChanged: widget.options.onTextChanged,
+                        onTap: widget.options.onTextFieldTap,
+                        // style: const TextStyle(
+                        //   fontSize: 16,
+                        //   fontWeight: FontWeight.w500,
+                        //   height: 1.5,
+                        // ),
+                        style: Theme.of(context).textTheme.bodyLarge,
+                        textCapitalization: TextCapitalization.sentences,
+                      ),
                     ),
                   ),
                 ),

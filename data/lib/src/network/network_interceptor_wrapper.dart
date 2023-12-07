@@ -31,7 +31,7 @@ class NetworkInterceptorWrapper extends QueuedInterceptorsWrapper {
       return handler.next(err);
     }
     // Do something with response error
-    if (err.response?.data["metadata"]["code"] == 16) {
+    if (err.response?.data["metadata"]["code"] == 14) {
       final isHasToken = await _refreshToken();
       if (!isHasToken) {
         return handler.next(err);

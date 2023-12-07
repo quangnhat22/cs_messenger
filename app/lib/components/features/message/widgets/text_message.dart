@@ -47,15 +47,15 @@ class TextMessageText extends StatelessWidget {
           mailToMatcher(
             style: bodyLinkTextStyle ??
                 Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      decoration: TextDecoration.underline,
-                    ),
+                    decoration: TextDecoration.underline,
+                    color: Theme.of(context).colorScheme.surfaceTint),
           ),
           urlMatcher(
             onLinkPressed: options.onLinkPressed,
             style: bodyLinkTextStyle ??
                 Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      decoration: TextDecoration.underline,
-                    ),
+                    decoration: TextDecoration.underline,
+                    color: Theme.of(context).colorScheme.surfaceTint),
           ),
           boldMatcher(
             style: boldTextStyle ??
@@ -141,31 +141,20 @@ class TextMessage extends StatelessWidget {
     BuildContext context,
   ) {
     final linkDescriptionTextStyle = currentUserId == message.author.id
-        ? TextStyle(
-            color: Theme.of(context).colorScheme.primary,
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-            height: 1.428,
-          )
-        : TextStyle(
-            color: Theme.of(context).colorScheme.primary,
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-            height: 1.428,
-          );
+        ? Theme.of(context).textTheme.bodyMedium?.copyWith(
+              fontWeight: FontWeight.w400,
+            )
+        : Theme.of(context).textTheme.bodyMedium?.copyWith(
+              fontWeight: FontWeight.w400,
+              color: Theme.of(context).colorScheme.outline,
+            );
     final linkTitleTextStyle = currentUserId == message.author.id
-        ? TextStyle(
-            color: Theme.of(context).colorScheme.primary,
-            fontSize: 16,
-            fontWeight: FontWeight.w800,
-            height: 1.375,
-          )
-        : TextStyle(
-            color: Theme.of(context).colorScheme.primary,
-            fontSize: 16,
-            fontWeight: FontWeight.w800,
-            height: 1.375,
-          );
+        ? Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+            )
+        : Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+            );
 
     return LinkPreview(
       enableAnimation: true,
@@ -191,8 +180,8 @@ class TextMessage extends StatelessWidget {
         description: message.previewData?.description,
         image: message.previewData?.image != null
             ? flutter_chat_types.PreviewDataImage(
-                height: 400,
-                width: 400,
+                height: 1000,
+                width: 1000,
                 url: message.previewData!.image!,
               )
             : null,

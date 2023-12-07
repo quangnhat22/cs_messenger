@@ -1,13 +1,19 @@
 import 'package:app/components/features/message/widgets/text_message.dart';
+import 'package:app/components/main/text/app_text_base_builder.dart';
+import 'package:app/configs/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:utilities/utilities.dart';
 
 /// A class that represents system message widget.
 class SystemMessage extends StatelessWidget {
   const SystemMessage({
     required this.message,
+    this.createdAt,
     this.options = const TextMessageOptions(),
     super.key,
   });
+
+  final DateTime? createdAt;
 
   final String message;
 
@@ -16,30 +22,46 @@ class SystemMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.outline.withOpacity(0.2),
+          borderRadius: BorderRadius.circular(16),
+        ),
         alignment: Alignment.center,
-        color: Theme.of(context).colorScheme.outline.withOpacity(0.4),
         margin: const EdgeInsets.only(
           bottom: 24,
-          top: 8,
-          left: 8,
-          right: 8,
+          top: 24,
+          left: 20,
+          right: 20,
         ),
-        child: TextMessageText(
-          bodyLinkTextStyle: Theme.of(context)
-              .textTheme
-              .bodyMedium
-              ?.copyWith(fontStyle: FontStyle.italic),
-          bodyTextStyle: Theme.of(context).textTheme.bodyMedium,
-          boldTextStyle: Theme.of(context)
-              .textTheme
-              .bodyMedium
-              ?.copyWith(fontWeight: FontWeight.bold),
-          codeTextStyle: Theme.of(context)
-              .textTheme
-              .bodyMedium
-              ?.copyWith(fontWeight: FontWeight.w200),
-          options: options,
-          text: message,
+        padding: EdgeInsets.all(AppSizeExt.of.majorPaddingScale(6 / 4)),
+        child: Column(
+          children: [
+            AppTextLabelSmallWidget()
+                .setText(DateTimeExt.dateTimeToDisplayHHmmddMMyyyy(
+                    dateTime: DateTime.now()))
+                .setTextStyle(const TextStyle(fontWeight: FontWeight.bold))
+                .build(context),
+            SizedBox(
+              height: AppSizeExt.of.majorScale(1),
+            ),
+            TextMessageText(
+              bodyLinkTextStyle: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(fontStyle: FontStyle.italic),
+              bodyTextStyle: Theme.of(context).textTheme.bodyMedium,
+              boldTextStyle: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(fontWeight: FontWeight.bold),
+              codeTextStyle: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(fontWeight: FontWeight.w200),
+              options: options,
+              text: message,
+            ),
+          ],
         ),
       );
 }

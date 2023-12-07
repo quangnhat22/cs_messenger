@@ -38,7 +38,6 @@ scripts:
     description: Unused files Resources module.
   ## End Resources
 
-
   ## Data
   build-data:
     run: melos exec --fail-fast --scope="*data*" --flutter -- flutter packages pub run build_runner build --delete-conflicting-outputs
@@ -120,5 +119,5 @@ scripts:
 
   # Flutter launcher icons
   build-flutter-launcher-icons:
-    run: melos exec --fail-fast --scope="*flutter_launcher_icons*" --flutter -- flutter packages pub run build_runner build --delete-conflicting-outputs
+    run: melos exec --fail-fast --scope="*flutter_launcher_icons-master*" --flutter -- flutter packages pub run build_runner build --delete-conflicting-outputs
     description: Generates domain.
