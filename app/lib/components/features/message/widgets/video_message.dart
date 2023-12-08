@@ -53,7 +53,7 @@ class VideoMessage extends StatelessWidget {
                 Navigator.of(context).push(
                   MaterialPageRoute<void>(
                     builder: (BuildContext context) => VideoPlayPage(
-                      url: message!.uri,
+                      url: message.uri,
                     ),
                   ),
                 );

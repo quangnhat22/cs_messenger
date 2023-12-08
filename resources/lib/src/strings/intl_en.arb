@@ -168,5 +168,7 @@
   "image": "Image",
   "file": "File",
   "location": "Location",
-  "openLocation": "Open location"
+  "openLocation": "Open location",
+  "emailOrPasswordWrong": "Email or Password wrong! Try again.",
+  "join": "Join"
 }

@@ -53,6 +53,8 @@ class AuthRepositoryImpl extends AuthRepository {
       rethrow;
     } on NetworkException catch (_) {
       rethrow;
+    } on GrpcException catch (_) {
+      rethrow;
     }
   }
 
@@ -64,6 +66,8 @@ class AuthRepositoryImpl extends AuthRepository {
       await _removeLocal();
       return AppObjResultModel<EmptyModel>(netData: EmptyModel());
     } on NetworkException catch (_) {
+      rethrow;
+    } on GrpcException catch (_) {
       rethrow;
     }
   }
@@ -86,6 +90,8 @@ class AuthRepositoryImpl extends AuthRepository {
       return AppObjResultModel<EmptyModel>(netData: EmptyModel());
     } on NetworkException catch (_) {
       rethrow;
+    } on GrpcException catch (_) {
+      rethrow;
     }
   }
 
@@ -96,7 +102,7 @@ class AuthRepositoryImpl extends AuthRepository {
       await _authRemoteDataSource.registerNewAccount(body: query);
 
       return AppObjResultModel<EmptyModel>(netData: EmptyModel());
-    } on NetworkException catch (_) {
+    } on AppException catch (_) {
       rethrow;
     }
   }
@@ -130,7 +136,7 @@ class AuthRepositoryImpl extends AuthRepository {
         await _authLocalDataSource.saveToken(token: e.data!["access_token"]);
       }
       rethrow;
-    } on NetworkException catch (_) {
+    } on AppException catch (e) {
       rethrow;
     }
   }
@@ -154,7 +160,7 @@ class AuthRepositoryImpl extends AuthRepository {
         await _authLocalDataSource.saveToken(token: e.data!["access_token"]);
       }
       rethrow;
-    } on NetworkException catch (_) {
+    } on AppException catch (_) {
       rethrow;
     }
   }
@@ -182,7 +188,7 @@ class AuthRepositoryImpl extends AuthRepository {
     try {
       final remoteData = await _authRemoteDataSource.checkVerifyEmail();
       return remoteData.raw2Model();
-    } on NetworkException catch (_) {
+    } on AppException catch (_) {
       rethrow;
     }
   }
@@ -193,7 +199,7 @@ class AuthRepositoryImpl extends AuthRepository {
     try {
       await _authRemoteDataSource.forgotPassword(body: query);
       return AppObjResultModel<EmptyModel>(netData: EmptyModel());
-    } on NetworkException catch (_) {
+    } on AppException catch (_) {
       rethrow;
     }
   }
@@ -203,7 +209,7 @@ class AuthRepositoryImpl extends AuthRepository {
     try {
       await _authRemoteDataSource.requestResendEmail();
       return AppObjResultModel<EmptyModel>(netData: EmptyModel());
-    } on NetworkException catch (_) {
+    } on AppException catch (_) {
       rethrow;
     }
   }
@@ -214,7 +220,7 @@ class AuthRepositoryImpl extends AuthRepository {
     try {
       await _authRemoteDataSource.changePassword(body: query);
       return AppObjResultModel<EmptyModel>(netData: EmptyModel());
-    } on NetworkException catch (_) {
+    } on AppException catch (_) {
       rethrow;
     }
   }

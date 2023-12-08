@@ -26,7 +26,7 @@ class DeviceRepositoryImpl implements DeviceRepository {
       await _local.setDeviceId(remoteData.netData?.id);
 
       return AppObjResultModel(netData: EmptyModel());
-    } on NetworkException catch (_) {
+    } on AppException catch (_) {
       rethrow;
     }
   }

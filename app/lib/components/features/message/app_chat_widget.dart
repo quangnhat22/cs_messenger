@@ -1,3 +1,10 @@
+import 'dart:math';
+
+import 'package:app/components/main/avatar/app_avatar_base_builder.dart';
+import 'package:app/components/main/button/app_button_base_builder.dart';
+import 'package:app/components/main/card/app_card_base_builder.dart';
+import 'package:app/components/main/text/app_text_base_builder.dart';
+import 'package:app/configs/theme/app_theme.dart';
 import 'package:diffutil_dart/diffutil.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +29,8 @@ class AppChatWidget extends StatefulWidget {
     required this.scrollController,
     this.scrollPhysics,
     required this.useTopSafeAreaInset,
+    this.bottomContainerWidget,
+    this.topContainerWidget,
   });
 
   final String currentUserId;
@@ -80,6 +89,12 @@ class AppChatWidget extends StatefulWidget {
   /// Used for pagination (infinite scroll) together with [onStartReached]. Can be anything from 0 to 1, where 0 is immediate load of the next page as soon as scroll starts, and 1 is load of the next page only if scrolled to the very end of the list. Default value is 0.75, e.g. start loading next page when scrolled through about 3/4 of the available content.
   final double? onStartReachedThreshold;
 
+  ///bottom float widget in chat app
+  final Widget? bottomContainerWidget;
+
+  ///top float widget in chat app
+  final Widget? topContainerWidget;
+
   @override
   State<AppChatWidget> createState() => _AppChatWidgetState();
 }
@@ -93,6 +108,8 @@ class _AppChatWidgetState extends State<AppChatWidget>
   late final AnimationController _controller = AnimationController(vsync: this);
 
   // bool _indicatorOnScrollStatus = false;
+
+  bool _showButtonGoToBottom = false;
 
   bool _isNextPageLoading = false;
 
@@ -235,6 +252,19 @@ class _AppChatWidgetState extends State<AppChatWidget>
   Widget build(BuildContext context) =>
       NotificationListener<ScrollNotification>(
         onNotification: (notification) {
+          //handle show button
+          if (notification.metrics.pixels >= 50) {
+            setState(() {
+              _showButtonGoToBottom = true;
+            });
+          }
+
+          if (notification.metrics.pixels ==
+              notification.metrics.minScrollExtent) {
+            setState(() {
+              _showButtonGoToBottom = false;
+            });
+          }
           // if (notification.metrics.pixels > 10.0 && !_indicatorOnScrollStatus) {
           //   setState(() {
           //     _indicatorOnScrollStatus = !_indicatorOnScrollStatus;
@@ -247,10 +277,6 @@ class _AppChatWidgetState extends State<AppChatWidget>
           // }
 
           if (widget.onEndReached == null || widget.isLastPage == true) {
-            return false;
-          }
-
-          if (widget.onStartReached == null || widget.isFirstPage == true) {
             return false;
           }
 
@@ -268,7 +294,8 @@ class _AppChatWidgetState extends State<AppChatWidget>
 
             widget.onEndReached!().whenComplete(() {
               if (mounted) {
-                _controller.duration = const Duration(milliseconds: 300);
+                _controller.duration = const Duration(milliseconds: 100);
+
                 _controller.reverse();
 
                 setState(() {
@@ -279,9 +306,9 @@ class _AppChatWidgetState extends State<AppChatWidget>
           }
 
           if (notification.metrics.pixels ==
-              notification.metrics.minScrollExtent) {
-            if (widget.items.isEmpty || _isNextBottomPageLoading) return false;
-
+                  notification.metrics.minScrollExtent &&
+              widget.onStartReached != null &&
+              widget.isFirstPage == false) {
             _controller.duration = Duration.zero;
             _controller.forward();
 
@@ -291,7 +318,7 @@ class _AppChatWidgetState extends State<AppChatWidget>
 
             widget.onStartReached!().whenComplete(() {
               if (mounted) {
-                _controller.duration = const Duration(milliseconds: 300);
+                _controller.duration = const Duration(milliseconds: 1000);
                 _controller.reverse();
 
                 setState(() {
@@ -303,117 +330,197 @@ class _AppChatWidgetState extends State<AppChatWidget>
 
           return false;
         },
-        child: CustomScrollView(
-          controller: widget.scrollController,
-          keyboardDismissBehavior: widget.keyboardDismissBehavior,
-          physics: widget.scrollPhysics,
-          reverse: true,
-          slivers: [
-            if (widget.bottomWidget != null)
-              SliverToBoxAdapter(child: widget.bottomWidget),
-            SliverPadding(
-              padding: EdgeInsets.only(
-                top: 16 +
-                    (widget.useTopSafeAreaInset
-                        ? MediaQuery.of(context).padding.bottom
-                        : 0),
-              ),
-              sliver: SliverToBoxAdapter(
-                child: SizeTransition(
-                  axisAlignment: 1,
-                  sizeFactor: _animation,
-                  child: Center(
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 32,
-                      width: 32,
-                      child: SizedBox(
-                        height: 16,
-                        width: 16,
-                        child: _isNextBottomPageLoading
-                            ? CircularProgressIndicator(
-                                backgroundColor: Colors.transparent,
-                                strokeWidth: 1.5,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                    Theme.of(context).colorScheme.primary),
-                              )
-                            : null,
+        child: Stack(
+          children: [
+            CustomScrollView(
+              controller: widget.scrollController,
+              keyboardDismissBehavior: widget.keyboardDismissBehavior,
+              physics: widget.scrollPhysics,
+              reverse: true,
+              slivers: [
+                if (widget.bottomContainerWidget != null)
+                  makeHeader(widget.bottomContainerWidget!),
+                if (widget.bottomWidget != null)
+                  SliverToBoxAdapter(child: widget.bottomWidget),
+
+                SliverPadding(
+                  padding: EdgeInsets.only(
+                    top: 16 +
+                        (widget.useTopSafeAreaInset
+                            ? MediaQuery.of(context).padding.bottom
+                            : 0),
+                  ),
+                  sliver: SliverToBoxAdapter(
+                    child: SizeTransition(
+                      axisAlignment: 1,
+                      sizeFactor: _animation,
+                      child: Center(
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 32,
+                          width: 32,
+                          child: SizedBox(
+                            height: 16,
+                            width: 16,
+                            child: _isNextBottomPageLoading
+                                ? CircularProgressIndicator(
+                                    backgroundColor: Colors.transparent,
+                                    strokeWidth: 1.5,
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        Theme.of(context).colorScheme.primary),
+                                  )
+                                : null,
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
+
+                // SliverPadding(
+                //   padding: const EdgeInsets.only(bottom: 4),
+                //   sliver: SliverToBoxAdapter(
+                //     child: (widget.typingIndicatorOptions!.typingUsers.isNotEmpty &&
+                //             !_indicatorOnScrollStatus)
+                //         ? widget.typingIndicatorOptions?.customTypingIndicator ??
+                //             TypingIndicator(
+                //               bubbleAlignment: widget.bubbleRtlAlignment,
+                //               options: widget.typingIndicatorOptions!,
+                //               showIndicator: (widget.typingIndicatorOptions!
+                //                       .typingUsers.isNotEmpty &&
+                //                   !_indicatorOnScrollStatus),
+                //             )
+                //         : const SizedBox.shrink(),
+                //   ),
+                // ),
+
+                ///message
+                SliverPadding(
+                  padding: const EdgeInsets.only(bottom: 4),
+                  sliver: SliverAnimatedList(
+                    findChildIndexCallback: (Key key) {
+                      if (key is ValueKey<Object>) {
+                        final newIndex = widget.items.indexWhere(
+                          (v) => _valueKeyForItem(v) == key,
+                        );
+                        if (newIndex != -1) {
+                          return newIndex;
+                        }
+                      }
+                      return null;
+                    },
+                    initialItemCount: widget.items.length,
+                    key: _listKey,
+                    itemBuilder: (_, index, animation) =>
+                        _newMessageBuilder(index, animation),
+                  ),
+                ),
+                // SliverPadding(
+                //   padding: EdgeInsets.only(
+                //     top: 16 +
+                //         (widget.useTopSafeAreaInset
+                //             ? MediaQuery.of(context).padding.top
+                //             : 0),
+                //   ),
+                //   sliver: SliverToBoxAdapter(
+                //     child: SizeTransition(
+                //       axisAlignment: 1,
+                //       sizeFactor: _animation,
+                //       child: Center(
+                //         child: Container(
+                //           alignment: Alignment.center,
+                //           height: 32,
+                //           width: 32,
+                //           child: SizedBox(
+                //             height: 16,
+                //             width: 16,
+                //             child: _isNextPageLoading
+                //                 ? CircularProgressIndicator(
+                //                     backgroundColor: Colors.transparent,
+                //                     strokeWidth: 1.5,
+                //                     valueColor: AlwaysStoppedAnimation<Color>(
+                //                         Theme.of(context).colorScheme.primary),
+                //                   )
+                //                 : null,
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
+              ],
             ),
-            // SliverPadding(
-            //   padding: const EdgeInsets.only(bottom: 4),
-            //   sliver: SliverToBoxAdapter(
-            //     child: (widget.typingIndicatorOptions!.typingUsers.isNotEmpty &&
-            //             !_indicatorOnScrollStatus)
-            //         ? widget.typingIndicatorOptions?.customTypingIndicator ??
-            //             TypingIndicator(
-            //               bubbleAlignment: widget.bubbleRtlAlignment,
-            //               options: widget.typingIndicatorOptions!,
-            //               showIndicator: (widget.typingIndicatorOptions!
-            //                       .typingUsers.isNotEmpty &&
-            //                   !_indicatorOnScrollStatus),
-            //             )
-            //         : const SizedBox.shrink(),
-            //   ),
-            // ),
-            SliverPadding(
-              padding: const EdgeInsets.only(bottom: 4),
-              sliver: SliverAnimatedList(
-                findChildIndexCallback: (Key key) {
-                  if (key is ValueKey<Object>) {
-                    final newIndex = widget.items.indexWhere(
-                      (v) => _valueKeyForItem(v) == key,
+            if (widget.topContainerWidget != null)
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: widget.topContainerWidget!,
+              ),
+            if (_showButtonGoToBottom)
+              Positioned(
+                bottom: AppSizeExt.of.majorScale(5),
+                right: AppSizeExt.of.majorScale(5),
+                child: FloatingActionButton(
+                  backgroundColor: Theme.of(context)
+                      .colorScheme
+                      .tertiaryContainer
+                      .withOpacity(0.8),
+                  onPressed: () {
+                    widget.scrollController.animateTo(
+                      0,
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.easeInQuad,
                     );
-                    if (newIndex != -1) {
-                      return newIndex;
-                    }
-                  }
-                  return null;
-                },
-                initialItemCount: widget.items.length,
-                key: _listKey,
-                itemBuilder: (_, index, animation) =>
-                    _newMessageBuilder(index, animation),
-              ),
-            ),
-            SliverPadding(
-              padding: EdgeInsets.only(
-                top: 16 +
-                    (widget.useTopSafeAreaInset
-                        ? MediaQuery.of(context).padding.top
-                        : 0),
-              ),
-              sliver: SliverToBoxAdapter(
-                child: SizeTransition(
-                  axisAlignment: 1,
-                  sizeFactor: _animation,
-                  child: Center(
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 32,
-                      width: 32,
-                      child: SizedBox(
-                        height: 16,
-                        width: 16,
-                        child: _isNextPageLoading
-                            ? CircularProgressIndicator(
-                                backgroundColor: Colors.transparent,
-                                strokeWidth: 1.5,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                    Theme.of(context).colorScheme.primary),
-                              )
-                            : null,
-                      ),
-                    ),
-                  ),
+                  },
+                  child: const Icon(Icons.arrow_downward_outlined),
                 ),
               ),
-            ),
           ],
         ),
       );
+
+  SliverPersistentHeader makeHeader(Widget bottomFloatWidget) {
+    return SliverPersistentHeader(
+      pinned: true,
+      floating: true,
+      delegate: _SliverAppBarDelegate(
+        minHeight: MediaQuery.sizeOf(context).height / 6,
+        maxHeight: MediaQuery.sizeOf(context).height / 5,
+        child: Container(
+          color: Theme.of(context).colorScheme.outline.withOpacity(0.8),
+          child: bottomFloatWidget,
+        ),
+      ),
+    );
+  }
+}
+
+class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  _SliverAppBarDelegate({
+    required this.minHeight,
+    required this.maxHeight,
+    required this.child,
+  });
+  final double minHeight;
+  final double maxHeight;
+  final Widget child;
+
+  @override
+  double get minExtent => minHeight;
+  @override
+  double get maxExtent => max(maxHeight, minHeight);
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return SizedBox.expand(child: child);
+  }
+
+  @override
+  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
+    return maxHeight != oldDelegate.maxHeight ||
+        minHeight != oldDelegate.minHeight ||
+        child != oldDelegate.child;
+  }
 }

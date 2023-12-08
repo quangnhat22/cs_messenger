@@ -7,6 +7,8 @@ abstract class AppBarBaseBuilder {
   @protected
   String? _textTitle;
   @protected
+  Widget? _textTitleWidget;
+  @protected
   Color? _textTitleColor;
   @protected
   Widget? _leading;
@@ -40,4 +42,6 @@ abstract class AppBarBaseBuilder {
   AppBarBaseBuilder setBottom(PreferredSizeWidget? bottom);
 
   PreferredSizeWidget build(BuildContext context);
+
+  AppBarBaseBuilder setTextTitleWidget(Widget? textTitleWidget);
 }

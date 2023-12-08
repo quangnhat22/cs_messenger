@@ -80,7 +80,7 @@ class AppExceptionExt {
           {
             AppDefaultDialogWidget()
                 .setTitle(R.strings.loginFail)
-                .setContent(appException?.message)
+                .setContent(R.strings.emailOrPasswordWrong)
                 .setAppDialogType(AppDialogType.error)
                 .setNegativeText(R.strings.close)
                 .setPositiveText(R.strings.confirm)

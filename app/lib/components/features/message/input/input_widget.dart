@@ -148,7 +148,7 @@ class _InputWidgetState extends State<InputWidget> {
                     ),
                     child: AnimatedSize(
                       duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeInOut,
+                      curve: Curves.easeInQuad,
                       child: TextField(
                         enabled: widget.options.enabled,
                         autocorrect: widget.options.autocorrect,
@@ -156,7 +156,6 @@ class _InputWidgetState extends State<InputWidget> {
                         enableSuggestions: widget.options.enableSuggestions,
                         controller: _textController,
                         cursorColor: Theme.of(context).colorScheme.outline,
-
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderSide: const BorderSide(
@@ -170,12 +169,13 @@ class _InputWidgetState extends State<InputWidget> {
                             ),
                           ),
                           contentPadding: EdgeInsets.symmetric(
-                            vertical: AppSizeExt.of.majorPaddingScale(1),
+                            vertical: AppSizeExt.of.majorPaddingScale(2),
                             horizontal: AppSizeExt.of.majorPaddingScale(3),
                           ),
                           isCollapsed: true,
                           filled: true,
                           fillColor: Theme.of(context).colorScheme.background,
+                          //TODO: support en vi
                           hintText: 'Type a message',
                         ),
 

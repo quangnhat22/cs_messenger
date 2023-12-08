@@ -61,7 +61,7 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
       final AppResponse response = await _networkService.request(
         clientRequest: ClientRequest(
           url: ApiProvider.userSelfUrl,
-          method: HttpMethod.put,
+          method: HttpMethod.patch,
           body: {...body},
         ),
       );

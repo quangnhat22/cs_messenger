@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:app/components/features/message/app_chat_widget.dart';
+import 'package:app/components/features/message/input/media_buttons_widget.dart';
 import 'package:app/components/features/message/unread_header.dart';
 import 'package:app/components/features/message/utils/message_utils.dart';
 import 'package:app/components/features/message/widgets/message.dart';
@@ -74,6 +75,8 @@ class Chat extends StatefulWidget {
     this.scrollToUnreadOptions = const ScrollToUnreadOptions(),
     this.timeFormat,
     required this.onSendPressed,
+    this.bottomContainerWidget,
+    this.topContainerWidget,
   });
 
   final String currentUserId;
@@ -142,6 +145,12 @@ class Chat extends StatefulWidget {
   final ScrollToUnreadOptions scrollToUnreadOptions;
   final DateFormat? timeFormat;
 
+  ///bottom float container widget
+  final Widget? bottomContainerWidget;
+
+  ///top float widget in chat app
+  final Widget? topContainerWidget;
+
   @override
   State<Chat> createState() => _ChatState();
 }
@@ -155,6 +164,7 @@ class _ChatState extends State<Chat> {
   PageController? _galleryPageController;
   bool _hadScrolledToUnreadOnOpen = false;
   bool _isImageViewVisible = false;
+  bool _isShowMediaOptions = false;
 
   late final AutoScrollController _scrollController;
 
@@ -206,56 +216,80 @@ class _ChatState extends State<Chat> {
       children: <Widget>[
         Container(
           color: Theme.of(context).colorScheme.background,
-          child: Column(
-            children: <Widget>[
-              Flexible(
-                child: widget.messages.isEmpty
-                    ? //TODO:handle empty
-                    const SizedBox()
-                    : GestureDetector(
-                        onTap: () {
-                          FocusManager.instance.primaryFocus?.unfocus();
-                          // widget.onBackgroundTap?.call();
-                        },
-                        child: LayoutBuilder(
-                          builder: (
-                            BuildContext context,
-                            BoxConstraints constraints,
-                          ) =>
-                              AppChatWidget(
-                            currentUserId: widget.currentUserId,
-                            bottomWidget: widget.listBottomWidget,
-                            bubbleRtlAlignment: widget.bubbleRtlAlignment!,
-                            isLastPage: widget.isLastPage,
-                            isFirstPage: widget.isFirstPage,
-                            itemBuilder: (Object item, int? index) =>
-                                _messageBuilder(item, constraints, index),
-                            items: _chatMessages,
-                            keyboardDismissBehavior:
-                                widget.keyboardDismissBehavior,
-                            onEndReached: widget.onEndReached,
-                            onEndReachedThreshold: widget.onEndReachedThreshold,
-                            onStartReached: widget.onStartReached,
-                            onStartReachedThreshold:
-                                widget.onStartReachedThreshold,
-                            scrollController: _scrollController,
-                            scrollPhysics: widget.scrollPhysics,
-                            // typingIndicatorOptions:
-                            //     widget.typingIndicatorOptions,
-                            useTopSafeAreaInset: widget.useTopSafeAreaInset ??
-                                MessageUtils.isMobile,
+          child: AnimatedSize(
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeInQuad,
+            child: Column(
+              children: <Widget>[
+                Flexible(
+                  child: widget.messages.isEmpty
+                      ? //TODO:handle empty
+                      const SizedBox()
+                      : GestureDetector(
+                          onTap: () {
+                            FocusManager.instance.primaryFocus?.unfocus();
+                            setState(() {
+                              _isShowMediaOptions = false;
+                            });
+                            // widget.onBackgroundTap?.call();
+                          },
+                          child: LayoutBuilder(
+                            builder: (
+                              BuildContext context,
+                              BoxConstraints constraints,
+                            ) =>
+                                AppChatWidget(
+                              currentUserId: widget.currentUserId,
+                              bottomWidget: widget.listBottomWidget,
+                              bubbleRtlAlignment: widget.bubbleRtlAlignment!,
+                              isLastPage: widget.isLastPage,
+                              isFirstPage: widget.isFirstPage,
+                              itemBuilder: (Object item, int? index) =>
+                                  _messageBuilder(item, constraints, index),
+                              items: _chatMessages,
+                              keyboardDismissBehavior:
+                                  widget.keyboardDismissBehavior,
+                              onEndReached: widget.onEndReached,
+                              onEndReachedThreshold:
+                                  widget.onEndReachedThreshold,
+                              onStartReached: widget.onStartReached,
+                              onStartReachedThreshold:
+                                  widget.onStartReachedThreshold,
+                              scrollController: _scrollController,
+                              scrollPhysics: widget.scrollPhysics,
+                              // typingIndicatorOptions:
+                              //     widget.typingIndicatorOptions,
+                              useTopSafeAreaInset: widget.useTopSafeAreaInset ??
+                                  MessageUtils.isMobile,
+                              bottomContainerWidget:
+                                  widget.bottomContainerWidget,
+                              topContainerWidget: widget.topContainerWidget,
+                            ),
                           ),
                         ),
+                ),
+                widget.customBottomWidget ??
+                    InputWidget(
+                      isAttachmentUploading: widget.isAttachmentUploading,
+                      onAttachmentPressed: () {
+                        setState(() {
+                          _isShowMediaOptions = !_isShowMediaOptions;
+                        });
+                        FocusManager.instance.primaryFocus?.unfocus();
+                        widget.onAttachmentPressed?.call();
+                      },
+                      onSendPressed: widget.onSendPressed,
+                      options: InputOptions(
+                        onTextFieldTap: () {
+                          setState(() {
+                            _isShowMediaOptions = false;
+                          });
+                        },
                       ),
-              ),
-              widget.customBottomWidget ??
-                  InputWidget(
-                    isAttachmentUploading: widget.isAttachmentUploading,
-                    onAttachmentPressed: widget.onAttachmentPressed,
-                    onSendPressed: widget.onSendPressed,
-                    options: widget.inputOptions,
-                  ),
-            ],
+                    ),
+                if (_isShowMediaOptions) const MediaButtonsWidget(),
+              ],
+            ),
           ),
         ),
         if (_isImageViewVisible)

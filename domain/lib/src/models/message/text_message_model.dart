@@ -17,4 +17,16 @@ class TextMessageModel extends IMessageModel {
     required this.text,
     this.previewData,
   });
+
+  static TextMessageModel getTextMessageModelFromParam(
+      TextMessageParam param, UserModel currentUser) {
+    return TextMessageModel(
+      id: DateTime.now().toString(),
+      author: currentUser,
+      text: param.text,
+      status: StatusMessageType.sending,
+      createdAt: DateTime.now(),
+      type: MessageType.text,
+    );
+  }
 }

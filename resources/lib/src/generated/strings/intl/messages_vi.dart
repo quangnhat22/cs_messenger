@@ -92,6 +92,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "editProfile":
             MessageLookupByLibrary.simpleMessage("Thay đổi thông tin"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "emailOrPasswordWrong": MessageLookupByLibrary.simpleMessage(
+            "Tài khoản hoặc mật khẩu sai! Vui lòng thử lại."),
         "emailPasswordWrong":
             MessageLookupByLibrary.simpleMessage("Tài khoản hoặc mật khẩu sai"),
         "emailValidate":
@@ -120,6 +122,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "image": MessageLookupByLibrary.simpleMessage("Hình ảnh"),
         "invalidInput":
             MessageLookupByLibrary.simpleMessage("Input không hợp lệ"),
+        "join": MessageLookupByLibrary.simpleMessage("Tham gia"),
         "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
         "lightMode": MessageLookupByLibrary.simpleMessage("Chế độ sáng"),
         "listFriend": MessageLookupByLibrary.simpleMessage("Danh sách bạn bè"),

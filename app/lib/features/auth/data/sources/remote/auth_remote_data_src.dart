@@ -43,7 +43,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
         ),
       );
       return response.toRaw((data) => EmptyRaw());
-    } on NetworkException catch (e) {
+    } on AppException catch (e) {
       rethrow;
     }
   }
@@ -63,7 +63,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
         ),
       );
       return response.toRaw((data) => TokenRaw.fromJson(data));
-    } on NetworkException catch (_) {
+    } on AppException catch (_) {
       rethrow;
     }
   }
@@ -80,7 +80,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
         ),
       );
       return response.toRaw((data) => TokenRaw.fromJson(data));
-    } on NetworkException catch (_) {
+    } on AppException catch (_) {
       rethrow;
     }
   }
@@ -95,7 +95,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
         ),
       );
       return response.toRaw((data) => StatusVerifyEmailRaw.fromJson(data));
-    } on NetworkException catch (_) {
+    } on AppException catch (_) {
       rethrow;
     }
   }
@@ -112,7 +112,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
         ),
       );
       return response.toRaw((data) => EmptyRaw());
-    } on NetworkException catch (_) {
+    } on AppException catch (_) {
       rethrow;
     }
   }
@@ -127,7 +127,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
         ),
       );
       return response.toRaw((data) => EmptyRaw());
-    } on NetworkException catch (_) {
+    } on AppException catch (_) {
       rethrow;
     }
   }
@@ -142,7 +142,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
         ),
       );
       return response.toRaw((data) => EmptyRaw());
-    } on NetworkException catch (_) {
+    } on AppException catch (_) {
       rethrow;
     }
   }
@@ -158,7 +158,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
             body: {...body}),
       );
       return response.toRaw((data) => EmptyRaw());
-    } on NetworkException catch (_) {
+    } on AppException catch (_) {
       rethrow;
     }
   }

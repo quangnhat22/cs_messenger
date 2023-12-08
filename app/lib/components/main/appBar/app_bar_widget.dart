@@ -4,14 +4,15 @@ class AppBarWidget extends AppBarBaseBuilder {
   @override
   PreferredSizeWidget build(BuildContext context) {
     return AppBar(
-      title: AppTextHeadlineSmallWidget()
-          .setText(_textTitle)
-          .setTextStyle(TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).colorScheme.primary,
-          ))
-          .setColor(_textTitleColor)
-          .build(context),
+      title: _textTitleWidget ??
+          AppTextHeadlineSmallWidget()
+              .setText(_textTitle)
+              .setTextStyle(TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.primary,
+              ))
+              .setColor(_textTitleColor)
+              .build(context),
       centerTitle: _centerTitle ?? true,
       leading: _leading,
       actions: _actions,
@@ -66,6 +67,12 @@ class AppBarWidget extends AppBarBaseBuilder {
   @override
   AppBarWidget setCenterTitle(bool? centerTitle) {
     _centerTitle = centerTitle;
+    return this;
+  }
+
+  @override
+  AppBarWidget setTextTitleWidget(Widget? textTitleWidget) {
+    _textTitleWidget = textTitleWidget;
     return this;
   }
 }

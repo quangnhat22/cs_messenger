@@ -1469,6 +1469,26 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Tài khoản hoặc mật khẩu sai! Vui lòng thử lại.`
+  String get emailOrPasswordWrong {
+    return Intl.message(
+      'Tài khoản hoặc mật khẩu sai! Vui lòng thử lại.',
+      name: 'emailOrPasswordWrong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tham gia`
+  String get join {
+    return Intl.message(
+      'Tham gia',
+      name: 'join',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

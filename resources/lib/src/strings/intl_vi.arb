@@ -168,5 +168,7 @@
   "image": "Hình ảnh",
   "file": "Tệp",
   "location": "Vị trí",
-  "openLocation": "Mở vị trí"
+  "openLocation": "Mở vị trí",
+  "emailOrPasswordWrong": "Tài khoản hoặc mật khẩu sai! Vui lòng thử lại.",
+  "join": "Tham gia"
 }

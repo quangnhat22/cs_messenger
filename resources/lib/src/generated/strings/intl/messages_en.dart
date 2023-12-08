@@ -90,6 +90,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "done": MessageLookupByLibrary.simpleMessage("Done"),
         "editProfile": MessageLookupByLibrary.simpleMessage("Edit Profile"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "emailOrPasswordWrong": MessageLookupByLibrary.simpleMessage(
+            "Email or Password wrong! Try again."),
         "emailPasswordWrong":
             MessageLookupByLibrary.simpleMessage("Email or Password wrong"),
         "emailValidate": MessageLookupByLibrary.simpleMessage(
@@ -116,6 +118,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "image": MessageLookupByLibrary.simpleMessage("Image"),
         "invalidInput": MessageLookupByLibrary.simpleMessage("Invalid Input"),
+        "join": MessageLookupByLibrary.simpleMessage("Join"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "lightMode": MessageLookupByLibrary.simpleMessage("Light Mode"),
         "listFriend": MessageLookupByLibrary.simpleMessage("List Friends"),
