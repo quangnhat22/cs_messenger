@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app/components/features/imagePicker/app_dialog_image_picker.dart';
 import 'package:app/components/main/card/app_card_base_builder.dart';
 import 'package:app/components/main/page/app_main_page_base_builder.dart';
@@ -26,15 +28,15 @@ class SettingDashBoardPage extends StatelessWidget {
   }
 
   Future<void> _showDialogChangeAvatar(BuildContext context) async {
-    final filePath = await showDialog(
+    final file = await showDialog<File?>(
       context: context,
       builder: (_) {
         return const AppDialogImagePickerWidget();
       },
     );
 
-    if (filePath != null && context.mounted) {
-      await context.read<SettingDashboardCubit>().updateAvatar(filePath);
+    if (file?.path != null && context.mounted) {
+      await context.read<SettingDashboardCubit>().updateAvatar(file!.path);
     }
   }
 

@@ -47,6 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockSuccess":
             MessageLookupByLibrary.simpleMessage("Block user success!"),
         "bridgeTheGap": m0,
+        "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change Password"),
@@ -67,6 +68,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "createNewGroup":
             MessageLookupByLibrary.simpleMessage("Create new group"),
         "currentDevices": MessageLookupByLibrary.simpleMessage("Current"),
+        "currentLocation":
+            MessageLookupByLibrary.simpleMessage("Current location"),
         "currentPassword":
             MessageLookupByLibrary.simpleMessage("Current password"),
         "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
@@ -104,10 +107,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Experience the power of instant messaging and crystal-clear video calls. Connect with people across the globe with ease."),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
         "file": MessageLookupByLibrary.simpleMessage("File"),
+        "files": MessageLookupByLibrary.simpleMessage("File"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password"),
         "friendRequest": MessageLookupByLibrary.simpleMessage("Friend Request"),
         "friends": MessageLookupByLibrary.simpleMessage("Friends"),
+        "gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
         "gender": MessageLookupByLibrary.simpleMessage("Gender"),
         "getConnectWithYourFriends": MessageLookupByLibrary.simpleMessage(
             "Get connect with your friends"),
@@ -174,6 +179,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendEmail": MessageLookupByLibrary.simpleMessage("Send email"),
         "sendEmailSuccess":
             MessageLookupByLibrary.simpleMessage("Send email success"),
+        "sendMediaOrEmojiMessage":
+            MessageLookupByLibrary.simpleMessage("Send Media Or Emoji Message"),
         "sendRequestFail": MessageLookupByLibrary.simpleMessage(
             "Sent your request fail! Try again"),
         "sendRequestSuccess":
@@ -196,6 +203,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Start chatting with a new account"),
         "stayCloseNoMatterDistance": MessageLookupByLibrary.simpleMessage(
             "Stay Close, No Matter the Distance"),
+        "stickers": MessageLookupByLibrary.simpleMessage("Sticker"),
         "system": MessageLookupByLibrary.simpleMessage("System"),
         "systemIsCurrentlyErrorPleaseTryAgainLater":
             MessageLookupByLibrary.simpleMessage(
@@ -232,6 +240,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "verifying": MessageLookupByLibrary.simpleMessage("Verifying"),
         "video": MessageLookupByLibrary.simpleMessage("Video"),
         "vn": MessageLookupByLibrary.simpleMessage("Vietnam"),
+        "voice": MessageLookupByLibrary.simpleMessage("Voice"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
         "welcomeToApp": m2

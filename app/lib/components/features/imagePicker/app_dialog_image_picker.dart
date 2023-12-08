@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/configs/di/di.dart';
 import 'package:app/configs/routes/app_router.dart';
@@ -54,10 +56,10 @@ class AppDialogImagePickerWidget extends StatelessWidget {
                       children: [
                         InkWell(
                           onTap: () async {
-                            final filePath =
+                            final file =
                                 await AppAssetsPicker.pickImageFromCamera(
                                     context);
-                            await getIt<AppRouter>().pop(filePath);
+                            await getIt<AppRouter>().pop<File>(file);
                           },
                           child: SizedBox(
                             height: AppSizeExt.of.majorPaddingScale(12),
@@ -73,10 +75,10 @@ class AppDialogImagePickerWidget extends StatelessWidget {
                         const Divider(),
                         InkWell(
                           onTap: () async {
-                            final filePath =
+                            final file =
                                 await AppAssetsPicker.pickImageFromGallery(
                                     context);
-                            await getIt<AppRouter>().pop(filePath);
+                            await getIt<AppRouter>().pop<File>(file);
                           },
                           child: SizedBox(
                             height: AppSizeExt.of.majorPaddingScale(12),

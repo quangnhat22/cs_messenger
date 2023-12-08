@@ -170,5 +170,12 @@
   "location": "Location",
   "openLocation": "Open location",
   "emailOrPasswordWrong": "Email or Password wrong! Try again.",
-  "join": "Join"
+  "join": "Join",
+  "sendMediaOrEmojiMessage": "Send Media Or Emoji Message",
+  "camera": "Camera",
+  "gallery": "Gallery",
+  "voice": "Voice",
+  "files": "File",
+  "stickers": "Sticker",
+  "currentLocation": "Current location"
 }

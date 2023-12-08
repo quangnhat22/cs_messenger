@@ -3,7 +3,9 @@ part of '../base_model.dart';
 class ImageMessageModel extends IMessageModel {
   final String? name;
   final String uri;
-  final double size;
+  final double? size;
+  final double? width;
+  final double? height;
 
   ImageMessageModel({
     required super.id,
@@ -17,6 +19,8 @@ class ImageMessageModel extends IMessageModel {
     super.metadata,
     this.name,
     required this.uri,
-    required this.size,
+    this.size,
+    this.width,
+    this.height,
   });
 }

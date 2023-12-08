@@ -144,29 +144,32 @@ class _ImageMessageState extends State<ImageMessage> {
                     //           .receivedMessageBodyTextStyle,
                     //   textWidthBasis: TextWidthBasis.longestLine,
                     // ),
-                    Container(
-                      margin: const EdgeInsets.only(
-                        top: 4,
+                    if (widget.message.size != null)
+                      Container(
+                        margin: const EdgeInsets.only(
+                          top: 4,
+                        ),
+                        child: Text(
+                          MessageUtils.formatBytes(
+                              widget.message.size!.truncate()),
+                          style: widget.currentUserId ==
+                                  widget.message.author.id
+                              //TODO: refactor this
+                              ? TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.background,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                  height: 1.333,
+                                )
+                              : TextStyle(
+                                  color: Theme.of(context).colorScheme.primary,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                  height: 1.333,
+                                ),
+                        ),
                       ),
-                      child: Text(
-                        MessageUtils.formatBytes(
-                            widget.message.size.truncate()),
-                        style: widget.currentUserId == widget.message.author.id
-                            //TODO: refactor this
-                            ? TextStyle(
-                                color: Theme.of(context).colorScheme.background,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                height: 1.333,
-                              )
-                            : TextStyle(
-                                color: Theme.of(context).colorScheme.primary,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                height: 1.333,
-                              ),
-                      ),
-                    ),
                   ],
                 ),
               ),

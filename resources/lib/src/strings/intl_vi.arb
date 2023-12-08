@@ -170,5 +170,12 @@
   "location": "Vị trí",
   "openLocation": "Mở vị trí",
   "emailOrPasswordWrong": "Tài khoản hoặc mật khẩu sai! Vui lòng thử lại.",
-  "join": "Tham gia"
+  "join": "Tham gia",
+  "sendMediaOrEmojiMessage": "Gửi tin nhắn emoji hoặc loại tin nhắn khác",
+  "camera": "Camera",
+  "gallery": "Thư viện ảnh",
+  "voice": "Âm thanh",
+  "files": "Tệp",
+  "stickers": "Stickers",
+  "currentLocation": "Vị trí hiện tại"
 }

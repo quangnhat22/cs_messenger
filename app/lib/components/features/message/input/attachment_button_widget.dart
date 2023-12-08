@@ -41,7 +41,7 @@ class AttachmentButton extends StatelessWidget {
           onPressed: isLoading ? null : onPressed,
           padding: padding,
           splashRadius: AppSizeExt.of.majorScale(7),
-          tooltip: 'Send media',
+          tooltip: R.strings.sendMediaOrEmojiMessage,
         ),
       );
 }

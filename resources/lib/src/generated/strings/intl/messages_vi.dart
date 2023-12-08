@@ -47,6 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockSuccess":
             MessageLookupByLibrary.simpleMessage("Chặn người dùng thành công!"),
         "bridgeTheGap": m0,
+        "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "cancel": MessageLookupByLibrary.simpleMessage("Đóng"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Thay đổi mật khẩu"),
@@ -67,6 +68,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "createNewGroup": MessageLookupByLibrary.simpleMessage("Tạo nhóm mới"),
         "currentDevices":
             MessageLookupByLibrary.simpleMessage("Thiết bị hiện tại"),
+        "currentLocation":
+            MessageLookupByLibrary.simpleMessage("Vị trí hiện tại"),
         "currentPassword":
             MessageLookupByLibrary.simpleMessage("Mật khẩu hiện tại"),
         "darkMode": MessageLookupByLibrary.simpleMessage("Chế độ tối"),
@@ -106,10 +109,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Trải nghiệm sức mạnh của việc nhắn tin tức thời và cuộc gọi video rõ nét. Kết nối với mọi người trên toàn thế giới dễ dàng."),
         "female": MessageLookupByLibrary.simpleMessage("Nữ"),
         "file": MessageLookupByLibrary.simpleMessage("Tệp"),
+        "files": MessageLookupByLibrary.simpleMessage("Tệp"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("Quên mật khẩu"),
         "friendRequest":
             MessageLookupByLibrary.simpleMessage("Yêu cầu kết bạn"),
         "friends": MessageLookupByLibrary.simpleMessage("Bạn bè"),
+        "gallery": MessageLookupByLibrary.simpleMessage("Thư viện ảnh"),
         "gender": MessageLookupByLibrary.simpleMessage("Giới tính"),
         "getConnectWithYourFriends": MessageLookupByLibrary.simpleMessage(
             "Kết nối với \"network\" của bạn"),
@@ -180,6 +185,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendEmail": MessageLookupByLibrary.simpleMessage("Gửi email"),
         "sendEmailSuccess":
             MessageLookupByLibrary.simpleMessage("Gửi email thành công"),
+        "sendMediaOrEmojiMessage": MessageLookupByLibrary.simpleMessage(
+            "Gửi tin nhắn emoji hoặc loại tin nhắn khác"),
         "sendRequestFail": MessageLookupByLibrary.simpleMessage(
             "Yêu cầu của bạn gửi thất bại! Vui lòng thử lại."),
         "sendRequestSuccess": MessageLookupByLibrary.simpleMessage(
@@ -202,6 +209,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tạo tài khoản để bắt đầu kết nối với những người bạn"),
         "stayCloseNoMatterDistance":
             MessageLookupByLibrary.simpleMessage("Khoảng cách không là vấn đề"),
+        "stickers": MessageLookupByLibrary.simpleMessage("Stickers"),
         "system": MessageLookupByLibrary.simpleMessage("Hệ thống"),
         "systemIsCurrentlyErrorPleaseTryAgainLater":
             MessageLookupByLibrary.simpleMessage(
@@ -239,6 +247,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "verifying": MessageLookupByLibrary.simpleMessage("Đang xác thực"),
         "video": MessageLookupByLibrary.simpleMessage("Video"),
         "vn": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
+        "voice": MessageLookupByLibrary.simpleMessage("Âm thanh"),
         "welcome": MessageLookupByLibrary.simpleMessage("Chào mừng bạn"),
         "welcomeBack":
             MessageLookupByLibrary.simpleMessage("Chào mừng bạn trở lại!"),

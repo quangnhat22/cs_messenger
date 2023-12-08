@@ -1489,6 +1489,76 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Gửi tin nhắn emoji hoặc loại tin nhắn khác`
+  String get sendMediaOrEmojiMessage {
+    return Intl.message(
+      'Gửi tin nhắn emoji hoặc loại tin nhắn khác',
+      name: 'sendMediaOrEmojiMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Camera`
+  String get camera {
+    return Intl.message(
+      'Camera',
+      name: 'camera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thư viện ảnh`
+  String get gallery {
+    return Intl.message(
+      'Thư viện ảnh',
+      name: 'gallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Âm thanh`
+  String get voice {
+    return Intl.message(
+      'Âm thanh',
+      name: 'voice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tệp`
+  String get files {
+    return Intl.message(
+      'Tệp',
+      name: 'files',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stickers`
+  String get stickers {
+    return Intl.message(
+      'Stickers',
+      name: 'stickers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vị trí hiện tại`
+  String get currentLocation {
+    return Intl.message(
+      'Vị trí hiện tại',
+      name: 'currentLocation',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

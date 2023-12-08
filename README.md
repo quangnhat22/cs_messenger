@@ -72,7 +72,9 @@ samples, guidance on mobile development, and a full API reference.
 
 - One time: `make denied` (Mac OS)
 -
+
 PreBuild: `make pre-bootstrap`, `make pub-get`, `make build-init flavor=dev`, `make build-init flavor=prod`, `make build-runner`
+
 - Get Command for run: `make run flavor=dev/staging/prod` -> After running
   finished, copy command
 - Run Project: `cd app`, paste copied command to run with `fvm` in front.
@@ -80,7 +82,7 @@ PreBuild: `make pre-bootstrap`, `make pub-get`, `make build-init flavor=dev`, `m
 
 ### Windows
 
-- Install Flutter 3.13.1 or latest version
+- Install Flutter 3.13.9 or latest version
 - Install **Melos** latest version (Optional)
 - Install **fvm** latest version (Optional)
 
