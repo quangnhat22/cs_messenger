@@ -28,6 +28,7 @@ enum MessageType {
   video(value: "video"),
   file(value: "file"),
   map(value: "map"),
+  emoji(value: "emoji"),
   custom(value: "custom");
 
   const MessageType({required this.value});
@@ -49,6 +50,8 @@ enum MessageType {
       return MessageType.file;
     } else if (MessageType.map.value == type) {
       return MessageType.map;
+    } else if (MessageType.emoji.value == type) {
+      return MessageType.emoji;
     } else {
       return MessageType.custom;
     }

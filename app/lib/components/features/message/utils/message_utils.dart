@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:app/components/features/message/model/emoji_enlargement_behavior.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/foundation.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 
 class MessageUtils {
@@ -13,6 +14,30 @@ class MessageUtils {
   static bool get isMobile =>
       defaultTargetPlatform == TargetPlatform.android ||
       defaultTargetPlatform == TargetPlatform.iOS;
+
+  //TODO refactor code permission
+  static Future<Position> getCurrentLocation() async {
+    final isEnableService = await _checkServiceEnable();
+    if (!isEnableService) {
+      return Future.error('Location service is not enable');
+    }
+
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+  }
+
+  static Future<bool> _checkServiceEnable() async {
+    return await Geolocator.isLocationServiceEnabled();
+  }
 
   static String convertDurationToString(Duration duration) {
     String twoDigits(int n) => n.toString().padLeft(2, '0');

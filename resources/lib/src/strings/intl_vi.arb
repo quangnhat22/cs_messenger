@@ -186,5 +186,6 @@
         "example": "0"
       }
     }
-  }
+  },
+  "appDontHavePermission": "Ứng dụng không có quyền để thực hiện tính năng này. Vui lòng cấp quyền cho ứng dụng"
 }

@@ -1569,6 +1569,16 @@ class Strings {
       args: [size],
     );
   }
+
+  /// `Ứng dụng không có quyền để thực hiện tính năng này. Vui lòng cấp quyền cho ứng dụng`
+  String get appDontHavePermission {
+    return Intl.message(
+      'Ứng dụng không có quyền để thực hiện tính năng này. Vui lòng cấp quyền cho ứng dụng',
+      name: 'appDontHavePermission',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

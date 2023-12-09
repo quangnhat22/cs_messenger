@@ -186,5 +186,6 @@
         "example": "0"
       }
     }
-  }
+  },
+  "appDontHavePermission": "The app does not have permission to perform this feature. Please grant permission"
 }

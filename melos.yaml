@@ -121,3 +121,8 @@ scripts:
   build-flutter-launcher-icons:
     run: melos exec --fail-fast --scope="*flutter_launcher_icons-master*" --flutter -- flutter packages pub run build_runner build --delete-conflicting-outputs
     description: Generates domain.
+
+  # Flutter launcher icons
+  build-flutter-sounds:
+    run: melos exec --fail-fast --scope="*flutter_sound*" --flutter -- flutter packages pub run build_runner build --delete-conflicting-outputs
+    description: Generates domain.

@@ -77,7 +77,11 @@ class Chat extends StatefulWidget {
     required this.onSendPressed,
     this.bottomContainerWidget,
     this.topContainerWidget,
-    this.onSendImageMessage,
+    this.onImageSent,
+    this.onVideoSent,
+    this.onFileSent,
+    this.onAudioSent,
+    this.onStickerSent,
   });
 
   final String currentUserId;
@@ -153,7 +157,11 @@ class Chat extends StatefulWidget {
   final Widget? topContainerWidget;
 
   //function handle send message
-  final void Function(ImageMessageParam)? onSendImageMessage;
+  final void Function(ImageMessageParam)? onImageSent;
+  final void Function(VideoMessageParam)? onVideoSent;
+  final void Function(FileMessageParam)? onFileSent;
+  final void Function(AudioMessageParam)? onAudioSent;
+  final void Function(EmojiMessageParam)? onStickerSent;
 
   @override
   State<Chat> createState() => _ChatState();
@@ -268,7 +276,6 @@ class _ChatState extends State<Chat> {
                               bottomContainerWidget:
                                   widget.bottomContainerWidget,
                               topContainerWidget: widget.topContainerWidget,
-                              onSendImageMessage: widget.onSendImageMessage,
                             ),
                           ),
                         ),
@@ -292,7 +299,14 @@ class _ChatState extends State<Chat> {
                         },
                       ),
                     ),
-                if (_isShowMediaOptions) const MediaButtonsWidget(),
+                if (_isShowMediaOptions)
+                  MediaButtonsWidget(
+                    onAudioSent: widget.onAudioSent,
+                    onFileSent: widget.onFileSent,
+                    onImageSent: widget.onImageSent,
+                    onVideoSent: widget.onVideoSent,
+                    onStickerSent: widget.onStickerSent,
+                  ),
               ],
             ),
           ),

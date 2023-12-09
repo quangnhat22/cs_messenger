@@ -14,6 +14,7 @@ part 'group_model.dart';
 part 'history_call_model.dart';
 part 'message/audio_message_model.dart';
 part 'message/date_header_model.dart';
+part 'message/emoji_sticker_model.dart';
 part 'message/file_message_model.dart';
 part 'message/image_message_model.dart';
 part 'message/imessage_model.dart';

@@ -4,6 +4,7 @@ import 'package:app/configs/theme/app_theme.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:resources/resources.dart';
 
 class VoiceMessage extends StatelessWidget {
   const VoiceMessage({
@@ -86,7 +87,7 @@ class _AudioMessageItemState extends State<AudioMessageItem> {
   @override
   Widget build(BuildContext context) {
     return Semantics(
-      label: 'Audio',
+      label: R.strings.audio,
       child: Container(
         padding: EdgeInsetsDirectional.fromSTEB(
           AppSizeExt.of.majorPaddingScale(4),

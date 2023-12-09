@@ -12,6 +12,7 @@ import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import 'emoji_message.dart';
 import 'file_message.dart';
 import 'image_message.dart';
 import 'message_status.dart';
@@ -271,6 +272,10 @@ class Message extends StatelessWidget {
           currentUserId: currentUserId,
           screenWidth: MediaQuery.sizeOf(context).width,
         );
+
+      case MessageType.emoji:
+        final emojiMessage = message as EmojiStickerModel;
+        return EmojiMessage(message: emojiMessage);
       default:
         return const SizedBox();
     }

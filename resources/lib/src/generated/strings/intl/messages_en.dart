@@ -41,6 +41,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addNewContact":
             MessageLookupByLibrary.simpleMessage("Add new contact"),
         "app": MessageLookupByLibrary.simpleMessage("App"),
+        "appDontHavePermission": MessageLookupByLibrary.simpleMessage(
+            "The app does not have permission to perform this feature. Please grant permission"),
         "audio": MessageLookupByLibrary.simpleMessage("Audio"),
         "back": MessageLookupByLibrary.simpleMessage("Back"),
         "backToWelcome":

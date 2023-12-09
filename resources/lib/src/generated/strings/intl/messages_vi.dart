@@ -41,6 +41,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addNewContact":
             MessageLookupByLibrary.simpleMessage("Thêm liên hệ mới"),
         "app": MessageLookupByLibrary.simpleMessage("Ứng dụng"),
+        "appDontHavePermission": MessageLookupByLibrary.simpleMessage(
+            "Ứng dụng không có quyền để thực hiện tính năng này. Vui lòng cấp quyền cho ứng dụng"),
         "audio": MessageLookupByLibrary.simpleMessage("Audio"),
         "back": MessageLookupByLibrary.simpleMessage("Quay lại"),
         "backToWelcome":

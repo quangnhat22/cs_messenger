@@ -1,9 +1,14 @@
+import 'dart:convert';
+
 import 'package:app/components/features/imagePicker/app_dialog_image_picker.dart';
+import 'package:app/components/features/message/input/void_record_widget.dart';
 import 'package:app/components/features/message/utils/app_assets_picker.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/configs/theme/app_theme.dart';
+import 'package:configs/configs.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:giphy_get/giphy_get.dart';
 import 'package:mime/mime.dart';
 import 'package:resources/resources.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
@@ -14,11 +19,15 @@ class MediaButtonsWidget extends StatelessWidget {
     this.onImageSent,
     this.onVideoSent,
     this.onFileSent,
+    this.onAudioSent,
+    this.onStickerSent,
   });
 
   final void Function(ImageMessageParam)? onImageSent;
   final void Function(VideoMessageParam)? onVideoSent;
   final void Function(FileMessageParam)? onFileSent;
+  final void Function(AudioMessageParam)? onAudioSent;
+  final void Function(EmojiMessageParam)? onStickerSent;
 
   void _pickImage(BuildContext context) async {
     final assetEntity = await showDialog<AssetEntity?>(
@@ -83,26 +92,29 @@ class MediaButtonsWidget extends StatelessWidget {
   Future<void> _pickRecord(BuildContext ctx) async {
     await showModalBottomSheet(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(AppSizeExt.of.majorScale(4)),
+          topRight: Radius.circular(AppSizeExt.of.majorScale(4)),
+        ),
       ),
       context: ctx,
-      builder: ((context) {
-        return const VoiceSoundBottomSheet();
+      builder: ((_) {
+        return VoiceSoundBottomSheet(onAudioSent: onAudioSent);
       }),
     ).then((value) async {
       if (value != null) {}
     });
   }
 
-  // void _pickStickerAndGif(BuildContext ctx) async {
-  //   final gif = await GiphyGet.getGif(context: ctx, apiKey: AppConfig.giphyKey);
-  //   if (gif != null && ctx.mounted) {
-  //     await ctx
-  //         .read<MessageStreamCubit>()
-  //         .sendMessage(type: "giphy", message: jsonEncode(gif));
-  //   }
-  // }
-  //
+  void _pickStickerAndGif(BuildContext ctx) async {
+    final gif =
+        await GiphyGet.getGif(context: ctx, apiKey: BuildConfig.giphyKey);
+    if (gif != null && ctx.mounted) {
+      final stickerParams = EmojiMessageParam(link: jsonEncode(gif));
+      onStickerSent?.call(stickerParams);
+    }
+  }
+
   // void _pickLocation(BuildContext ctx) async {
   //   showDialog(
   //     context: ctx,
@@ -155,7 +167,7 @@ class MediaButtonsWidget extends StatelessWidget {
           COutlineIconButton(
             icon: Icons.mic_outlined,
             title: R.strings.voice,
-            onPress: () => {},
+            onPress: () => _pickRecord(context),
           ),
           COutlineIconButton(
             icon: Icons.attach_file_outlined,
@@ -167,7 +179,7 @@ class MediaButtonsWidget extends StatelessWidget {
             icon: Icons.emoji_emotions_outlined,
             color: Colors.orange,
             title: R.strings.stickers,
-            onPress: () => {},
+            onPress: () => _pickStickerAndGif(context),
           ),
           COutlineIconButton(
             icon: Icons.location_on_outlined,

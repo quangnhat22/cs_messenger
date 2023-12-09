@@ -27,7 +27,6 @@ class AppChatWidget extends StatefulWidget {
     required this.useTopSafeAreaInset,
     this.bottomContainerWidget,
     this.topContainerWidget,
-    this.onSendImageMessage,
   });
 
   final String currentUserId;
@@ -89,9 +88,6 @@ class AppChatWidget extends StatefulWidget {
 
   ///top float widget in chat app
   final Widget? topContainerWidget;
-
-  //function handle send message
-  final void Function(ImageMessageParam)? onSendImageMessage;
 
   @override
   State<AppChatWidget> createState() => _AppChatWidgetState();
@@ -500,12 +496,14 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     required this.maxHeight,
     required this.child,
   });
+
   final double minHeight;
   final double maxHeight;
   final Widget child;
 
   @override
   double get minExtent => minHeight;
+
   @override
   double get maxExtent => max(maxHeight, minHeight);
 
