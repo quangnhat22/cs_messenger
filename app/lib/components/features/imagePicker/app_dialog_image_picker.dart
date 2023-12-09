@@ -1,12 +1,11 @@
-import 'dart:io';
-
+import 'package:app/components/features/message/utils/app_assets_picker.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/configs/di/di.dart';
 import 'package:app/configs/routes/app_router.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:resources/resources.dart';
-import 'package:utilities/utilities.dart';
+import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 class AppDialogImagePickerWidget extends StatelessWidget {
   const AppDialogImagePickerWidget({
@@ -59,7 +58,7 @@ class AppDialogImagePickerWidget extends StatelessWidget {
                             final file =
                                 await AppAssetsPicker.pickImageFromCamera(
                                     context);
-                            await getIt<AppRouter>().pop<File>(file);
+                            await getIt<AppRouter>().pop<AssetEntity?>(file);
                           },
                           child: SizedBox(
                             height: AppSizeExt.of.majorPaddingScale(12),
@@ -78,7 +77,7 @@ class AppDialogImagePickerWidget extends StatelessWidget {
                             final file =
                                 await AppAssetsPicker.pickImageFromGallery(
                                     context);
-                            await getIt<AppRouter>().pop<File>(file);
+                            await getIt<AppRouter>().pop<AssetEntity?>(file);
                           },
                           child: SizedBox(
                             height: AppSizeExt.of.majorPaddingScale(12),

@@ -177,5 +177,14 @@
   "voice": "Âm thanh",
   "files": "Tệp",
   "stickers": "Stickers",
-  "currentLocation": "Vị trí hiện tại"
+  "currentLocation": "Vị trí hiện tại",
+  "fileLimitSize": "Kích thước file không được quá {size} mb! Vui lòng thử lại",
+  "@fileLimitSize": {
+    "placeholders": {
+      "size": {
+        "type": "String",
+        "example": "0"
+      }
+    }
+  }
 }

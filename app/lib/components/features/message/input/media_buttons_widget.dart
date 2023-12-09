@@ -1,8 +1,11 @@
 import 'package:app/components/features/imagePicker/app_dialog_image_picker.dart';
+import 'package:app/components/features/message/utils/app_assets_picker.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/configs/theme/app_theme.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:resources/resources.dart';
+import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 class MediaButtonsWidget extends StatelessWidget {
   const MediaButtonsWidget({
@@ -10,30 +13,43 @@ class MediaButtonsWidget extends StatelessWidget {
     this.onImageSent,
   });
 
-  final void Function(String)? onImageSent;
+  final void Function(ImageMessageParam)? onImageSent;
 
   void _pickImage(BuildContext context) async {
-    final filePath = await showDialog(
+    final assetEntity = await showDialog<AssetEntity?>(
       context: context,
       builder: (_) {
         return const AppDialogImagePickerWidget();
       },
     );
 
-    if (filePath != null && context.mounted) {
+    final file = await assetEntity?.file;
+    final widthImage = assetEntity?.width;
+    final heightImage = assetEntity?.height;
+    final name = assetEntity?.title;
+    final size = await AppAssetsPicker.getSize(file);
+
+    if (file?.path != null && context.mounted) {
+      final imageParam = ImageMessageParam(
+        uri: file!.path,
+        name: name,
+        width: widthImage?.toDouble(),
+        height: heightImage?.toDouble(),
+        size: size,
+      );
       // await context.read<SettingDashboardCubit>().updateAvatar(filePath);
     }
   }
 
-  // void _pickVideo(BuildContext ctx) async {
-  //   final filePath = await AppAssetsPicker.pickVideo(ctx);
-  //
-  //   if (filePath != null && ctx.mounted) {
-  //     await ctx
-  //         .read<MessageStreamCubit>()
-  //         .sendMessage(type: "video", message: filePath);
-  //   }
-  // }
+  void _pickVideo(BuildContext ctx) async {
+    final filePath = await AppAssetsPicker.pickVideo(ctx);
+
+    if (filePath != null && ctx.mounted) {
+      // await ctx
+      //     .read<MessageStreamCubit>()
+      //     .sendMessage(type: "video", message: filePath);
+    }
+  }
 
   // void _pickRecord(BuildContext ctx) async {
   //   final stateChatRoom = ctx.read<ChatRoomBloc>().state;
@@ -110,7 +126,7 @@ class MediaButtonsWidget extends StatelessWidget {
         mainAxisSpacing: AppSizeExt.of.majorScale(1 / 4),
         children: <Widget>[
           COutlineIconButton(
-            icon: Icons.camera_alt_outlined,
+            icon: Icons.image_outlined,
             color: Colors.blue,
             title: R.strings.image,
             onPress: () => _pickImage(context),
@@ -125,7 +141,7 @@ class MediaButtonsWidget extends StatelessWidget {
             icon: Icons.video_collection_outlined,
             color: Colors.deepPurple,
             title: R.strings.video,
-            onPress: () => {},
+            onPress: () => _pickVideo(context),
           ),
           COutlineIconButton(
             icon: Icons.mic_outlined,

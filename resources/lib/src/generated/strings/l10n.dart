@@ -1559,6 +1559,16 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Kích thước file không được quá {size} mb! Vui lòng thử lại`
+  String fileLimitSize(String size) {
+    return Intl.message(
+      'Kích thước file không được quá $size mb! Vui lòng thử lại',
+      name: 'fileLimitSize',
+      desc: '',
+      args: [size],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

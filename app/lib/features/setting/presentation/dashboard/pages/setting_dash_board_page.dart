@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:app/components/features/imagePicker/app_dialog_image_picker.dart';
 import 'package:app/components/main/card/app_card_base_builder.dart';
 import 'package:app/components/main/page/app_main_page_base_builder.dart';
@@ -14,6 +12,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
+import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 @RoutePage()
 class SettingDashBoardPage extends StatelessWidget {
@@ -28,12 +27,14 @@ class SettingDashBoardPage extends StatelessWidget {
   }
 
   Future<void> _showDialogChangeAvatar(BuildContext context) async {
-    final file = await showDialog<File?>(
+    final assetEntity = await showDialog<AssetEntity?>(
       context: context,
       builder: (_) {
         return const AppDialogImagePickerWidget();
       },
     );
+
+    final file = await assetEntity?.file;
 
     if (file?.path != null && context.mounted) {
       await context.read<SettingDashboardCubit>().updateAvatar(file!.path);

@@ -23,10 +23,13 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m0(app) =>
       "Bỏ qua khoảng cách với ${app}. Chia sẻ những kỉ niệm, gửi tin nhắn và video call, bất kể bạn đang ở đâu.";
 
-  static String m1(email, expireTime) =>
+  static String m1(size) =>
+      "Kích thước file không được quá ${size} mb! Vui lòng thử lại";
+
+  static String m2(email, expireTime) =>
       "Vui lòng mở \"${email}\" để xác minh tài khoản. Vui lòng xác nhận tài khoản trước \$${expireTime}, nếu không tài khoản của bạn có thể bị mất!";
 
-  static String m2(app) => "Chào mừng đến với ${app}";
+  static String m3(app) => "Chào mừng đến với ${app}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -109,6 +112,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Trải nghiệm sức mạnh của việc nhắn tin tức thời và cuộc gọi video rõ nét. Kết nối với mọi người trên toàn thế giới dễ dàng."),
         "female": MessageLookupByLibrary.simpleMessage("Nữ"),
         "file": MessageLookupByLibrary.simpleMessage("Tệp"),
+        "fileLimitSize": m1,
         "files": MessageLookupByLibrary.simpleMessage("Tệp"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("Quên mật khẩu"),
         "friendRequest":
@@ -160,7 +164,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Số điện thoại không hợp lệ"),
         "pickFromGallery":
             MessageLookupByLibrary.simpleMessage("Lấy từ thư viện"),
-        "pleaseCheckYourEmail": m1,
+        "pleaseCheckYourEmail": m2,
         "pleaseCheckYourEmailToRecovery": MessageLookupByLibrary.simpleMessage(
             "Bạn hãy kiểm tra email để khôi phục mật khẩu nhé"),
         "pleaseLoginAgain":
@@ -251,6 +255,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcome": MessageLookupByLibrary.simpleMessage("Chào mừng bạn"),
         "welcomeBack":
             MessageLookupByLibrary.simpleMessage("Chào mừng bạn trở lại!"),
-        "welcomeToApp": m2
+        "welcomeToApp": m3
       };
 }

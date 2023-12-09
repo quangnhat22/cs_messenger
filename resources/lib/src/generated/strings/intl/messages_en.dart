@@ -23,10 +23,13 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m0(app) =>
       "Bridge the gap with ${app}. Share moments, send messages, and have face-to-face conversations, regardless of where you are.";
 
-  static String m1(email, expireTime) =>
+  static String m1(size) =>
+      "File size cannot exceed ${size} mb!. Please try again";
+
+  static String m2(email, expireTime) =>
       "Please check your email \"${email}\" to verify your account. Please confirm your email before ${expireTime}., otherwise your account will not be deleted in the future";
 
-  static String m2(app) => "Welcome to ${app}";
+  static String m3(app) => "Welcome to ${app}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -107,6 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Experience the power of instant messaging and crystal-clear video calls. Connect with people across the globe with ease."),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
         "file": MessageLookupByLibrary.simpleMessage("File"),
+        "fileLimitSize": m1,
         "files": MessageLookupByLibrary.simpleMessage("File"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password"),
@@ -155,7 +159,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Phone number is not valid"),
         "pickFromGallery":
             MessageLookupByLibrary.simpleMessage("Pick from gallery"),
-        "pleaseCheckYourEmail": m1,
+        "pleaseCheckYourEmail": m2,
         "pleaseCheckYourEmailToRecovery": MessageLookupByLibrary.simpleMessage(
             "Please check your email to recovery your password"),
         "pleaseLoginAgain":
@@ -243,6 +247,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "voice": MessageLookupByLibrary.simpleMessage("Voice"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
-        "welcomeToApp": m2
+        "welcomeToApp": m3
       };
 }

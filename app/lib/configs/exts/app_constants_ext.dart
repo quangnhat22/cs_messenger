@@ -20,6 +20,8 @@ class AppConstants {
   static double numberElevationContainer = 10;
 
   static int timeDebounceSearch = 1000;
+
+  static int sizeMbFileLimit = 10;
 }
 
 class AppFormKeys {

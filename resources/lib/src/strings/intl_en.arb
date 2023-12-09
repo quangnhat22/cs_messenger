@@ -177,5 +177,14 @@
   "voice": "Voice",
   "files": "File",
   "stickers": "Sticker",
-  "currentLocation": "Current location"
+  "currentLocation": "Current location",
+  "fileLimitSize": "File size cannot exceed {size} mb!. Please try again",
+  "@fileLimitSize": {
+    "placeholders": {
+      "size": {
+        "type": "String",
+        "example": "0"
+      }
+    }
+  }
 }
