@@ -1,3 +1,4 @@
+import 'package:app/components/main/avatar/app_avatar_base_builder.dart';
 import 'package:app/components/main/card/app_card_base_builder.dart';
 import 'package:app/components/main/listView/app_list_view_widget.dart';
 import 'package:app/components/main/listView/controllers/app_list_view_cubit.dart';
@@ -20,15 +21,16 @@ class ListFriendWidget extends StatelessWidget {
         GetListFriendCubit>(
       physics: const BouncingScrollPhysics(),
       childWidget: _buildCardFriendItem,
-      emptyView: const SizedBox(),
-      retryView: const SizedBox(),
     );
   }
 
   Widget _buildCardFriendItem(
       BuildContext context, UserModel friend, int index) {
     return AppCardBorderWidget()
-        .setLeading(const CircleAvatar(radius: 24))
+        .setLeading(AppAvatarCircleWidget()
+            .setUrl(friend.avatar)
+            .setSize(AppAvatarSize.medium)
+            .build(context))
         .setTitle(
             AppTextTitleMediumWidget().setText(friend.name).build(context))
         .setSubtitle(AppTextBodyMediumWidget()

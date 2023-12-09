@@ -48,7 +48,7 @@ class ApiProvider {
       'https://166706c7-b0dd-4262-a9a8-9e7b5f3dd1be.mock.pstmn.io';
   static const String friendCallHistory = "$mockServerUrl/friend/call-history";
   static const String friendRequest = "$mockServerUrl/friend/friend-request";
-  static const String friendList = "$mockServerUrl/friend/friend-list";
+  static const String friendList = "$mockServerUrl/friend/list";
   static const String groupList = "$mockServerUrl/group/group-list";
   static const String mockBlockUser = '$mockServerUrl/block/list';
 }

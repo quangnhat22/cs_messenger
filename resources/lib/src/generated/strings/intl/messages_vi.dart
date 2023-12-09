@@ -70,6 +70,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kết nối với bạn bè ở mọi lúc, mọi Nơi"),
         "createAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Tạo tài khoản thành công! Vui lòng đăng nhập để tiếp tục."),
+        "createGroupFail":
+            MessageLookupByLibrary.simpleMessage("Tạo nhóm thất bại"),
+        "createGroupSuccess":
+            MessageLookupByLibrary.simpleMessage("Tạo nhóm thành công"),
         "createNewGroup": MessageLookupByLibrary.simpleMessage("Tạo nhóm mới"),
         "currentDevices":
             MessageLookupByLibrary.simpleMessage("Thiết bị hiện tại"),
@@ -125,6 +129,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "getConnectWithYourFriends": MessageLookupByLibrary.simpleMessage(
             "Kết nối với \"network\" của bạn"),
         "gotIt": MessageLookupByLibrary.simpleMessage("Hiểu rồi"),
+        "groupName": MessageLookupByLibrary.simpleMessage("Tên nhóm"),
         "groupRequest": MessageLookupByLibrary.simpleMessage("Lời mời nhóm"),
         "groups": MessageLookupByLibrary.simpleMessage("Nhóm"),
         "historyDevices":
@@ -150,6 +155,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "loginSuccess":
             MessageLookupByLibrary.simpleMessage("Đăng nhập thành công"),
         "male": MessageLookupByLibrary.simpleMessage("Nam"),
+        "members": MessageLookupByLibrary.simpleMessage("Thành viên"),
         "name": MessageLookupByLibrary.simpleMessage("Tên"),
         "newPassword": MessageLookupByLibrary.simpleMessage("Mật khẩu mới"),
         "next": MessageLookupByLibrary.simpleMessage("Tiếp tục"),
@@ -190,6 +196,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "search": MessageLookupByLibrary.simpleMessage("Tìm kiếm"),
         "searchFriend": MessageLookupByLibrary.simpleMessage("Tìm kiếm bạn bè"),
         "selectGender": MessageLookupByLibrary.simpleMessage("Chọn giới tính"),
+        "selected": MessageLookupByLibrary.simpleMessage("Đã chọn"),
         "sendEmail": MessageLookupByLibrary.simpleMessage("Gửi email"),
         "sendEmailSuccess":
             MessageLookupByLibrary.simpleMessage("Gửi email thành công"),

@@ -47,7 +47,7 @@ class FriendRemoteDataSourceImpl extends FriendRemoteDataSource {
     try {
       final AppResponse response = await _service.request(
         clientRequest: ClientRequest(
-          url: ApiProvider.friend,
+          url: ApiProvider.friendList,
           method: HttpMethod.get,
           query: {...query},
           isRequestForList: true,

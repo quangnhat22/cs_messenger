@@ -1599,6 +1599,56 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Tạo nhóm thành công`
+  String get createGroupSuccess {
+    return Intl.message(
+      'Tạo nhóm thành công',
+      name: 'createGroupSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tạo nhóm thất bại`
+  String get createGroupFail {
+    return Intl.message(
+      'Tạo nhóm thất bại',
+      name: 'createGroupFail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tên nhóm`
+  String get groupName {
+    return Intl.message(
+      'Tên nhóm',
+      name: 'groupName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thành viên`
+  String get members {
+    return Intl.message(
+      'Thành viên',
+      name: 'members',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Đã chọn`
+  String get selected {
+    return Intl.message(
+      'Đã chọn',
+      name: 'selected',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

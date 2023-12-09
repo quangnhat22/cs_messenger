@@ -189,5 +189,10 @@
   },
   "appDontHavePermission": "Ứng dụng không có quyền để thực hiện tính năng này. Vui lòng cấp quyền cho ứng dụng",
   "sendMyLocation": "Gửi vị trí",
-  "loginSuccess": "Đăng nhập thành công"
+  "loginSuccess": "Đăng nhập thành công",
+  "createGroupSuccess": "Tạo nhóm thành công",
+  "createGroupFail": "Tạo nhóm thất bại",
+  "groupName": "Tên nhóm",
+  "members": "Thành viên",
+  "selected": "Đã chọn"
 }

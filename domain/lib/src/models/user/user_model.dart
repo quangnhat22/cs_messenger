@@ -56,4 +56,6 @@ class UserModel extends BaseModel {
     this.friendCommon,
     this.groupCommon,
   });
+
+  static UserModel get empty => UserModel(id: '-1');
 }

@@ -189,5 +189,11 @@
   },
   "appDontHavePermission": "The app does not have permission to perform this feature. Please grant permission",
   "sendMyLocation": "Send my location",
-  "loginSuccess": "Login Success"
+  "loginSuccess": "Login Success",
+  "createGroup": "Create Group",
+  "createGroupSuccess": "Create group success",
+  "createGroupFail": "Create group fail",
+  "groupName": "Group name",
+  "members": "Members",
+  "selected": "Selected"
 }

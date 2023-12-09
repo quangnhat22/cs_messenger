@@ -70,6 +70,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Connecting People, Anytime, Anywhere"),
         "createAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Create account success! Please login to continue."),
+        "createGroupFail":
+            MessageLookupByLibrary.simpleMessage("Create group fail"),
+        "createGroupSuccess":
+            MessageLookupByLibrary.simpleMessage("Create group success"),
         "createNewGroup":
             MessageLookupByLibrary.simpleMessage("Create new group"),
         "currentDevices": MessageLookupByLibrary.simpleMessage("Current"),
@@ -123,6 +127,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "getConnectWithYourFriends": MessageLookupByLibrary.simpleMessage(
             "Get connect with your friends"),
         "gotIt": MessageLookupByLibrary.simpleMessage("Got it"),
+        "groupName": MessageLookupByLibrary.simpleMessage("Group name"),
         "groupRequest": MessageLookupByLibrary.simpleMessage("Group request"),
         "groups": MessageLookupByLibrary.simpleMessage("Groups"),
         "historyDevices": MessageLookupByLibrary.simpleMessage("History"),
@@ -145,6 +150,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Login expired. Please log in again!"),
         "loginSuccess": MessageLookupByLibrary.simpleMessage("Login Success"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
+        "members": MessageLookupByLibrary.simpleMessage("Members"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "newPassword": MessageLookupByLibrary.simpleMessage("New password"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
@@ -183,6 +189,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "searchFriend": MessageLookupByLibrary.simpleMessage("Search friend"),
         "selectGender": MessageLookupByLibrary.simpleMessage("Select Gender"),
+        "selected": MessageLookupByLibrary.simpleMessage("Selected"),
         "sendEmail": MessageLookupByLibrary.simpleMessage("Send email"),
         "sendEmailSuccess":
             MessageLookupByLibrary.simpleMessage("Send email success"),

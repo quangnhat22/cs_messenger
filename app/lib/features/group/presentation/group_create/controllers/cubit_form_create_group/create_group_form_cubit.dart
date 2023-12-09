@@ -1,0 +1,16 @@
+import 'package:domain/domain.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
+
+part 'create_group_form_state.dart';
+part 'create_group_form_cubit.freezed.dart';
+
+@Injectable()
+class CreateGroupFormCubit extends Cubit<CreateGroupFormState> {
+  CreateGroupFormCubit() : super(const CreateGroupFormState.initial());
+
+  void friendInvitedChanged(List<UserModel> friends) {
+    emit(state.copyWith(members: friends));
+  }
+}
