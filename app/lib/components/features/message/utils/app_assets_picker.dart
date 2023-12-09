@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:app/components/main/snackBar/app_snack_bar_base_builder.dart';
 import 'package:app/configs/exts/app_exts.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:resources/resources.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
@@ -49,7 +50,7 @@ class AppAssetsPicker {
     }
   }
 
-  static Future<String?>? pickVideo(BuildContext context,
+  static Future<AssetEntity?>? pickVideo(BuildContext context,
       {int limit = 1}) async {
     try {
       final List<AssetEntity>? result = await AssetPicker.pickAssets(
@@ -64,33 +65,38 @@ class AppAssetsPicker {
 
       final file = await result[0].file;
 
-      if (file == null) return null;
-
       final checkSize = await checkSizeFile(file);
 
-      return checkSize ? file.path : null;
+      return checkSize ? result[0] : null;
     } catch (e) {
       throw Exception(e.toString());
     }
   }
 
-  // static Future<String?>? pickFile(BuildContext context) async {
-  //   try {
-  //     FilePickerResult? result = await FilePicker.platform.pickFiles();
-  //     if (result != null) {
-  //       return result.paths[0];
-  //     } else {
-  //       return null;
-  //     }
-  //   } catch (e) {
-  //     throw Exception(e.toString());
-  //   }
-  // }
+  static Future<PlatformFile?>? pickFile(BuildContext context) async {
+    try {
+      FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+      if (result != null) {
+        final sizeInMb = result.files[0].size / (1000 * 1024);
+        final checkFileSize = checkLimitSize(sizeInMb);
+        return checkFileSize ? result.files.single : null;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 
   static Future<bool> checkSizeFile(File? file) async {
     if (file == null) return false;
     final sizeInBytes = await file.length();
     double sizeInMb = sizeInBytes / (1024 * 1024);
+    return checkLimitSize(sizeInMb);
+  }
+
+  static bool checkLimitSize(double sizeInMb) {
     if (sizeInMb < AppConstants.sizeMbFileLimit) {
       return true;
     }

@@ -1,7 +1,7 @@
 part of '../base_param.dart';
 
 @freezed
-class TextMessageParam extends BaseParam with _$TextMessageParam {
+class TextMessageParam extends IMessageParam with _$TextMessageParam {
   const factory TextMessageParam({
     Map<String, dynamic>? metadata,
     PreviewDataParam? previewData,

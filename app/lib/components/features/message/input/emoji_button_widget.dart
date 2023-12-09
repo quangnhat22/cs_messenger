@@ -1,7 +1,7 @@
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:resources/resources.dart';
 
+//TODO: unused
 class EmojiButton extends StatelessWidget {
   const EmojiButton({
     super.key,

@@ -1,9 +1,5 @@
 import 'dart:math';
 
-import 'package:app/components/main/avatar/app_avatar_base_builder.dart';
-import 'package:app/components/main/button/app_button_base_builder.dart';
-import 'package:app/components/main/card/app_card_base_builder.dart';
-import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:diffutil_dart/diffutil.dart';
 import 'package:domain/domain.dart';
@@ -31,6 +27,7 @@ class AppChatWidget extends StatefulWidget {
     required this.useTopSafeAreaInset,
     this.bottomContainerWidget,
     this.topContainerWidget,
+    this.onSendImageMessage,
   });
 
   final String currentUserId;
@@ -75,8 +72,6 @@ class AppChatWidget extends StatefulWidget {
   /// Determines the physics of the scroll view.
   final ScrollPhysics? scrollPhysics;
 
-  // /// Used to build typing indicator according to options.
-  // /// See [TypingIndicatorOptions].
   // final TypingIndicatorOptions? typingIndicatorOptions;
 
   /// Whether to use top safe area inset for the list.
@@ -94,6 +89,9 @@ class AppChatWidget extends StatefulWidget {
 
   ///top float widget in chat app
   final Widget? topContainerWidget;
+
+  //function handle send message
+  final void Function(ImageMessageParam)? onSendImageMessage;
 
   @override
   State<AppChatWidget> createState() => _AppChatWidgetState();

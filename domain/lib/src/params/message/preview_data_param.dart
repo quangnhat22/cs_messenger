@@ -1,7 +1,7 @@
 part of '../base_param.dart';
 
 @freezed
-class PreviewDataParam extends BaseParam with _$PreviewDataParam {
+class PreviewDataParam extends IMessageParam with _$PreviewDataParam {
   const factory PreviewDataParam({
     String? title,
     String? description,

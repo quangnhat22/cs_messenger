@@ -4,6 +4,7 @@ import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:mime/mime.dart';
 import 'package:resources/resources.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
@@ -11,9 +12,13 @@ class MediaButtonsWidget extends StatelessWidget {
   const MediaButtonsWidget({
     super.key,
     this.onImageSent,
+    this.onVideoSent,
+    this.onFileSent,
   });
 
   final void Function(ImageMessageParam)? onImageSent;
+  final void Function(VideoMessageParam)? onVideoSent;
+  final void Function(FileMessageParam)? onFileSent;
 
   void _pickImage(BuildContext context) async {
     final assetEntity = await showDialog<AssetEntity?>(
@@ -37,54 +42,58 @@ class MediaButtonsWidget extends StatelessWidget {
         height: heightImage?.toDouble(),
         size: size,
       );
-      // await context.read<SettingDashboardCubit>().updateAvatar(filePath);
+      onImageSent?.call(imageParam);
     }
   }
 
   void _pickVideo(BuildContext ctx) async {
-    final filePath = await AppAssetsPicker.pickVideo(ctx);
+    final assetEntity = await AppAssetsPicker.pickVideo(ctx);
+    final file = await assetEntity?.file;
+    final name = assetEntity?.title;
+    final size = await AppAssetsPicker.getSize(file);
+    final duration = assetEntity?.duration;
 
-    if (filePath != null && ctx.mounted) {
-      // await ctx
-      //     .read<MessageStreamCubit>()
-      //     .sendMessage(type: "video", message: filePath);
+    if (file?.path != null && ctx.mounted) {
+      onVideoSent?.call(VideoMessageParam(
+        name: name,
+        size: size,
+        uri: file!.path,
+        duration: duration?.toDouble(),
+      ));
     }
   }
 
-  // void _pickRecord(BuildContext ctx) async {
-  //   final stateChatRoom = ctx.read<ChatRoomBloc>().state;
-  //   if (stateChatRoom is ChatRoomInfoSuccess) {
-  //     await showModalBottomSheet(
-  //       shape: RoundedRectangleBorder(
-  //         borderRadius: BorderRadius.circular(20.0),
-  //       ),
-  //       context: ctx,
-  //       builder: ((context) {
-  //         return const VoiceSoundBottomSheet();
-  //       }),
-  //     ).then((value) async {
-  //       if (value != null) {
-  //         await ctx
-  //             .read<MessageStreamCubit>()
-  //             .sendMessage(type: "audio", message: value);
-  //       }
-  //     });
-  //   }
-  // }
-  //
-  // void _pickFile(BuildContext ctx) async {
-  //   final stateChatRoom = ctx.read<ChatRoomBloc>().state;
-  //   if (stateChatRoom is ChatRoomInfoSuccess) {
-  //     String? filePath = await AppAssetsPicker.pickFile(ctx);
-  //
-  //     if (filePath != null && ctx.mounted) {
-  //       await ctx
-  //           .read<MessageStreamCubit>()
-  //           .sendMessage(type: "file", message: filePath);
-  //     }
-  //   }
-  // }
-  //
+  void _pickFile(BuildContext ctx) async {
+    final file = await AppAssetsPicker.pickFile(ctx);
+
+    if (file != null && file.path != null && ctx.mounted) {
+      final filePath = file.path;
+      final name = file.name;
+      final size = file.size;
+      onFileSent?.call(FileMessageParam(
+        name: name,
+        mimeType: lookupMimeType(filePath!),
+        size: size.toDouble(),
+        uri: filePath,
+        isLoading: true,
+      ));
+    }
+  }
+
+  Future<void> _pickRecord(BuildContext ctx) async {
+    await showModalBottomSheet(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      context: ctx,
+      builder: ((context) {
+        return const VoiceSoundBottomSheet();
+      }),
+    ).then((value) async {
+      if (value != null) {}
+    });
+  }
+
   // void _pickStickerAndGif(BuildContext ctx) async {
   //   final gif = await GiphyGet.getGif(context: ctx, apiKey: AppConfig.giphyKey);
   //   if (gif != null && ctx.mounted) {
@@ -152,7 +161,7 @@ class MediaButtonsWidget extends StatelessWidget {
             icon: Icons.attach_file_outlined,
             color: Colors.pink,
             title: R.strings.file,
-            onPress: () => {},
+            onPress: () => _pickFile(context),
           ),
           COutlineIconButton(
             icon: Icons.emoji_emotions_outlined,

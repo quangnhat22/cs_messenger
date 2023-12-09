@@ -59,6 +59,13 @@ dependencies:
   video_player: ^2.8.1
   wechat_assets_picker: ^8.8.0
   wechat_camera_picker: ^4.1.1
+  file_picker: ^6.1.1
+  mime: ^1.0.4
+  flutter_sound:
+    git:
+      url: https://github.com/enricostrijks/flutter_sound.git
+      path: flutter_sound
+      ref: master
 
 dev_dependencies:
   flutter_test:

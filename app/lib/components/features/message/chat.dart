@@ -77,6 +77,7 @@ class Chat extends StatefulWidget {
     required this.onSendPressed,
     this.bottomContainerWidget,
     this.topContainerWidget,
+    this.onSendImageMessage,
   });
 
   final String currentUserId;
@@ -150,6 +151,9 @@ class Chat extends StatefulWidget {
 
   ///top float widget in chat app
   final Widget? topContainerWidget;
+
+  //function handle send message
+  final void Function(ImageMessageParam)? onSendImageMessage;
 
   @override
   State<Chat> createState() => _ChatState();
@@ -264,6 +268,7 @@ class _ChatState extends State<Chat> {
                               bottomContainerWidget:
                                   widget.bottomContainerWidget,
                               topContainerWidget: widget.topContainerWidget,
+                              onSendImageMessage: widget.onSendImageMessage,
                             ),
                           ),
                         ),
