@@ -7,7 +7,6 @@ import 'package:app/configs/di/di.dart';
 import 'package:app/configs/exts/app_exts.dart';
 import 'package:app/configs/exts/app_form_validator_ext.dart';
 import 'package:app/configs/routes/app_router.dart';
-import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/features/auth/domain/usecases/auth/login_with_email_uc.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
@@ -50,13 +49,12 @@ class LoginFormBloc extends FormBloc<String, String> {
       AppLoadingOverlayWidget.dismiss();
       //back to welcome
       AppSnackBarWidget()
-          .setLabelText(R.strings.createAccountSuccess)
+          .setLabelText(R.strings.loginSuccess)
           .setAppSnackBarType(AppSnackBarType.informMessage)
           .setAppSnackBarStatus(AppSnackBarStatus.success)
           .showSnackBar();
 
-      //go to login page after creating new account success
-      await getIt<AppRouter>().replace(const WelcomeRoute());
+      await getIt<AppRouter>().pop<bool>(true);
     } on AppException catch (e) {
       AppLoadingOverlayWidget.dismiss();
       emitFailure();

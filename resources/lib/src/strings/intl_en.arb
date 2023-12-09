@@ -187,5 +187,7 @@
       }
     }
   },
-  "appDontHavePermission": "The app does not have permission to perform this feature. Please grant permission"
+  "appDontHavePermission": "The app does not have permission to perform this feature. Please grant permission",
+  "sendMyLocation": "Send my location",
+  "loginSuccess": "Login Success"
 }

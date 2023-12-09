@@ -143,6 +143,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "loginFail": MessageLookupByLibrary.simpleMessage("Login fail"),
         "loginInExpired": MessageLookupByLibrary.simpleMessage(
             "Login expired. Please log in again!"),
+        "loginSuccess": MessageLookupByLibrary.simpleMessage("Login Success"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "newPassword": MessageLookupByLibrary.simpleMessage("New password"),
@@ -187,6 +188,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Send email success"),
         "sendMediaOrEmojiMessage":
             MessageLookupByLibrary.simpleMessage("Send Media Or Emoji Message"),
+        "sendMyLocation":
+            MessageLookupByLibrary.simpleMessage("Send my location"),
         "sendRequestFail": MessageLookupByLibrary.simpleMessage(
             "Sent your request fail! Try again"),
         "sendRequestSuccess":

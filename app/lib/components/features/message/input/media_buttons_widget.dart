@@ -2,8 +2,11 @@ import 'dart:convert';
 
 import 'package:app/components/features/imagePicker/app_dialog_image_picker.dart';
 import 'package:app/components/features/message/input/void_record_widget.dart';
+import 'package:app/components/features/message/map/picker_map_widget.dart';
 import 'package:app/components/features/message/utils/app_assets_picker.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
+import 'package:app/configs/di/di.dart';
+import 'package:app/configs/routes/app_router.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:configs/configs.dart';
 import 'package:domain/domain.dart';
@@ -21,6 +24,7 @@ class MediaButtonsWidget extends StatelessWidget {
     this.onFileSent,
     this.onAudioSent,
     this.onStickerSent,
+    this.onMapSent,
   });
 
   final void Function(ImageMessageParam)? onImageSent;
@@ -28,6 +32,7 @@ class MediaButtonsWidget extends StatelessWidget {
   final void Function(FileMessageParam)? onFileSent;
   final void Function(AudioMessageParam)? onAudioSent;
   final void Function(EmojiMessageParam)? onStickerSent;
+  final void Function(MapMessageParam)? onMapSent;
 
   void _pickImage(BuildContext context) async {
     final assetEntity = await showDialog<AssetEntity?>(
@@ -115,23 +120,19 @@ class MediaButtonsWidget extends StatelessWidget {
     }
   }
 
-  // void _pickLocation(BuildContext ctx) async {
-  //   showDialog(
-  //     context: ctx,
-  //     builder: (context) {
-  //       return const MapPage();
-  //     },
-  //   ).then((result) {
-  //     if (result != null && result["currentLocation"] != null) {
-  //       final currentLocation = jsonDecode(result["currentLocation"]) as List;
-  //       ctx.read<MessageStreamCubit>().sendMessage(
-  //           type: "map",
-  //           message:
-  //               "https://www.google.com/maps/search/?api=1&query=${currentLocation.first},${currentLocation.last}");
-  //     }
-  //   });
-  //   //NavigationUtil.pushNamed(route: RouteName.googleMap);
-  // }
+  void _pickLocation(BuildContext ctx) async {
+    showModalBottomSheet<MapMessageParam>(
+      context: ctx,
+      builder: (context) {
+        return const PickerMapWidget();
+      },
+    ).then((result) async {
+      if (result != null) {
+        onMapSent?.call(result);
+      }
+      await getIt<AppRouter>().pop();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -185,7 +186,7 @@ class MediaButtonsWidget extends StatelessWidget {
             icon: Icons.location_on_outlined,
             color: Colors.green,
             title: R.strings.currentLocation,
-            onPress: () => {},
+            onPress: () => _pickLocation(context),
           ),
         ],
       ),

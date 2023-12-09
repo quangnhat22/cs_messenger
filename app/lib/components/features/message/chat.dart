@@ -82,6 +82,7 @@ class Chat extends StatefulWidget {
     this.onFileSent,
     this.onAudioSent,
     this.onStickerSent,
+    this.onMapSent,
   });
 
   final String currentUserId;
@@ -162,6 +163,7 @@ class Chat extends StatefulWidget {
   final void Function(FileMessageParam)? onFileSent;
   final void Function(AudioMessageParam)? onAudioSent;
   final void Function(EmojiMessageParam)? onStickerSent;
+  final void Function(MapMessageParam)? onMapSent;
 
   @override
   State<Chat> createState() => _ChatState();
@@ -306,6 +308,7 @@ class _ChatState extends State<Chat> {
                     onImageSent: widget.onImageSent,
                     onVideoSent: widget.onVideoSent,
                     onStickerSent: widget.onStickerSent,
+                    onMapSent: widget.onMapSent,
                   ),
               ],
             ),

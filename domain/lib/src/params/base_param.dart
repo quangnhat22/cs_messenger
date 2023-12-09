@@ -16,6 +16,7 @@ part 'message/emoji_message_param.dart';
 part 'message/file_message_param.dart';
 part 'message/i_message_param.dart';
 part 'message/image_message_param.dart';
+part 'message/map_message_param.dart';
 part 'message/preview_data_param.dart';
 part 'message/text_message_param.dart';
 part 'message/video_message_param.dart';

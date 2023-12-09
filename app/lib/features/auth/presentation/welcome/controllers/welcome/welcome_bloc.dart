@@ -15,6 +15,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:resources/resources.dart';
+import 'package:utilities/utilities.dart';
 
 part 'welcome_bloc.freezed.dart';
 part 'welcome_event.dart';
@@ -43,6 +44,8 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
       await event.map(
         started: (event) async => await _started(event, emit),
         loginWithGoogle: (event) async => await _loginWithGoogle(event, emit),
+        checkAuthenticated: (event) async =>
+            await _checkAuthenticated(event, emit),
       );
     });
   }
@@ -72,8 +75,9 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
           await getIt<AppRouter>()
               .push(VerifyEmailRoute(isFirstRequestSendEmail: false));
         } else {
-          final isAuthenticated = await _checkAuthenticated();
-          emit(state.copyWith(isAuthenticated: isAuthenticated));
+          add(const WelcomeCheckLoginAuthenticated());
+          // final isAuthenticated = await _checkAuthenticated();
+          // emit(state.copyWith(isAuthenticated: isAuthenticated));
         }
       }
       emit(state.copyWith(isLoading: false));
@@ -100,8 +104,9 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
     try {
       emit(state.copyWith(isLoading: true));
       await _loginWithGoogleUseCase.executeObj();
-      final isAuthenticated = await _checkAuthenticated();
-      emit(state.copyWith(isAuthenticated: isAuthenticated));
+      add(const WelcomeEvent.checkAuthenticated());
+      // final isAuthenticated = await _checkAuthenticated();
+      // emit(state.copyWith(isAuthenticated: isAuthenticated));
       emit(state.copyWith(isLoading: false));
     } on AppException catch (e) {
       emit(state.copyWith(isLoading: false));
@@ -125,16 +130,23 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
     }
   }
 
-  Future<bool> _checkAuthenticated() async {
+  Future<void> _checkAuthenticated(
+      WelcomeCheckLoginAuthenticated event, Emitter<WelcomeState> emit) async {
     try {
+      emit(state.copyWith(isLoading: true));
       final tokenModel = await _checkAuthenticatedUseCase.executeObj();
       if (tokenModel.netData?.accessToken != '') {
         await _getUserProfileUseCase.executeObj();
-        return true;
+        emit(state.copyWith(isAuthenticated: true, isLoading: false));
       }
-      return false;
-    } catch (_) {
-      rethrow;
+      emit(state.copyWith(isAuthenticated: false, isLoading: false));
+    } on AppException catch (e) {
+      emit(state.copyWith(isAuthenticated: false, isLoading: false));
+      AppExceptionExt(
+          appException: e,
+          onError: (e) {
+            Logs.d(e);
+          }).detected();
     }
   }
 }

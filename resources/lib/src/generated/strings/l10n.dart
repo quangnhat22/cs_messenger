@@ -1579,6 +1579,26 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Gửi vị trí`
+  String get sendMyLocation {
+    return Intl.message(
+      'Gửi vị trí',
+      name: 'sendMyLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Đăng nhập thành công`
+  String get loginSuccess {
+    return Intl.message(
+      'Đăng nhập thành công',
+      name: 'loginSuccess',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

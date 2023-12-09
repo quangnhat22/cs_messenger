@@ -187,5 +187,7 @@
       }
     }
   },
-  "appDontHavePermission": "Ứng dụng không có quyền để thực hiện tính năng này. Vui lòng cấp quyền cho ứng dụng"
+  "appDontHavePermission": "Ứng dụng không có quyền để thực hiện tính năng này. Vui lòng cấp quyền cho ứng dụng",
+  "sendMyLocation": "Gửi vị trí",
+  "loginSuccess": "Đăng nhập thành công"
 }

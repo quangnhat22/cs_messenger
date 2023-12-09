@@ -147,6 +147,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "loginFail": MessageLookupByLibrary.simpleMessage("Đăng nhập thất bại"),
         "loginInExpired": MessageLookupByLibrary.simpleMessage(
             "Đăng nhập hết hạn. Vui lòng đăng nhập lại!"),
+        "loginSuccess":
+            MessageLookupByLibrary.simpleMessage("Đăng nhập thành công"),
         "male": MessageLookupByLibrary.simpleMessage("Nam"),
         "name": MessageLookupByLibrary.simpleMessage("Tên"),
         "newPassword": MessageLookupByLibrary.simpleMessage("Mật khẩu mới"),
@@ -193,6 +195,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gửi email thành công"),
         "sendMediaOrEmojiMessage": MessageLookupByLibrary.simpleMessage(
             "Gửi tin nhắn emoji hoặc loại tin nhắn khác"),
+        "sendMyLocation": MessageLookupByLibrary.simpleMessage("Gửi vị trí"),
         "sendRequestFail": MessageLookupByLibrary.simpleMessage(
             "Yêu cầu của bạn gửi thất bại! Vui lòng thử lại."),
         "sendRequestSuccess": MessageLookupByLibrary.simpleMessage(

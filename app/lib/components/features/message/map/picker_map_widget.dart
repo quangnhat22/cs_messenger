@@ -1,8 +1,11 @@
-import 'dart:convert';
-
 import 'package:app/components/features/message/utils/message_utils.dart';
+import 'package:app/components/main/button/app_button_base_builder.dart';
+import 'package:app/configs/theme/app_theme.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:resources/resources.dart';
 
 class PickerMapWidget extends StatefulWidget {
   const PickerMapWidget({super.key});
@@ -40,17 +43,22 @@ class _PickerMapWidgetState extends State<PickerMapWidget> {
     }
   }
 
-  void _sendMyLocation() {
-    Navigator.pop(
-        context, {"currentLocation": jsonEncode(markers.first.position)});
+  Future<void> _sendMyLocation(BuildContext context) async {
+    final lat = markers.first.position.latitude;
+    final long = markers.first.position.longitude;
+    List<Placemark> placemarks = await placemarkFromCoordinates(lat, long);
+    final address =
+        "${placemarks.first.street}, ${placemarks.first.thoroughfare} ,${placemarks.first.locality}, ${placemarks.first.administrativeArea}, ${placemarks.first.country}";
+    final mapParams = MapMessageParam(lat: lat, long: long, name: address);
+    if (context.mounted) {
+      Navigator.of(context).pop<MapMessageParam>(mapParams);
+    }
   }
 
   @override
   void initState() {
     super.initState();
-    (() async {
-      await _getCurrentLocation();
-    })();
+    (() async {})();
   }
 
   @override
@@ -66,11 +74,12 @@ class _PickerMapWidgetState extends State<PickerMapWidget> {
         Expanded(
           child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(AppSizeExt.of.majorScale(4)),
             ),
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(AppSizeExt.of.majorPaddingScale(2)),
             child: ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(36)),
+              borderRadius: BorderRadius.all(
+                  Radius.circular(AppSizeExt.of.majorScale(9))),
               child: Align(
                 alignment: Alignment.bottomRight,
                 heightFactor: 0.3,
@@ -80,8 +89,9 @@ class _PickerMapWidgetState extends State<PickerMapWidget> {
                   mapType: MapType.normal,
                   myLocationEnabled: true,
                   myLocationButtonEnabled: true,
-                  onMapCreated: (GoogleMapController controller) {
+                  onMapCreated: (GoogleMapController controller) async {
                     _controller = controller;
+                    await _getCurrentLocation();
                   },
                   markers: markers,
                   // onCameraIdle: () {
@@ -114,9 +124,13 @@ class _PickerMapWidgetState extends State<PickerMapWidget> {
         ),
         Column(
           children: [
-            TextButton(
-                onPressed: _sendMyLocation,
-                child: const Text("Send my location")),
+            AppButtonTextWidget()
+                .setButtonText(R.strings.sendMyLocation)
+                .setTextStyle(
+                    TextStyle(color: Theme.of(context).colorScheme.primary))
+                .setOnPressed(() async {
+              await _sendMyLocation(context);
+            }).build(context),
           ],
         )
       ],

@@ -1,19 +1,26 @@
 import 'package:app/components/features/button/login_with_google/login_with_google.dart';
 import 'package:app/components/main/button/app_button_base_builder.dart';
 import 'package:app/components/main/divider/app_divider_base_builder.dart';
+import 'package:app/configs/di/di.dart';
+import 'package:app/configs/routes/app_router.dart';
 import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:app/features/auth/presentation/welcome/controllers/welcome/welcome_bloc.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
+import 'package:utilities/utilities.dart';
 
 class WelcomeButtonsWidget extends StatelessWidget {
   const WelcomeButtonsWidget({super.key});
 
   void _handleSignInWithEmailBtn(BuildContext ctx) async {
-    await ctx.router.push(const LoginRoute());
+    await getIt<AppRouter>().push(const LoginRoute()).then((value) {
+      Logs.d(value);
+      if (value == true && ctx.mounted) {
+        ctx.read<WelcomeBloc>().add(const WelcomeCheckLoginAuthenticated());
+      }
+    });
   }
 
   void _handleSignInWithGoogle(BuildContext ctx) async {
@@ -21,7 +28,7 @@ class WelcomeButtonsWidget extends StatelessWidget {
   }
 
   void _handleSignUpWithEmailBtn(BuildContext ctx) async {
-    await ctx.router.push(const SignUpRoute());
+    await getIt<AppRouter>().push(const SignUpRoute());
   }
 
   @override
