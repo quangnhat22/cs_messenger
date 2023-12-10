@@ -1649,6 +1649,16 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Bạn có muốn thoát khỏi trang này?`
+  String get doYouWantToExit {
+    return Intl.message(
+      'Bạn có muốn thoát khỏi trang này?',
+      name: 'doYouWantToExit',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

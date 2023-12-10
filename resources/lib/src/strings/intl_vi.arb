@@ -194,5 +194,6 @@
   "createGroupFail": "Tạo nhóm thất bại",
   "groupName": "Tên nhóm",
   "members": "Thành viên",
-  "selected": "Đã chọn"
+  "selected": "Đã chọn",
+  "doYouWantToExit": "Bạn có muốn thoát khỏi trang này?"
 }

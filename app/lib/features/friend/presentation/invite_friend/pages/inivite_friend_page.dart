@@ -7,6 +7,7 @@ import 'package:app/configs/theme/app_theme.dart';
 import 'package:app/features/friend/presentation/invite_friend/controllers/cubit/list_selected_friend_cubit.dart';
 import 'package:app/features/friend/presentation/invite_friend/controllers/invite_list_friend_cubit.dart';
 import 'package:app/features/friend/presentation/invite_friend/widgets/list_friend_invite_widget.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
@@ -14,10 +15,10 @@ import 'package:resources/resources.dart';
 class InviteFriendPage extends StatelessWidget {
   const InviteFriendPage({
     super.key,
-    this.groupId,
+    this.listFilterFriend = const [],
   });
 
-  final String? groupId;
+  final List<UserModel> listFilterFriend;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +80,10 @@ class InviteFriendPage extends StatelessWidget {
                   ),
                 ),
               if (state.selectedMembers.isNotEmpty) const Divider(),
-              ListFriendInviteWidget(listFriendSelected: state.selectedMembers),
+              ListFriendInviteWidget(
+                listFriendSelected: state.selectedMembers,
+                listFilterMember: listFilterFriend,
+              ),
               if (state.selectedMembers.isNotEmpty)
                 AppButtonFilledWidget()
                     .setButtonText(R.strings.done)

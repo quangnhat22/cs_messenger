@@ -195,5 +195,6 @@
   "createGroupFail": "Create group fail",
   "groupName": "Group name",
   "members": "Members",
-  "selected": "Selected"
+  "selected": "Selected",
+  "doYouWantToExit": "Do you want to exit this page?"
 }

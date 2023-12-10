@@ -94,6 +94,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bạn có muốn chấp nhận lời mời kết bạn này không? Hãy đảm bảo bạn có quen biết người này."),
         "doYouWantRejectFriendRequest": MessageLookupByLibrary.simpleMessage(
             "Bạn có muốn từ chối lời mời kết bạn này hay không?"),
+        "doYouWantToExit": MessageLookupByLibrary.simpleMessage(
+            "Bạn có muốn thoát khỏi trang này?"),
         "doYouWantToLogOut":
             MessageLookupByLibrary.simpleMessage("Bạn có muốn đăng xuất?"),
         "doYouWantUnBlockThisUser": MessageLookupByLibrary.simpleMessage(

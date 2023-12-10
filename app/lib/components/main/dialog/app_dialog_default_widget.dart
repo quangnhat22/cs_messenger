@@ -9,13 +9,22 @@ class AppDefaultDialogWidget extends AppDialogBaseBuilder {
 
     switch (_appDialogType!) {
       case AppDialogType.success:
-        setIcon(R.svgs.icSuccess.svg());
+        setIcon(R.svgs.icSuccess.svg(
+          width: AppSizeExt.of.majorScale(16),
+          height: AppSizeExt.of.majorScale(16),
+        ));
         break;
       case AppDialogType.error:
-        setIcon(R.svgs.icError.svg());
+        setIcon(R.svgs.icError.svg(
+          width: AppSizeExt.of.majorScale(16),
+          height: AppSizeExt.of.majorScale(16),
+        ));
         break;
       case AppDialogType.confirm:
-        setIcon(R.svgs.icWarning.svg());
+        setIcon(R.svgs.icWarning.svg(
+          width: AppSizeExt.of.majorScale(16),
+          height: AppSizeExt.of.majorScale(16),
+        ));
         break;
       default:
         throw Exception('appDialogType null!');

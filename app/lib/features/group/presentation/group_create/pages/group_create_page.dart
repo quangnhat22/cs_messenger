@@ -1,11 +1,15 @@
 import 'package:app/components/main/appBar/app_bar_base_builder.dart';
+import 'package:app/components/main/dialog/app_dialog_base_builder.dart';
 import 'package:app/components/main/page/app_main_page_base_builder.dart';
 import 'package:app/components/main/textField/app_field_base_builder.dart';
 import 'package:app/configs/di/di.dart';
+import 'package:app/configs/exts/app_exts.dart';
+import 'package:app/configs/routes/app_router.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:app/features/friend/presentation/invite_friend/pages/inivite_friend_page.dart';
 import 'package:app/features/group/presentation/group_create/controllers/create_group_name_form.cubit.dart';
 import 'package:app/features/group/presentation/group_create/controllers/cubit_form_create_group/create_group_form_cubit.dart';
+import 'package:app/features/group/presentation/group_create/widgets/create_group_image_widget.dart';
 import 'package:app/features/group/presentation/group_create/widgets/create_group_list_member_widget.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:domain/domain.dart';
@@ -28,76 +32,82 @@ class GroupCreatePage extends StatelessWidget {
           create: (_) => getIt<CreateGroupFormCubit>(),
         ),
       ],
-      child: AppMainPageWidget()
-          .setAppBar(AppBarWidget()
-              .setTextTitle(R.strings.createNewGroup)
-              .build(context))
-          .setBody(_body(context))
-          .build(context),
+      child: WillPopScope(
+        onWillPop: () async {
+          AppDefaultDialogWidget()
+              .setTitle(R.strings.confirm)
+              .setContent(R.strings.doYouWantToExit)
+              .setAppDialogType(AppDialogType.confirm)
+              .setNegativeText(R.strings.close)
+              .setPositiveText(R.strings.confirm)
+              .setOnPositive(() async {
+                Navigator.of(context).pop();
+              })
+              .buildDialog(AppKeys.navigatorKey.currentContext!)
+              .show();
+          return false;
+        },
+        child: AppMainPageWidget()
+            .setAppBar(AppBarWidget()
+                .setTextTitle(R.strings.createNewGroup)
+                .build(context))
+            .setBody(_body(context))
+            .setFloatActionButton(_fabAddMemberButton(context))
+            .build(context),
+      ),
     );
   }
 
   Widget _body(BuildContext context) {
-    return Stack(
-      children: [
-        Padding(
-          padding: EdgeInsets.all(AppSizeExt.of.majorPaddingScale(5)),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(
-                  height: AppSizeExt.of.majorScale(2),
-                ),
-                CircleAvatar(
-                  radius: AppSizeExt.of.majorScale(14),
-                  backgroundColor:
-                      Theme.of(context).colorScheme.primaryContainer,
-                  child: IconButton(
-                    onPressed: () {
-                      // _showImageDialog(context);
-                    },
-                    icon: Icon(
-                      Icons.camera_alt_outlined,
-                      size: AppSizeExt.of.majorScale(9),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: AppSizeExt.of.majorScale(5),
-                ),
-                Builder(
-                  builder: (context) {
-                    return AppTextFieldWidget()
-                        .setBloc(
-                            context.read<CreateGroupNameFormBloc>().groupName)
-                        .setIsRequired(true)
-                        .setKeyboardType(TextInputType.text)
-                        .setAutoFillHints([AutofillHints.name])
-                        .setLabelText(R.strings.groupName)
-                        .build(context);
-                  },
-                ),
-                SizedBox(
-                  height: AppSizeExt.of.majorScale(4),
-                ),
-                const CreateGroupListMemberWidget(),
-              ],
+    return Padding(
+      padding: EdgeInsets.all(AppSizeExt.of.majorPaddingScale(4)),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(height: AppSizeExt.of.majorScale(2)),
+            const CreateGroupImageWidget(),
+            SizedBox(height: AppSizeExt.of.majorScale(5)),
+            Builder(
+              builder: (context) {
+                return AppTextFieldWidget()
+                    .setBloc(context.read<CreateGroupNameFormBloc>().groupName)
+                    .setOnChanged((value) {
+                      context
+                          .read<CreateGroupFormCubit>()
+                          .groupNameChanged(value);
+                    })
+                    .setIsRequired(true)
+                    .setKeyboardType(TextInputType.text)
+                    .setAutoFillHints([AutofillHints.name])
+                    .setLabelText(R.strings.groupName)
+                    .build(context);
+              },
             ),
-          ),
+            SizedBox(
+              height: AppSizeExt.of.majorScale(4),
+            ),
+            const CreateGroupListMemberWidget(),
+          ],
         ),
-        Positioned(
-          bottom: 0,
-          child: FloatingActionButton(
-            onPressed: () async => await _showBottomSheetAddMember(context),
-            child: const Icon(Icons.add),
-          ),
-        ),
-      ],
+      ),
     );
   }
 
-  Future<void> _showBottomSheetAddMember(BuildContext context) async {
+  Widget _fabAddMemberButton(BuildContext context) {
+    return BlocBuilder<CreateGroupFormCubit, CreateGroupFormState>(
+      builder: (context, state) {
+        return FloatingActionButton(
+          onPressed: () async =>
+              await _showBottomSheetAddMember(context, state.members ?? []),
+          child: const Icon(Icons.add),
+        );
+      },
+    );
+  }
+
+  Future<void> _showBottomSheetAddMember(
+      BuildContext context, List<UserModel> filterMember) async {
     await showModalBottomSheet<List<UserModel>>(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -107,7 +117,7 @@ class GroupCreatePage extends StatelessWidget {
       ),
       context: context,
       builder: (context) {
-        return const InviteFriendPage();
+        return InviteFriendPage(listFilterFriend: filterMember);
       },
     ).then((result) async {
       if (result != null) {

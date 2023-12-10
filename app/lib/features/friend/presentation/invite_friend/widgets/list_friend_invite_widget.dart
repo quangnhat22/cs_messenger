@@ -10,9 +10,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
 
 class ListFriendInviteWidget extends StatelessWidget {
-  const ListFriendInviteWidget({super.key, required this.listFriendSelected});
+  const ListFriendInviteWidget({
+    super.key,
+    required this.listFriendSelected,
+    required this.listFilterMember,
+  });
 
   final List<UserModel> listFriendSelected;
+  final List<UserModel> listFilterMember;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +50,7 @@ class ListFriendInviteWidget extends StatelessWidget {
                 InviteListFriendCubit>(
               physics: const BouncingScrollPhysics(),
               childWidget: (context, friend, index) => _buildCardFriendItem(
-                  context, friend, index, listFriendSelected),
+                  context, friend, index, listFriendSelected, listFilterMember),
             ),
           ),
         ],
@@ -54,8 +59,15 @@ class ListFriendInviteWidget extends StatelessWidget {
   }
 
   Widget _buildCardFriendItem(BuildContext context, UserModel friend, int index,
-      List<UserModel> selectedMember) {
+      List<UserModel> selectedMember, List<UserModel> filterUsers) {
     return CheckboxListTile(
+      enabled: filterUsers
+              .firstWhere(
+                (element) => element.id == friend.id,
+                orElse: () => UserModel.empty,
+              )
+              .id ==
+          UserModel.empty.id,
       title: AppTextTitleMediumWidget().setText(friend.name).build(context),
       subtitle: AppTextBodyMediumWidget()
           .setText("${R.strings.email}: ${friend.email}")

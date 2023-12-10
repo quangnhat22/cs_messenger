@@ -93,6 +93,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Do you want to accept this friend request? Make sure you know this person."),
         "doYouWantRejectFriendRequest": MessageLookupByLibrary.simpleMessage(
             "Do you want to reject this friend request?"),
+        "doYouWantToExit": MessageLookupByLibrary.simpleMessage(
+            "Do you want to exit this page?"),
         "doYouWantToLogOut":
             MessageLookupByLibrary.simpleMessage("Do you want to log out?"),
         "doYouWantUnBlockThisUser": MessageLookupByLibrary.simpleMessage(

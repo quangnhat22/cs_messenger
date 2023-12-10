@@ -21,7 +21,7 @@ class CreateGroupListMemberWidget extends StatelessWidget {
             if (state.members != null && state.members!.isNotEmpty)
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: AppSizeExt.of.majorPaddingScale(3),
+                  horizontal: AppSizeExt.of.majorPaddingScale(1),
                   vertical: AppSizeExt.of.majorPaddingScale(2),
                 ),
                 child: AppTextTitleMediumWidget()
@@ -36,6 +36,7 @@ class CreateGroupListMemberWidget extends StatelessWidget {
             if (state.members != null && state.members!.isNotEmpty)
               ListView.builder(
                 shrinkWrap: true,
+                itemCount: state.members!.length,
                 itemBuilder: (ctx, index) =>
                     _buildCardItem(context, index, state.members![index]),
               )
@@ -46,12 +47,27 @@ class CreateGroupListMemberWidget extends StatelessWidget {
   }
 
   Widget _buildCardItem(BuildContext context, int index, UserModel user) {
-    return AppCardBorderWidget()
-        .setTitle(AppTextBodyLargeWidget().setText(user.name).build(context))
-        .setLeading(AppAvatarCircleWidget()
-            .setUrl(user.avatar)
-            .setSize(AppAvatarSize.medium)
-            .build(context))
-        .setActions(<Widget>[]).build(context);
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: AppSizeExt.of.majorPaddingScale(1),
+      ),
+      child: AppCardWidget()
+          .setTitle(AppTextBodyLargeWidget().setText(user.name).build(context))
+          .setLeading(AppAvatarCircleWidget()
+              .setUrl(user.avatar)
+              .setSize(AppAvatarSize.medium)
+              .build(context))
+          .setActions(<Widget>[
+        IconButton(
+          onPressed: () {
+            context.read<CreateGroupFormCubit>().removeMember(user.id);
+          },
+          icon: Icon(
+            Icons.remove_circle,
+            color: Theme.of(context).colorScheme.error,
+          ),
+        )
+      ]).build(context),
+    );
   }
 }
