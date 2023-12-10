@@ -6,6 +6,7 @@ import 'package:app/features/auth/data/sources/remote/auth_remote_data_src.dart'
 import 'package:app/features/auth/domain/repositories/auth_repository.dart';
 import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
+import 'package:utilities/utilities.dart';
 
 @Injectable(as: AuthRepository)
 class AuthRepositoryImpl extends AuthRepository {
@@ -91,6 +92,9 @@ class AuthRepositoryImpl extends AuthRepository {
     } on NetworkException catch (_) {
       rethrow;
     } on GrpcException catch (_) {
+      rethrow;
+    } catch (e) {
+      Logs.e(e);
       rethrow;
     }
   }

@@ -16,7 +16,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:resources/resources.dart';
-import 'package:socket_io_client/socket_io_client.dart';
 import 'package:utilities/utilities.dart';
 
 part 'welcome_bloc.freezed.dart';
@@ -55,6 +54,8 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
   Future<void> _started(_Started event, Emitter<WelcomeState> emit) async {
     try {
       emit(state.copyWith(isLoading: true));
+
+      getIt<SocketService>().socketDisconnected();
 
       final welcomeModel = await _getIsFirstInstalledUseCase.executeObj();
       final idRemoteDeviceModel = await _getIdRemoteDeviceUseCase.executeObj();

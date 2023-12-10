@@ -68,6 +68,14 @@ class ChatPage extends StatelessWidget {
           isLeftStatus: true,
           onEndReachedThreshold: 0.6,
           onStartReachedThreshold: 0.8,
+          onMapSent: (mapParams) {
+            print(mapParams);
+          },
+          onAudioSent: (audioParams) {},
+          onFileSent: (fileParams) {},
+          onImageSent: (imageParams) {},
+          onVideoSent: (videoParams) {},
+          onStickerSent: (stickerParams) {},
         );
       },
     );

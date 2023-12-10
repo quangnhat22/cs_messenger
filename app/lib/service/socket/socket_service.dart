@@ -5,7 +5,7 @@ import 'package:utilities/utilities.dart';
 
 @Singleton()
 class SocketService {
-  late final IO.Socket _socket;
+  IO.Socket? _socket;
   late final AuthLocalDataSource _authLocalDataSource;
 
   SocketService(this._authLocalDataSource);
@@ -20,10 +20,10 @@ class SocketService {
             .setExtraHeaders({
           'Authorization': 'Bearer ${token.netData?.accessToken}',
         }).build());
-    _socket.onConnecting((data) => Logs.d("connecting"));
-    _socket.onConnect((data) => Logs.d("connected"));
-    _socket.onDisconnect((data) => Logs.d("disconnected"));
-    _socket.on('register', (data) => Logs.d(data));
+    _socket?.onConnecting((data) => Logs.d("connecting"));
+    _socket?.onConnect((data) => Logs.d("connected"));
+    _socket?.onDisconnect((data) => Logs.d("disconnected"));
+    _socket?.on('register', (data) => Logs.d(data));
     // _socket.on('new-message', ((data) => socketNewMessage(data)));
     // _socket.on('new-notification', ((data) => socketNewNotification(data)));
     // _socket.on('webrtc', ((data) => socketNewCallWebRTC(data)));
@@ -31,5 +31,16 @@ class SocketService {
     // _socket.on('friend-deleted', ((_) => socketNewEventChatRoom()));
     // _socket.on('chatroom-deleted', ((_) => socketNewEventChatRoom()));
     // _socket.on('room-left', ((_) => socketNewEventChatRoom()));
+  }
+
+  void socketDisconnected() {
+    if (_socket != null) {
+      if (_socket!.connected) {
+        _socket!.disconnect();
+      }
+
+      // // dispose controller
+      // dispose();
+    }
   }
 }

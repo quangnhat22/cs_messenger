@@ -226,6 +226,23 @@ class ListMessageCubit extends Cubit<ListMessageState> {
                 'https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3',
             type: MessageType.audio,
           ),
+          MapMessageModel(
+            id: '21',
+            author: UserModel(id: '2'),
+            lat: 37.4219983,
+            long: -122.084,
+            name:
+                "P1600 Amphitheatre Pkwy, Amphitheatre Parkway ,Mountain View, California, United States",
+            type: MessageType.map,
+          ),
+          AudioMessageModel(
+            id: '22',
+            author: state.currentUser!,
+            name: 'city-guide-image1872y1772717627627.png',
+            uri:
+                'https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3',
+            type: MessageType.audio,
+          ),
         ];
         emit(state.copyWith(
           listMessage: [...state.listMessage, ..._messages],
