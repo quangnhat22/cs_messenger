@@ -10,11 +10,13 @@ import 'package:app/features/auth/domain/usecases/onboarding/get_id_remote_devic
 import 'package:app/features/auth/domain/usecases/onboarding/get_is_first_installed_uc.dart';
 import 'package:app/features/auth/domain/usecases/onboarding/register_device_uc.dart';
 import 'package:app/features/user/domain/usecases/profile/get_user_profile_uc.dart';
+import 'package:app/service/socket/socket_service.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:resources/resources.dart';
+import 'package:socket_io_client/socket_io_client.dart';
 import 'package:utilities/utilities.dart';
 
 part 'welcome_bloc.freezed.dart';
@@ -136,6 +138,7 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
       emit(state.copyWith(isLoading: true));
       final tokenModel = await _checkAuthenticatedUseCase.executeObj();
       if (tokenModel.netData?.accessToken != '') {
+        getIt<SocketService>().connectSocket();
         await _getUserProfileUseCase.executeObj();
         emit(state.copyWith(isAuthenticated: true, isLoading: false));
       }

@@ -29,7 +29,8 @@ class App extends StatelessWidget {
       child: BlocBuilder<AppThemeLanguageCubit, AppThemeLanguageState>(
         builder: (context, state) {
           return MaterialApp.router(
-            title: 'Flutter Demo',
+            title: 'CS Messenger',
+            debugShowCheckedModeBanner: false,
             supportedLocales: R.appLocalizationDelegate.supportedLocales,
             localizationsDelegates: const [
               R.appLocalizationDelegate,
@@ -39,6 +40,7 @@ class App extends StatelessWidget {
             ],
             locale: state.language,
             themeMode: state.theme,
+            color: Colors.white,
             theme: AppThemeData.lightThemeData(context),
             darkTheme: AppThemeData.darkThemeData(context),
             routerConfig: getIt<AppRouter>().config(),
