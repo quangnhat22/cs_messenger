@@ -1,9 +1,11 @@
+import 'package:app/configs/di/di.dart';
 import 'package:app/features/auth/data/sources/firebase/auth_firebase_data_source.dart';
 import 'package:app/features/auth/data/sources/local/auth_local_data_src.dart';
 import 'package:app/features/auth/data/sources/local/device_info_local_data_src.dart';
 import 'package:app/features/auth/data/sources/local/first_install_app_local_data_src.dart';
 import 'package:app/features/auth/data/sources/remote/auth_remote_data_src.dart';
 import 'package:app/features/auth/domain/repositories/auth_repository.dart';
+import 'package:app/service/socket/socket_service.dart';
 import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
 import 'package:utilities/utilities.dart';
@@ -65,6 +67,7 @@ class AuthRepositoryImpl extends AuthRepository {
       await _authRemoteDataSource.logOut();
       await _authFirebaseDataSource.logOut();
       await _removeLocal();
+      getIt<SocketService>().socketDisconnect();
       return AppObjResultModel<EmptyModel>(netData: EmptyModel());
     } on NetworkException catch (_) {
       rethrow;

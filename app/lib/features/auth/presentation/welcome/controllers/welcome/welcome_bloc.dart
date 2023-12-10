@@ -55,8 +55,6 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
     try {
       emit(state.copyWith(isLoading: true));
 
-      getIt<SocketService>().socketDisconnected();
-
       final welcomeModel = await _getIsFirstInstalledUseCase.executeObj();
       final idRemoteDeviceModel = await _getIdRemoteDeviceUseCase.executeObj();
 
