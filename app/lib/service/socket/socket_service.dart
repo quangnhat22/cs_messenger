@@ -3,13 +3,24 @@ import 'package:injectable/injectable.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:utilities/utilities.dart';
 
-@Singleton()
-class SocketService {
+abstract class RealtimeService {
+  void connectSocket();
+
+  void disconnectSocket();
+
+  void sendMessages(Map<String, dynamic> message);
+}
+
+@Singleton(as: RealtimeService)
+class SocketService implements RealtimeService {
   late final IO.Socket _socket;
   late final AuthLocalDataSource _authLocalDataSource;
 
   SocketService(this._authLocalDataSource);
 
+  static String _newMessageEvent = 'new-message';
+
+  @override
   void connectSocket() async {
     final token = await _authLocalDataSource.getToken();
     _socket = IO.io(
@@ -27,7 +38,7 @@ class SocketService {
     _socket.onConnect((data) => Logs.d("connected"));
     _socket.onDisconnect((data) => Logs.d("disconnected"));
     _socket.on('register', (data) => Logs.d(data));
-    // _socket.on('new-message', ((data) => socketNewMessage(data)));
+    _socket.on('new-message', ((data) => Logs.d(data)));
     // _socket.on('new-notification', ((data) => socketNewNotification(data)));
     // _socket.on('webrtc', ((data) => socketNewCallWebRTC(data)));
     // _socket.on('email-verified', ((data) => socketNewEmailVerified(data)));
@@ -36,7 +47,13 @@ class SocketService {
     // _socket.on('room-left', ((_) => socketNewEventChatRoom()));
   }
 
-  void socketDisconnect() {
+  @override
+  void disconnectSocket() {
     _socket.disconnect();
+  }
+
+  @override
+  void sendMessages(Map<String, dynamic> message) {
+    _socket.emit(_newMessageEvent, message);
   }
 }

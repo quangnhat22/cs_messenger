@@ -3,6 +3,9 @@ import 'package:app/components/main/card/app_card_base_builder.dart';
 import 'package:app/components/main/listView/app_list_view_widget.dart';
 import 'package:app/components/main/listView/controllers/app_list_view_cubit.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
+import 'package:app/configs/di/di.dart';
+import 'package:app/configs/routes/app_router.dart';
+import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:app/features/group/presentation/group_dashboard/controllers/cubit_list_group.dart';
 import 'package:domain/domain.dart';
@@ -43,7 +46,9 @@ class GroupListWidget extends StatelessWidget {
         .setHasBottomBorderRadius(index == 99)
         .setActions([
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              getIt<AppRouter>().push(ChatRoute(roomId: group.roomId));
+            },
             icon: const Icon(Icons.message_outlined),
           )
         ])

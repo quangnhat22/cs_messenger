@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:domain/domain.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'app_param.dart';
@@ -10,8 +13,8 @@ part 'base_param.freezed.dart';
 part 'base_param.g.dart';
 part 'friends/get_list_call_history_param.dart';
 part 'friends/get_list_friend_param.dart';
-part 'group/get_list_group_param.dart';
 part 'group/create_new_group_param.dart';
+part 'group/get_list_group_param.dart';
 part 'message/audio_message_param.dart';
 part 'message/emoji_message_param.dart';
 part 'message/file_message_param.dart';
@@ -19,6 +22,7 @@ part 'message/i_message_param.dart';
 part 'message/image_message_param.dart';
 part 'message/map_message_param.dart';
 part 'message/preview_data_param.dart';
+part 'message/socket_message_param.dart';
 part 'message/text_message_param.dart';
 part 'message/video_message_param.dart';
 part 'request/action_request_param.dart';

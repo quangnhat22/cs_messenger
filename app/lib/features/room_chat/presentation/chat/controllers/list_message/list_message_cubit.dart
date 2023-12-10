@@ -1,4 +1,5 @@
 import 'package:app/configs/exts/app_exts.dart';
+import 'package:app/features/room_chat/domain/usecases/send_message_usecase.dart';
 import 'package:app/features/user/domain/usecases/profile/get_user_profile_local_uc.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,13 +13,14 @@ part 'list_message_state.dart';
 @Injectable()
 class ListMessageCubit extends Cubit<ListMessageState> {
   late final GetUserProfileLocalUseCase _getUserProfileLocalUseCase;
+  late final SendMessageUseCase _sendMessageUseCase;
 
-  ListMessageCubit(this._getUserProfileLocalUseCase)
+  ListMessageCubit(this._getUserProfileLocalUseCase, this._sendMessageUseCase)
       : super(const ListMessageState.initial());
 
-  Future<void> initPage() async {
+  Future<void> initPage(String roomId) async {
     try {
-      emit(state.copyWith(isLoading: true));
+      emit(state.copyWith(isLoading: true, roomId: roomId));
       final userResponse = await _getUserProfileLocalUseCase.executeObj();
       emit(state.copyWith(currentUser: userResponse.netData));
 
@@ -368,20 +370,23 @@ class ListMessageCubit extends Cubit<ListMessageState> {
 
   Future<void> sendTextMessage(TextMessageParam message) async {
     try {
-      if (state.currentUser == null) {
-        return;
-      }
-
-      final tempMessage = TextMessageModel.getTextMessageModelFromParam(
-          message, state.currentUser!);
-
-      emit(state.copyWith(listMessage: [tempMessage, ...state.listMessage]));
-
-      // Future.delayed(const Duration(seconds: 2), () {
-      //   emit(state.copyWith(
-      //     listMessage: [...state.listMessage, _message],
-      //   ));
-      // });
+      final messageParams =
+          SocketMessageParam.convert2SocketMessageParam(message, state.roomId);
+      _sendMessageUseCase.executeObj(request: messageParams);
+      // if (state.currentUser == null) {
+      //   return;
+      // }
+      //
+      // final tempMessage = TextMessageModel.getTextMessageModelFromParam(
+      //     message, state.currentUser!);
+      //
+      // emit(state.copyWith(listMessage: [tempMessage, ...state.listMessage]));
+      //
+      // // Future.delayed(const Duration(seconds: 2), () {
+      // //   emit(state.copyWith(
+      // //     listMessage: [...state.listMessage, _message],
+      // //   ));
+      // // });
     } on AppException catch (e) {}
   }
 }

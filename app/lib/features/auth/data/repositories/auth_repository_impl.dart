@@ -67,7 +67,7 @@ class AuthRepositoryImpl extends AuthRepository {
       await _authRemoteDataSource.logOut();
       await _authFirebaseDataSource.logOut();
       await _removeLocal();
-      getIt<SocketService>().socketDisconnect();
+      getIt<RealtimeService>().disconnectSocket();
       return AppObjResultModel<EmptyModel>(netData: EmptyModel());
     } on NetworkException catch (_) {
       rethrow;

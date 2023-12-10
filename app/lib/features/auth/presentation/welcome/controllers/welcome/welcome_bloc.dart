@@ -137,7 +137,7 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
       emit(state.copyWith(isLoading: true));
       final tokenModel = await _checkAuthenticatedUseCase.executeObj();
       if (tokenModel.netData?.accessToken != '') {
-        getIt<SocketService>().connectSocket();
+        getIt<RealtimeService>().connectSocket();
         await _getUserProfileUseCase.executeObj();
         emit(state.copyWith(isAuthenticated: true, isLoading: false));
       }

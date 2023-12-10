@@ -10,13 +10,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
 class ChatPage extends StatelessWidget {
-  const ChatPage({super.key});
+  const ChatPage({super.key, required this.roomId});
+
+  final String roomId;
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [
-          BlocProvider(create: (_) => getIt<ListMessageCubit>()..initPage()),
+          BlocProvider(
+              create: (_) => getIt<ListMessageCubit>()..initPage(roomId)),
         ],
         child: AppMainPageWidget()
             .setAppBar(AppBarWidget()
