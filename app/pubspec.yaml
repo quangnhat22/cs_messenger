@@ -62,7 +62,11 @@ dependencies:
   file_picker: ^6.1.1
   mime: ^1.0.4
   flutter_sound:
-    path: ../flutter_sound-master/flutter_sound
+    git:
+      url: https://github.com/quangnhat22/flutter_sound.git
+      path: flutter_sound
+      ref: master
+
   permission_handler: ^11.0.1
   path: ^1.8.3
   giphy_get: ^3.5.2

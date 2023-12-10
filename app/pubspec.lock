@@ -708,9 +708,11 @@ packages:
   flutter_sound:
     dependency: "direct main"
     description:
-      path: "../flutter_sound-master/flutter_sound"
-      relative: true
-    source: path
+      path: flutter_sound
+      ref: master
+      resolved-ref: "5fca2d152502eca7a0b051880e875de31c75d671"
+      url: "https://github.com/quangnhat22/flutter_sound.git"
+    source: git
     version: "9.2.13"
   flutter_sound_platform_interface:
     dependency: transitive
