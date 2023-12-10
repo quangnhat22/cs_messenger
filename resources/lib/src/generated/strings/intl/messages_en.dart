@@ -68,6 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Password confirmation and Password must match."),
         "connectingPeopleAnytimeAnywhere": MessageLookupByLibrary.simpleMessage(
             "Connecting People, Anytime, Anywhere"),
+        "create": MessageLookupByLibrary.simpleMessage("Create"),
         "createAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Create account success! Please login to continue."),
         "createGroupFail":
@@ -130,6 +131,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Get connect with your friends"),
         "gotIt": MessageLookupByLibrary.simpleMessage("Got it"),
         "groupName": MessageLookupByLibrary.simpleMessage("Group name"),
+        "groupNameCannotBeEmpty":
+            MessageLookupByLibrary.simpleMessage("Group name cannot be empty"),
         "groupRequest": MessageLookupByLibrary.simpleMessage("Group request"),
         "groups": MessageLookupByLibrary.simpleMessage("Groups"),
         "historyDevices": MessageLookupByLibrary.simpleMessage("History"),

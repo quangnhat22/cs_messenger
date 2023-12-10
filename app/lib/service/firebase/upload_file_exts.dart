@@ -73,4 +73,24 @@ class UploadFileExts {
       return null;
     }
   }
+
+  static Future<String?> uploadAndDownloadUrlFile(String filePath) async {
+    try {
+      //get name for file by random time.
+      String uniqueImageName = DateTime.now().microsecondsSinceEpoch.toString();
+      // path for file in firestore
+      Reference ref = FirebaseStorage.instance.ref();
+      Reference refDirImage = ref.child(TypeFile.images.type);
+      Reference refToUpload = refDirImage.child(uniqueImageName);
+
+      UploadTask? uploadTask = refToUpload.putFile(File(filePath));
+
+      final snapshot = await uploadTask.whenComplete(() => {});
+      final urlDownloadImage = await snapshot.ref.getDownloadURL();
+      return urlDownloadImage;
+    } catch (err) {
+      Logs.e('Failed to pick image: $err');
+      return null;
+    }
+  }
 }

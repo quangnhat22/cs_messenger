@@ -68,6 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Xác nhận mật khẩu không trùng với Mật khẩu"),
         "connectingPeopleAnytimeAnywhere": MessageLookupByLibrary.simpleMessage(
             "Kết nối với bạn bè ở mọi lúc, mọi Nơi"),
+        "create": MessageLookupByLibrary.simpleMessage("Tạo"),
         "createAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Tạo tài khoản thành công! Vui lòng đăng nhập để tiếp tục."),
         "createGroupFail":
@@ -132,6 +133,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kết nối với \"network\" của bạn"),
         "gotIt": MessageLookupByLibrary.simpleMessage("Hiểu rồi"),
         "groupName": MessageLookupByLibrary.simpleMessage("Tên nhóm"),
+        "groupNameCannotBeEmpty": MessageLookupByLibrary.simpleMessage(
+            "Tên nhóm không được để trống"),
         "groupRequest": MessageLookupByLibrary.simpleMessage("Lời mời nhóm"),
         "groups": MessageLookupByLibrary.simpleMessage("Nhóm"),
         "historyDevices":

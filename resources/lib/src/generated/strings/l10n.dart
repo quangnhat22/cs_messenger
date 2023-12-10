@@ -1659,6 +1659,26 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Tên nhóm không được để trống`
+  String get groupNameCannotBeEmpty {
+    return Intl.message(
+      'Tên nhóm không được để trống',
+      name: 'groupNameCannotBeEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tạo`
+  String get create {
+    return Intl.message(
+      'Tạo',
+      name: 'create',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

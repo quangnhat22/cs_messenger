@@ -17,7 +17,19 @@ class GroupRepositoryImpl extends GroupRepository {
       final AppListResultRaw<GroupRaw> remoteData =
           await _remote.fetchListGroup(query: query);
       return remoteData.raw2Model();
-    } on NetworkException catch (_) {
+    } on AppException catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<AppObjResultModel<EmptyModel>> createNewGroup(
+      {required Map<String, dynamic> request}) async {
+    try {
+      final AppObjResultRaw<EmptyRaw> remoteData =
+          await _remote.createNewGroup(query: request);
+      return remoteData.raw2Model();
+    } on AppException catch (_) {
       rethrow;
     }
   }

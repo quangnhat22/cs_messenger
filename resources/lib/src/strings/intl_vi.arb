@@ -195,5 +195,7 @@
   "groupName": "Tên nhóm",
   "members": "Thành viên",
   "selected": "Đã chọn",
-  "doYouWantToExit": "Bạn có muốn thoát khỏi trang này?"
+  "doYouWantToExit": "Bạn có muốn thoát khỏi trang này?",
+  "groupNameCannotBeEmpty": "Tên nhóm không được để trống",
+  "create": "Tạo"
 }

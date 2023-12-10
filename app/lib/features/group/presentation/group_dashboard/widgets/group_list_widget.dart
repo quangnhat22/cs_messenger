@@ -1,3 +1,4 @@
+import 'package:app/components/main/avatar/app_avatar_base_builder.dart';
 import 'package:app/components/main/card/app_card_base_builder.dart';
 import 'package:app/components/main/listView/app_list_view_widget.dart';
 import 'package:app/components/main/listView/controllers/app_list_view_cubit.dart';
@@ -33,7 +34,10 @@ class GroupListWidget extends StatelessWidget {
   Widget _buildCardGroupItem(
       BuildContext context, GroupModel group, int index) {
     return AppCardBorderWidget()
-        .setLeading(const CircleAvatar(radius: 24))
+        .setLeading(AppAvatarCircleWidget()
+            .setSize(AppAvatarSize.medium)
+            .setUrl(group.avatar)
+            .build(context))
         .setTitle(AppTextTitleMediumWidget().setText(group.name).build(context))
         .setHasTopBorderRadius(index == 0)
         .setHasBottomBorderRadius(index == 99)

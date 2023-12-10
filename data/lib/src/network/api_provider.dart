@@ -43,6 +43,11 @@ class ApiProvider {
 
   static String friendById(String id) => '$friend/$id';
 
+  //group
+  static const String group = '/group';
+
+  static String groupById(String id) => '$group/$id';
+
   //TODO: mockApi
   static const String mockServerUrl =
       'https://166706c7-b0dd-4262-a9a8-9e7b5f3dd1be.mock.pstmn.io';

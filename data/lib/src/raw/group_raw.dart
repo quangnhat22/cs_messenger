@@ -7,6 +7,9 @@ class GroupRaw extends BaseRaw<GroupModel> with _$GroupRaw {
   factory GroupRaw({
     required String id,
     required String name,
+    String? avatar,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: 'room_id') required String roomId,
   }) = _GroupRaw;
 
   factory GroupRaw.fromJson(Map<String, Object?> json) =>
@@ -17,6 +20,8 @@ class GroupRaw extends BaseRaw<GroupModel> with _$GroupRaw {
     return GroupModel(
       id: id,
       name: name,
+      avatar: avatar,
+      roomId: roomId,
     );
   }
 }

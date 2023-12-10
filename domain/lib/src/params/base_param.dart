@@ -11,6 +11,7 @@ part 'base_param.g.dart';
 part 'friends/get_list_call_history_param.dart';
 part 'friends/get_list_friend_param.dart';
 part 'group/get_list_group_param.dart';
+part 'group/create_new_group_param.dart';
 part 'message/audio_message_param.dart';
 part 'message/emoji_message_param.dart';
 part 'message/file_message_param.dart';

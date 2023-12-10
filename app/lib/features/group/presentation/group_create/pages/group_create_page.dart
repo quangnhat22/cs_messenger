@@ -1,10 +1,10 @@
 import 'package:app/components/main/appBar/app_bar_base_builder.dart';
+import 'package:app/components/main/button/app_button_base_builder.dart';
 import 'package:app/components/main/dialog/app_dialog_base_builder.dart';
 import 'package:app/components/main/page/app_main_page_base_builder.dart';
 import 'package:app/components/main/textField/app_field_base_builder.dart';
 import 'package:app/configs/di/di.dart';
 import 'package:app/configs/exts/app_exts.dart';
-import 'package:app/configs/routes/app_router.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:app/features/friend/presentation/invite_friend/pages/inivite_friend_page.dart';
 import 'package:app/features/group/presentation/group_create/controllers/create_group_name_form.cubit.dart';
@@ -59,48 +59,87 @@ class GroupCreatePage extends StatelessWidget {
   }
 
   Widget _body(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(AppSizeExt.of.majorPaddingScale(4)),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(height: AppSizeExt.of.majorScale(2)),
-            const CreateGroupImageWidget(),
-            SizedBox(height: AppSizeExt.of.majorScale(5)),
-            Builder(
-              builder: (context) {
-                return AppTextFieldWidget()
-                    .setBloc(context.read<CreateGroupNameFormBloc>().groupName)
-                    .setOnChanged((value) {
-                      context
-                          .read<CreateGroupFormCubit>()
-                          .groupNameChanged(value);
-                    })
-                    .setIsRequired(true)
-                    .setKeyboardType(TextInputType.text)
-                    .setAutoFillHints([AutofillHints.name])
-                    .setLabelText(R.strings.groupName)
+    return Column(
+      children: <Widget>[
+        Expanded(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.all(AppSizeExt.of.majorPaddingScale(4)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: AppSizeExt.of.majorScale(2)),
+                  const CreateGroupImageWidget(),
+                  SizedBox(height: AppSizeExt.of.majorScale(5)),
+                  Builder(
+                    builder: (context) {
+                      return AppTextFieldWidget()
+                          .setBloc(
+                              context.read<CreateGroupNameFormBloc>().groupName)
+                          .setOnChanged((value) {
+                            context
+                                .read<CreateGroupFormCubit>()
+                                .groupNameChanged(value);
+                          })
+                          .setIsRequired(true)
+                          .setKeyboardType(TextInputType.text)
+                          .setAutoFillHints([AutofillHints.name])
+                          .setLabelText(R.strings.groupName)
+                          .build(context);
+                    },
+                  ),
+                  SizedBox(
+                    height: AppSizeExt.of.majorScale(4),
+                  ),
+                  const CreateGroupListMemberWidget(),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Material(
+          elevation: AppConstants.numberElevationContainer,
+          child: Padding(
+            padding: EdgeInsets.all(AppSizeExt.of.majorScale(4)),
+            child: BlocBuilder<CreateGroupFormCubit, CreateGroupFormState>(
+              builder: (context, state) {
+                return AppButtonFilledWidget()
+                    .setButtonText(R.strings.create.toUpperCase())
+                    .setAppButtonSize(AppButtonSize.large)
+                    .setBackgroundColor(Theme.of(context).colorScheme.primary)
+                    .setTextStyle(TextStyle(
+                        color: Theme.of(context).colorScheme.background))
+                    .setOnPressed(state.groupName.isNotEmpty
+                        ? () async {
+                            await context
+                                .read<CreateGroupFormCubit>()
+                                .createNewGroup();
+                            if (context.mounted) {
+                              Navigator.of(context).pop(true);
+                            }
+                          }
+                        : null)
                     .build(context);
               },
             ),
-            SizedBox(
-              height: AppSizeExt.of.majorScale(4),
-            ),
-            const CreateGroupListMemberWidget(),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 
   Widget _fabAddMemberButton(BuildContext context) {
     return BlocBuilder<CreateGroupFormCubit, CreateGroupFormState>(
       builder: (context, state) {
-        return FloatingActionButton(
-          onPressed: () async =>
-              await _showBottomSheetAddMember(context, state.members ?? []),
-          child: const Icon(Icons.add),
+        return Container(
+          margin: EdgeInsets.only(
+            bottom: AppSizeExt.of.majorScale(20),
+          ),
+          child: FloatingActionButton(
+            onPressed: () async =>
+                await _showBottomSheetAddMember(context, state.members ?? []),
+            child: const Icon(Icons.add),
+          ),
         );
       },
     );

@@ -196,5 +196,7 @@
   "groupName": "Group name",
   "members": "Members",
   "selected": "Selected",
-  "doYouWantToExit": "Do you want to exit this page?"
+  "doYouWantToExit": "Do you want to exit this page?",
+  "groupNameCannotBeEmpty": "Group name cannot be empty",
+  "create": "Create"
 }
