@@ -27,6 +27,7 @@ class ChatFloatTopWidget extends StatelessWidget {
               .setBackgroundColor(Colors.transparent)
               .setLeading(AppAvatarCircleWidget()
                   .setSize(AppAvatarSize.medium)
+                  //TODO: set url
                   .setUrl('url')
                   .build(context))
               .setActions([

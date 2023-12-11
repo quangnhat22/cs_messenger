@@ -2,12 +2,13 @@ import 'package:app/components/features/message/chat.dart';
 import 'package:app/components/main/appBar/app_bar_base_builder.dart';
 import 'package:app/components/main/page/app_main_page_base_builder.dart';
 import 'package:app/configs/di/di.dart';
+import 'package:app/configs/routes/app_router.dart';
+import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/features/room_chat/presentation/chat/controllers/list_message/list_message_cubit.dart';
 import 'package:app/features/room_chat/presentation/chat/widgets/chat_info_app_bar_widget.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:utilities/utilities.dart';
 
 @RoutePage()
 class ChatPage extends StatelessWidget {
@@ -33,7 +34,9 @@ class ChatPage extends StatelessWidget {
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  getIt<AppRouter>().push(const PersonalDetailChatRoomRoute());
+                },
                 icon: const Icon(
                   Icons.more_vert,
                 ),
@@ -56,9 +59,6 @@ class ChatPage extends StatelessWidget {
           onAttachmentPressed: () {},
           onMessageTap: (_, __) {},
           onPreviewDataFetched: (_, __) {},
-          onSendPressed: (textMessage) async {
-            await context.read<ListMessageCubit>().sendTextMessage(textMessage);
-          },
           isFirstPage: state.isFirstPage,
           isLastPage: state.isLastPage,
           onEndReached: () async {
@@ -72,14 +72,19 @@ class ChatPage extends StatelessWidget {
           isLeftStatus: true,
           onEndReachedThreshold: 0.6,
           onStartReachedThreshold: 0.8,
-          onMapSent: (mapParams) {
-            Logs.d(mapParams);
+          onSendPressed: (textParam) async {
+            context.read<ListMessageCubit>().sendTextMessage(textParam);
+          },
+          onMapSent: (mapParam) {
+            context.read<ListMessageCubit>().sendMapMessage(mapParam);
           },
           onAudioSent: (audioParams) {},
           onFileSent: (fileParams) {},
           onImageSent: (imageParams) {},
           onVideoSent: (videoParams) {},
-          onStickerSent: (stickerParams) {},
+          onStickerSent: (stickerParams) {
+            context.read<ListMessageCubit>().sendEmojiMessage(stickerParams);
+          },
         );
       },
     );

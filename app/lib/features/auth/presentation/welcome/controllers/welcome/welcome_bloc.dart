@@ -10,6 +10,7 @@ import 'package:app/features/auth/domain/usecases/onboarding/get_id_remote_devic
 import 'package:app/features/auth/domain/usecases/onboarding/get_is_first_installed_uc.dart';
 import 'package:app/features/auth/domain/usecases/onboarding/register_device_uc.dart';
 import 'package:app/features/user/domain/usecases/profile/get_user_profile_uc.dart';
+import 'package:app/service/onesignal/onesignal_service.dart';
 import 'package:app/service/socket/socket_service.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -54,6 +55,8 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
   Future<void> _started(_Started event, Emitter<WelcomeState> emit) async {
     try {
       emit(state.copyWith(isLoading: true));
+
+      await getIt<OneSignalService>().init();
 
       final welcomeModel = await _getIsFirstInstalledUseCase.executeObj();
       final idRemoteDeviceModel = await _getIdRemoteDeviceUseCase.executeObj();

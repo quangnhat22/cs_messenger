@@ -382,7 +382,7 @@ class ListMessageCubit extends Cubit<ListMessageState> {
     }
   }
 
-  Future<void> sendTextMessage(TextMessageParam message) async {
+  void sendTextMessage(TextMessageParam message) async {
     try {
       final messageParams =
           SocketMessageParam.convert2SocketMessageParam(message, state.roomId);
@@ -401,6 +401,28 @@ class ListMessageCubit extends Cubit<ListMessageState> {
       // //     listMessage: [...state.listMessage, _message],
       // //   ));
       // // });
-    } on AppException catch (e) {}
+    } on AppException catch (e) {
+      Logs.e(e);
+    }
+  }
+
+  void sendMapMessage(MapMessageParam message) async {
+    try {
+      final messageParams =
+          SocketMessageParam.convert2SocketMessageParam(message, state.roomId);
+      _sendMessageUseCase.executeObj(request: messageParams);
+    } on AppException catch (e) {
+      Logs.e(e);
+    }
+  }
+
+  void sendEmojiMessage(EmojiMessageParam message) async {
+    try {
+      final messageParams =
+          SocketMessageParam.convert2SocketMessageParam(message, state.roomId);
+      _sendMessageUseCase.executeObj(request: messageParams);
+    } on AppException catch (e) {
+      Logs.e(e);
+    }
   }
 }

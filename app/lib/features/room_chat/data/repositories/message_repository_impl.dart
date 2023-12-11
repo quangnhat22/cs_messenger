@@ -26,8 +26,8 @@ class MessageRepositoryImpl extends MessageRepository {
 
   @override
   Stream<AppObjResultModel<IMessageModel>> getNewMessageStream() {
-    return _realtimeService.getReceiveNewMessageStream().map((userRaw) {
-      return userRaw.raw2Model();
+    return _realtimeService.getReceiveNewMessageStream().map((messageRaw) {
+      return messageRaw.raw2Model();
     });
   }
 }

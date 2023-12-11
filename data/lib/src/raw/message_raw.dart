@@ -42,6 +42,43 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
               : null,
           clientId: clientId,
         );
+      case "map":
+        return MapMessageModel(
+          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          author: author.raw2Model(),
+          content: content,
+          type: MessageType.map,
+          isMe: isMe,
+          status: StatusMessageType.convertString2StatusMessageType(status),
+          roomId: roomId,
+          createdAt: createdAt != null
+              ? DateTimeExt.convertTimeStampToDateTime(createdAt!)
+              : null,
+          deletedAt: deletedAt != null
+              ? DateTimeExt.convertTimeStampToDateTime(deletedAt!)
+              : null,
+          clientId: clientId,
+          name: content,
+          lat: 10.782637,
+          long: 106.695944,
+        );
+      case "gif":
+        return EmojiStickerModel(
+          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          author: author.raw2Model(),
+          content: content,
+          type: MessageType.emoji,
+          isMe: isMe,
+          status: StatusMessageType.convertString2StatusMessageType(status),
+          roomId: roomId,
+          createdAt: createdAt != null
+              ? DateTimeExt.convertTimeStampToDateTime(createdAt!)
+              : null,
+          deletedAt: deletedAt != null
+              ? DateTimeExt.convertTimeStampToDateTime(deletedAt!)
+              : null,
+          clientId: clientId,
+        );
       // case "system":
       //   return SystemMessageModel(
       //     id: id,
@@ -104,15 +141,14 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
       //     id: id,
       //     clientId: clientId,
       //     author: author.raw2Model(),
-      //     createdAt: DateTimeExt.convertTimeStampToDateTime(createdAt),
-      //     repliedMessage: repliedMessage?.raw2Model(),
+      //     createdAt: DateTimeExt.convertTimeStampToDateTime(createdAt!),
       //     roomId: roomId,
       //     status: StatusMessageType.convertString2StatusMessageType(status),
       //     type: MessageType.convertString2MessageType(type),
-      //     metadata: metadata,
       //     size: size ?? 0,
       //     uri: uri ?? '',
-      //     name: name ?? '',
+      //     name: content ?? '',
+      //     content: content ?? 'File',
       //   );
       default:
         throw Exception("Message type not found");

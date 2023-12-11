@@ -28,7 +28,7 @@ enum MessageType {
   video(value: "video"),
   file(value: "file"),
   map(value: "map"),
-  emoji(value: "emoji"),
+  emoji(value: "gif"),
   custom(value: "custom");
 
   const MessageType({required this.value});

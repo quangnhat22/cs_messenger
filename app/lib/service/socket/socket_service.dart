@@ -76,18 +76,7 @@ class SocketService implements RealtimeService {
   @override
   void updateReceiveNewMessageStream(data) {
     final response = AppResponse.fromJson(data as Map<String, dynamic>);
-
-    final rawData = <String, Object?>{
-      ...response.data,
-      "author": {
-        'id': '2',
-        'name': 'Nguyen Van A',
-        'avatar': 'https://i.pravatar.cc/150?img=3',
-      },
-    };
-
-    final newMessageRaw = MessageRaw.fromJson(rawData);
-    final result = AppObjResultRaw(netData: newMessageRaw);
+    final result = response.toRaw((data) => MessageRaw.fromJson(response.data));
     newMessageController.sink.add(result);
   }
 
