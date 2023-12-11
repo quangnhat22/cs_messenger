@@ -22,13 +22,16 @@ class EmojiMessage extends StatelessWidget {
       builder: (stream, giphyGetWrapper) => StreamBuilder<GiphyGif>(
         stream: stream,
         builder: (context, _) {
-          return GiphyGifWidget(
-            imageAlignment: Alignment.center,
-            gif: GiphyGif.fromJson(jsonDecode(message.content)),
-            giphyGetWrapper: giphyGetWrapper,
-            borderRadius: BorderRadius.circular(AppSizeExt.of.majorScale(4)),
-            showGiphyLabel: false,
-          );
+          return message.link != null
+              ? GiphyGifWidget(
+                  imageAlignment: Alignment.center,
+                  gif: GiphyGif.fromJson(jsonDecode(message.link!)),
+                  giphyGetWrapper: giphyGetWrapper,
+                  borderRadius:
+                      BorderRadius.circular(AppSizeExt.of.majorScale(4)),
+                  showGiphyLabel: false,
+                )
+              : SizedBox();
         },
       ),
     );

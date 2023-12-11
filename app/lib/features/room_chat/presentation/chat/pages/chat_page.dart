@@ -78,10 +78,24 @@ class ChatPage extends StatelessWidget {
           onMapSent: (mapParam) {
             context.read<ListMessageCubit>().sendMapMessage(mapParam);
           },
-          onAudioSent: (audioParams) {},
-          onFileSent: (fileParams) {},
-          onImageSent: (imageParams) {},
-          onVideoSent: (videoParams) {},
+          onAudioSent: (audioParams) async {
+            await context
+                .read<ListMessageCubit>()
+                .sendAudioMessage(audioParams);
+          },
+          onFileSent: (fileParams) async {
+            await context.read<ListMessageCubit>().sendFileMessage(fileParams);
+          },
+          onImageSent: (imageParams) async {
+            await context
+                .read<ListMessageCubit>()
+                .sendImageMessage(imageParams);
+          },
+          onVideoSent: (videoParams) async {
+            await context
+                .read<ListMessageCubit>()
+                .sendVideoMessage(videoParams);
+          },
           onStickerSent: (stickerParams) {
             context.read<ListMessageCubit>().sendEmojiMessage(stickerParams);
           },

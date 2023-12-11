@@ -62,6 +62,8 @@ class SocketMessageParam extends IMessageParam with _$SocketMessageParam {
     } else if (messageParam is FileMessageParam) {
       final meta = <String, dynamic>{
         'name': messageParam.name,
+        'mimeType': messageParam.mimeType,
+        'size': messageParam.size,
       };
       return SocketMessageParam(
         roomId: roomId,
@@ -84,7 +86,8 @@ class SocketMessageParam extends IMessageParam with _$SocketMessageParam {
     } else if (messageParam is EmojiMessageParam) {
       return SocketMessageParam(
         roomId: roomId,
-        content: messageParam.link,
+        content: "",
+        extra: messageParam.link,
         type: MessageType.emoji.value,
       );
     } else {

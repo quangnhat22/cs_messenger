@@ -24,6 +24,8 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
 
   @override
   IMessageModel raw2Model() {
+    final extraMessage =
+        extra != null && extra!.isNotEmpty ? jsonDecode(extra!) : null;
     switch (type) {
       case "text":
         return TextMessageModel(
@@ -43,6 +45,9 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
           clientId: clientId,
         );
       case "map":
+        final name = extraMessage?['name'] as String?;
+        final lat = extraMessage?['lat'] as double?;
+        final long = extraMessage?['long'] as double?;
         return MapMessageModel(
           id: DateTime.now().millisecondsSinceEpoch.toString(),
           author: author.raw2Model(),
@@ -58,9 +63,9 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
               ? DateTimeExt.convertTimeStampToDateTime(deletedAt!)
               : null,
           clientId: clientId,
-          name: content,
-          lat: 10.782637,
-          long: 106.695944,
+          name: name,
+          lat: lat ?? 10.782637,
+          long: long ?? 106.695944,
         );
       case "gif":
         return EmojiStickerModel(
@@ -78,78 +83,102 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
               ? DateTimeExt.convertTimeStampToDateTime(deletedAt!)
               : null,
           clientId: clientId,
+          link: extra,
         );
-      // case "system":
-      //   return SystemMessageModel(
-      //     id: id,
-      //     clientId: clientId,
-      //     author: author.raw2Model(),
-      //     createdAt: DateTimeExt.convertTimeStampToDateTime(createdAt),
-      //     repliedMessage: repliedMessage?.raw2Model(),
-      //     roomId: roomId,
-      //     status: StatusMessageType.convertString2StatusMessageType(status),
-      //     type: MessageType.convertString2MessageType(type),
-      //     metadata: metadata,
-      //     text: text ?? '-',
-      //   );
-      // case "image":
-      //   return ImageMessageModel(
-      //     id: id,
-      //     clientId: clientId,
-      //     author: author.raw2Model(),
-      //     createdAt: DateTimeExt.convertTimeStampToDateTime(createdAt),
-      //     repliedMessage: repliedMessage?.raw2Model(),
-      //     roomId: roomId,
-      //     status: StatusMessageType.convertString2StatusMessageType(status),
-      //     type: MessageType.convertString2MessageType(type),
-      //     metadata: metadata,
-      //     size: size ?? 0,
-      //     uri: uri ?? '',
-      //     name: name ?? '',
-      //   );
-      // case "audio":
-      //   return AudioMessageModel(
-      //     id: id,
-      //     clientId: clientId,
-      //     author: author.raw2Model(),
-      //     createdAt: DateTimeExt.convertTimeStampToDateTime(createdAt),
-      //     repliedMessage: repliedMessage?.raw2Model(),
-      //     roomId: roomId,
-      //     status: StatusMessageType.convertString2StatusMessageType(status),
-      //     type: MessageType.convertString2MessageType(type),
-      //     metadata: metadata,
-      //     uri: uri ?? '',
-      //     name: name ?? '',
-      //   );
-      // case "video":
-      //   return VideoMessageModel(
-      //     id: id,
-      //     clientId: clientId,
-      //     author: author.raw2Model(),
-      //     createdAt: DateTimeExt.convertTimeStampToDateTime(createdAt),
-      //     repliedMessage: repliedMessage?.raw2Model(),
-      //     roomId: roomId,
-      //     status: StatusMessageType.convertString2StatusMessageType(status),
-      //     type: MessageType.convertString2MessageType(type),
-      //     metadata: metadata,
-      //     size: size ?? 0,
-      //     uri: uri ?? '',
-      //     name: name ?? '',
-      //   );
-      // case "file":
-      //   return FileMessageModel(
-      //     id: id,
-      //     clientId: clientId,
-      //     author: author.raw2Model(),
-      //     createdAt: DateTimeExt.convertTimeStampToDateTime(createdAt!),
-      //     roomId: roomId,
-      //     status: StatusMessageType.convertString2StatusMessageType(status),
-      //     type: MessageType.convertString2MessageType(type),
-      //     size: size ?? 0,
-      //     uri: uri ?? '',
-      //     name: content ?? '',
-      //     content: content ?? 'File',
-      //   );
+      case "system":
+        return SystemMessageModel(
+          id: id,
+          clientId: clientId,
+          author: author.raw2Model(),
+          createdAt: createdAt != null
+              ? DateTimeExt.convertTimeStampToDateTime(createdAt!)
+              : null,
+          roomId: roomId,
+          status: StatusMessageType.convertString2StatusMessageType(status),
+          type: MessageType.convertString2MessageType(type),
+          content: content,
+          isMe: isMe,
+        );
+      case "image":
+        final size = extraMessage?['size'] as double?;
+        final height = extraMessage?['height'] as double?;
+        final width = extraMessage?['width'] as double?;
+        final name = extraMessage?['name'] as String?;
+        return ImageMessageModel(
+          id: id,
+          clientId: clientId,
+          author: author.raw2Model(),
+          createdAt: createdAt != null
+              ? DateTimeExt.convertTimeStampToDateTime(createdAt!)
+              : null,
+          roomId: roomId,
+          status: StatusMessageType.convertString2StatusMessageType(status),
+          type: MessageType.convertString2MessageType(type),
+          size: size ?? 0,
+          uri: content,
+          name: name ?? '',
+          content: content,
+          width: width ?? 0.0,
+          height: height ?? 0.0,
+        );
+      case "audio":
+        final name = extraMessage?['name'] as String?;
+        return AudioMessageModel(
+          id: id,
+          clientId: clientId,
+          author: author.raw2Model(),
+          createdAt: createdAt != null
+              ? DateTimeExt.convertTimeStampToDateTime(createdAt!)
+              : null,
+          roomId: roomId,
+          status: StatusMessageType.convertString2StatusMessageType(status),
+          type: MessageType.convertString2MessageType(type),
+          uri: content,
+          content: content,
+          name: name ?? '',
+          isMe: isMe,
+        );
+      case "video":
+        final name = extraMessage?['name'] as String?;
+        final thumbnailUrl = extraMessage?['thumbnailUrl'] as String?;
+        final size = extraMessage?['size'] as double?;
+        return VideoMessageModel(
+          id: id,
+          clientId: clientId,
+          author: author.raw2Model(),
+          createdAt: createdAt != null
+              ? DateTimeExt.convertTimeStampToDateTime(createdAt!)
+              : null,
+          roomId: roomId,
+          status: StatusMessageType.convertString2StatusMessageType(status),
+          type: MessageType.convertString2MessageType(type),
+          size: size ?? 0,
+          content: content,
+          uri: content,
+          thumbnailUrl: thumbnailUrl ?? '',
+          isMe: isMe,
+          name: name,
+        );
+      case "file":
+        final size = extraMessage?['size'] as double?;
+        final name = extraMessage?['name'] as String?;
+        final mimeType = extraMessage?['mimeType'] as String?;
+        return FileMessageModel(
+          id: id,
+          clientId: clientId,
+          author: author.raw2Model(),
+          createdAt: createdAt != null
+              ? DateTimeExt.convertTimeStampToDateTime(createdAt!)
+              : null,
+          roomId: roomId,
+          status: StatusMessageType.convertString2StatusMessageType(status),
+          type: MessageType.convertString2MessageType(type),
+          size: size ?? 0,
+          uri: content,
+          name: name,
+          content: content,
+          mimeType: mimeType,
+        );
       default:
         throw Exception("Message type not found");
     }

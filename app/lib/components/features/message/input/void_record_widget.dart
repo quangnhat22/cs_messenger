@@ -71,13 +71,13 @@ class _VoiceSoundBottomSheetState extends State<VoiceSoundBottomSheet> {
     });
   }
 
-  void _handleSendRecord(BuildContext ctx) {
+  void _handleSendRecord(BuildContext ctx) async {
     if (pathFile != null) {
       File file = File(pathFile!);
       String name = basename(file.path);
       final audioParams = AudioMessageParam(uri: pathFile!, name: name);
       widget.onAudioSent?.call(audioParams);
-      getIt<AppRouter>().pop();
+      await getIt<AppRouter>().pop();
     }
   }
 

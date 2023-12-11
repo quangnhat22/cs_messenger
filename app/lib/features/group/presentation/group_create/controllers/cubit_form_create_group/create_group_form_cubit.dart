@@ -53,8 +53,8 @@ class CreateGroupFormCubit extends Cubit<CreateGroupFormState> {
       }
       AppLoadingOverlayWidget.show();
       if (state.groupImage != null && state.groupImage!.trim().isNotEmpty) {
-        final groupImageUrl =
-            await UploadFileExts.uploadAndDownloadUrlFile(state.groupImage!);
+        final groupImageUrl = await UploadFileExts.uploadAndDownloadUrlFile(
+            state.groupImage!, TypeFile.images.type);
         await _submitCreateNewGroupForm(groupImageNetworkUrl: groupImageUrl);
       } else {
         await _submitCreateNewGroupForm();

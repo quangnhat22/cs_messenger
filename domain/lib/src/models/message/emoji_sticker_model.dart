@@ -1,6 +1,8 @@
 part of '../base_model.dart';
 
 class EmojiStickerModel extends IMessageModel {
+  final String? link;
+
   EmojiStickerModel({
     required super.id,
     super.clientId,
@@ -12,5 +14,6 @@ class EmojiStickerModel extends IMessageModel {
     required super.roomId,
     super.createdAt,
     super.deletedAt,
+    this.link,
   });
 }

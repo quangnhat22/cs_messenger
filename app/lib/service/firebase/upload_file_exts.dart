@@ -7,7 +7,10 @@ import 'package:resources/resources.dart';
 import 'package:utilities/utilities.dart';
 
 enum TypeFile {
-  images("images");
+  images("images"),
+  files("files"),
+  videos("videos"),
+  audios("audios");
 
   const TypeFile(this.type);
 
@@ -74,13 +77,14 @@ class UploadFileExts {
     }
   }
 
-  static Future<String?> uploadAndDownloadUrlFile(String filePath) async {
+  static Future<String?> uploadAndDownloadUrlFile(
+      String filePath, String typeFile) async {
     try {
       //get name for file by random time.
       String uniqueImageName = DateTime.now().microsecondsSinceEpoch.toString();
       // path for file in firestore
       Reference ref = FirebaseStorage.instance.ref();
-      Reference refDirImage = ref.child(TypeFile.images.type);
+      Reference refDirImage = ref.child(typeFile);
       Reference refToUpload = refDirImage.child(uniqueImageName);
 
       UploadTask? uploadTask = refToUpload.putFile(File(filePath));

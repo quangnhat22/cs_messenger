@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:giphy_get/giphy_get.dart';
 import 'package:mime/mime.dart';
 import 'package:resources/resources.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 class MediaButtonsWidget extends StatelessWidget {
@@ -68,10 +69,18 @@ class MediaButtonsWidget extends StatelessWidget {
     final duration = assetEntity?.duration;
 
     if (file?.path != null && ctx.mounted) {
+      final uint8list = await VideoThumbnail.thumbnailFile(
+        video: file!.path,
+        imageFormat: ImageFormat.JPEG,
+        maxWidth: 128,
+        // specify the width of the thumbnail, let the height auto-scaled to keep the source aspect ratio
+        quality: 25,
+      );
       onVideoSent?.call(VideoMessageParam(
         name: name,
         size: size,
-        uri: file!.path,
+        uri: file.path,
+        thumbnailUrl: uint8list,
         duration: duration?.toDouble(),
       ));
     }
@@ -115,7 +124,8 @@ class MediaButtonsWidget extends StatelessWidget {
     final gif =
         await GiphyGet.getGif(context: ctx, apiKey: BuildConfig.giphyKey);
     if (gif != null && ctx.mounted) {
-      final stickerParams = EmojiMessageParam(link: jsonEncode(gif));
+      final content = jsonEncode(gif);
+      final stickerParams = EmojiMessageParam(link: content);
       onStickerSent?.call(stickerParams);
     }
   }
