@@ -220,6 +220,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "signUpWithEmail":
             MessageLookupByLibrary.simpleMessage("Sign up with email"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+        "someThingWrong":
+            MessageLookupByLibrary.simpleMessage("Something wrong! Try again."),
         "startChattingWithANewAccount": MessageLookupByLibrary.simpleMessage(
             "Start chatting with a new account"),
         "stayCloseNoMatterDistance": MessageLookupByLibrary.simpleMessage(

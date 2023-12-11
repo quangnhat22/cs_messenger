@@ -27,8 +27,6 @@ class GroupListWidget extends StatelessWidget {
             ListGroupCubit>(
           physics: const BouncingScrollPhysics(),
           childWidget: _buildCardGroupItem,
-          emptyView: const SizedBox(),
-          retryView: const SizedBox(),
         ),
       ),
     );

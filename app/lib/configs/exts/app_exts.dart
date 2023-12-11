@@ -5,6 +5,7 @@ import 'package:app/configs/di/di.dart';
 import 'package:app/configs/routes/app_router.dart';
 import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/features/auth/domain/usecases/auth/force_logout_uc.dart';
+import 'package:data/data.dart';
 import 'package:domain/domain.dart';
 import 'package:resources/resources.dart';
 import 'package:utilities/utilities.dart';

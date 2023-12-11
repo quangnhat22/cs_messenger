@@ -1,5 +1,7 @@
+import 'dart:async';
+
 import 'package:app/configs/exts/app_exts.dart';
-import 'package:app/features/room_chat/domain/usecases/send_message_usecase.dart';
+import 'package:app/features/room_chat/domain/usecases/send_message_uc.dart';
 import 'package:app/features/user/domain/usecases/profile/get_user_profile_local_uc.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +18,24 @@ class ListMessageCubit extends Cubit<ListMessageState> {
   late final SendMessageUseCase _sendMessageUseCase;
 
   ListMessageCubit(this._getUserProfileLocalUseCase, this._sendMessageUseCase)
-      : super(const ListMessageState.initial());
+      : super(const ListMessageState.initial()) {
+    _subGetNewMessage =
+        _sendMessageUseCase.getNewMessageStream().listen((messageModel) {
+      if (messageModel.netData != null) {
+        Logs.d(messageModel.netData);
+        _onReceiveNewMessage(messageModel.netData!);
+      }
+    });
+  }
+
+  late final StreamSubscription<AppObjResultModel<IMessageModel>>
+      _subGetNewMessage;
+
+  @override
+  Future<void> close() {
+    _subGetNewMessage.cancel();
+    return super.close();
+  }
 
   Future<void> initPage(String roomId) async {
     try {
@@ -135,6 +154,12 @@ class ListMessageCubit extends Cubit<ListMessageState> {
           onError: (_) {
             Logs.e(e);
           }).detected();
+    }
+  }
+
+  void _onReceiveNewMessage(IMessageModel newMessage) {
+    if (newMessage.roomId == state.roomId) {
+      emit(state.copyWith(listMessage: [newMessage, ...state.listMessage]));
     }
   }
 

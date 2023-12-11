@@ -91,14 +91,22 @@ class NetworkServiceImpl extends NetworkService {
             )
           : Metadata(
               code: ErrorCode.dioError,
-              message: null,
+              message: e.message,
             );
 
-      throw NetworkException(
-        code: e.response?.statusCode,
-        message: meta.message,
-        errorCode: ErrorCode.dioError,
-      );
+      if (e.response?.statusCode != null) {
+        throw NetworkException(
+          code: e.response!.statusCode!,
+          message: meta.message,
+          errorCode: ErrorCode.dioError,
+        );
+      } else {
+        throw NetworkException(
+          code: Code.code999,
+          message: 'SomeThingsWrong: ${e.message.toString()}',
+          errorCode: ErrorCode.networkServiceError,
+        );
+      }
     } catch (e) {
       if (e is GrpcException) {
         throw GrpcException(

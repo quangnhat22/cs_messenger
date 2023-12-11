@@ -64,6 +64,15 @@ class AppExceptionExt {
               .setNegativeText(R.strings.close)
               .buildDialog(AppKeys.navigatorKey.currentContext!)
               .show();
+        case Code.code999:
+          return AppDefaultDialogWidget()
+              .setTitle(R.strings.error)
+              .setContent(appException?.message)
+              .setAppDialogType(AppDialogType.error)
+              .setPositiveText(R.strings.confirm)
+              .setNegativeText(R.strings.close)
+              .buildDialog(AppKeys.navigatorKey.currentContext!)
+              .show();
         //force change password
         case HttpStatus.locked:
           //ForceChangePasswordPage.open();

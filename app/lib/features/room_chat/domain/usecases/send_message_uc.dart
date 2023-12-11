@@ -3,7 +3,9 @@ import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class SendMessageUseCase
-    extends BaseUseCase<SocketMessageParam, EmptyModel> {}
+    extends BaseUseCase<SocketMessageParam, EmptyModel> {
+  Stream<AppObjResultModel<IMessageModel>> getNewMessageStream();
+}
 
 @Injectable(as: SendMessageUseCase)
 class SendMessageUseCaseImpl extends SendMessageUseCase {
@@ -15,4 +17,8 @@ class SendMessageUseCaseImpl extends SendMessageUseCase {
   Future<AppObjResultModel<EmptyModel>> executeObj(
           {SocketMessageParam? request}) async =>
       await _repo.sendMessage(message: request?.toJson() ?? {});
+
+  @override
+  Stream<AppObjResultModel<IMessageModel>> getNewMessageStream() =>
+      _repo.getNewMessageStream();
 }

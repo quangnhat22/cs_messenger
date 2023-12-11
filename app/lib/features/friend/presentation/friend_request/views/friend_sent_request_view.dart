@@ -27,8 +27,6 @@ class FriendSentRequestView extends StatelessWidget {
           ListFriendSentRequestCubit>(
         physics: const BouncingScrollPhysics(),
         childWidget: _buildCardMissionItem,
-        emptyView: const SizedBox(),
-        retryView: const SizedBox(),
       ),
     );
   }

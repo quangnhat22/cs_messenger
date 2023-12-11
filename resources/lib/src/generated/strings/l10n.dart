@@ -1679,6 +1679,16 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Đã có lỗi xảy ra! Vui lòng thử lại.`
+  String get someThingWrong {
+    return Intl.message(
+      'Đã có lỗi xảy ra! Vui lòng thử lại.',
+      name: 'someThingWrong',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

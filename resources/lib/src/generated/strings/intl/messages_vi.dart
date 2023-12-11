@@ -226,6 +226,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "signUpWithEmail":
             MessageLookupByLibrary.simpleMessage("Đăng ký với email"),
         "skip": MessageLookupByLibrary.simpleMessage("Bỏ qua"),
+        "someThingWrong": MessageLookupByLibrary.simpleMessage(
+            "Đã có lỗi xảy ra! Vui lòng thử lại."),
         "startChattingWithANewAccount": MessageLookupByLibrary.simpleMessage(
             "Tạo tài khoản để bắt đầu kết nối với những người bạn"),
         "stayCloseNoMatterDistance":

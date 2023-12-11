@@ -1,4 +1,3 @@
-import 'package:app/components/main/overlay/app_loading_overlay_widget.dart';
 import 'package:app/configs/exts/app_exts.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,25 +19,24 @@ abstract class AppListViewCubit<BM extends BaseModel>
 
   void initFetch() async {
     try {
-      AppLoadingOverlayWidget.show();
+      emit(state.copyWith(isLoading: true));
       final response = await onCall(_appParam);
-      AppLoadingOverlayWidget.dismiss();
 
       emit(state.copyWith(
         data: [...response.netData ?? List.empty()],
         total: response.total,
         hasMore: response.hasMore,
         appException: null,
+        isLoading: false,
       ));
 
       Logs.i(
           'AppListWidget Init Call: Data length ${state.data.length} --- total: ${state.total}');
     } on AppException catch (e) {
-      AppLoadingOverlayWidget.dismiss();
       AppExceptionExt(
         appException: e,
         onError: (_) {
-          emit(state.copyWith(appException: e));
+          emit(state.copyWith(appException: e, isLoading: false));
         },
       ).detected();
     }
@@ -69,9 +67,9 @@ abstract class AppListViewCubit<BM extends BaseModel>
   }
 
   Future<void> onRefreshCallWithLoading() async {
-    AppLoadingOverlayWidget.show();
+    emit(state.copyWith(isLoading: true));
     await onRefreshCall();
-    AppLoadingOverlayWidget.dismiss();
+    emit(state.copyWith(isLoading: false));
   }
 
   Future<void> onLoadMoreCall() async {

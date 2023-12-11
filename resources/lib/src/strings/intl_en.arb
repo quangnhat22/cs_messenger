@@ -198,5 +198,6 @@
   "selected": "Selected",
   "doYouWantToExit": "Do you want to exit this page?",
   "groupNameCannotBeEmpty": "Group name cannot be empty",
-  "create": "Create"
+  "create": "Create",
+  "someThingWrong": "Something wrong! Try again."
 }

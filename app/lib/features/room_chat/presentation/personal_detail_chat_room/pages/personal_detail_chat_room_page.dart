@@ -1,3 +1,5 @@
+import 'package:app/components/main/appBar/app_bar_base_builder.dart';
+import 'package:app/components/main/page/app_main_page_base_builder.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +9,13 @@ class PersonalDetailChatRoomPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return AppMainPageWidget()
+        .setAppBar(AppBarWidget().setTextTitle('').build(context))
+        .setBody(_body(context))
+        .build(context);
+  }
+
+  Widget _body(BuildContext context) {
+    return Container();
   }
 }

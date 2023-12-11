@@ -7,5 +7,6 @@ class AppListViewState<T extends BaseModel> with _$AppListViewState<T> {
     @Default(0) int total,
     AppException? appException,
     @Default(false) bool hasMore,
+    @Default(false) bool isLoading,
   }) = _Initial;
 }

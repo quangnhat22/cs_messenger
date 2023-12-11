@@ -22,8 +22,6 @@ class ListBlockWidget extends StatelessWidget {
         GetListBlockCubit>(
       physics: const BouncingScrollPhysics(),
       childWidget: _buildCardBlockItem,
-      emptyView: const SizedBox(),
-      retryView: const SizedBox(),
     );
   }
 

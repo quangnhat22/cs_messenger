@@ -125,12 +125,23 @@ class $AssetsSvgsGen {
   SvgGenImage get icErrorCircle =>
       const SvgGenImage('assets/svgs/ic_error_circle.svg');
 
+  /// File path: assets/svgs/ic_error_list.svg
+  SvgGenImage get icErrorList =>
+      const SvgGenImage('assets/svgs/ic_error_list.svg');
+
   /// File path: assets/svgs/ic_filled_info_circle.svg
   SvgGenImage get icFilledInfoCircle =>
       const SvgGenImage('assets/svgs/ic_filled_info_circle.svg');
 
+  /// File path: assets/svgs/ic_no_data.svg
+  SvgGenImage get icNoData => const SvgGenImage('assets/svgs/ic_no_data.svg');
+
   /// File path: assets/svgs/ic_ongoing.svg
   SvgGenImage get icOngoing => const SvgGenImage('assets/svgs/ic_ongoing.svg');
+
+  /// File path: assets/svgs/ic_search_not_found.svg
+  SvgGenImage get icSearchNotFound =>
+      const SvgGenImage('assets/svgs/ic_search_not_found.svg');
 
   /// File path: assets/svgs/ic_sticker.svg
   SvgGenImage get icSticker => const SvgGenImage('assets/svgs/ic_sticker.svg');
@@ -161,8 +172,11 @@ class $AssetsSvgsGen {
         genderIcon,
         icError,
         icErrorCircle,
+        icErrorList,
         icFilledInfoCircle,
+        icNoData,
         icOngoing,
+        icSearchNotFound,
         icSticker,
         icSuccess,
         icSuccessCircle,

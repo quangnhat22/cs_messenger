@@ -197,5 +197,6 @@
   "selected": "Đã chọn",
   "doYouWantToExit": "Bạn có muốn thoát khỏi trang này?",
   "groupNameCannotBeEmpty": "Tên nhóm không được để trống",
-  "create": "Tạo"
+  "create": "Tạo",
+  "someThingWrong": "Đã có lỗi xảy ra! Vui lòng thử lại."
 }

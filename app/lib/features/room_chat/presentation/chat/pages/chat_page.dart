@@ -7,6 +7,7 @@ import 'package:app/features/room_chat/presentation/chat/widgets/chat_info_app_b
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:utilities/utilities.dart';
 
 @RoutePage()
 class ChatPage extends StatelessWidget {
@@ -72,7 +73,7 @@ class ChatPage extends StatelessWidget {
           onEndReachedThreshold: 0.6,
           onStartReachedThreshold: 0.8,
           onMapSent: (mapParams) {
-            print(mapParams);
+            Logs.d(mapParams);
           },
           onAudioSent: (audioParams) {},
           onFileSent: (fileParams) {},

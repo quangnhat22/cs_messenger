@@ -23,10 +23,11 @@ class MessageRepositoryImpl extends MessageRepository {
       rethrow;
     }
   }
-  
+
   @override
-  Stream<AppObjResultModel<IMessageModel>> subNewMessageStream() {
-    // TODO: implement subNewMessageStream
-    throw UnimplementedError();
+  Stream<AppObjResultModel<IMessageModel>> getNewMessageStream() {
+    return _realtimeService.getReceiveNewMessageStream().map((userRaw) {
+      return userRaw.raw2Model();
+    });
   }
 }

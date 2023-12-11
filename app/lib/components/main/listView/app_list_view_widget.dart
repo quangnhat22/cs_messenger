@@ -1,3 +1,4 @@
+import 'package:app/components/features/skeleton/list_skeletion.dart';
 import 'package:app/components/main/button/app_button_base_builder.dart';
 import 'package:app/components/main/listView/controllers/app_list_view_cubit.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
@@ -46,56 +47,78 @@ class AppListWidget<BM extends BaseModel, BS extends AppListViewState<BM>,
           controller: _refreshController,
           onRefresh: () => _onRefresh(ctx),
           onLoading: () => _onLoadMore(ctx),
-          child:
-              state.appException != null ? _retry(ctx) : _main(ctx, state.data),
+          child: state.appException != null
+              ? _retry(ctx)
+              : _main(ctx, state.data, state.isLoading),
         );
       },
     );
   }
 
-  Widget _main(BuildContext context, List<BM> data) {
-    return data.isEmpty
-        ? emptyView ??
-            Center(
-                child: AppTextBodyMediumWidget()
-                    .setText(R.strings.friends)
-                    .setTextAlign(TextAlign.center)
-                    .build(context))
-        : ListView.builder(
-            shrinkWrap: true,
-            controller: scrollController,
-            scrollDirection: scrollDirection,
-            reverse: reverse,
-            physics: physics,
-            itemCount: data.length,
-            itemBuilder: (ctx, index) => childWidget.call(
-              ctx,
-              data[index],
-              index,
-            ),
-          );
+  Widget _main(BuildContext context, List<BM> data, bool isLoading) {
+    return isLoading
+        ? const ListSkeleton()
+        : data.isEmpty
+            ? Center(
+                child: SizedBox(
+                  height: MediaQuery.sizeOf(context).height * 0.6,
+                  width: MediaQuery.sizeOf(context).width * 0.7,
+                  child: R.svgs.icNoData.svg(),
+                ),
+              )
+            : ListView.builder(
+                shrinkWrap: true,
+                controller: scrollController,
+                scrollDirection: scrollDirection,
+                reverse: reverse,
+                physics: physics,
+                itemCount: data.length,
+                itemBuilder: (ctx, index) => childWidget.call(
+                  ctx,
+                  data[index],
+                  index,
+                ),
+              );
   }
 
   Widget _retry(BuildContext context) {
-    return retryView ??
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: AppSizeExt.of.majorPaddingScale(4)),
-              child: AppTextHeadlineSmallWidget()
-                  .setText(R.strings.serverError)
-                  .setTextAlign(TextAlign.center)
-                  .build(context),
-            ),
-            AppButtonFilledWidget()
-                .setButtonText(R.strings.retry)
-                .setOnPressed(
-                    () => context.read<AppListViewCubit<BM>>().initFetch())
-                .build(context),
-          ],
-        );
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: AppSizeExt.of.majorPaddingScale(6),
+      ),
+      child: Center(
+        child: SingleChildScrollView(
+          child: retryView ??
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  R.svgs.icErrorList.svg(
+                    height: MediaQuery.sizeOf(context).height * 0.3,
+                    width: MediaQuery.sizeOf(context).width * 0.3,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: AppSizeExt.of.majorPaddingScale(5),
+                    ),
+                    child: AppTextHeadlineSmallWidget()
+                        .setText(R.strings.someThingWrong)
+                        .setColor(Theme.of(context).colorScheme.tertiary)
+                        .setTextAlign(TextAlign.center)
+                        .build(context),
+                  ),
+                  AppButtonOutlineWidget()
+                      .setButtonText(R.strings.retry)
+                      .setBorderColor(Theme.of(context).colorScheme.error)
+                      .setTextStyle(
+                          TextStyle(color: Theme.of(context).colorScheme.error))
+                      .setOnPressed(() =>
+                          context.read<AppListViewCubit<BM>>().initFetch())
+                      .build(context),
+                ],
+              ),
+        ),
+      ),
+    );
   }
 
   void _onRefresh(BuildContext context) async {

@@ -13,7 +13,9 @@ abstract class RealtimeService {
 
   void sendMessages(Map<String, dynamic> message);
 
-  Stream<AppObjResultRaw<MessageRaw>> receiveNewMessageStream(dynamic data);
+  void updateReceiveNewMessageStream(dynamic data);
+
+  Stream<AppObjResultRaw<MessageRaw>> getReceiveNewMessageStream();
 }
 
 @Singleton(as: RealtimeService)
@@ -46,7 +48,8 @@ class SocketService implements RealtimeService {
     _socket.onConnect((data) => Logs.d("connected"));
     _socket.onDisconnect((data) => Logs.d("disconnected"));
     _socket.on('register', (data) => Logs.d(data));
-    _socket.on(_newMessageEvent, ((data) => receiveNewMessageStream(data)));
+    _socket.on(
+        _newMessageEvent, ((data) => updateReceiveNewMessageStream(data)));
     // _socket.on('new-notification', ((data) => socketNewNotification(data)));
     // _socket.on('webrtc', ((data) => socketNewCallWebRTC(data)));
     // _socket.on('email-verified', ((data) => socketNewEmailVerified(data)));
@@ -71,12 +74,11 @@ class SocketService implements RealtimeService {
   }
 
   @override
-  Stream<AppObjResultRaw<MessageRaw>> receiveNewMessageStream(dynamic data) {
-    Logs.d(data);
-    final resonse = AppResponse.fromJson(data as Map<String, dynamic>);
+  void updateReceiveNewMessageStream(data) {
+    final response = AppResponse.fromJson(data as Map<String, dynamic>);
 
     final rawData = <String, Object?>{
-      ...resonse.data,
+      ...response.data,
       "author": {
         'id': '2',
         'name': 'Nguyen Van A',
@@ -84,8 +86,12 @@ class SocketService implements RealtimeService {
       },
     };
 
-    final newMessage = MessageRaw.fromJson(rawData);
-    // _newMessageController.sink.add(newMessage);
-    return newMessageController.stream;
+    final newMessageRaw = MessageRaw.fromJson(rawData);
+    final result = AppObjResultRaw(netData: newMessageRaw);
+    newMessageController.sink.add(result);
   }
+
+  @override
+  Stream<AppObjResultRaw<MessageRaw>> getReceiveNewMessageStream() =>
+      newMessageController.stream;
 }
