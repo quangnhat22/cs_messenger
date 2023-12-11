@@ -1,18 +1,16 @@
 part of '../base_model.dart';
 
 class SystemMessageModel extends IMessageModel {
-  final String text;
-
   SystemMessageModel({
     required super.id,
     super.clientId,
     required super.author,
-    super.createdAt,
-    super.repliedMessage,
-    super.roomId,
+    required super.content,
+    required super.type,
+    super.isMe,
     super.status,
-    super.type,
-    super.metadata,
-    required this.text,
+    required super.roomId,
+    super.createdAt,
+    super.deletedAt,
   });
 }

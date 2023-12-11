@@ -3,9 +3,11 @@ part of '../base_param.dart';
 @freezed
 class TextMessageParam extends IMessageParam with _$TextMessageParam {
   const factory TextMessageParam({
-    Map<String, dynamic>? metadata,
-    PreviewDataParam? previewData,
+    @Default('-1') String roomId,
+    String? clientId,
     required String text,
+    PreviewDataParam? previewData,
+    // IMessageParam? repliedMessage,
   }) = _TextMessageParam;
 
   factory TextMessageParam.fromJson(Map<String, Object?> json) =>

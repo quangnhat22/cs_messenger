@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:app/features/auth/data/sources/local/auth_local_data_src.dart';
+import 'package:data/data.dart';
 import 'package:injectable/injectable.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:utilities/utilities.dart';
@@ -9,6 +12,8 @@ abstract class RealtimeService {
   void disconnectSocket();
 
   void sendMessages(Map<String, dynamic> message);
+
+  Stream<AppObjResultRaw<MessageRaw>> receiveNewMessageStream(dynamic data);
 }
 
 @Singleton(as: RealtimeService)
@@ -18,7 +23,10 @@ class SocketService implements RealtimeService {
 
   SocketService(this._authLocalDataSource);
 
-  static String _newMessageEvent = 'new-message';
+  static const String _newMessageEvent = 'new-message';
+
+  StreamController<AppObjResultRaw<MessageRaw>> newMessageController =
+      StreamController<AppObjResultRaw<MessageRaw>>.broadcast();
 
   @override
   void connectSocket() async {
@@ -38,7 +46,7 @@ class SocketService implements RealtimeService {
     _socket.onConnect((data) => Logs.d("connected"));
     _socket.onDisconnect((data) => Logs.d("disconnected"));
     _socket.on('register', (data) => Logs.d(data));
-    _socket.on('new-message', ((data) => Logs.d(data)));
+    _socket.on(_newMessageEvent, ((data) => receiveNewMessageStream(data)));
     // _socket.on('new-notification', ((data) => socketNewNotification(data)));
     // _socket.on('webrtc', ((data) => socketNewCallWebRTC(data)));
     // _socket.on('email-verified', ((data) => socketNewEmailVerified(data)));
@@ -50,10 +58,34 @@ class SocketService implements RealtimeService {
   @override
   void disconnectSocket() {
     _socket.disconnect();
+    _dispose();
+  }
+
+  void _dispose() {
+    newMessageController.close();
   }
 
   @override
   void sendMessages(Map<String, dynamic> message) {
     _socket.emit(_newMessageEvent, message);
+  }
+
+  @override
+  Stream<AppObjResultRaw<MessageRaw>> receiveNewMessageStream(dynamic data) {
+    Logs.d(data);
+    final resonse = AppResponse.fromJson(data as Map<String, dynamic>);
+
+    final rawData = <String, Object?>{
+      ...resonse.data,
+      "author": {
+        'id': '2',
+        'name': 'Nguyen Van A',
+        'avatar': 'https://i.pravatar.cc/150?img=3',
+      },
+    };
+
+    final newMessage = MessageRaw.fromJson(rawData);
+    // _newMessageController.sink.add(newMessage);
+    return newMessageController.stream;
   }
 }

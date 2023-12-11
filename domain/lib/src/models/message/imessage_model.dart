@@ -59,27 +59,37 @@ enum MessageType {
 }
 
 abstract class IMessageModel extends BaseModel {
+  // final String id;
+  // final String? clientId;
+  // final UserModel author;
+  // final DateTime? createdAt;
+  // final IMessageModel? repliedMessage;
+  // final String? roomId;
+  // final StatusMessageType? status;
+  // final MessageType? type;
+  // final Map<String, dynamic>? metadata;
+  // final bool showStatus;
   final String id;
   final String? clientId;
   final UserModel author;
-  final DateTime? createdAt;
-  final IMessageModel? repliedMessage;
-  final String? roomId;
+  final String content;
+  final MessageType type;
+  final bool isMe;
   final StatusMessageType? status;
-  final MessageType? type;
-  final Map<String, dynamic>? metadata;
-  final bool showStatus;
+  final String roomId;
+  final DateTime? createdAt;
+  final DateTime? deletedAt;
 
   IMessageModel({
     required this.id,
     this.clientId,
     required this.author,
+    required this.content,
+    this.isMe = false,
     this.createdAt,
-    this.repliedMessage,
-    this.roomId,
+    this.deletedAt,
+    required this.roomId,
     this.status,
-    this.type,
-    this.metadata,
-    this.showStatus = false,
+    required this.type,
   });
 }

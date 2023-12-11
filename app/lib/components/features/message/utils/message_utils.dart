@@ -62,10 +62,10 @@ class MessageUtils {
         RegExp(multiEmojiRegExp.pattern.replaceFirst(r'+$', r'$'));
 
     if (emojiEnlargementBehavior == EmojiEnlargementBehavior.single) {
-      return singleEmojiRegExp.hasMatch(message.text);
+      return singleEmojiRegExp.hasMatch(message.content);
     }
 
-    return multiEmojiRegExp.hasMatch(message.text);
+    return multiEmojiRegExp.hasMatch(message.content);
   }
 
   static String formatBytes(int size, [int fractionDigits = 2]) {
@@ -207,7 +207,9 @@ class MessageUtils {
         'message': message,
         'nextMessageInGroup': nextMessageInGroup,
         'showName': notMyMessage && showUserNames && showName,
-        'showStatus': message.showStatus,
+        //TODO: check again
+        // 'showStatus': message.showStatus ?? false,
+        'showStatus': false,
       });
 
       if (!nextMessageInGroup && message.type != MessageType.system) {

@@ -23,4 +23,10 @@ class MessageRepositoryImpl extends MessageRepository {
       rethrow;
     }
   }
+  
+  @override
+  Stream<AppObjResultModel<IMessageModel>> subNewMessageStream() {
+    // TODO: implement subNewMessageStream
+    throw UnimplementedError();
+  }
 }

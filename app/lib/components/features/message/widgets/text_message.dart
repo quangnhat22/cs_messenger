@@ -188,7 +188,7 @@ class TextMessage extends StatelessWidget {
         link: message.previewData?.link,
         title: message.previewData?.title,
       ),
-      text: message.text,
+      text: message.content,
       textWidget: _textWidgetBuilder(currentUserId, context, false),
       userAgent: userAgent,
       width: width,
@@ -227,13 +227,13 @@ class TextMessage extends StatelessWidget {
         if (showName) UserName(author: message.author),
         if (enlargeEmojis)
           if (options.isTextSelectable)
-            SelectableText(message.text, style: emojiTextStyle)
+            SelectableText(message.content, style: emojiTextStyle)
           else
-            Text(message.text, style: emojiTextStyle)
+            Text(message.content, style: emojiTextStyle)
         else
           TextMessageText(
             options: options,
-            text: message.text,
+            text: message.content,
           ),
       ],
     );
@@ -248,7 +248,7 @@ class TextMessage extends StatelessWidget {
 
     if (usePreviewData && onPreviewDataFetched != null) {
       final urlRegexp = RegExp(regexLink, caseSensitive: false);
-      final matches = urlRegexp.allMatches(message.text);
+      final matches = urlRegexp.allMatches(message.content);
 
       if (matches.isNotEmpty) {
         return _linkPreview(currentUserId, width, context);
