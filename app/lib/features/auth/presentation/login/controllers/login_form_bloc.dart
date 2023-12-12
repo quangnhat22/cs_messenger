@@ -70,6 +70,16 @@ class LoginFormBloc extends FormBloc<String, String> {
               .buildDialog(AppKeys.navigatorKey.currentContext!)
               .show();
         },
+        onGrpcError: (_) {
+          AppDefaultDialogWidget()
+              .setTitle(R.strings.error)
+              .setContent(R.strings.emailOrPasswordWrong)
+              .setAppDialogType(AppDialogType.error)
+              .setNegativeText(R.strings.close)
+              .setPositiveText(R.strings.confirm)
+              .buildDialog(AppKeys.navigatorKey.currentContext!)
+              .show();
+        },
       ).detected();
     }
   }

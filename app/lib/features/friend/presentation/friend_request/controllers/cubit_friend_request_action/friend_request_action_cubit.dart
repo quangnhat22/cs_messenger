@@ -46,6 +46,18 @@ class FriendRequestActionCubit extends Cubit<FriendRequestActionState> {
                 .setPositiveText(R.strings.confirm)
                 .buildDialog(AppKeys.navigatorKey.currentContext!)
                 .show();
+          },
+          onGrpcError: (e) {
+            if (e.errorCode == '5') {
+              AppDefaultDialogWidget()
+                  .setTitle(R.strings.error)
+                  .setContent(R.strings.requestNotFound)
+                  .setAppDialogType(AppDialogType.error)
+                  .setNegativeText(R.strings.close)
+                  .setPositiveText(R.strings.confirm)
+                  .buildDialog(AppKeys.navigatorKey.currentContext!)
+                  .show();
+            }
           }).detected();
     }
   }

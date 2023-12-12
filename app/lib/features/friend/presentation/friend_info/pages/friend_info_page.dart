@@ -9,6 +9,7 @@ import 'package:app/features/friend/presentation/friend_info/widgets/friend_info
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:resources/resources.dart';
 import 'package:utilities/utilities.dart';
 
 import '../../../../../components/main/avatar/app_avatar_base_builder.dart';
@@ -81,7 +82,7 @@ class FriendInfoPage extends StatelessWidget {
                                     .build(context),
                                 SizedBox(height: AppSizeExt.of.majorScale(2)),
                                 AppTextBodyLargeWidget()
-                                    .setText('Bạn chung')
+                                    .setText(R.strings.friendCommon)
                                     .setTextStyle(const TextStyle(
                                         fontWeight: FontWeight.bold))
                                     .setColor(
@@ -106,7 +107,7 @@ class FriendInfoPage extends StatelessWidget {
                                     .build(context),
                                 SizedBox(height: AppSizeExt.of.majorScale(2)),
                                 AppTextBodyLargeWidget()
-                                    .setText('Nhóm chung')
+                                    .setText(R.strings.groupCommon)
                                     .setTextStyle(const TextStyle(
                                         fontWeight: FontWeight.bold))
                                     .setColor(
@@ -130,7 +131,7 @@ class FriendInfoPage extends StatelessWidget {
                           AppCardBorderWidget()
                               .setLeading(const Icon(Icons.badge_outlined))
                               .setTitle(AppTextBodyLargeWidget()
-                                  .setText('Phone')
+                                  .setText(R.strings.phone)
                                   .build(context))
                               .setSubtitle(AppTextBodyMediumWidget()
                                   .setText(state.userInfo?.phone)
@@ -140,7 +141,7 @@ class FriendInfoPage extends StatelessWidget {
                           AppCardBorderWidget()
                               .setLeading(const Icon(Icons.male_outlined))
                               .setTitle(AppTextBodyLargeWidget()
-                                  .setText('Gender')
+                                  .setText(R.strings.gender)
                                   .build(context))
                               .setSubtitle(AppTextBodyMediumWidget()
                                   .setText(state.userInfo?.gender?.value)
@@ -150,7 +151,7 @@ class FriendInfoPage extends StatelessWidget {
                           AppCardBorderWidget()
                               .setLeading(const Icon(Icons.cake_outlined))
                               .setTitle(AppTextBodyLargeWidget()
-                                  .setText('Birthday')
+                                  .setText(R.strings.dateOfBirth)
                                   .build(context))
                               .setSubtitle(AppTextBodyMediumWidget()
                                   .setText(DateTimeExt.dateTimeToDisplay(

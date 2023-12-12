@@ -57,7 +57,7 @@ class BlockRemoteDataSourceImpl extends BlockRemoteDataSource {
     try {
       final AppResponse response = await _networkService.request(
         clientRequest: ClientRequest(
-          url: ApiProvider.mockBlockUser,
+          url: ApiProvider.blockUser,
           method: HttpMethod.get,
           query: {...query},
           isRequestForList: true,

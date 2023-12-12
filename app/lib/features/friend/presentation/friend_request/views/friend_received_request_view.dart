@@ -92,6 +92,7 @@ class FriendReceivedRequestView extends StatelessWidget {
     try {
       AppDefaultDialogWidget()
           .setAppDialogType(AppDialogType.confirm)
+          .setTitle(R.strings.confirm)
           .setContent(R.strings.doYouWantRejectFriendRequest)
           .setNegativeText(R.strings.close)
           .setPositiveText(R.strings.confirm)
@@ -117,6 +118,7 @@ class FriendReceivedRequestView extends StatelessWidget {
     try {
       AppDefaultDialogWidget()
           .setAppDialogType(AppDialogType.confirm)
+          .setTitle(R.strings.confirm)
           .setContent(R.strings.doYouWantAcceptFriendRequest)
           .setNegativeText(R.strings.close)
           .setPositiveText(R.strings.confirm)

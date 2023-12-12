@@ -31,10 +31,10 @@ enum RelationType {
 
 class RelationModel extends BaseModel {
   final RelationType? relation;
-  final String? requestId;
+  final String? roomId;
 
   RelationModel({
     this.relation,
-    this.requestId,
+    this.roomId,
   });
 }

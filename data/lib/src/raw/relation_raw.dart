@@ -6,7 +6,7 @@ class RelationRaw extends BaseRaw<RelationModel> with _$RelationRaw {
 
   factory RelationRaw({
     String? relation,
-    String? requestId,
+    @JsonKey(name: "room_id") String? roomId,
   }) = _RelationRaw;
 
   factory RelationRaw.fromJson(Map<String, Object?> json) =>
@@ -16,7 +16,7 @@ class RelationRaw extends BaseRaw<RelationModel> with _$RelationRaw {
   RelationModel raw2Model() {
     return RelationModel(
       relation: RelationType.convertStringToRelationType(relation),
-      requestId: requestId,
+      roomId: roomId,
     );
   }
 }

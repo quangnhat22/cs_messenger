@@ -190,6 +190,7 @@
   "appDontHavePermission": "Ứng dụng không có quyền để thực hiện tính năng này. Vui lòng cấp quyền cho ứng dụng",
   "sendMyLocation": "Gửi vị trí",
   "loginSuccess": "Đăng nhập thành công",
+  "createGroup": "Tạo nhóm",
   "createGroupSuccess": "Tạo nhóm thành công",
   "createGroupFail": "Tạo nhóm thất bại",
   "groupName": "Tên nhóm",
@@ -198,5 +199,13 @@
   "doYouWantToExit": "Bạn có muốn thoát khỏi trang này?",
   "groupNameCannotBeEmpty": "Tên nhóm không được để trống",
   "create": "Tạo",
-  "someThingWrong": "Đã có lỗi xảy ra! Vui lòng thử lại."
+  "someThingWrong": "Đã có lỗi xảy ra! Vui lòng thử lại.",
+  "requestNotFound": "Không tìm thấy yêu cầu! Vui lòng kiểm tra lại.",
+  "friendCommon": "Bạn chung",
+  "groupCommon": "Nhóm chung",
+  "doYouWantUnFriend": "Bạn có muốn huỷ kết bạn?",
+  "youHaveAlreadySentThisRequest": "Bạn đã gửi yêu cầu trước đây? Vì vậy bạn không thể gửi thêm yêu cầu này nữa.",
+  "acceptOrReject": "Đồng ý/ Từ chối",
+  "areYouSureBlockThisUser": "Bạn có chắc chắn muốn chặn người này?",
+  "unBlock": "Bỏ chặn"
 }

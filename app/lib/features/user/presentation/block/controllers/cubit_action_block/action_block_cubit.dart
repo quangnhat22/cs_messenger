@@ -22,8 +22,8 @@ class ActionBlockCubit extends Cubit<ActionBlockState> {
   Future<void> unBlockUser(String userId) async {
     try {
       AppLoadingOverlayWidget.show();
-      // await _unBlockUserUseCase.executeObj(
-      //     request: ActionRequestParam(id: userId));
+      await _unBlockUserUseCase.executeObj(
+          request: ActionRequestParam(id: userId));
       AppSnackBarWidget()
           .setLabelText(R.strings.unBlockSuccess)
           .setAppSnackBarType(AppSnackBarType.informMessage)

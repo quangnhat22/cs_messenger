@@ -3,6 +3,9 @@ import 'package:app/components/main/button/app_button_base_builder.dart';
 import 'package:app/components/main/card/app_card_base_builder.dart';
 import 'package:app/components/main/dialog/app_dialog_base_builder.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
+import 'package:app/configs/di/di.dart';
+import 'package:app/configs/routes/app_router.dart';
+import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/features/search/presentation/controllers/bloc/search_bloc.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +31,7 @@ class SearchUserItemWidget extends StatelessWidget {
             context
                 .read<SearchBloc>()
                 .add(SearchSendFriendRequest(userId: user!.id));
+            Navigator.of(context).pop();
           }
         })
         .buildDialog(context)
@@ -44,13 +48,32 @@ class SearchUserItemWidget extends StatelessWidget {
         .setTitle(AppTextBodyLargeWidget().setText(user?.name).build(context))
         .setSubtitle(
             AppTextBodyMediumWidget().setText(user?.email).build(context))
+        .setOnTap((user?.relation?.relation == RelationType.stranger)
+            ? null
+            : () async {
+                if (user?.id != null) {
+                  await getIt<AppRouter>()
+                      .push(FriendInfoRoute(userId: user!.id));
+                }
+              })
         .setActions([
-      AppButtonOutlineWidget()
-          .setAppButtonSize(AppButtonSize.medium)
-          .setButtonText(R.strings.addFriend)
-          .setBorderColor(Theme.of(context).colorScheme.primary)
-          .setOnPressed(() => _handleAddFriendButton(context))
-          .build(context)
+      if (user?.relation?.relation == RelationType.stranger)
+        AppButtonOutlineWidget()
+            .setAppButtonSize(AppButtonSize.medium)
+            .setButtonText(R.strings.addFriend)
+            .setBorderColor(Theme.of(context).colorScheme.primary)
+            .setOnPressed(() => _handleAddFriendButton(context))
+            .build(context),
+      if (user?.relation?.relation == RelationType.requested)
+        AppButtonOutlineWidget()
+            .setAppButtonSize(AppButtonSize.medium)
+            .setButtonText(R.strings.receive)
+            .build(context),
+      if (user?.relation?.relation == RelationType.requesting)
+        AppButtonOutlineWidget()
+            .setAppButtonSize(AppButtonSize.medium)
+            .setButtonText(R.strings.sent)
+            .build(context)
     ]).build(context);
   }
 }

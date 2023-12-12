@@ -34,6 +34,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("Về chún tôi"),
+        "acceptOrReject":
+            MessageLookupByLibrary.simpleMessage("Đồng ý/ Từ chối"),
         "acceptRequestSuccess": MessageLookupByLibrary.simpleMessage(
             "Chấp nhận lời mời thành công!"),
         "account": MessageLookupByLibrary.simpleMessage("Tài khoản"),
@@ -43,6 +45,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "app": MessageLookupByLibrary.simpleMessage("Ứng dụng"),
         "appDontHavePermission": MessageLookupByLibrary.simpleMessage(
             "Ứng dụng không có quyền để thực hiện tính năng này. Vui lòng cấp quyền cho ứng dụng"),
+        "areYouSureBlockThisUser": MessageLookupByLibrary.simpleMessage(
+            "Bạn có chắc chắn muốn chặn người này?"),
         "audio": MessageLookupByLibrary.simpleMessage("Audio"),
         "back": MessageLookupByLibrary.simpleMessage("Quay lại"),
         "backToWelcome":
@@ -71,6 +75,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "create": MessageLookupByLibrary.simpleMessage("Tạo"),
         "createAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Tạo tài khoản thành công! Vui lòng đăng nhập để tiếp tục."),
+        "createGroup": MessageLookupByLibrary.simpleMessage("Tạo nhóm"),
         "createGroupFail":
             MessageLookupByLibrary.simpleMessage("Tạo nhóm thất bại"),
         "createGroupSuccess":
@@ -101,6 +106,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bạn có muốn đăng xuất?"),
         "doYouWantUnBlockThisUser": MessageLookupByLibrary.simpleMessage(
             "Bạn có muốn bỏ chặn người dùng này hay không?"),
+        "doYouWantUnFriend":
+            MessageLookupByLibrary.simpleMessage("Bạn có muốn huỷ kết bạn?"),
         "doYouWantUndoFriendRequest": MessageLookupByLibrary.simpleMessage(
             "Bạn có muốn thu hồi lời mời kết bạn này hay không?"),
         "done": MessageLookupByLibrary.simpleMessage("Hoàn tất"),
@@ -124,6 +131,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fileLimitSize": m1,
         "files": MessageLookupByLibrary.simpleMessage("Tệp"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("Quên mật khẩu"),
+        "friendCommon": MessageLookupByLibrary.simpleMessage("Bạn chung"),
         "friendRequest":
             MessageLookupByLibrary.simpleMessage("Yêu cầu kết bạn"),
         "friends": MessageLookupByLibrary.simpleMessage("Bạn bè"),
@@ -132,6 +140,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "getConnectWithYourFriends": MessageLookupByLibrary.simpleMessage(
             "Kết nối với \"network\" của bạn"),
         "gotIt": MessageLookupByLibrary.simpleMessage("Hiểu rồi"),
+        "groupCommon": MessageLookupByLibrary.simpleMessage("Nhóm chung"),
         "groupName": MessageLookupByLibrary.simpleMessage("Tên nhóm"),
         "groupNameCannotBeEmpty": MessageLookupByLibrary.simpleMessage(
             "Tên nhóm không được để trống"),
@@ -195,6 +204,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "requestFriend":
             MessageLookupByLibrary.simpleMessage("Lời mời kết bạn"),
         "requestGroup": MessageLookupByLibrary.simpleMessage("Lời mời nhóm"),
+        "requestNotFound": MessageLookupByLibrary.simpleMessage(
+            "Không tìm thấy yêu cầu! Vui lòng kiểm tra lại."),
         "resendEmailAfter":
             MessageLookupByLibrary.simpleMessage("Gửi lại email sau"),
         "retry": MessageLookupByLibrary.simpleMessage("Thử lại"),
@@ -245,6 +256,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Theme and Language"),
         "turnOnOffNotification":
             MessageLookupByLibrary.simpleMessage("Bật/tắt mở thông báo"),
+        "unBlock": MessageLookupByLibrary.simpleMessage("Bỏ chặn"),
         "unBlockSuccess": MessageLookupByLibrary.simpleMessage(
             "Bỏ chặn người dùng thành công"),
         "unFriendSuccess":
@@ -274,6 +286,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcome": MessageLookupByLibrary.simpleMessage("Chào mừng bạn"),
         "welcomeBack":
             MessageLookupByLibrary.simpleMessage("Chào mừng bạn trở lại!"),
-        "welcomeToApp": m3
+        "welcomeToApp": m3,
+        "youHaveAlreadySentThisRequest": MessageLookupByLibrary.simpleMessage(
+            "Bạn đã gửi yêu cầu trước đây? Vì vậy bạn không thể gửi thêm yêu cầu này nữa.")
       };
 }

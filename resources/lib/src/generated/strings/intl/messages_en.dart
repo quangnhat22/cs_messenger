@@ -34,6 +34,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("About us"),
+        "acceptOrReject":
+            MessageLookupByLibrary.simpleMessage("Accept/ Reject"),
         "acceptRequestSuccess":
             MessageLookupByLibrary.simpleMessage("Accept request success!"),
         "account": MessageLookupByLibrary.simpleMessage("Account"),
@@ -43,6 +45,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "app": MessageLookupByLibrary.simpleMessage("App"),
         "appDontHavePermission": MessageLookupByLibrary.simpleMessage(
             "The app does not have permission to perform this feature. Please grant permission"),
+        "areYouSureBlockThisUser": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to block this person?"),
         "audio": MessageLookupByLibrary.simpleMessage("Audio"),
         "back": MessageLookupByLibrary.simpleMessage("Back"),
         "backToWelcome":
@@ -71,6 +75,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "create": MessageLookupByLibrary.simpleMessage("Create"),
         "createAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Create account success! Please login to continue."),
+        "createGroup": MessageLookupByLibrary.simpleMessage("Create Group"),
         "createGroupFail":
             MessageLookupByLibrary.simpleMessage("Create group fail"),
         "createGroupSuccess":
@@ -100,6 +105,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Do you want to log out?"),
         "doYouWantUnBlockThisUser": MessageLookupByLibrary.simpleMessage(
             "Do you want unblock this user?"),
+        "doYouWantUnFriend":
+            MessageLookupByLibrary.simpleMessage("Do you want to unfriend?"),
         "doYouWantUndoFriendRequest": MessageLookupByLibrary.simpleMessage(
             "Do you want to undo this friend request?"),
         "done": MessageLookupByLibrary.simpleMessage("Done"),
@@ -123,6 +130,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "files": MessageLookupByLibrary.simpleMessage("File"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password"),
+        "friendCommon": MessageLookupByLibrary.simpleMessage("Friend Common"),
         "friendRequest": MessageLookupByLibrary.simpleMessage("Friend Request"),
         "friends": MessageLookupByLibrary.simpleMessage("Friends"),
         "gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
@@ -130,6 +138,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "getConnectWithYourFriends": MessageLookupByLibrary.simpleMessage(
             "Get connect with your friends"),
         "gotIt": MessageLookupByLibrary.simpleMessage("Got it"),
+        "groupCommon": MessageLookupByLibrary.simpleMessage("Group Common"),
         "groupName": MessageLookupByLibrary.simpleMessage("Group name"),
         "groupNameCannotBeEmpty":
             MessageLookupByLibrary.simpleMessage("Group name cannot be empty"),
@@ -188,6 +197,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "removeFriend": MessageLookupByLibrary.simpleMessage("Remove Friend"),
         "requestFriend": MessageLookupByLibrary.simpleMessage("Request friend"),
         "requestGroup": MessageLookupByLibrary.simpleMessage("Request Group"),
+        "requestNotFound": MessageLookupByLibrary.simpleMessage(
+            "Request not found! Please check again."),
         "resendEmailAfter":
             MessageLookupByLibrary.simpleMessage("Resend email after"),
         "retry": MessageLookupByLibrary.simpleMessage("Retry"),
@@ -239,6 +250,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Theme and Language"),
         "turnOnOffNotification":
             MessageLookupByLibrary.simpleMessage("Turn on/off notification"),
+        "unBlock": MessageLookupByLibrary.simpleMessage("Unblock"),
         "unBlockSuccess":
             MessageLookupByLibrary.simpleMessage("Unblock user success"),
         "unFriendSuccess":
@@ -266,6 +278,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "voice": MessageLookupByLibrary.simpleMessage("Voice"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
-        "welcomeToApp": m3
+        "welcomeToApp": m3,
+        "youHaveAlreadySentThisRequest": MessageLookupByLibrary.simpleMessage(
+            "You have already sent this request")
       };
 }

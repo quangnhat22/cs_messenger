@@ -44,6 +44,7 @@ class FriendSentRequestView extends StatelessWidget {
             .build(context))
         .setSubtitle(
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppTextBodyMediumWidget()
                   .setText('${R.strings.email}: ${request.receiver?.email}')
@@ -77,6 +78,7 @@ class FriendSentRequestView extends StatelessWidget {
     try {
       AppDefaultDialogWidget()
           .setAppDialogType(AppDialogType.confirm)
+          .setTitle(R.strings.confirm)
           .setContent(R.strings.doYouWantUndoFriendRequest)
           .setNegativeText(R.strings.close)
           .setPositiveText(R.strings.confirm)

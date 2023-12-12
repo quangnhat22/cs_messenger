@@ -1,7 +1,9 @@
 import 'package:app/components/main/dialog/app_dialog_base_builder.dart';
 import 'package:app/components/main/overlay/app_loading_overlay_widget.dart';
 import 'package:app/components/main/snackBar/app_snack_bar_base_builder.dart';
+import 'package:app/configs/di/di.dart';
 import 'package:app/configs/exts/app_exts.dart';
+import 'package:app/configs/routes/app_router.dart';
 import 'package:app/features/search/domain/usecases/search_uc.dart';
 import 'package:app/features/user/domain/usecases/request/sent_request_uc.dart';
 import 'package:domain/domain.dart';

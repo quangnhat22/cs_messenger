@@ -9,9 +9,10 @@ import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/features/friend/presentation/friend_list/controllers/friend_list_cubit.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:resources/resources.dart';
+import 'package:utilities/utilities.dart';
 
-//TODO: refactor code
 class ListFriendWidget extends StatelessWidget {
   const ListFriendWidget({super.key});
 
@@ -39,13 +40,25 @@ class ListFriendWidget extends StatelessWidget {
         .setHasTopBorderRadius(index == 0)
         .setActions([
           IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              if (friend.relation?.roomId != null) {
+                await getIt<AppRouter>()
+                    .push(ChatRoute(roomId: friend.relation!.roomId!));
+              }
+            },
             icon: const Icon(Icons.message_outlined),
           )
         ])
         .setIsShowBottomDivider(true)
         .setOnTap(() async {
-          await getIt<AppRouter>().push(FriendInfoRoute(userId: friend.id));
+          await getIt<AppRouter>()
+              .push(FriendInfoRoute(userId: friend.id))
+              .then((result) {
+            Logs.d(result);
+            if (result == true) {
+              context.read<GetListFriendCubit>().onRefreshCall();
+            }
+          });
         })
         .build(context);
   }

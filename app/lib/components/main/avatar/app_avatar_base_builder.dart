@@ -1,5 +1,6 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:resources/resources.dart';
 
 part 'app_avatar_circle_widget.dart';
 

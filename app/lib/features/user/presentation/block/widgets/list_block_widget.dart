@@ -1,3 +1,4 @@
+import 'package:app/components/main/avatar/app_avatar_base_builder.dart';
 import 'package:app/components/main/button/app_button_base_builder.dart';
 import 'package:app/components/main/card/app_card_base_builder.dart';
 import 'package:app/components/main/dialog/app_dialog_base_builder.dart';
@@ -32,13 +33,21 @@ class ListBlockWidget extends StatelessWidget {
         horizontal: AppSizeExt.of.majorPaddingScale(2),
       ),
       child: AppCardWidget()
-          .setLeading(const CircleAvatar(radius: 24))
+          .setLeading(AppAvatarCircleWidget()
+              .setUrl(user.avatar)
+              .setSize(AppAvatarSize.medium)
+              .build(context))
           .setTitle(
               AppTextTitleMediumWidget().setText(user.name).build(context))
+          .setSubtitle(AppTextBodyMediumWidget()
+              .setText("${R.strings.email}: ${user.email}")
+              .build(context))
           .setActions([
             AppButtonOutlineWidget()
-                .setButtonText('Unblock')
-                .setBorderColor(Theme.of(context).colorScheme.primary)
+                .setButtonText(R.strings.unBlock)
+                .setTextStyle(
+                    TextStyle(color: Theme.of(context).colorScheme.tertiary))
+                .setBorderColor(Theme.of(context).colorScheme.tertiary)
                 .setOnPressed(() async =>
                     await _handleBlockItemButtonTap(context, user.id))
                 .build(context)

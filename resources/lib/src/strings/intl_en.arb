@@ -199,5 +199,13 @@
   "doYouWantToExit": "Do you want to exit this page?",
   "groupNameCannotBeEmpty": "Group name cannot be empty",
   "create": "Create",
-  "someThingWrong": "Something wrong! Try again."
+  "someThingWrong": "Something wrong! Try again.",
+  "requestNotFound": "Request not found! Please check again.",
+  "friendCommon": "Friend Common",
+  "groupCommon": "Group Common",
+  "doYouWantUnFriend": "Do you want to unfriend?",
+  "youHaveAlreadySentThisRequest": "You have already sent this request",
+  "acceptOrReject": "Accept/ Reject",
+  "areYouSureBlockThisUser": "Are you sure you want to block this person?",
+  "unBlock": "Unblock"
 }

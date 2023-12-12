@@ -1600,6 +1600,16 @@ class Strings {
     );
   }
 
+  /// `Tạo nhóm`
+  String get createGroup {
+    return Intl.message(
+      'Tạo nhóm',
+      name: 'createGroup',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Tạo nhóm thành công`
   String get createGroupSuccess {
     return Intl.message(
@@ -1685,6 +1695,86 @@ class Strings {
     return Intl.message(
       'Đã có lỗi xảy ra! Vui lòng thử lại.',
       name: 'someThingWrong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Không tìm thấy yêu cầu! Vui lòng kiểm tra lại.`
+  String get requestNotFound {
+    return Intl.message(
+      'Không tìm thấy yêu cầu! Vui lòng kiểm tra lại.',
+      name: 'requestNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bạn chung`
+  String get friendCommon {
+    return Intl.message(
+      'Bạn chung',
+      name: 'friendCommon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nhóm chung`
+  String get groupCommon {
+    return Intl.message(
+      'Nhóm chung',
+      name: 'groupCommon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bạn có muốn huỷ kết bạn?`
+  String get doYouWantUnFriend {
+    return Intl.message(
+      'Bạn có muốn huỷ kết bạn?',
+      name: 'doYouWantUnFriend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bạn đã gửi yêu cầu trước đây? Vì vậy bạn không thể gửi thêm yêu cầu này nữa.`
+  String get youHaveAlreadySentThisRequest {
+    return Intl.message(
+      'Bạn đã gửi yêu cầu trước đây? Vì vậy bạn không thể gửi thêm yêu cầu này nữa.',
+      name: 'youHaveAlreadySentThisRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Đồng ý/ Từ chối`
+  String get acceptOrReject {
+    return Intl.message(
+      'Đồng ý/ Từ chối',
+      name: 'acceptOrReject',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bạn có chắc chắn muốn chặn người này?`
+  String get areYouSureBlockThisUser {
+    return Intl.message(
+      'Bạn có chắc chắn muốn chặn người này?',
+      name: 'areYouSureBlockThisUser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bỏ chặn`
+  String get unBlock {
+    return Intl.message(
+      'Bỏ chặn',
+      name: 'unBlock',
       desc: '',
       args: [],
     );

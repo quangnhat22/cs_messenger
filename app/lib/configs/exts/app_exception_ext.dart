@@ -2,9 +2,10 @@ part of 'app_exts.dart';
 
 class AppExceptionExt {
   late final AppException? appException;
+  final Function(AppException appException)? onGrpcError;
   final Function(AppException appException)? onError;
 
-  AppExceptionExt({required this.appException, this.onError});
+  AppExceptionExt({required this.appException, this.onError, this.onGrpcError});
 
   void detected() {
     if (appException == null) {
@@ -85,18 +86,18 @@ class AppExceptionExt {
 
     if (appException is GrpcException) {
       switch (appException!.errorCode) {
-        case "5":
-          {
-            AppDefaultDialogWidget()
-                .setTitle(R.strings.loginFail)
-                .setContent(R.strings.emailOrPasswordWrong)
-                .setAppDialogType(AppDialogType.error)
-                .setNegativeText(R.strings.close)
-                .setPositiveText(R.strings.confirm)
-                .buildDialog(AppKeys.navigatorKey.currentContext!)
-                .show();
-            break;
-          }
+        // case "5":
+        //   {
+        //     AppDefaultDialogWidget()
+        //         .setTitle(R.strings.loginFail)
+        //         .setContent(R.strings.emailOrPasswordWrong)
+        //         .setAppDialogType(AppDialogType.error)
+        //         .setNegativeText(R.strings.close)
+        //         .setPositiveText(R.strings.confirm)
+        //         .buildDialog(AppKeys.navigatorKey.currentContext!)
+        //         .show();
+        //     break;
+        //   }
         case "14":
           {
             AppDefaultDialogWidget()
@@ -137,6 +138,25 @@ class AppExceptionExt {
                 .show();
             getIt<AppRouter>()
                 .replace(VerifyEmailRoute(isFirstRequestSendEmail: true));
+            break;
+          }
+
+        case "22":
+          {
+            AppDefaultDialogWidget()
+                .setTitle(R.strings.error)
+                .setContent(R.strings.youHaveAlreadySentThisRequest)
+                .setAppDialogType(AppDialogType.error)
+                .setNegativeText(R.strings.close)
+                .setPositiveText(R.strings.confirm)
+                .buildDialog(AppKeys.navigatorKey.currentContext!)
+                .show();
+            break;
+          }
+
+        default:
+          {
+            onGrpcError?.call(appException!);
             break;
           }
       }
