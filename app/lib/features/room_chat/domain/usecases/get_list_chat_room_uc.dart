@@ -11,11 +11,6 @@ class GetListChatRoomUseCaseImpl extends GetListChatRoomUseCase {
 
   GetListChatRoomUseCaseImpl(this._repo);
 
-  // @override
-  // Future<AppObjResultModel<ChatRoomModel>> executeObj(
-  //         {GetListChatRoomParam? request}) async =>
-  //
-
   @override
   Future<AppListResultModel<ChatRoomModel>> executeList(
           {GetListChatRoomParam? request}) async =>

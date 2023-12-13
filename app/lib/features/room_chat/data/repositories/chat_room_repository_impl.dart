@@ -45,4 +45,16 @@ class ChatRoomRepositoryImpl extends ChatRoomRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<AppListResultModel<IMessageModel>> getListMessage(
+      {required Map<String, dynamic> query}) async {
+    try {
+      final AppListResultRaw<MessageRaw> remoteData =
+          await _chatRoomRemoteDataSource.getListMessages(query: query);
+      return remoteData.raw2Model();
+    } on AppException catch (_) {
+      rethrow;
+    }
+  }
 }

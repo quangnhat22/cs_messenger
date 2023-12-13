@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:app/configs/exts/app_exts.dart';
+import 'package:app/features/room_chat/domain/usecases/get_list_message_chat_room_uc.dart';
 import 'package:app/features/room_chat/domain/usecases/send_message_uc.dart';
 import 'package:app/features/user/domain/usecases/profile/get_user_profile_local_uc.dart';
 import 'package:app/service/firebase/upload_file_exts.dart';
@@ -20,9 +21,11 @@ part 'list_message_state.dart';
 @Injectable()
 class ListMessageCubit extends Cubit<ListMessageState> {
   late final GetUserProfileLocalUseCase _getUserProfileLocalUseCase;
+  late final GetListMessageChatRoomUseCase _getListMessageChatRoomUseCase;
   late final SendMessageUseCase _sendMessageUseCase;
 
-  ListMessageCubit(this._getUserProfileLocalUseCase, this._sendMessageUseCase)
+  ListMessageCubit(this._getUserProfileLocalUseCase, this._sendMessageUseCase,
+      this._getListMessageChatRoomUseCase)
       : super(const ListMessageState.initial()) {
     _subGetNewMessage =
         _sendMessageUseCase.getNewMessageStream().listen((messageModel) {
@@ -46,9 +49,11 @@ class ListMessageCubit extends Cubit<ListMessageState> {
     try {
       emit(state.copyWith(isLoading: true, roomId: roomId));
       final userResponse = await _getUserProfileLocalUseCase.executeObj();
-      emit(state.copyWith(currentUser: userResponse.netData));
-
-      await _getListMessages();
+      final listMessageResponse = await _getListMessageChatRoomUseCase
+          .executeList(request: GetListRoomMessageParam(chatRoomId: roomId));
+      emit(state.copyWith(
+          currentUser: userResponse.netData,
+          listMessage: listMessageResponse.netData ?? []));
       emit(state.copyWith(isLoading: false));
     } on AppException catch (e) {
       Logs.e(e);

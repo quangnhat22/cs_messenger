@@ -9,4 +9,7 @@ abstract class ChatRoomRepository {
 
   Future<AppObjResultModel<EmptyModel>> updateChatRoomInfo(
       {required Map<String, dynamic> query});
+
+  Future<AppListResultModel<IMessageModel>> getListMessage(
+      {required Map<String, dynamic> query});
 }

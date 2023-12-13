@@ -9,7 +9,11 @@ abstract class ChatRoomRemoteDataSource {
   Future<AppObjResultRaw<ChatRoomRaw>> getChatRoomInfo(
       {required Map<String, dynamic> query});
 
+  //todo: remove it
   Future<AppObjResultRaw<EmptyRaw>> updateGroupChatRoomInfo(
+      {required Map<String, dynamic> query});
+
+  Future<AppListResultRaw<MessageRaw>> getListMessages(
       {required Map<String, dynamic> query});
 }
 
@@ -68,6 +72,25 @@ class ChatRoomRemoteDataSourceImpl extends ChatRoomRemoteDataSource {
         ),
       );
       return response.toRaw((_) => EmptyRaw());
+    } on AppException catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<AppListResultRaw<MessageRaw>> getListMessages(
+      {required Map<String, dynamic> query}) async {
+    try {
+      final AppResponse response = await _service.request(
+        clientRequest: ClientRequest(
+          url: ApiProvider.chatRoomMessageById(query['id']),
+          method: HttpMethod.post,
+          body: query,
+        ),
+      );
+      return response.toRawList((data) => (data as List<dynamic>)
+          .map((item) => MessageRaw.fromJson(item))
+          .toList());
     } on AppException catch (_) {
       rethrow;
     }
