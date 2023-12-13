@@ -30,7 +30,7 @@ class ChatRoomRemoteDataSourceImpl extends ChatRoomRemoteDataSource {
           body: query,
         ),
       );
-      return response.toRaw((_) => ChatRoomRaw(id: '-1'));
+      return response.toRaw((_) => ChatRoomRaw(id: '-1', roomId: '1'));
     } on AppException catch (_) {
       rethrow;
     }
@@ -42,7 +42,7 @@ class ChatRoomRemoteDataSourceImpl extends ChatRoomRemoteDataSource {
     try {
       final AppResponse response = await _service.request(
         clientRequest: ClientRequest(
-          url: ApiProvider.group,
+          url: ApiProvider.chatRoom,
           method: HttpMethod.get,
           query: query,
           isRequestForList: true,

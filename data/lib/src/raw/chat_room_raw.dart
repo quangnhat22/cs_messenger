@@ -8,6 +8,9 @@ class ChatRoomRaw extends BaseRaw<ChatRoomModel> with _$ChatRoomRaw {
     required String id,
     String? name,
     String? avatar,
+    MessageRaw? message,
+    required String roomId,
+    String? extra,
   }) = _ChatRoomRaw;
 
   factory ChatRoomRaw.fromJson(Map<String, Object?> json) =>
@@ -19,6 +22,7 @@ class ChatRoomRaw extends BaseRaw<ChatRoomModel> with _$ChatRoomRaw {
       id: id,
       name: name,
       avatar: avatar,
+      message: message?.raw2Model(),
     );
   }
 }

@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:utilities/utilities.dart';
 
 part 'api_provider.dart';
 part 'client_request.dart';

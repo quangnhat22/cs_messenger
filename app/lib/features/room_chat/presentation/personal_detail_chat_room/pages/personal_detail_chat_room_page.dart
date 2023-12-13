@@ -10,7 +10,6 @@ import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:resources/resources.dart';
 
 @RoutePage()
 class PersonalDetailChatRoomPage extends StatelessWidget {
@@ -20,7 +19,7 @@ class PersonalDetailChatRoomPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppMainPageWidget()
         .setAppBar(AppBarWidget().setTextTitle('').build(context))
-        .setBackgroundColor(Theme.of(context).colorScheme.surfaceVariant)
+        .setBackgroundColor(Theme.of(context).colorScheme.surface)
         .setBody(_body(context))
         .build(context);
   }
@@ -28,142 +27,142 @@ class PersonalDetailChatRoomPage extends StatelessWidget {
   Widget _body(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-          padding: EdgeInsets.all(AppSizeExt.of.majorPaddingScale(4)),
-          child: Column(
-            children: <Widget>[
-              AppAvatarCircleWidget()
-                  .setSize(AppAvatarSize.extraLarge)
-                  //TODO: set url
-                  .setUrl(
-                      'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsX29mZmljZV8zNF9mdWxsX2JvZHlfM2RfYXZhdGFyXzNkX3JlbmRlcl9vZl9hX2J1c2luZXNzd19jOWYzODYxYy1lZTYzLTQxOGYtOThmNC02MWJkNGM3OGE1YTZfMS5wbmc.png')
-                  .build(context),
-              SizedBox(height: AppSizeExt.of.majorScale(6)),
-              AppTextHeadlineSmallWidget()
-                  .setText(
-                      'Nguyen Dinh Nhat Quang sjdhjshdjhdjhshbdhsbdhbshdbhsbdhhsbdhsbhdbshdbhsbdh')
-                  .setTextAlign(TextAlign.center)
-                  .setTextOverFlow(TextOverflow.ellipsis)
-                  .setMaxLines(2)
-                  .build(context),
-              SizedBox(
-                height: AppSizeExt.of.majorScale(6),
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  IconButtonWithTextWidget(
-                    icon: Icon(
-                      Icons.person_outline,
-                      color: Theme.of(context).colorScheme.background,
-                    ),
-                    text: 'Thông tin cá nhân',
+        padding: EdgeInsets.all(AppSizeExt.of.majorPaddingScale(4)),
+        child: Column(
+          children: <Widget>[
+            AppAvatarCircleWidget()
+                .setSize(AppAvatarSize.extraLarge)
+                //TODO: set url
+                .setUrl(
+                    'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsX29mZmljZV8zNF9mdWxsX2JvZHlfM2RfYXZhdGFyXzNkX3JlbmRlcl9vZl9hX2J1c2luZXNzd19jOWYzODYxYy1lZTYzLTQxOGYtOThmNC02MWJkNGM3OGE1YTZfMS5wbmc.png')
+                .build(context),
+            SizedBox(height: AppSizeExt.of.majorScale(6)),
+            AppTextHeadlineSmallWidget()
+                .setText(
+                    'Nguyen Dinh Nhat Quang sjdhjshdjhdjhshbdhsbdhbshdbhsbdhhsbdhsbhdbshdbhsbdh')
+                .setTextAlign(TextAlign.center)
+                .setTextOverFlow(TextOverflow.ellipsis)
+                .setMaxLines(2)
+                .build(context),
+            SizedBox(
+              height: AppSizeExt.of.majorScale(6),
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                IconButtonWithTextWidget(
+                  icon: Icon(
+                    Icons.person_outline,
+                    color: Theme.of(context).colorScheme.background,
                   ),
-                ],
-              ),
-              SizedBox(
-                height: AppSizeExt.of.majorScale(2),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: AppSizeExt.of.majorPaddingScale(3),
-                      vertical: AppSizeExt.of.majorPaddingScale(3),
-                    ),
-                    child: AppTextTitleMediumWidget()
-                        .setText('More action')
-                        .setTextStyle(TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                          fontWeight: FontWeight.bold,
-                        ))
-                        .build(context),
+                  text: 'Thông tin cá nhân',
+                ),
+              ],
+            ),
+            SizedBox(
+              height: AppSizeExt.of.majorScale(2),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppSizeExt.of.majorPaddingScale(3),
+                    vertical: AppSizeExt.of.majorPaddingScale(3),
                   ),
-                  Card(
-                    elevation: 0,
-                    child: Column(
-                      children: <Widget>[
-                        AppCardBorderWidget()
-                            .setLeading(const Icon(Icons.group_outlined))
-                            .setTitle(AppTextBodyLargeWidget()
-                                .setText(
-                                    'Tạo nhóm chat với Nguyễn Đình Nhật Quang')
-                                .build(context))
-                            .setHasTopBorderRadius(true)
-                            .setIsShowBottomDivider(true)
-                            .setActions(
-                                [const Icon(Icons.chevron_right)]).setOnTap(
-                          () {
-                            getIt<AppRouter>()
-                                .push(const NotificationSettingRoute());
-                          },
-                        ).build(context),
-                        AppCardBorderWidget()
-                            .setLeading(const Icon(Icons.image_outlined))
-                            .setTitle(AppTextBodyLargeWidget()
-                                .setText(
-                                    'Xem file phương tiện, file và liên kết')
-                                .build(context))
-                            .setIsShowBottomDivider(true)
-                            .setActions(
-                                [const Icon(Icons.chevron_right)]).setOnTap(
-                          () {
-                            getIt<AppRouter>()
-                                .push(const NotificationSettingRoute());
-                          },
-                        ).build(context),
-                        AppCardBorderWidget()
-                            .setLeading(const Icon(Icons.push_pin_outlined))
-                            .setTitle(AppTextBodyLargeWidget()
-                                .setText('Tin nhắn đã ghim')
-                                .build(context))
-                            .setIsShowBottomDivider(true)
-                            .setActions([
-                          Icon(
-                            Icons.chevron_right,
+                  child: AppTextTitleMediumWidget()
+                      .setText('More action')
+                      .setTextStyle(TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                      ))
+                      .build(context),
+                ),
+                Card(
+                  elevation: 0,
+                  child: Column(
+                    children: <Widget>[
+                      AppCardBorderWidget()
+                          .setLeading(const Icon(Icons.group_outlined))
+                          .setTitle(AppTextBodyLargeWidget()
+                              .setText(
+                                  'Tạo nhóm chat với Nguyễn Đình Nhật Quang')
+                              .build(context))
+                          .setHasTopBorderRadius(true)
+                          .setIsShowBottomDivider(true)
+                          .setActions(
+                              [const Icon(Icons.chevron_right)]).setOnTap(
+                        () {
+                          getIt<AppRouter>()
+                              .push(const NotificationSettingRoute());
+                        },
+                      ).build(context),
+                      AppCardBorderWidget()
+                          .setLeading(const Icon(Icons.image_outlined))
+                          .setTitle(AppTextBodyLargeWidget()
+                              .setText('Xem file phương tiện, file và liên kết')
+                              .build(context))
+                          .setIsShowBottomDivider(true)
+                          .setActions(
+                              [const Icon(Icons.chevron_right)]).setOnTap(
+                        () {
+                          getIt<AppRouter>()
+                              .push(const NotificationSettingRoute());
+                        },
+                      ).build(context),
+                      AppCardBorderWidget()
+                          .setLeading(const Icon(Icons.push_pin_outlined))
+                          .setTitle(AppTextBodyLargeWidget()
+                              .setText('Tin nhắn đã ghim')
+                              .build(context))
+                          .setIsShowBottomDivider(true)
+                          .setActions([
+                        Icon(
+                          Icons.chevron_right,
+                          color: Theme.of(context).colorScheme.error,
+                        )
+                      ]).setOnTap(
+                        () {
+                          getIt<AppRouter>().push(const BlockRoute());
+                        },
+                      ).build(context),
+                      AppCardBorderWidget()
+                          .setLeading(Icon(
+                            Icons.logout_outlined,
                             color: Theme.of(context).colorScheme.error,
-                          )
-                        ]).setOnTap(
-                          () {
-                            getIt<AppRouter>().push(const BlockRoute());
-                          },
-                        ).build(context),
-                        AppCardBorderWidget()
-                            .setLeading(Icon(
-                              Icons.logout_outlined,
-                              color: Theme.of(context).colorScheme.error,
-                            ))
-                            .setTitle(AppTextBodyLargeWidget()
-                                .setText('Xoá kết bạn')
-                                .setTextStyle(TextStyle(
-                                  color: Theme.of(context).colorScheme.error,
-                                ))
-                                .build(context))
-                            .setOnTap(() {})
-                            .setIsShowBottomDivider(true)
-                            .build(context),
-                        AppCardBorderWidget()
-                            .setLeading(Icon(
-                              Icons.logout_outlined,
-                              color: Theme.of(context).colorScheme.error,
-                            ))
-                            .setTitle(AppTextBodyLargeWidget()
-                                .setText('Chặn')
-                                .setTextStyle(TextStyle(
-                                  color: Theme.of(context).colorScheme.error,
-                                ))
-                                .build(context))
-                            .setHasBottomBorderRadius(true)
-                            .setOnTap(() {})
-                            .build(context)
-                      ],
-                    ),
+                          ))
+                          .setTitle(AppTextBodyLargeWidget()
+                              .setText('Xoá kết bạn')
+                              .setTextStyle(TextStyle(
+                                color: Theme.of(context).colorScheme.error,
+                              ))
+                              .build(context))
+                          .setOnTap(() {})
+                          .setIsShowBottomDivider(true)
+                          .build(context),
+                      AppCardBorderWidget()
+                          .setLeading(Icon(
+                            Icons.logout_outlined,
+                            color: Theme.of(context).colorScheme.error,
+                          ))
+                          .setTitle(AppTextBodyLargeWidget()
+                              .setText('Chặn')
+                              .setTextStyle(TextStyle(
+                                color: Theme.of(context).colorScheme.error,
+                              ))
+                              .build(context))
+                          .setHasBottomBorderRadius(true)
+                          .setOnTap(() {})
+                          .build(context)
+                    ],
                   ),
-                ],
-              )
-            ],
-          )),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }

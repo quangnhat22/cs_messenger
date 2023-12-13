@@ -32,5 +32,6 @@ part 'request/sent_request_param.dart';
 part 'search/search_param.dart';
 part 'setting/theme_and_language_param.dart';
 part 'user/update_user_self_param.dart';
+part 'chat_room/get_list_chat_room_param.dart';
 
 abstract class BaseParam {}

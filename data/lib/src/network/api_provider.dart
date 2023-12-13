@@ -48,6 +48,12 @@ class ApiProvider {
 
   static String groupById(String id) => '$group/$id';
 
+  //group
+  static const String chatRoom = '/chatroom';
+
+  static String chatRoomById(String id) => '$chatRoom/$id';
+  static String chatRoomMessageById(String id) => '$chatRoom/$id/message';
+
   //TODO: mockApi
   static const String mockServerUrl =
       'https://166706c7-b0dd-4262-a9a8-9e7b5f3dd1be.mock.pstmn.io';
