@@ -1,5 +1,4 @@
 import 'package:domain/src/params/base_param.dart';
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:resources/resources.dart';
 
@@ -9,6 +8,8 @@ part 'auth/email_verify_model.dart';
 part 'auth/status_verify_email_model.dart';
 part 'auth/token_model.dart';
 part 'auth/welcome_model.dart';
+part 'base_model.freezed.dart';
+part 'chat_room/chat_room_model.dart';
 part 'device/device_id_model.dart';
 part 'group/group_model.dart';
 part 'history_call_model.dart';

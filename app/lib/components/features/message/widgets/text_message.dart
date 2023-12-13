@@ -139,6 +139,7 @@ class TextMessage extends StatelessWidget {
     String currentUserId,
     double width,
     BuildContext context,
+    String link,
   ) {
     final linkDescriptionTextStyle = currentUserId == message.author.id
         ? Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -176,19 +177,21 @@ class TextMessage extends StatelessWidget {
         horizontal: AppSizeExt.of.majorPaddingScale(5),
         vertical: AppSizeExt.of.majorPaddingScale(4),
       ),
-      previewData: flutter_chat_types.PreviewData(
-        description: message.previewData?.description,
-        image: message.previewData?.image != null
-            ? flutter_chat_types.PreviewDataImage(
-                height: 1000,
-                width: 1000,
-                url: message.previewData!.image!,
-              )
-            : null,
-        link: message.previewData?.link,
-        title: message.previewData?.title,
-      ),
-      text: message.content,
+      previewData: message.previewData != null
+          ? flutter_chat_types.PreviewData(
+              description: message.previewData?.description,
+              image: message.previewData?.image != null
+                  ? flutter_chat_types.PreviewDataImage(
+                      height: 1000,
+                      width: 1000,
+                      url: message.previewData!.image!,
+                    )
+                  : null,
+              link: message.previewData?.link,
+              title: message.previewData?.title,
+            )
+          : null,
+      text: link,
       textWidget: _textWidgetBuilder(currentUserId, context, false),
       userAgent: userAgent,
       width: width,
@@ -251,7 +254,10 @@ class TextMessage extends StatelessWidget {
       final matches = urlRegexp.allMatches(message.content);
 
       if (matches.isNotEmpty) {
-        return _linkPreview(currentUserId, width, context);
+        String urlLink =
+            message.content.substring(matches.first.start, matches.first.end);
+
+        return _linkPreview(currentUserId, width, context, urlLink);
       }
     }
 

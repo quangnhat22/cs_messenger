@@ -1,23 +1,21 @@
 part of '../base_model.dart';
 
-class TextMessageModel extends IMessageModel {
-  final PreviewDataModel? previewData;
-  final IMessageModel? repliedMessage;
-
-  TextMessageModel({
-    required super.id,
-    super.clientId,
-    required super.author,
-    required super.content,
-    required super.type,
-    super.isMe,
-    super.status,
-    required super.roomId,
-    super.createdAt,
-    super.deletedAt,
-    this.previewData,
-    this.repliedMessage,
-  });
+@freezed
+class TextMessageModel extends IMessageModel with _$TextMessageModel {
+  const factory TextMessageModel({
+    required String id,
+    String? clientId,
+    required UserModel author,
+    required String content,
+    required MessageType type,
+    @Default(false) bool isMe,
+    StatusMessageType? status,
+    required String roomId,
+    DateTime? createdAt,
+    DateTime? deletedAt,
+    PreviewDataModel? previewData,
+    IMessageModel? repliedMessage,
+  }) = _TextMessageModel;
 
   static TextMessageModel getTextMessageModelFromParam(
       TextMessageParam param, UserModel currentUser) {

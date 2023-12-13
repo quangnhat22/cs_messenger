@@ -1,27 +1,28 @@
 part of '../base_model.dart';
 
-class FileMessageModel extends IMessageModel {
-  final String? mimeType;
-  final double size;
-  final String uri;
-  final String? name;
-  final bool? isLoading;
+@freezed
+class FileMessageModel extends IMessageModel with _$FileMessageModel {
+  // final String? mimeType;
+  // final double size;
+  // final String uri;
+  // final String? name;
+  // final bool? isLoading;
 
-  FileMessageModel({
-    required super.id,
-    super.clientId,
-    required super.author,
-    required super.content,
-    required super.type,
-    super.isMe,
-    super.status,
-    required super.roomId,
-    super.createdAt,
-    super.deletedAt,
-    this.isLoading = false,
-    this.mimeType,
-    required this.size,
-    required this.uri,
-    this.name,
-  });
+  const factory FileMessageModel({
+    required String id,
+    String? clientId,
+    required UserModel author,
+    required String content,
+    required MessageType type,
+    @Default(false) bool isMe,
+    StatusMessageType? status,
+    required String roomId,
+    DateTime? createdAt,
+    DateTime? deletedAt,
+    @Default(false) bool isLoading,
+    String? mimeType,
+    required double size,
+    required String uri,
+    String? name,
+  }) = _FileMessageModel;
 }

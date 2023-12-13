@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:app/configs/exts/app_exts.dart';
 import 'package:app/features/room_chat/domain/usecases/send_message_uc.dart';
@@ -7,7 +8,10 @@ import 'package:app/service/firebase/upload_file_exts.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
+import 'package:open_filex/open_filex.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:utilities/utilities.dart';
 
 part 'list_message_cubit.freezed.dart';
@@ -482,6 +486,64 @@ class ListMessageCubit extends Cubit<ListMessageState> {
       }
     } on AppException catch (e) {
       Logs.e(e);
+    }
+  }
+
+  void previewDataFetched(
+      TextMessageModel textMessage, PreviewDataModel previewData) {
+    var currentListMessage = state.listMessage.toList();
+    final index = currentListMessage
+        .indexWhere((element) => element.id == textMessage.id);
+    final updatedMessage =
+        (currentListMessage[index] as TextMessageModel).copyWith(
+      previewData: previewData,
+    );
+
+    currentListMessage[index] = updatedMessage;
+    emit(state.copyWith(listMessage: [...currentListMessage]));
+  }
+
+  Future<void> handleMessageTap(IMessageModel message) async {
+    if (message is FileMessageModel) {
+      var localPath = message.uri;
+
+      int index = -1;
+      var currentListMessage = state.listMessage.toList();
+
+      if (message.uri.startsWith('http')) {
+        try {
+          index = currentListMessage
+              .indexWhere((element) => element.id == message.id);
+
+          final updatedMessage = (currentListMessage[index] as FileMessageModel)
+              .copyWith(isLoading: true);
+
+          currentListMessage[index] = updatedMessage;
+
+          emit(state.copyWith(listMessage: [...currentListMessage]));
+
+          final documentsDir = (await getApplicationDocumentsDirectory()).path;
+          localPath = '$documentsDir/${message.name}';
+
+          if (!File(localPath).existsSync()) {
+            final file = File(localPath);
+            final client = http.Client();
+            final request = await client.get(Uri.parse(message.uri));
+            final bytes = request.bodyBytes;
+            await file.writeAsBytes(bytes);
+          }
+        } finally {
+          if (index != -1) {
+            final updatedMessage =
+                (currentListMessage[index] as FileMessageModel)
+                    .copyWith(isLoading: false);
+            currentListMessage[index] = updatedMessage;
+            emit(state.copyWith(listMessage: [...currentListMessage]));
+          }
+        }
+      }
+
+      await OpenFilex.open(localPath);
     }
   }
 }

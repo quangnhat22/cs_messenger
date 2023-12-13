@@ -8,29 +8,34 @@ class IconButtonWithTextWidget extends StatelessWidget {
     super.key,
     required this.icon,
     required this.text,
+    this.onTap,
   });
 
   final Widget icon;
   final String text;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        AppButtonFilledWidget()
-            .setAppButtonSize(AppButtonSize.small)
-            .setAppButtonType(AppButtonType.circle)
-            .setPrefixIcon(icon)
-            .build(context),
-        SizedBox(
-          height: AppSizeExt.of.majorScale(1),
-        ),
-        AppTextTitleMediumWidget()
-            .setText(text)
-            .setColor(Theme.of(context).colorScheme.primary)
-            .build(context),
-      ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          AppButtonFilledWidget()
+              .setAppButtonSize(AppButtonSize.small)
+              .setAppButtonType(AppButtonType.circle)
+              .setPrefixIcon(icon)
+              .build(context),
+          SizedBox(
+            height: AppSizeExt.of.majorScale(1),
+          ),
+          AppTextTitleMediumWidget()
+              .setText(text)
+              .setColor(Theme.of(context).colorScheme.primary)
+              .build(context),
+        ],
+      ),
     );
   }
 }

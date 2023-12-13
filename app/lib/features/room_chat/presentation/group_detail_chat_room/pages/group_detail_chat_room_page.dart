@@ -53,15 +53,16 @@ class GroupDetailChatRoomPage extends StatelessWidget {
                     ),
                     text: 'Thông tin',
                   ),
-                  // SizedBox(
-                  //   width: AppSizeExt.of.majorScale(6),
-                  // ),
                   IconButtonWithTextWidget(
                     icon: Icon(
                       Icons.group_outlined,
                       color: Theme.of(context).colorScheme.background,
                     ),
                     text: R.strings.members,
+                    onTap: () async {
+                      await getIt<AppRouter>()
+                          .push(GroupMemberRoute(groupId: '1'));
+                    },
                   ),
                   IconButtonWithTextWidget(
                     icon: Icon(

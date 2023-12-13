@@ -9,9 +9,12 @@ part 'app_object_result_raw.dart';
 part 'app_response.dart';
 part 'base_raw.freezed.dart';
 part 'base_raw.g.dart';
+part 'chat_room_raw.dart';
 part 'device_id_raw.dart';
 part 'group_raw.dart';
 part 'history_call_raw.dart';
+part 'message_raw.dart';
+part 'preview_data_raw.dart';
 part 'relation_raw.dart';
 part 'request_raw.dart';
 part 'search_raw.dart';
@@ -19,8 +22,6 @@ part 'status_verify_email_raw.dart';
 part 'token_raw.dart';
 part 'user_raw.dart';
 part 'welcome_raw.dart';
-part 'message_raw.dart';
-part 'preview_data_raw.dart';
 
 abstract class BaseRaw<BM extends BaseModel> extends HiveObject {
   BM raw2Model();

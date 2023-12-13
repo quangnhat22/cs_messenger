@@ -33,4 +33,11 @@ class GroupRepositoryImpl extends GroupRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<AppListResultModel<UserModel>> getListMemberGroup(
+      {required Map<String, dynamic> query}) {
+    // TODO: implement getListMemberGroup
+    throw UnimplementedError();
+  }
 }
