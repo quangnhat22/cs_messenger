@@ -149,9 +149,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "historyDevices": MessageLookupByLibrary.simpleMessage("History"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "image": MessageLookupByLibrary.simpleMessage("Image"),
+        "information": MessageLookupByLibrary.simpleMessage("Information"),
         "invalidInput": MessageLookupByLibrary.simpleMessage("Invalid Input"),
         "join": MessageLookupByLibrary.simpleMessage("Join"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "leaveGroup": MessageLookupByLibrary.simpleMessage("Leave group"),
         "lightMode": MessageLookupByLibrary.simpleMessage("Light Mode"),
         "listFriend": MessageLookupByLibrary.simpleMessage("List Friends"),
         "listUserBlock":
@@ -167,6 +169,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "loginSuccess": MessageLookupByLibrary.simpleMessage("Login Success"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
         "members": MessageLookupByLibrary.simpleMessage("Members"),
+        "moreAction": MessageLookupByLibrary.simpleMessage("More action"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "newPassword": MessageLookupByLibrary.simpleMessage("New password"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
@@ -206,6 +209,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("Retry"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "searchFriend": MessageLookupByLibrary.simpleMessage("Search friend"),
+        "seePictureVideosFiles":
+            MessageLookupByLibrary.simpleMessage("See pictures, videos, files"),
         "selectGender": MessageLookupByLibrary.simpleMessage("Select Gender"),
         "selected": MessageLookupByLibrary.simpleMessage("Selected"),
         "sendEmail": MessageLookupByLibrary.simpleMessage("Send email"),

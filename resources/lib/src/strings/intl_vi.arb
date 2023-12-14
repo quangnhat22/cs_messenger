@@ -209,5 +209,9 @@
   "areYouSureBlockThisUser": "Bạn có chắc chắn muốn chặn người này?",
   "unBlock": "Bỏ chặn",
   "edit": "Chỉnh sửa",
-  "editGroup": "Chỉnh sửa nhóm"
+  "editGroup": "Chỉnh sửa nhóm",
+  "seePictureVideosFiles": "Xem hình ảnh, video, tệp tin",
+  "leaveGroup": "Rời nhóm",
+  "moreAction": "Hành động khác",
+  "information": "Thông tin"
 }

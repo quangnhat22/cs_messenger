@@ -9,6 +9,7 @@ import 'package:app/features/room_chat/presentation/chat/widgets/chat_info_app_b
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:utilities/utilities.dart';
 
 @RoutePage()
 class ChatPage extends StatelessWidget {
@@ -59,12 +60,12 @@ class ChatPage extends StatelessWidget {
           onMessageTap: (_, message) async {
             await context.read<ListMessageCubit>().handleMessageTap(message);
           },
-          // onPreviewDataFetched: (textMessage, previewData) {
-          //   Logs.d(previewData);
-          //   context
-          //       .read<ListMessageCubit>()
-          //       .previewDataFetched(textMessage, previewData);
-          // },
+          onPreviewDataFetched: (textMessage, previewData) {
+            Logs.d(previewData);
+            context
+                .read<ListMessageCubit>()
+                .previewDataFetched(textMessage, previewData);
+          },
           isFirstPage: state.isFirstPage,
           isLastPage: state.isLastPage,
           onEndReached: () async {

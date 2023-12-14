@@ -1799,6 +1799,46 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Xem hình ảnh, video, tệp tin`
+  String get seePictureVideosFiles {
+    return Intl.message(
+      'Xem hình ảnh, video, tệp tin',
+      name: 'seePictureVideosFiles',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rời nhóm`
+  String get leaveGroup {
+    return Intl.message(
+      'Rời nhóm',
+      name: 'leaveGroup',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hành động khác`
+  String get moreAction {
+    return Intl.message(
+      'Hành động khác',
+      name: 'moreAction',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thông tin`
+  String get information {
+    return Intl.message(
+      'Thông tin',
+      name: 'information',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

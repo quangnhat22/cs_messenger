@@ -209,5 +209,9 @@
   "areYouSureBlockThisUser": "Are you sure you want to block this person?",
   "unBlock": "Unblock",
   "edit": "Edit",
-  "editGroup": "Edit group"
+  "editGroup": "Edit group",
+  "seePictureVideosFiles": "See pictures, videos, files",
+  "leaveGroup": "Leave group",
+  "moreAction": "More action",
+  "information": "Information"
 }

@@ -1,4 +1,5 @@
 import 'package:app/components/features/button/icon_button_with_text_widget.dart';
+import 'package:app/components/features/imagePicker/app_dialog_image_picker.dart';
 import 'package:app/components/main/appBar/app_bar_base_builder.dart';
 import 'package:app/components/main/avatar/app_avatar_base_builder.dart';
 import 'package:app/components/main/card/app_card_base_builder.dart';
@@ -16,6 +17,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
+import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 @RoutePage()
 class GroupDetailChatRoomPage extends StatelessWidget {
@@ -46,7 +48,9 @@ class GroupDetailChatRoomPage extends StatelessWidget {
           child: Column(
             children: <Widget>[
               GestureDetector(
-                onTap: () {},
+                onTap: () async {
+                  await _showDialogChangeGroupImage(context);
+                },
                 child: AppAvatarCircleWidget()
                     .setSize(AppAvatarSize.extraExtraLarge)
                     //TODO: set url
@@ -68,7 +72,7 @@ class GroupDetailChatRoomPage extends StatelessWidget {
                       Icons.info_outline,
                       color: Theme.of(context).colorScheme.primary,
                     ),
-                    text: 'Thông tin',
+                    text: R.strings.information,
                   ),
                   IconButtonWithTextWidget(
                     icon: Icon(
@@ -103,7 +107,7 @@ class GroupDetailChatRoomPage extends StatelessWidget {
                       vertical: AppSizeExt.of.majorPaddingScale(3),
                     ),
                     child: AppTextTitleMediumWidget()
-                        .setText('More action')
+                        .setText(R.strings.moreAction)
                         .setTextStyle(TextStyle(
                           color: Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.bold,
@@ -121,16 +125,14 @@ class GroupDetailChatRoomPage extends StatelessWidget {
                         AppCardBorderWidget()
                             .setLeading(const Icon(Icons.image_outlined))
                             .setTitle(AppTextBodyLargeWidget()
-                                .setText(
-                                    'Xem file phương tiện, file và liên kết')
+                                .setText(R.strings.seePictureVideosFiles)
                                 .build(context))
                             .setHasTopBorderRadius(true)
                             .setIsShowBottomDivider(true)
                             .setActions(
                                 [const Icon(Icons.chevron_right)]).setOnTap(
                           () {
-                            getIt<AppRouter>()
-                                .push(const NotificationSettingRoute());
+                            getIt<AppRouter>().push(const RoomChatMediaRoute());
                           },
                         ).build(context),
                         AppCardBorderWidget()
@@ -151,7 +153,7 @@ class GroupDetailChatRoomPage extends StatelessWidget {
                               color: Theme.of(context).colorScheme.error,
                             ))
                             .setTitle(AppTextBodyLargeWidget()
-                                .setText('Rời nhóm')
+                                .setText(R.strings.leaveGroup)
                                 .setTextStyle(TextStyle(
                                   color: Theme.of(context).colorScheme.error,
                                 ))
@@ -165,6 +167,19 @@ class GroupDetailChatRoomPage extends StatelessWidget {
             ],
           )),
     );
+  }
+
+  Future<void> _showDialogChangeGroupImage(BuildContext context) async {
+    final assetEntity = await showDialog<AssetEntity?>(
+      context: context,
+      builder: (_) {
+        return const AppDialogImagePickerWidget();
+      },
+    );
+
+    final file = await assetEntity?.file;
+
+    if (file?.path != null && context.mounted) {}
   }
 
   void _buildDialogChangeGroupName(BuildContext context, String groupName) {
