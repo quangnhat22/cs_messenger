@@ -49,8 +49,9 @@ class ListMessageCubit extends Cubit<ListMessageState> {
     try {
       emit(state.copyWith(isLoading: true, roomId: roomId));
       final userResponse = await _getUserProfileLocalUseCase.executeObj();
-      final listMessageResponse = await _getListMessageChatRoomUseCase
-          .executeList(request: GetListRoomMessageParam(chatRoomId: roomId));
+      final listMessageResponse =
+          await _getListMessageChatRoomUseCase.executeList(
+              request: GetListRoomMessageParam(chatRoomId: roomId, limit: 20));
       emit(state.copyWith(
         currentUser: userResponse.netData,
         listMessage: listMessageResponse.netData ?? [],
@@ -81,7 +82,7 @@ class ListMessageCubit extends Cubit<ListMessageState> {
         request: GetListRoomMessageParam(
           chatRoomId: state.roomId,
           offset: state.nextOffset!,
-          limit: 10,
+          limit: 15,
         ),
       );
 
@@ -105,37 +106,37 @@ class ListMessageCubit extends Cubit<ListMessageState> {
     }
   }
 
-  Future<void> getMessagesBottomPage() async {
-    try {
-      final currentListMessage = state.listMessage;
+  // Future<void> getMessagesBottomPage() async {
+  //   try {
+  //     final currentListMessage = state.listMessage;
 
-      final listMessageResponse =
-          await _getListMessageChatRoomUseCase.executeList(
-        request: GetListRoomMessageParam(
-          chatRoomId: state.roomId,
-          offset: currentListMessage.first.id,
-          order: MessageOrder.asc.value,
-        ),
-      );
+  //     final listMessageResponse =
+  //         await _getListMessageChatRoomUseCase.executeList(
+  //       request: GetListRoomMessageParam(
+  //         chatRoomId: state.roomId,
+  //         offset: currentListMessage.first.id,
+  //         order: MessageOrder.asc.value,
+  //       ),
+  //     );
 
-      final bool isFirstPage =
-          (listMessageResponse.netData?.length ?? 0) < limitMessage;
+  //     final bool isFirstPage =
+  //         (listMessageResponse.netData?.length ?? 0) < limitMessage;
 
-      final List<IMessageModel> newListMessage = [
-        ...listMessageResponse.netData?.reversed ?? [],
-        ...currentListMessage
-      ];
+  //     final List<IMessageModel> newListMessage = [
+  //       ...listMessageResponse.netData?.reversed ?? [],
+  //       ...currentListMessage
+  //     ];
 
-      emit(state.copyWith(
-          listMessage: newListMessage, isFirstPage: isFirstPage));
-    } on AppException catch (e) {
-      AppExceptionExt(
-          appException: e,
-          onError: (_) {
-            Logs.e(e);
-          }).detected();
-    }
-  }
+  //     emit(state.copyWith(
+  //         listMessage: newListMessage, isFirstPage: isFirstPage));
+  //   } on AppException catch (e) {
+  //     AppExceptionExt(
+  //         appException: e,
+  //         onError: (_) {
+  //           Logs.e(e);
+  //         }).detected();
+  //   }
+  // }
 
   void sendTextMessage(TextMessageParam message) async {
     try {
