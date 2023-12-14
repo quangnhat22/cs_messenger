@@ -34,5 +34,6 @@ part 'setting/theme_and_language_param.dart';
 part 'user/update_user_self_param.dart';
 part 'chat_room/get_list_chat_room_param.dart';
 part 'chat_room/get_list_room_message_chat_room_param.dart';
+part 'group/edit_group_param.dart';
 
 abstract class BaseParam {}

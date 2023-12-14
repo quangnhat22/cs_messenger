@@ -40,4 +40,11 @@ class GroupRepositoryImpl extends GroupRepository {
     // TODO: implement getListMemberGroup
     throw UnimplementedError();
   }
+
+  @override
+  Future<AppObjResultModel<EmptyModel>> editGroup(
+      {required Map<String, dynamic> request}) {
+    // TODO: implement editGroup
+    throw UnimplementedError();
+  }
 }

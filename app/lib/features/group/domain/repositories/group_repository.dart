@@ -9,4 +9,7 @@ abstract class GroupRepository {
 
   Future<AppObjResultModel<EmptyModel>> createNewGroup(
       {required Map<String, dynamic> request});
+
+  Future<AppObjResultModel<EmptyModel>> editGroup(
+      {required Map<String, dynamic> request});
 }

@@ -96,11 +96,11 @@ class AppChatWidget extends StatefulWidget {
 
 class _AppChatWidgetState extends State<AppChatWidget>
     with SingleTickerProviderStateMixin {
-  late final Animation<double> _animation = CurvedAnimation(
-    curve: Curves.easeOutQuad,
-    parent: _controller,
-  );
-  late final AnimationController _controller = AnimationController(vsync: this);
+  // late final Animation<double> _animation = CurvedAnimation(
+  //   curve: Curves.easeOutQuad,
+  //   parent: _controller,
+  // );
+  // late final AnimationController _controller = AnimationController(vsync: this);
 
   // bool _indicatorOnScrollStatus = false;
 
@@ -130,7 +130,7 @@ class _AppChatWidgetState extends State<AppChatWidget>
 
   @override
   void dispose() {
-    _controller.dispose();
+    // _controller.dispose();
     super.dispose();
   }
 
@@ -280,8 +280,8 @@ class _AppChatWidgetState extends State<AppChatWidget>
                   (widget.onEndReachedThreshold ?? 0.75))) {
             if (widget.items.isEmpty || _isNextPageLoading) return false;
 
-            _controller.duration = Duration.zero;
-            _controller.forward();
+            // _controller.duration = Duration.zero;
+            // _controller.forward();
 
             setState(() {
               _isNextPageLoading = true;
@@ -289,9 +289,9 @@ class _AppChatWidgetState extends State<AppChatWidget>
 
             widget.onEndReached!().whenComplete(() {
               if (mounted) {
-                _controller.duration = const Duration(milliseconds: 100);
+                // _controller.duration = const Duration(milliseconds: 100);
 
-                _controller.reverse();
+                // _controller.reverse();
 
                 setState(() {
                   _isNextPageLoading = false;
@@ -304,8 +304,8 @@ class _AppChatWidgetState extends State<AppChatWidget>
                   notification.metrics.minScrollExtent &&
               widget.onStartReached != null &&
               widget.isFirstPage == false) {
-            _controller.duration = Duration.zero;
-            _controller.forward();
+            // _controller.duration = Duration.zero;
+            // _controller.forward();
 
             setState(() {
               _isNextBottomPageLoading = true;
@@ -313,8 +313,8 @@ class _AppChatWidgetState extends State<AppChatWidget>
 
             widget.onStartReached!().whenComplete(() {
               if (mounted) {
-                _controller.duration = const Duration(milliseconds: 1000);
-                _controller.reverse();
+                // _controller.duration = const Duration(milliseconds: 1000);
+                // _controller.reverse();
 
                 setState(() {
                   _isNextBottomPageLoading = false;
@@ -339,41 +339,41 @@ class _AppChatWidgetState extends State<AppChatWidget>
                   if (widget.bottomWidget != null)
                     SliverToBoxAdapter(child: widget.bottomWidget),
 
-                  SliverPadding(
-                    padding: EdgeInsets.only(
-                      top: 16 +
-                          (widget.useTopSafeAreaInset
-                              ? MediaQuery.of(context).padding.bottom
-                              : 0),
-                    ),
-                    sliver: SliverToBoxAdapter(
-                      child: SizeTransition(
-                        axisAlignment: 1,
-                        sizeFactor: _animation,
-                        child: Center(
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 32,
-                            width: 32,
-                            child: SizedBox(
-                              height: 16,
-                              width: 16,
-                              child: _isNextBottomPageLoading
-                                  ? CircularProgressIndicator(
-                                      backgroundColor: Colors.transparent,
-                                      strokeWidth: 1.5,
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                          Theme.of(context)
-                                              .colorScheme
-                                              .primary),
-                                    )
-                                  : null,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  // SliverPadding(
+                  //   padding: EdgeInsets.only(
+                  //     top: 16 +
+                  //         (widget.useTopSafeAreaInset
+                  //             ? MediaQuery.of(context).padding.bottom
+                  //             : 0),
+                  //   ),
+                  //   sliver: SliverToBoxAdapter(
+                  //     child: SizeTransition(
+                  //       axisAlignment: 1,
+                  //       sizeFactor: _animation,
+                  //       child: Center(
+                  //         child: Container(
+                  //           alignment: Alignment.center,
+                  //           height: 32,
+                  //           width: 32,
+                  //           child: SizedBox(
+                  //             height: 16,
+                  //             width: 16,
+                  //             child: _isNextBottomPageLoading
+                  //                 ? CircularProgressIndicator(
+                  //                     backgroundColor: Colors.transparent,
+                  //                     strokeWidth: 1.5,
+                  //                     valueColor: AlwaysStoppedAnimation<Color>(
+                  //                         Theme.of(context)
+                  //                             .colorScheme
+                  //                             .primary),
+                  //                   )
+                  //                 : null,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
 
                   // SliverPadding(
                   //   padding: const EdgeInsets.only(bottom: 4),
@@ -413,41 +413,41 @@ class _AppChatWidgetState extends State<AppChatWidget>
                           _newMessageBuilder(index, animation),
                     ),
                   ),
-                  SliverPadding(
-                    padding: EdgeInsets.only(
-                      top: 16 +
-                          (widget.useTopSafeAreaInset
-                              ? MediaQuery.of(context).padding.top
-                              : 0),
-                    ),
-                    sliver: SliverToBoxAdapter(
-                      child: SizeTransition(
-                        axisAlignment: 1,
-                        sizeFactor: _animation,
-                        child: Center(
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 32,
-                            width: 32,
-                            child: SizedBox(
-                              height: 16,
-                              width: 16,
-                              child: _isNextPageLoading
-                                  ? CircularProgressIndicator(
-                                      backgroundColor: Colors.transparent,
-                                      strokeWidth: 1.5,
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                          Theme.of(context)
-                                              .colorScheme
-                                              .primary),
-                                    )
-                                  : null,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  // SliverPadding(
+                  //   padding: EdgeInsets.only(
+                  //     top: 16 +
+                  //         (widget.useTopSafeAreaInset
+                  //             ? MediaQuery.of(context).padding.top
+                  //             : 0),
+                  //   ),
+                  //   sliver: SliverToBoxAdapter(
+                  //     child: SizeTransition(
+                  //       axisAlignment: 1,
+                  //       sizeFactor: _animation,
+                  //       child: Center(
+                  //         child: Container(
+                  //           alignment: Alignment.center,
+                  //           height: 32,
+                  //           width: 32,
+                  //           child: SizedBox(
+                  //             height: 16,
+                  //             width: 16,
+                  //             child: _isNextPageLoading
+                  //                 ? CircularProgressIndicator(
+                  //                     backgroundColor: Colors.transparent,
+                  //                     strokeWidth: 1.5,
+                  //                     valueColor: AlwaysStoppedAnimation<Color>(
+                  //                         Theme.of(context)
+                  //                             .colorScheme
+                  //                             .primary),
+                  //                   )
+                  //                 : null,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),

@@ -81,11 +81,11 @@ class ListMessageCubit extends Cubit<ListMessageState> {
         request: GetListRoomMessageParam(
           chatRoomId: state.roomId,
           offset: state.nextOffset!,
-          limit: 5,
+          limit: 10,
         ),
       );
 
-      final bool isLastPage = (listMessageResponse.netData?.length ?? 0) < 5 ||
+      final bool isLastPage =
           (listMessageResponse.next == null || listMessageResponse.next == '');
 
       final List<IMessageModel> newListMessage = List.from(currentListMessage)

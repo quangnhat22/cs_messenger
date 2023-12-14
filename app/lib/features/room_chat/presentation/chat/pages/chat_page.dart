@@ -52,6 +52,7 @@ class ChatPage extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
         return Chat(
+          scrollPhysics: const BouncingScrollPhysics(),
           currentUserId: state.currentUser?.id ?? '-1',
           messages: state.listMessage,
           onAttachmentPressed: () {},
@@ -75,7 +76,7 @@ class ChatPage extends StatelessWidget {
           //topContainerWidget: const ChatFloatTopWidget(),
           showUserAvatars: true,
           isLeftStatus: true,
-          onEndReachedThreshold: 0.6,
+          onEndReachedThreshold: 0.4,
           onStartReachedThreshold: 0.8,
           onSendPressed: (textParam) async {
             context.read<ListMessageCubit>().sendTextMessage(textParam);
