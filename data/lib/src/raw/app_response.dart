@@ -26,6 +26,8 @@ class AppResponse {
   final int limit;
   final bool hasMore;
   final int total;
+  final String? next;
+  final String? before;
 
   AppResponse({
     this.meta,
@@ -35,6 +37,8 @@ class AppResponse {
     this.total = 0,
     this.hasMore = false,
     this.limit = 25,
+    this.next,
+    this.before,
   });
 
   factory AppResponse.fromJson(Map<String, dynamic> json) {
@@ -53,6 +57,8 @@ class AppResponse {
       limit: json['result']['meta']['pageSize'] ?? 25,
       hasMore: json['result']['meta']['hasNextPage'] ?? false,
       total: json['result']['meta']['total'] ?? 0,
+      next: json['result']['meta']['next'],
+      before: json['result']['meta']['before'],
     );
   }
 
@@ -63,5 +69,9 @@ class AppResponse {
   AppListResultRaw<BR> toRawList<BR extends BaseRaw>(
           List<BR> Function(dynamic data) netDataFunc) =>
       AppListResultRaw<BR>(
-          netData: netDataFunc(data), hasMore: hasMore, total: total);
+          netData: netDataFunc(data),
+          hasMore: hasMore,
+          total: total,
+          next: next,
+          before: before);
 }

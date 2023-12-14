@@ -111,6 +111,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "doYouWantUndoFriendRequest": MessageLookupByLibrary.simpleMessage(
             "Bạn có muốn thu hồi lời mời kết bạn này hay không?"),
         "done": MessageLookupByLibrary.simpleMessage("Hoàn tất"),
+        "edit": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),
+        "editGroup": MessageLookupByLibrary.simpleMessage("Chỉnh sửa nhóm"),
         "editProfile":
             MessageLookupByLibrary.simpleMessage("Thay đổi thông tin"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),

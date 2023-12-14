@@ -1779,6 +1779,26 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Chỉnh sửa`
+  String get edit {
+    return Intl.message(
+      'Chỉnh sửa',
+      name: 'edit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chỉnh sửa nhóm`
+  String get editGroup {
+    return Intl.message(
+      'Chỉnh sửa nhóm',
+      name: 'editGroup',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

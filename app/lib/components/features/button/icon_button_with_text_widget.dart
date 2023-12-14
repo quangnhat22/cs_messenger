@@ -23,12 +23,14 @@ class IconButtonWithTextWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           AppButtonFilledWidget()
-              .setAppButtonSize(AppButtonSize.small)
+              .setAppButtonSize(AppButtonSize.medium)
+              .setBackgroundColor(
+                  Theme.of(context).colorScheme.primaryContainer)
               .setAppButtonType(AppButtonType.circle)
               .setPrefixIcon(icon)
               .build(context),
           SizedBox(
-            height: AppSizeExt.of.majorScale(1),
+            height: AppSizeExt.of.majorScale(2),
           ),
           AppTextTitleMediumWidget()
               .setText(text)

@@ -8,12 +8,14 @@ enum MessageOrder {
   final String value;
 }
 
+const limitMessage = 10;
+
 @freezed
 class GetListRoomMessageParam extends BaseParam with _$GetListRoomMessageParam {
   const factory GetListRoomMessageParam({
     @Default("") String offset,
-    @Default(10) int limit,
-    @Default('asc') String order,
+    @Default(limitMessage) int limit,
+    @Default('desc') String order,
     required String chatRoomId,
   }) = _GetListRoomMessageParam;
 

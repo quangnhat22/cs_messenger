@@ -66,6 +66,7 @@ class NetworkInterceptorWrapper extends QueuedInterceptorsWrapper {
   //TODO:handle this
   Map<String, String> _headerToken() {
     final token = pref.getString(AppPrefKey.token, '');
+    Logs.d(token);
     return {AppNetworkKey.authorization: '${AppNetworkKey.bearer} $token'};
   }
 

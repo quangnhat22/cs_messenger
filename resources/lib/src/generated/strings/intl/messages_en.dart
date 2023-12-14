@@ -110,6 +110,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "doYouWantUndoFriendRequest": MessageLookupByLibrary.simpleMessage(
             "Do you want to undo this friend request?"),
         "done": MessageLookupByLibrary.simpleMessage("Done"),
+        "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+        "editGroup": MessageLookupByLibrary.simpleMessage("Edit group"),
         "editProfile": MessageLookupByLibrary.simpleMessage("Edit Profile"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailOrPasswordWrong": MessageLookupByLibrary.simpleMessage(

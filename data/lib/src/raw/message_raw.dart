@@ -29,7 +29,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
     switch (type) {
       case "text":
         return TextMessageModel(
-          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          id: id,
           author: author.raw2Model(),
           content: content,
           type: MessageType.text,
@@ -49,7 +49,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
         final lat = extraMessage?['lat'] as double?;
         final long = extraMessage?['long'] as double?;
         return MapMessageModel(
-          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          id: id,
           author: author.raw2Model(),
           content: content,
           type: MessageType.map,
@@ -69,7 +69,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
         );
       case "gif":
         return EmojiStickerModel(
-          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          id: id,
           author: author.raw2Model(),
           content: content,
           type: MessageType.emoji,

@@ -4,13 +4,11 @@ import 'package:app/components/main/page/app_main_page_base_builder.dart';
 import 'package:app/configs/di/di.dart';
 import 'package:app/configs/routes/app_router.dart';
 import 'package:app/configs/routes/app_router.gr.dart';
-import 'package:app/features/room_chat/presentation/chat/controllers/chat_room_info/chat_room_info_cubit.dart';
 import 'package:app/features/room_chat/presentation/chat/controllers/list_message/list_message_cubit.dart';
 import 'package:app/features/room_chat/presentation/chat/widgets/chat_info_app_bar_widget.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:utilities/utilities.dart';
 
 @RoutePage()
 class ChatPage extends StatelessWidget {
@@ -60,20 +58,20 @@ class ChatPage extends StatelessWidget {
           onMessageTap: (_, message) async {
             await context.read<ListMessageCubit>().handleMessageTap(message);
           },
-          onPreviewDataFetched: (textMessage, previewData) {
-            Logs.d(previewData);
-            context
-                .read<ListMessageCubit>()
-                .previewDataFetched(textMessage, previewData);
-          },
+          // onPreviewDataFetched: (textMessage, previewData) {
+          //   Logs.d(previewData);
+          //   context
+          //       .read<ListMessageCubit>()
+          //       .previewDataFetched(textMessage, previewData);
+          // },
           isFirstPage: state.isFirstPage,
           isLastPage: state.isLastPage,
           onEndReached: () async {
             await context.read<ListMessageCubit>().getMessagesTopPage();
           },
-          onStartReached: () async {
-            await context.read<ListMessageCubit>().getMessagesBottomPage();
-          },
+          // onStartReached: () async {
+          //   await context.read<ListMessageCubit>().getMessagesBottomPage();
+          // },
           //topContainerWidget: const ChatFloatTopWidget(),
           showUserAvatars: true,
           isLeftStatus: true,

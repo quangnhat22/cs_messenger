@@ -207,5 +207,7 @@
   "youHaveAlreadySentThisRequest": "You have already sent this request",
   "acceptOrReject": "Accept/ Reject",
   "areYouSureBlockThisUser": "Are you sure you want to block this person?",
-  "unBlock": "Unblock"
+  "unBlock": "Unblock",
+  "edit": "Edit",
+  "editGroup": "Edit group"
 }

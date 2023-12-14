@@ -25,26 +25,6 @@ class ListFriendInviteWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          // TextField(
-          //   textAlignVertical: TextAlignVertical.center,
-          //   decoration: InputDecoration(
-          //     isCollapsed: true,
-          //     hintText: R.strings.search,
-          //     alignLabelWithHint: true,
-          //     prefixIcon: const Icon(Icons.search),
-          //     filled: true,
-          //     border: OutlineInputBorder(
-          //       borderRadius: BorderRadius.all(
-          //         Radius.circular(AppSizeExt.of.majorScale(8)),
-          //       ),
-          //       borderSide: const BorderSide(
-          //         width: 0,
-          //         style: BorderStyle.none,
-          //       ),
-          //     ),
-          //   ),
-          //   onChanged: (value) {},
-          // ),
           Expanded(
             child: AppListWidget<UserModel, AppListViewState<UserModel>,
                 InviteListFriendCubit>(
@@ -60,29 +40,33 @@ class ListFriendInviteWidget extends StatelessWidget {
 
   Widget _buildCardFriendItem(BuildContext context, UserModel friend, int index,
       List<UserModel> selectedMember, List<UserModel> filterUsers) {
+    final isEnable = filterUsers
+            .firstWhere(
+              (element) => element.id == friend.id,
+              orElse: () => UserModel.empty,
+            )
+            .id ==
+        UserModel.empty.id;
+
     return CheckboxListTile(
-      enabled: filterUsers
-              .firstWhere(
-                (element) => element.id == friend.id,
-                orElse: () => UserModel.empty,
-              )
-              .id ==
-          UserModel.empty.id,
-      title: AppTextTitleMediumWidget().setText(friend.name).build(context),
+      enabled: isEnable,
+      title: AppTextTitleMediumWidget()
+          .setText(friend.name)
+          .setTextStyle(isEnable
+              ? null
+              : TextStyle(color: Theme.of(context).colorScheme.outline))
+          .build(context),
       subtitle: AppTextBodyMediumWidget()
           .setText("${R.strings.email}: ${friend.email}")
+          .setTextStyle(isEnable
+              ? null
+              : TextStyle(color: Theme.of(context).colorScheme.outline))
           .build(context),
       secondary: AppAvatarCircleWidget()
           .setUrl(friend.avatar)
           .setSize(AppAvatarSize.medium)
           .build(context),
-      value: selectedMember
-              .firstWhere(
-                (element) => element.id == friend.id,
-                orElse: () => UserModel.empty,
-              )
-              .id !=
-          UserModel.empty.id,
+      value: isEnable,
       onChanged: (bool? value) => {
         context.read<ListSelectedFriendCubit>().selectedMemberChanged(friend)
       },

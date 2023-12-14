@@ -207,5 +207,7 @@
   "youHaveAlreadySentThisRequest": "Bạn đã gửi yêu cầu trước đây? Vì vậy bạn không thể gửi thêm yêu cầu này nữa.",
   "acceptOrReject": "Đồng ý/ Từ chối",
   "areYouSureBlockThisUser": "Bạn có chắc chắn muốn chặn người này?",
-  "unBlock": "Bỏ chặn"
+  "unBlock": "Bỏ chặn",
+  "edit": "Chỉnh sửa",
+  "editGroup": "Chỉnh sửa nhóm"
 }

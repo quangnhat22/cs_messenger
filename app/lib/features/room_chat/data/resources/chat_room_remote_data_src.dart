@@ -81,11 +81,14 @@ class ChatRoomRemoteDataSourceImpl extends ChatRoomRemoteDataSource {
   Future<AppListResultRaw<MessageRaw>> getListMessages(
       {required Map<String, dynamic> query}) async {
     try {
+      final chatRoomId = query['chatRoomId'];
+      query.removeWhere((key, value) => key == 'chatRoomId');
       final AppResponse response = await _service.request(
         clientRequest: ClientRequest(
-          url: ApiProvider.chatRoomMessageById(query['id']),
-          method: HttpMethod.post,
-          body: query,
+          url: ApiProvider.chatRoomMessageById(chatRoomId),
+          method: HttpMethod.get,
+          query: {...query},
+          isRequestForList: true,
         ),
       );
       return response.toRawList((data) => (data as List<dynamic>)

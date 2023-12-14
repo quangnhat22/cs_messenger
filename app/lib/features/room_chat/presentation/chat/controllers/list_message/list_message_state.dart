@@ -8,6 +8,7 @@ class ListMessageState with _$ListMessageState {
     @Default(false) bool isLoading,
     @Default(false) bool isLastPage,
     @Default(false) bool isFirstPage,
+    String? nextOffset,
     @Default('-1') String roomId,
   }) = _Initial;
 }

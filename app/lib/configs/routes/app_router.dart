@@ -68,6 +68,7 @@ class AppRouter extends $AppRouter {
             _customRoute(page: PersonalDetailChatRoomRoute.page),
             _customRoute(page: GroupDetailChatRoomRoute.page),
             _customRoute(page: GroupMemberRoute.page),
+            _customRoute(page: GroupEditRoute.page),
           ],
         )
       ];

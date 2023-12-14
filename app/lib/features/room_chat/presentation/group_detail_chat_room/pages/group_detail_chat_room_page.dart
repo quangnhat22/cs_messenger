@@ -2,14 +2,18 @@ import 'package:app/components/features/button/icon_button_with_text_widget.dart
 import 'package:app/components/main/appBar/app_bar_base_builder.dart';
 import 'package:app/components/main/avatar/app_avatar_base_builder.dart';
 import 'package:app/components/main/card/app_card_base_builder.dart';
+import 'package:app/components/main/dialog/app_dialog_base_builder.dart';
 import 'package:app/components/main/page/app_main_page_base_builder.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
+import 'package:app/components/main/textField/app_field_base_builder.dart';
 import 'package:app/configs/di/di.dart';
 import 'package:app/configs/routes/app_router.dart';
 import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/configs/theme/app_theme.dart';
+import 'package:app/features/room_chat/presentation/group_detail_chat_room/controllers/group_edit_name_controller.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
 
 @RoutePage()
@@ -18,11 +22,13 @@ class GroupDetailChatRoomPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppMainPageWidget()
-        .setAppBar(AppBarWidget().setTextTitle('').build(context))
-        .setBackgroundColor(Theme.of(context).colorScheme.surfaceVariant)
-        .setBody(_body(context))
-        .build(context);
+    return BlocProvider(
+      create: (_) => getIt<GroupEditNameFormBloc>(),
+      child: AppMainPageWidget()
+          .setAppBar(AppBarWidget().setTextTitle('').build(context))
+          .setBody(_body(context))
+          .build(context),
+    );
   }
 
   Widget _body(BuildContext context) {
@@ -32,15 +38,15 @@ class GroupDetailChatRoomPage extends StatelessWidget {
           child: Column(
             children: <Widget>[
               AppAvatarCircleWidget()
-                  .setSize(AppAvatarSize.extraLarge)
+                  .setSize(AppAvatarSize.extraExtraLarge)
                   //TODO: set url
                   .setUrl(
                       'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsX29mZmljZV8zNF9mdWxsX2JvZHlfM2RfYXZhdGFyXzNkX3JlbmRlcl9vZl9hX2J1c2luZXNzd19jOWYzODYxYy1lZTYzLTQxOGYtOThmNC02MWJkNGM3OGE1YTZfMS5wbmc.png')
                   .build(context),
-              SizedBox(height: AppSizeExt.of.majorScale(6)),
-              AppTextHeadlineSmallWidget().setText('Group A').build(context),
+              SizedBox(height: AppSizeExt.of.majorScale(5)),
+              AppTextHeadlineLargeWidget().setText('Group A').build(context),
               SizedBox(
-                height: AppSizeExt.of.majorScale(6),
+                height: AppSizeExt.of.majorScale(5),
               ),
               Row(
                 mainAxisSize: MainAxisSize.max,
@@ -49,14 +55,22 @@ class GroupDetailChatRoomPage extends StatelessWidget {
                   IconButtonWithTextWidget(
                     icon: Icon(
                       Icons.info_outline,
-                      color: Theme.of(context).colorScheme.background,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                     text: 'Thông tin',
                   ),
                   IconButtonWithTextWidget(
                     icon: Icon(
+                      Icons.edit_outlined,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    text: R.strings.edit,
+                    onTap: () => _buildDialogChangeGroupName(context, '123'),
+                  ),
+                  IconButtonWithTextWidget(
+                    icon: Icon(
                       Icons.group_outlined,
-                      color: Theme.of(context).colorScheme.background,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                     text: R.strings.members,
                     onTap: () async {
@@ -64,17 +78,10 @@ class GroupDetailChatRoomPage extends StatelessWidget {
                           .push(GroupMemberRoute(groupId: '1'));
                     },
                   ),
-                  IconButtonWithTextWidget(
-                    icon: Icon(
-                      Icons.person_add_alt_1_outlined,
-                      color: Theme.of(context).colorScheme.background,
-                    ),
-                    text: 'Mời bạn bè',
-                  ),
                 ],
               ),
               SizedBox(
-                height: AppSizeExt.of.majorScale(2),
+                height: AppSizeExt.of.majorScale(4),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,6 +101,10 @@ class GroupDetailChatRoomPage extends StatelessWidget {
                   ),
                   Card(
                     elevation: 0,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .primaryContainer
+                        .withOpacity(0.18),
                     child: Column(
                       children: <Widget>[
                         AppCardBorderWidget()
@@ -117,12 +128,8 @@ class GroupDetailChatRoomPage extends StatelessWidget {
                                 .setText('Tin nhắn đã ghim')
                                 .build(context))
                             .setIsShowBottomDivider(true)
-                            .setActions([
-                          Icon(
-                            Icons.chevron_right,
-                            color: Theme.of(context).colorScheme.error,
-                          )
-                        ]).setOnTap(
+                            .setActions(
+                                [const Icon(Icons.chevron_right)]).setOnTap(
                           () {
                             getIt<AppRouter>().push(const BlockRoute());
                           },
@@ -147,5 +154,30 @@ class GroupDetailChatRoomPage extends StatelessWidget {
             ],
           )),
     );
+  }
+
+  void _buildDialogChangeGroupName(BuildContext context, String groupName) {
+    AppDialogRequestWidget()
+        .setNegativeText(R.strings.close)
+        .setPositiveText(R.strings.confirm)
+        .setTopWidget(AppTextTitleLargeWidget()
+            .setText(R.strings.editGroup)
+            .build(context))
+        .setTextField(
+          BlocProvider(
+            create: (_) => getIt<GroupEditNameFormBloc>(),
+            child: Builder(
+              builder: (context) {
+                return AppTextFieldWidget()
+                    .setBloc(context.read<GroupEditNameFormBloc>().groupName
+                      ..updateInitialValue(groupName))
+                    .setLabelText(R.strings.groupName)
+                    .build(context);
+              },
+            ),
+          ),
+        )
+        .buildDialog(context)
+        .show();
   }
 }
