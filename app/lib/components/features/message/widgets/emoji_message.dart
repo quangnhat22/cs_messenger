@@ -31,7 +31,7 @@ class EmojiMessage extends StatelessWidget {
                       BorderRadius.circular(AppSizeExt.of.majorScale(4)),
                   showGiphyLabel: false,
                 )
-              : SizedBox();
+              : const SizedBox();
         },
       ),
     );

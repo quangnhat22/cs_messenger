@@ -194,8 +194,8 @@ class _AppChatWidgetState extends State<AppChatWidget>
               if (widget.scrollController.hasClients) {
                 widget.scrollController.animateTo(
                   0,
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.easeInQuad,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
                 );
               }
             });

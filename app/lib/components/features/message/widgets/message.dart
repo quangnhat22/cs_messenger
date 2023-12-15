@@ -7,6 +7,7 @@ import 'package:app/components/features/message/widgets/text_message.dart';
 import 'package:app/components/features/message/widgets/user_avatar.dart';
 import 'package:app/components/features/message/widgets/video_message.dart';
 import 'package:app/components/features/message/widgets/voice_message.dart';
+import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
@@ -193,9 +194,11 @@ class Message extends StatelessWidget {
           : Container(
               decoration: BoxDecoration(
                 borderRadius: borderRadius,
-                color: !currentUserIsAuthor || message.type == MessageType.image
-                    ? Theme.of(context).colorScheme.outline.withOpacity(0.1)
-                    : Theme.of(context).colorScheme.secondaryContainer,
+                color: message.type == MessageType.emoji
+                    ? null
+                    : !currentUserIsAuthor || message.type == MessageType.image
+                        ? Theme.of(context).colorScheme.outline.withOpacity(0.1)
+                        : Theme.of(context).colorScheme.secondaryContainer,
               ),
               child: ClipRRect(
                 borderRadius: borderRadius,
@@ -205,11 +208,6 @@ class Message extends StatelessWidget {
 
   Widget _messageBuilder(BuildContext context) {
     switch (message.type) {
-      // case MessageType.custom:
-      //   final customMessage = message as types.CustomMessage;
-      //   return customMessageBuilder != null
-      //       ? customMessageBuilder!(customMessage, messageWidth: messageWidth)
-      //       : const SizedBox();
       case MessageType.file:
         final fileMessage = message as FileMessageModel;
         return fileMessageBuilder != null
@@ -329,13 +327,13 @@ class Message extends StatelessWidget {
               : Alignment.centerLeft,
       margin: bubbleRtlAlignment == BubbleRtlAlignment.left
           ? EdgeInsetsDirectional.only(
-              bottom: AppSizeExt.of.majorScale(1),
+              bottom: AppSizeExt.of.majorScale(3),
               end: MessageUtils.isMobile ? query.padding.right : 0,
               start: AppSizeExt.of.majorScale(5) +
                   (MessageUtils.isMobile ? query.padding.left : 0),
             )
           : EdgeInsets.only(
-              bottom: AppSizeExt.of.majorScale(1),
+              bottom: AppSizeExt.of.majorScale(3),
               left: AppSizeExt.of.majorScale(5) +
                   (MessageUtils.isMobile ? query.padding.left : 0),
               right: AppSizeExt.of.majorScale(2) +
@@ -357,6 +355,35 @@ class Message extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
+                // Row(
+                //   mainAxisSize: MainAxisSize.min,
+                //   children: [
+                //     SizedBox(
+                //       width: AppSizeExt.of.majorScale(2),
+                //       height: AppSizeExt.of.majorScale(5),
+                //       child: VerticalDivider(
+                //         width: AppSizeExt.of.majorScale(1),
+                //         color: Theme.of(context).colorScheme.primary,
+                //         thickness: 1,
+                //       ),
+                //     ),
+                //     Column(
+                //       children: [
+                //         AppTextLabelSmallWidget()
+                //             .setText('Replied message')
+                //             .setTextStyle(
+                //                 const TextStyle(fontStyle: FontStyle.italic))
+                //             .build(context),
+                //         _bubbleBuilder(
+                //           context,
+                //           borderRadius.resolve(Directionality.of(context)),
+                //           currentUserIsAuthor,
+                //           enlargeEmojis,
+                //         ),
+                //       ],
+                //     ),
+                //   ],
+                // ),
                 GestureDetector(
                   onDoubleTap: () => onMessageDoubleTap?.call(context, message),
                   onLongPress: () => onMessageLongPress?.call(context, message),
@@ -383,6 +410,13 @@ class Message extends StatelessWidget {
                           enlargeEmojis,
                         ),
                 ),
+                if (message.createdAt != null)
+                  AppTextLabelSmallWidget()
+                      .setText(MessageUtils.getVerboseDateTimeRepresentation(
+                          message.createdAt!))
+                      .setTextStyle(
+                          const TextStyle(fontStyle: FontStyle.italic))
+                      .build(context)
               ],
             ),
           ),

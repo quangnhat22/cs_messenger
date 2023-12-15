@@ -13,7 +13,8 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
     String? status,
     // ignore: invalid_annotation_target
     @JsonKey(name: 'room_id') required String roomId,
-    int? createdAt,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: 'created_at') int? createdAt,
     int? deletedAt,
     String? clientId,
     String? extra,
