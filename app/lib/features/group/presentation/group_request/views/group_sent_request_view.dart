@@ -7,6 +7,7 @@ import 'package:app/components/main/listView/controllers/app_list_view_cubit.dar
 import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:app/features/friend/presentation/friend_request/controllers/cubit_friend_request_action/friend_request_action_cubit.dart';
+import 'package:app/features/group/presentation/group_request/controllers/cubit_group_request_action/group_request_action_cubit.dart';
 import 'package:app/features/group/presentation/group_request/controllers/cubit_list_group_sent_request.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:domain/domain.dart';
@@ -82,7 +83,7 @@ class GroupSentRequestView extends StatelessWidget {
           .setPositiveText(R.strings.confirm)
           .setOnPositive(() async {
             await context
-                .read<FriendRequestActionCubit>()
+                .read<GroupRequestActionCubit>()
                 .undoRequest(requestId);
             if (context.mounted) {
               await context.read<ListGroupSentRequestCubit>().onRefreshCall();

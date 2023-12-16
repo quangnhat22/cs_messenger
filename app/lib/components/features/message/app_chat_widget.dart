@@ -328,6 +328,7 @@ class _AppChatWidgetState extends State<AppChatWidget>
         child: Stack(
           children: [
             CupertinoScrollbar(
+              controller: widget.scrollController,
               child: CustomScrollView(
                 controller: widget.scrollController,
                 keyboardDismissBehavior: widget.keyboardDismissBehavior,

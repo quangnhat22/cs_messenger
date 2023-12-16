@@ -7,10 +7,13 @@ import 'package:app/components/features/message/utils/message_utils.dart';
 import 'package:app/components/features/message/widgets/message.dart';
 import 'package:app/components/features/message/widgets/system_message.dart';
 import 'package:app/components/features/message/widgets/text_message.dart';
+import 'package:app/components/features/skeleton/list_skeletion.dart';
+import 'package:app/configs/theme/app_theme.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:resources/resources.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 import 'conditional/conditional.dart';
@@ -238,7 +241,12 @@ class _ChatState extends State<Chat> {
                 Flexible(
                   child: widget.messages.isEmpty
                       ? //TODO:handle empty
-                      const SizedBox()
+                      Center(
+                          child: R.svgs.icEmptyMessage.svg(
+                            width: AppSizeExt.of.majorScale(12),
+                            height: AppSizeExt.of.majorScale(12),
+                          ),
+                        )
                       : GestureDetector(
                           onTap: () {
                             FocusManager.instance.primaryFocus?.unfocus();

@@ -64,6 +64,9 @@ class SettingDashBoardPage extends StatelessWidget {
                     .build(ctx),
               ),
               Card(
+                elevation: 0,
+                color:
+                    Theme.of(ctx).colorScheme.primaryContainer.withOpacity(0.3),
                 child: Column(
                   children: <Widget>[
                     Builder(builder: (context) {
@@ -114,6 +117,9 @@ class SettingDashBoardPage extends StatelessWidget {
                     .build(ctx),
               ),
               Card(
+                elevation: 0,
+                color:
+                    Theme.of(ctx).colorScheme.primaryContainer.withOpacity(0.3),
                 child: Column(
                   children: <Widget>[
                     AppCardBorderWidget()

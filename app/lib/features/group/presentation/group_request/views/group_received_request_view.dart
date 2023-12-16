@@ -102,7 +102,7 @@ class GroupReceivedRequestView extends StatelessWidget {
                 .rejectRequest(requestId);
             if (context.mounted) {
               await context
-                  .read<ListFriendReceivedRequestCubit>()
+                  .read<ListGroupReceivedRequestCubit>()
                   .onRefreshCall();
             }
           })
@@ -127,7 +127,7 @@ class GroupReceivedRequestView extends StatelessWidget {
                 .acceptRequest(requestId);
             if (context.mounted) {
               await context
-                  .read<ListFriendReceivedRequestCubit>()
+                  .read<ListGroupReceivedRequestCubit>()
                   .onRefreshCall();
             }
           })

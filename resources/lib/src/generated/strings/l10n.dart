@@ -680,10 +680,10 @@ class Strings {
     );
   }
 
-  /// `Theme and Language`
+  /// `Chủ đề và ngôn ngữ`
   String get themeAndLanguage {
     return Intl.message(
-      'Theme and Language',
+      'Chủ đề và ngôn ngữ',
       name: 'themeAndLanguage',
       desc: '',
       args: [],
@@ -770,10 +770,10 @@ class Strings {
     );
   }
 
-  /// `Về chún tôi`
+  /// `Về chúng tôi`
   String get about {
     return Intl.message(
-      'Về chún tôi',
+      'Về chúng tôi',
       name: 'about',
       desc: '',
       args: [],
@@ -1440,10 +1440,10 @@ class Strings {
     );
   }
 
-  /// `Tệp`
+  /// `Tệp tin`
   String get file {
     return Intl.message(
-      'Tệp',
+      'Tệp tin',
       name: 'file',
       desc: '',
       args: [],

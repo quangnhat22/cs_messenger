@@ -33,7 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "about": MessageLookupByLibrary.simpleMessage("Về chún tôi"),
+        "about": MessageLookupByLibrary.simpleMessage("Về chúng tôi"),
         "acceptOrReject":
             MessageLookupByLibrary.simpleMessage("Đồng ý/ Từ chối"),
         "acceptRequestSuccess": MessageLookupByLibrary.simpleMessage(
@@ -129,7 +129,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "experienceThePower": MessageLookupByLibrary.simpleMessage(
             "Trải nghiệm sức mạnh của việc nhắn tin tức thời và cuộc gọi video rõ nét. Kết nối với mọi người trên toàn thế giới dễ dàng."),
         "female": MessageLookupByLibrary.simpleMessage("Nữ"),
-        "file": MessageLookupByLibrary.simpleMessage("Tệp"),
+        "file": MessageLookupByLibrary.simpleMessage("Tệp tin"),
         "fileLimitSize": m1,
         "files": MessageLookupByLibrary.simpleMessage("Tệp"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("Quên mật khẩu"),
@@ -260,7 +260,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Cảm ơn bạn đã xác thực email. Bạn hãy đăng nhập lại để tiếp tục bạn nhé!"),
         "theme": MessageLookupByLibrary.simpleMessage("Chủ đề"),
         "themeAndLanguage":
-            MessageLookupByLibrary.simpleMessage("Theme and Language"),
+            MessageLookupByLibrary.simpleMessage("Chủ đề và ngôn ngữ"),
         "turnOnOffNotification":
             MessageLookupByLibrary.simpleMessage("Bật/tắt mở thông báo"),
         "unBlock": MessageLookupByLibrary.simpleMessage("Bỏ chặn"),

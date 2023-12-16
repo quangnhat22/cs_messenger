@@ -21,7 +21,11 @@ import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 @RoutePage()
 class GroupDetailChatRoomPage extends StatelessWidget {
-  const GroupDetailChatRoomPage({super.key});
+  const GroupDetailChatRoomPage(
+      {super.key, required this.groupId, required this.chatRoomId});
+
+  final String groupId;
+  final String chatRoomId;
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +123,7 @@ class GroupDetailChatRoomPage extends StatelessWidget {
                     color: Theme.of(context)
                         .colorScheme
                         .primaryContainer
-                        .withOpacity(0.18),
+                        .withOpacity(0.36),
                     child: Column(
                       children: <Widget>[
                         AppCardBorderWidget()
@@ -132,7 +136,8 @@ class GroupDetailChatRoomPage extends StatelessWidget {
                             .setActions(
                                 [const Icon(Icons.chevron_right)]).setOnTap(
                           () {
-                            getIt<AppRouter>().push(const RoomChatMediaRoute());
+                            getIt<AppRouter>()
+                                .push(RoomChatMediaRoute(roomId: chatRoomId));
                           },
                         ).build(context),
                         AppCardBorderWidget()

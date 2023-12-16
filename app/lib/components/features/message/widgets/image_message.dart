@@ -58,7 +58,7 @@ class _ImageMessageState extends State<ImageMessage> {
           );
 
     //custom image
-    _size = const Size(540, 360);
+    _size = Size(widget.message.width ?? 0, widget.message.height ?? 0);
   }
 
   void _getImage() {
@@ -118,7 +118,7 @@ class _ImageMessageState extends State<ImageMessage> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child: Image(
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                   image: _image!,
                 ),
               ),
@@ -180,13 +180,13 @@ class _ImageMessageState extends State<ImageMessage> {
     } else {
       return Container(
         constraints: BoxConstraints(
-          maxHeight: widget.messageWidth.toDouble(),
-          minWidth: 170,
+          maxHeight: _size.height,
+          minWidth: MediaQuery.sizeOf(context).width * 0.25,
         ),
         child: AspectRatio(
           aspectRatio: _size.aspectRatio > 0 ? _size.aspectRatio : 1,
           child: Image(
-            fit: BoxFit.contain,
+            fit: BoxFit.cover,
             image: _image!,
           ),
         ),

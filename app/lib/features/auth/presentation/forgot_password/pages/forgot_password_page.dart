@@ -4,6 +4,7 @@ import 'package:app/components/main/page/app_main_page_base_builder.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/components/main/textField/app_field_base_builder.dart';
 import 'package:app/configs/di/di.dart';
+import 'package:app/configs/routes/app_router.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:app/features/auth/presentation/forgot_password/controllers/forgot_password_form_bloc.dart';
 import 'package:auto_route/auto_route.dart';
@@ -50,6 +51,9 @@ class ForgotPasswordPage extends StatelessWidget {
                           Icons.chevron_left,
                           color: Theme.of(context).colorScheme.primary,
                         ))
+                        .setOnPressed(() async {
+                          await getIt<AppRouter>().pop();
+                        })
                         .setBackgroundColor(
                             Theme.of(context).colorScheme.background)
                         .build(context),

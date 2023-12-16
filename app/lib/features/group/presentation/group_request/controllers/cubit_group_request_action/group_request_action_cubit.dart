@@ -7,16 +7,20 @@ import 'package:app/features/user/domain/usecases/request/delete_request_uc.dart
 import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:resources/resources.dart';
 
 part 'group_request_action_cubit.freezed.dart';
 part 'group_request_action_state.dart';
 
+@Injectable()
 class GroupRequestActionCubit extends Cubit<GroupRequestActionState> {
   late final AcceptRequestUseCase _acceptRequestUseCase;
   late final DeleteRequestUseCase _deleteRequestUseCase;
 
-  GroupRequestActionCubit() : super(const GroupRequestActionState.initial());
+  GroupRequestActionCubit(
+      this._acceptRequestUseCase, this._deleteRequestUseCase)
+      : super(const GroupRequestActionState.initial());
 
   Future<void> acceptRequest(String requestId) async {
     try {

@@ -50,7 +50,11 @@ class ThemeAndLanguagePage extends StatelessWidget {
                 children: [
                   //theme
                   Card(
-                    surfaceTintColor: Theme.of(context).colorScheme.background,
+                    elevation: 0,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .primaryContainer
+                        .withOpacity(0.3),
                     child: Padding(
                       padding:
                           EdgeInsets.all(AppSizeExt.of.majorPaddingScale(4)),
@@ -96,7 +100,11 @@ class ThemeAndLanguagePage extends StatelessWidget {
                   ),
                   //language
                   Card(
-                    surfaceTintColor: Theme.of(context).colorScheme.background,
+                    elevation: 0,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .primaryContainer
+                        .withOpacity(0.3),
                     child: Padding(
                       padding:
                           EdgeInsets.all(AppSizeExt.of.majorPaddingScale(4)),

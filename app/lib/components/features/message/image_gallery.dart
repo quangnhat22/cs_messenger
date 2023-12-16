@@ -1,6 +1,7 @@
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view_gallery.dart';
+import 'package:utilities/utilities.dart';
 
 import 'conditional/conditional.dart';
 
@@ -82,14 +83,35 @@ class ImageGallery extends StatelessWidget {
                     _imageGalleryLoadingBuilder(event),
                 pageController: pageController,
                 scrollPhysics: const ClampingScrollPhysics(),
+                onPageChanged: (index) {
+                  Logs.d(images[index]);
+                },
               ),
               Positioned.directional(
-                end: 16,
+                top: 16,
+                end: 4,
                 textDirection: Directionality.of(context),
-                top: 56,
-                child: CloseButton(
-                  color: Colors.white,
-                  onPressed: onClosePressed,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color:
+                        Theme.of(context).colorScheme.outline.withOpacity(0.8),
+                  ),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.download,
+                          color: Colors.white,
+                        ),
+                      ),
+                      CloseButton(
+                        color: Colors.red,
+                        onPressed: onClosePressed,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

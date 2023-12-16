@@ -21,7 +21,9 @@ class AppDotIndicatorWidget extends StatelessWidget {
       height: isActive ? height : 4,
       width: width,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
+        color: isActive
+            ? Theme.of(context).colorScheme.primary
+            : Theme.of(context).colorScheme.primaryContainer,
         borderRadius: const BorderRadius.all(
           Radius.circular(12),
         ),

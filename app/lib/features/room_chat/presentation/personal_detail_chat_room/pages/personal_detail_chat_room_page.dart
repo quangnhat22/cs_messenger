@@ -81,6 +81,10 @@ class PersonalDetailChatRoomPage extends StatelessWidget {
                 ),
                 Card(
                   elevation: 0,
+                  color: Theme.of(context)
+                      .colorScheme
+                      .primaryContainer
+                      .withOpacity(0.36),
                   child: Column(
                     children: <Widget>[
                       AppCardBorderWidget()
