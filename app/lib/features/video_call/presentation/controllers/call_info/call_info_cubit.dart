@@ -1,5 +1,6 @@
 import 'package:app/configs/exts/app_exts.dart';
 import 'package:app/features/video_call/domain/usecases/get_video_call_token_uc.dart';
+import 'package:configs/configs.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -33,10 +34,10 @@ class CallInfoCubit extends Cubit<CallInfoState> {
   Future<void> connectRoom(
       {LocalAudioTrack? audioTrack, LocalVideoTrack? videoTrack}) async {
     try {
-      // final tokenResponse = await _getVideoCallTokenUseCase.executeObj(
-      //     request: GetVideoCallTokenParam(chatRoomId: state.chatRoomId));
-      // final String? token = tokenResponse.netData?.token;
-      if (true) {
+      final tokenResponse = await _getVideoCallTokenUseCase.executeObj(
+          request: GetVideoCallTokenParam(chatRoomId: state.chatRoomId));
+      final String? token = tokenResponse.netData?.token;
+      if (token != null) {
         // E2EEOptions? e2eeOptions;
         // if (false && args.e2eeKey != null) {
         //   final keyProvider = await BaseKeyProvider.create();
@@ -45,8 +46,8 @@ class CallInfoCubit extends Cubit<CallInfoState> {
         // }
         final listener = _room.createListener();
         await _room.connect(
-          'ws://192.168.1.251:7880',
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDI4ODQzMjIsImlzcyI6ImRldmtleSIsIm5hbWUiOiJ1c2VyMSIsIm5iZiI6MTcwMjc5NzkyMiwic3ViIjoidXNlcjEiLCJ2aWRlbyI6eyJyb29tIjoibXktZmlyc3Qtcm9vbSIsInJvb21Kb2luIjp0cnVlfX0.rMdz2Oi4x6l9CdoKfJoW43_XLKphSMgqVU9WowdFZew',
+          BuildConfig.videoCallUrl,
+          token,
           roomOptions: const RoomOptions(
             adaptiveStream: true,
             dynacast: true,

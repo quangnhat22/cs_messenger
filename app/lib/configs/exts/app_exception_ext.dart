@@ -98,6 +98,23 @@ class AppExceptionExt {
         //         .show();
         //     break;
         //   }
+        case "10":
+          {
+            //system loggedIn
+            AppDefaultDialogWidget()
+                .setTitle(R.strings.error)
+                .setContent(
+                    'Chúng tôi ghi nhận thiết bị này đang được đăng nhập')
+                .setAppDialogType(AppDialogType.error)
+                .setNegativeText(R.strings.close)
+                .setPositiveText(R.strings.confirm)
+                .setOnPositive(() async {
+                  await _handleForceLogOut();
+                })
+                .buildDialog(AppKeys.navigatorKey.currentContext!)
+                .show();
+            break;
+          }
         case "14":
           {
             AppDefaultDialogWidget()
