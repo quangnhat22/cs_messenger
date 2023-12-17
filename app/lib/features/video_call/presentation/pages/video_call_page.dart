@@ -21,7 +21,7 @@ class VideoCallPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => getIt<CallInfoCubit>()..initPage(chatRoomId),
       child: WillPopScope(
-        onWillPop: () async => true,
+        onWillPop: () async => false,
         child: AppMainPageWidget()
             .setAppBar(AppBarWidget().setTextTitle('').build(context))
             .setBody(_body(context))
