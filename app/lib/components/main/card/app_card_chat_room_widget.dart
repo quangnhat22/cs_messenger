@@ -53,7 +53,7 @@ class AppCardChatRoomWidget extends AppCardBaseBuilder {
         ),
         if (_isShowBottomDivider == true)
           AppDividerSpaceLeftWidget()
-              .setSpaceLeft(AppSizeExt.of.majorScale(17))
+              .setSpaceLeft(AppSizeExt.of.majorScale(15))
               .build(context)
       ],
     );

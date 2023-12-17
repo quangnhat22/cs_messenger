@@ -29,7 +29,9 @@ class ChatPage extends StatelessWidget {
                 .setTextTitleWidget(const ChatInfoAppBarWidget())
                 .setActions([
               IconButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await getIt<AppRouter>().push(const VideoCallRoute());
+                },
                 icon: const Icon(Icons.video_camera_front_outlined),
               ),
               IconButton(

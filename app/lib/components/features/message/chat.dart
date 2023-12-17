@@ -240,11 +240,10 @@ class _ChatState extends State<Chat> {
               children: <Widget>[
                 Flexible(
                   child: widget.messages.isEmpty
-                      ? //TODO:handle empty
-                      Center(
+                      ? Center(
                           child: R.svgs.icEmptyMessage.svg(
-                            width: AppSizeExt.of.majorScale(12),
-                            height: AppSizeExt.of.majorScale(12),
+                            width: MediaQuery.sizeOf(context).width * 0.4,
+                            height: MediaQuery.sizeOf(context).height * 0.4,
                           ),
                         )
                       : GestureDetector(

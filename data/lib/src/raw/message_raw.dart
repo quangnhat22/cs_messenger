@@ -6,7 +6,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
 
   factory MessageRaw({
     required String id,
-    required UserRaw author,
+    UserRaw? author,
     required String content,
     required String type,
     @Default(false) bool isMe,
@@ -31,7 +31,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
       case "text":
         return TextMessageModel(
           id: id,
-          author: author.raw2Model(),
+          author: author != null ? author!.raw2Model() : UserModel.empty,
           content: content,
           type: MessageType.text,
           isMe: isMe,
@@ -51,7 +51,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
         final long = extraMessage?['long'] as double?;
         return MapMessageModel(
           id: id,
-          author: author.raw2Model(),
+          author: author != null ? author!.raw2Model() : UserModel.empty,
           content: content,
           type: MessageType.map,
           isMe: isMe,
@@ -71,7 +71,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
       case "gif":
         return EmojiStickerModel(
           id: id,
-          author: author.raw2Model(),
+          author: author != null ? author!.raw2Model() : UserModel.empty,
           content: content,
           type: MessageType.emoji,
           isMe: isMe,
@@ -90,7 +90,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
         return SystemMessageModel(
           id: id,
           clientId: clientId,
-          author: author.raw2Model(),
+          author: author != null ? author!.raw2Model() : UserModel.empty,
           createdAt: createdAt != null
               ? DateTimeExt.convertTimeStampToDateTime(createdAt!)
               : null,
@@ -108,7 +108,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
         return ImageMessageModel(
           id: id,
           clientId: clientId,
-          author: author.raw2Model(),
+          author: author != null ? author!.raw2Model() : UserModel.empty,
           createdAt: createdAt != null
               ? DateTimeExt.convertTimeStampToDateTime(createdAt!)
               : null,
@@ -127,7 +127,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
         return AudioMessageModel(
           id: id,
           clientId: clientId,
-          author: author.raw2Model(),
+          author: author != null ? author!.raw2Model() : UserModel.empty,
           createdAt: createdAt != null
               ? DateTimeExt.convertTimeStampToDateTime(createdAt!)
               : null,
@@ -146,7 +146,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
         return VideoMessageModel(
           id: id,
           clientId: clientId,
-          author: author.raw2Model(),
+          author: author != null ? author!.raw2Model() : UserModel.empty,
           createdAt: createdAt != null
               ? DateTimeExt.convertTimeStampToDateTime(createdAt!)
               : null,
@@ -167,7 +167,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
         return FileMessageModel(
           id: id,
           clientId: clientId,
-          author: author.raw2Model(),
+          author: author != null ? author!.raw2Model() : UserModel.empty,
           createdAt: createdAt != null
               ? DateTimeExt.convertTimeStampToDateTime(createdAt!)
               : null,

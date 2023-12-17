@@ -73,6 +73,7 @@ class AppRouter extends $AppRouter {
               _customRoute(page: RoomVideoRoute.page),
               _customRoute(page: RoomFileRoute.page),
             ]),
+            _customRoute(page: VideoCallRoute.page),
           ],
         )
       ];

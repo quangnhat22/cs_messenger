@@ -42,7 +42,10 @@ class CreateGroupImageWidget extends StatelessWidget {
                     bottom: 0,
                     right: 0,
                     child: AppButtonOutlineWidget()
-                        .setPrefixIcon(const Icon(Icons.edit_outlined))
+                        .setPrefixIcon(Icon(
+                          Icons.edit_outlined,
+                          color: Theme.of(context).colorScheme.primary,
+                        ))
                         .setAppButtonType(AppButtonType.circle)
                         .setAppButtonSize(AppButtonSize.small)
                         .setOnPressed(() {

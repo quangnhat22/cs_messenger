@@ -79,6 +79,9 @@ dependencies:
   open_filex: ^4.3.4
   http: ^1.1.0
   path_provider: ^2.1.1
+  livekit_client: ^1.5.3
+  flutter_webrtc: ^0.9.46
+  dropdown_button2: ^2.3.9
 
 dev_dependencies:
   flutter_test:

@@ -34,7 +34,7 @@ class ChatRoomRemoteDataSourceImpl extends ChatRoomRemoteDataSource {
           body: query,
         ),
       );
-      return response.toRaw((_) => ChatRoomRaw(id: '-1', roomId: '1'));
+      return response.toRaw((_) => ChatRoomRaw(id: '-1'));
     } on AppException catch (_) {
       rethrow;
     }
