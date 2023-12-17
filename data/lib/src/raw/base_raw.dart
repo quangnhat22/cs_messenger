@@ -21,6 +21,7 @@ part 'search_raw.dart';
 part 'status_verify_email_raw.dart';
 part 'token_raw.dart';
 part 'user_raw.dart';
+part 'video_call_token_raw.dart';
 part 'welcome_raw.dart';
 
 abstract class BaseRaw<BM extends BaseModel> extends HiveObject {

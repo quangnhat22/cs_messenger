@@ -30,7 +30,8 @@ class ChatPage extends StatelessWidget {
                 .setActions([
               IconButton(
                 onPressed: () async {
-                  await getIt<AppRouter>().push(const VideoCallRoute());
+                  await getIt<AppRouter>()
+                      .push(VideoCallRoute(chatRoomId: roomId));
                 },
                 icon: const Icon(Icons.video_camera_front_outlined),
               ),

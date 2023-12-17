@@ -52,7 +52,12 @@ class ApiProvider {
   static const String chatRoom = '/chatroom';
 
   static String chatRoomById(String id) => '$chatRoom/$id';
+
   static String chatRoomMessageById(String id) => '$chatRoom/$id/message';
+
+  //video call
+  static String chatRoomVideoCallById(String id) =>
+      '$chatRoom/$id/video-call-token';
 
   //TODO: mockApi
   static const String mockServerUrl =

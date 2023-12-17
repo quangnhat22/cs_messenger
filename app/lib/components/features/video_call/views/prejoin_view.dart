@@ -1,24 +1,28 @@
 import 'dart:async';
 import 'dart:math' as math;
 
-import 'package:app/components/features/video_call/args/join_args.dart';
 import 'package:app/components/features/video_call/constants/live_kit_constants.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:livekit_client/livekit_client.dart';
+import 'package:utilities/utilities.dart';
 
-class PrejoinView extends StatefulWidget {
-  const PrejoinView({super.key, required this.args});
+class PreJoinView extends StatefulWidget {
+  const PreJoinView({
+    super.key,
+    this.onConnect,
+  });
 
-  final JoinArgs args;
+  // final JoinArgs args;
+  final void Function(LocalAudioTrack?, LocalVideoTrack?)? onConnect;
 
   @override
-  State<PrejoinView> createState() => _PrejoinViewState();
+  State<PreJoinView> createState() => _PreJoinViewState();
 }
 
-class _PrejoinViewState extends State<PrejoinView> {
+class _PreJoinViewState extends State<PreJoinView> {
   List<MediaDevice> _audioInputs = [];
   List<MediaDevice> _videoInputs = [];
   StreamSubscription? _subscription;
@@ -50,8 +54,12 @@ class _PrejoinViewState extends State<PrejoinView> {
   }
 
   @override
-  void dispose() {
-    _subscription?.cancel();
+  void dispose() async {
+    Future.delayed(Duration.zero, () async {
+      await _setEnableVideo(false);
+      await _setEnableAudio(false);
+      _subscription?.cancel();
+    });
     super.dispose();
   }
 
@@ -116,25 +124,48 @@ class _PrejoinViewState extends State<PrejoinView> {
   }
 
   Future<void> _setEnableVideo(value) async {
-    _enableVideo = value;
-    if (!_enableVideo) {
+    if (!value) {
       await _videoTrack!.stop();
       _videoTrack = null;
     } else {
       await _changeLocalVideoTrack();
     }
-    setState(() {});
+    if (context.mounted) {
+      setState(() {
+        _enableVideo = value;
+      });
+    }
   }
 
   Future<void> _setEnableAudio(value) async {
-    _enableAudio = value;
-    if (!_enableAudio) {
+    if (!value) {
       await _audioTrack?.stop();
       _audioTrack = null;
     } else {
       await _changeLocalAudioTrack();
     }
-    setState(() {});
+    if (context.mounted) {
+      setState(() {
+        _enableAudio = value;
+      });
+    }
+  }
+
+  Future<void> _join(BuildContext context) async {
+    setState(() {
+      _busy = true;
+    });
+
+    try {
+      widget.onConnect?.call(_audioTrack, _videoTrack);
+    } catch (error) {
+      Logs.e('Could not connect $error');
+      // await context.showErrorDialog(error);
+    } finally {
+      setState(() {
+        _busy = false;
+      });
+    }
   }
 
   @override
@@ -338,7 +369,7 @@ class _PrejoinViewState extends State<PrejoinView> {
                 ),
               ),
               ElevatedButton(
-                onPressed: _busy ? null : () => {},
+                onPressed: _busy ? null : () => _join(context),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [

@@ -30,6 +30,7 @@ part 'setting/language_model.dart';
 part 'setting/theme_model.dart';
 part 'user/relation_model.dart';
 part 'user/user_model.dart';
+part 'video_call/video_call_token_model.dart';
 
 abstract class BaseModel {}
 
