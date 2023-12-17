@@ -85,6 +85,8 @@ dependencies:
       ref: main
   flutter_webrtc: ^0.9.46
   dropdown_button2: ^2.3.9
+  collection: ^1.17.2
+  flutter_background: ^1.2.0
 
 dev_dependencies:
   flutter_test:

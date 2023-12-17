@@ -57,7 +57,7 @@ class ApiProvider {
 
   //video call
   static String chatRoomVideoCallById(String id) =>
-      '$chatRoom/$id/video-call-token';
+      '$chatRoom/$id/video-call/token';
 
   //TODO: mockApi
   static const String mockServerUrl =

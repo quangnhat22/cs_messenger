@@ -16,7 +16,7 @@ class PreJoinView extends StatefulWidget {
   });
 
   // final JoinArgs args;
-  final void Function(LocalAudioTrack?, LocalVideoTrack?)? onConnect;
+  final Future<void> Function(LocalAudioTrack?, LocalVideoTrack?)? onConnect;
 
   @override
   State<PreJoinView> createState() => _PreJoinViewState();
@@ -49,17 +49,17 @@ class _PreJoinViewState extends State<PreJoinView> {
 
   @override
   void deactivate() {
+    // Future.delayed(Duration.zero, () async {
+    //   await _setEnableVideo(false);
+    //   await _setEnableAudio(false);
+    // });
     _subscription?.cancel();
     super.deactivate();
   }
 
   @override
   void dispose() async {
-    Future.delayed(Duration.zero, () async {
-      await _setEnableVideo(false);
-      await _setEnableAudio(false);
-      _subscription?.cancel();
-    });
+    _subscription?.cancel();
     super.dispose();
   }
 
@@ -118,37 +118,32 @@ class _PreJoinViewState extends State<PreJoinView> {
           await LocalVideoTrack.createCameraTrack(CameraCaptureOptions(
         deviceId: _selectedVideoDevice!.deviceId,
         params: _selectedVideoParameters,
+        cameraPosition: CameraPosition.back,
       ));
       await _videoTrack!.start();
     }
   }
 
   Future<void> _setEnableVideo(value) async {
-    if (!value) {
-      await _videoTrack!.stop();
+    _enableVideo = value;
+    if (!_enableVideo) {
+      await _videoTrack?.stop();
       _videoTrack = null;
     } else {
       await _changeLocalVideoTrack();
     }
-    if (context.mounted) {
-      setState(() {
-        _enableVideo = value;
-      });
-    }
+    setState(() {});
   }
 
   Future<void> _setEnableAudio(value) async {
-    if (!value) {
+    _enableAudio = value;
+    if (!_enableAudio) {
       await _audioTrack?.stop();
       _audioTrack = null;
     } else {
       await _changeLocalAudioTrack();
     }
-    if (context.mounted) {
-      setState(() {
-        _enableAudio = value;
-      });
-    }
+    setState(() {});
   }
 
   Future<void> _join(BuildContext context) async {
@@ -157,7 +152,9 @@ class _PreJoinViewState extends State<PreJoinView> {
     });
 
     try {
-      widget.onConnect?.call(_audioTrack, _videoTrack);
+      if (widget.onConnect != null) {
+        await widget.onConnect!(_audioTrack, _videoTrack);
+      }
     } catch (error) {
       Logs.e('Could not connect $error');
       // await context.showErrorDialog(error);

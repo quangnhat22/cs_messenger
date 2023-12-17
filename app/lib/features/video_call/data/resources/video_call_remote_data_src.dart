@@ -20,7 +20,7 @@ class VideoCallRemoteDataSourceImpl extends VideoCallRemoteDataSource {
       final AppResponse response = await _service.request(
         clientRequest: ClientRequest(
           url: ApiProvider.chatRoomVideoCallById(query['chatRoomId']),
-          method: HttpMethod.post,
+          method: HttpMethod.get,
         ),
       );
       return response.toRaw((data) => VideoCallTokenRaw.fromJson(data));
