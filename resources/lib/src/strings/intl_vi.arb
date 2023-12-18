@@ -223,5 +223,12 @@
         "example": "CS Messenger"
       }
     }
-  }
+  },
+  "information": "Thông tin",
+  "becomeFriend": "Đã trở thành bạn bè",
+  "roomCreated": "Nhóm được tạo",
+  "memberJoined": "Tham gia nhóm",
+  "memberLeft": "Rời nhóm",
+  "callStarted": "Bắt đầu cuộc gọi",
+  "callEnded": "Cuộc gọi kết thúc"
 }

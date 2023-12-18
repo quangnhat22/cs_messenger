@@ -53,11 +53,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "back": MessageLookupByLibrary.simpleMessage("Back"),
         "backToWelcome":
             MessageLookupByLibrary.simpleMessage("Back to Welcome"),
+        "becomeFriend": MessageLookupByLibrary.simpleMessage("Become a friend"),
         "bio": MessageLookupByLibrary.simpleMessage("Bio"),
         "block": MessageLookupByLibrary.simpleMessage("Block"),
         "blockSuccess":
             MessageLookupByLibrary.simpleMessage("Block user success!"),
         "bridgeTheGap": m0,
+        "callEnded": MessageLookupByLibrary.simpleMessage("Call ended"),
+        "callStarted": MessageLookupByLibrary.simpleMessage("Started call"),
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "changePassword":
@@ -171,6 +174,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Login expired. Please log in again!"),
         "loginSuccess": MessageLookupByLibrary.simpleMessage("Login Success"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
+        "memberJoined": MessageLookupByLibrary.simpleMessage("Member joined"),
+        "memberLeft": MessageLookupByLibrary.simpleMessage("Member left"),
         "members": MessageLookupByLibrary.simpleMessage("Members"),
         "moreAction": MessageLookupByLibrary.simpleMessage("More action"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
@@ -210,6 +215,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "resendEmailAfter":
             MessageLookupByLibrary.simpleMessage("Resend email after"),
         "retry": MessageLookupByLibrary.simpleMessage("Retry"),
+        "roomCreated": MessageLookupByLibrary.simpleMessage("Room created"),
         "screenSharing": MessageLookupByLibrary.simpleMessage("Screen Sharing"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "searchFriend": MessageLookupByLibrary.simpleMessage("Search friend"),

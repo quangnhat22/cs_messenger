@@ -16,7 +16,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:utilities/utilities.dart';
 
 @RoutePage()
 class RoomChatDashBoardPage extends StatelessWidget {
@@ -42,12 +41,12 @@ class RoomChatDashBoardPage extends StatelessWidget {
       child: AppListWidget<ChatRoomModel, AppListViewState<ChatRoomModel>,
           ListChatRoomCubit>(
         physics: const BouncingScrollPhysics(),
-        childWidget: _builCardChatRoomItem,
+        childWidget: _buildCardChatRoomItem,
       ),
     );
   }
 
-  Widget _builCardChatRoomItem(
+  Widget _buildCardChatRoomItem(
       BuildContext context, ChatRoomModel model, int index) {
     return AppCardChatRoomWidget()
         .setLeading(AppAvatarCircleWidget()

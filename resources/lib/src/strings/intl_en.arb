@@ -223,5 +223,12 @@
         "example": "CS Messenger"
       }
     }
-  }
+  },
+  "information": "Information",
+  "becomeFriend": "Become a friend",
+  "roomCreated": "Room created",
+  "memberJoined": "Member joined",
+  "memberLeft": "Member left",
+  "callStarted": "Started call",
+  "callEnded": "Call ended"
 }

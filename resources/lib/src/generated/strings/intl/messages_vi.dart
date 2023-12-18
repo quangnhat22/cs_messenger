@@ -53,11 +53,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "back": MessageLookupByLibrary.simpleMessage("Quay lại"),
         "backToWelcome":
             MessageLookupByLibrary.simpleMessage("Trở về trang chính"),
+        "becomeFriend":
+            MessageLookupByLibrary.simpleMessage("Đã trở thành bạn bè"),
         "bio": MessageLookupByLibrary.simpleMessage("Giới thiệu bản thân"),
         "block": MessageLookupByLibrary.simpleMessage("Chặn người dùng"),
         "blockSuccess":
             MessageLookupByLibrary.simpleMessage("Chặn người dùng thành công!"),
         "bridgeTheGap": m0,
+        "callEnded": MessageLookupByLibrary.simpleMessage("Cuộc gọi kết thúc"),
+        "callStarted": MessageLookupByLibrary.simpleMessage("Bắt đầu cuộc gọi"),
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "cancel": MessageLookupByLibrary.simpleMessage("Đóng"),
         "changePassword":
@@ -176,6 +180,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "loginSuccess":
             MessageLookupByLibrary.simpleMessage("Đăng nhập thành công"),
         "male": MessageLookupByLibrary.simpleMessage("Nam"),
+        "memberJoined": MessageLookupByLibrary.simpleMessage("Tham gia nhóm"),
+        "memberLeft": MessageLookupByLibrary.simpleMessage("Rời nhóm"),
         "members": MessageLookupByLibrary.simpleMessage("Thành viên"),
         "moreAction": MessageLookupByLibrary.simpleMessage("Hành động khác"),
         "name": MessageLookupByLibrary.simpleMessage("Tên"),
@@ -217,6 +223,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "resendEmailAfter":
             MessageLookupByLibrary.simpleMessage("Gửi lại email sau"),
         "retry": MessageLookupByLibrary.simpleMessage("Thử lại"),
+        "roomCreated": MessageLookupByLibrary.simpleMessage("Nhóm được tạo"),
         "screenSharing":
             MessageLookupByLibrary.simpleMessage("Chia sẻ màn hình"),
         "search": MessageLookupByLibrary.simpleMessage("Tìm kiếm"),

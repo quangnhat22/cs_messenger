@@ -7,8 +7,6 @@ import 'package:app/components/features/message/utils/message_utils.dart';
 import 'package:app/components/features/message/widgets/message.dart';
 import 'package:app/components/features/message/widgets/system_message.dart';
 import 'package:app/components/features/message/widgets/text_message.dart';
-import 'package:app/components/features/skeleton/list_skeletion.dart';
-import 'package:app/configs/theme/app_theme.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

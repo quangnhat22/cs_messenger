@@ -97,8 +97,9 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
           roomId: roomId,
           status: StatusMessageType.convertString2StatusMessageType(status),
           type: MessageType.convertString2MessageType(type),
-          content: content,
+          content: SystemMessageModel.convertSystemMessage2String(content),
           isMe: isMe,
+          systemMessage: SystemContent.convertSystemMessage2Enum(content),
         );
       case "image":
         final size = extraMessage?['size'] as double?;

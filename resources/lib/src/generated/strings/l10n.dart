@@ -1859,6 +1859,66 @@ class Strings {
       args: [appName],
     );
   }
+
+  /// `Đã trở thành bạn bè`
+  String get becomeFriend {
+    return Intl.message(
+      'Đã trở thành bạn bè',
+      name: 'becomeFriend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nhóm được tạo`
+  String get roomCreated {
+    return Intl.message(
+      'Nhóm được tạo',
+      name: 'roomCreated',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tham gia nhóm`
+  String get memberJoined {
+    return Intl.message(
+      'Tham gia nhóm',
+      name: 'memberJoined',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rời nhóm`
+  String get memberLeft {
+    return Intl.message(
+      'Rời nhóm',
+      name: 'memberLeft',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bắt đầu cuộc gọi`
+  String get callStarted {
+    return Intl.message(
+      'Bắt đầu cuộc gọi',
+      name: 'callStarted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cuộc gọi kết thúc`
+  String get callEnded {
+    return Intl.message(
+      'Cuộc gọi kết thúc',
+      name: 'callEnded',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {
