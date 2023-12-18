@@ -70,8 +70,10 @@ class _ControlsWidgetState extends State<ControlsWidget> {
   }
 
   void _unpublishAll() async {
-    final result = await context.showUnPublishDialog();
-    if (result == true) await participant.unpublishAllTracks();
+    // final result = await context.showUnPublishDialog();
+    // if (result == true) ;
+    VideoCallDialogExts.showUnPublishDialog(
+        () async => await participant.unpublishAllTracks());
   }
 
   bool get isMuted => participant.isMuted;

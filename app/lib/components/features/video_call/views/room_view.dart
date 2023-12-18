@@ -7,6 +7,7 @@ import 'package:app/components/features/video_call/methos_channel/methos_channel
 import 'package:app/components/features/video_call/utils/video_call_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:livekit_client/livekit_client.dart';
+import 'package:utilities/utilities.dart';
 
 import '../widgets/controls.dart';
 import '../widgets/participant.dart';
@@ -80,13 +81,13 @@ class _RoomViewState extends State<RoomView> {
   void _setUpListeners() => _listener
     ..on<RoomDisconnectedEvent>((event) async {
       if (event.reason != null) {
-        print('Room disconnected: reason => ${event.reason}');
+        Logs.d('Room disconnected: reason => ${event.reason}');
       }
       WidgetsBindingCompatible.instance?.addPostFrameCallback(
           (timeStamp) => Navigator.popUntil(context, (route) => route.isFirst));
     })
     ..on<ParticipantEvent>((event) {
-      print('Participant event');
+      Logs.d('Participant event');
       // sort participants on many track events as noted in documentation linked above
       _sortParticipants();
     })
@@ -97,7 +98,7 @@ class _RoomViewState extends State<RoomView> {
     ..on<LocalTrackUnpublishedEvent>((_) => _sortParticipants())
     ..on<TrackE2EEStateEvent>(_onE2EEStateEvent)
     ..on<ParticipantNameUpdatedEvent>((event) {
-      print(
+      Logs.d(
           'Participant name updated: ${event.participant.identity}, name => ${event.name}');
       _sortParticipants();
     })
@@ -106,20 +107,20 @@ class _RoomViewState extends State<RoomView> {
           'Participant metadata updated: ${event.participant.identity}, metadata => ${event.metadata}');
     })
     ..on<RoomMetadataChangedEvent>((event) {
-      print('Room metadata changed: ${event.metadata}');
+      Logs.d('Room metadata changed: ${event.metadata}');
     })
     ..on<DataReceivedEvent>((event) {
       String decoded = 'Failed to decode';
       try {
         decoded = utf8.decode(event.data);
       } catch (_) {
-        print('Failed to decode: $_');
+        Logs.d('Failed to decode: $_');
       }
       context.showDataReceivedDialog(decoded);
     })
     ..on<AudioPlaybackStatusChanged>((event) async {
       if (!widget.room.canPlaybackAudio) {
-        print('Audio playback failed for iOS Safari ..........');
+        Logs.d('Audio playback failed for iOS Safari ..........');
         bool? yesno = await context.showPlayAudioManuallyDialog();
         if (yesno == true) {
           await widget.room.startAudio();
@@ -127,22 +128,28 @@ class _RoomViewState extends State<RoomView> {
       }
     });
 
-  void _askPublish() async {
-    final result = await context.showPublishDialog();
-    if (result != true) return;
-    // video will fail when running in ios simulator
-    try {
+  // void _askPublish() async {
+  //   final result = await context.showPublishDialog();
+  //   if (result != true) return;
+  //   // video will fail when running in ios simulator
+  //   try {
+  //     await widget.room.localParticipant?.setCameraEnabled(true);
+  //   } catch (error) {
+
+  //   }
+  //   try {
+  //     await widget.room.localParticipant?.setMicrophoneEnabled(true);
+  //   } catch (error) {
+  //     Logs.d('could not publish audio: $error');
+  //     await context.showErrorDialog(error);
+  //   }
+  // }
+
+  void _askPublish() {
+    VideoCallDialogExts.showPublishDialog(() async {
       await widget.room.localParticipant?.setCameraEnabled(true);
-    } catch (error) {
-      print('could not publish video: $error');
-      await context.showErrorDialog(error);
-    }
-    try {
       await widget.room.localParticipant?.setMicrophoneEnabled(true);
-    } catch (error) {
-      print('could not publish audio: $error');
-      await context.showErrorDialog(error);
-    }
+    });
   }
 
   void _onRoomDidUpdate() {
@@ -150,7 +157,7 @@ class _RoomViewState extends State<RoomView> {
   }
 
   void _onE2EEStateEvent(TrackE2EEStateEvent e2eeState) {
-    print('e2ee state: $e2eeState');
+    Logs.d('e2ee state: $e2eeState');
   }
 
   void _sortParticipants() {

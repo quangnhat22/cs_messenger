@@ -1,7 +1,54 @@
+import 'package:app/components/main/dialog/app_dialog_base_builder.dart';
+import 'package:app/configs/di/di.dart';
+import 'package:app/configs/exts/app_exts.dart';
+import 'package:app/configs/routes/app_router.dart';
 import 'package:flutter/material.dart';
+import 'package:utilities/utilities.dart';
+
+class VideoCallDialogExts {
+  static void showPublishDialog(Future<void> Function()? onPositive) {
+    AppDefaultDialogWidget()
+        .setAppDialogType(AppDialogType.confirm)
+        .setTitle('Publish')
+        .setContent('Would you like to publish your Camera & Mic ?')
+        .setNegativeText('NO')
+        .setPositiveText('YES')
+        .setOnPositive(() async {
+          try {
+            await onPositive?.call();
+            await getIt<AppRouter>().pop();
+          } catch (e) {
+            Logs.d('could not publish video: $e');
+            // await context.showErrorDialog(error);
+          }
+        })
+        .buildDialog(AppKeys.navigatorKey.currentContext!)
+        .show();
+  }
+
+  static void showUnPublishDialog(Future<void> Function()? onPositive) {
+    AppDefaultDialogWidget()
+        .setAppDialogType(AppDialogType.confirm)
+        .setTitle('UnPublish')
+        .setContent('Would you like to un-publish your Camera & Mic ?')
+        .setNegativeText('NO')
+        .setPositiveText('YES')
+        .setOnPositive(() async {
+          try {
+            await onPositive?.call();
+            await getIt<AppRouter>().pop();
+          } catch (e) {
+            Logs.d('could not publish video: $e');
+            // await context.showErrorDialog(error);
+          }
+        })
+        .buildDialog(AppKeys.navigatorKey.currentContext!)
+        .show();
+  }
+}
 
 extension VideCallExts on BuildContext {
-  //
+  //DONE
   Future<bool?> showPublishDialog() => showDialog<bool>(
         context: this,
         builder: (ctx) => AlertDialog(
@@ -39,6 +86,7 @@ extension VideCallExts on BuildContext {
         ),
       );
 
+  //DONE
   Future<bool?> showUnPublishDialog() => showDialog<bool>(
         context: this,
         builder: (ctx) => AlertDialog(
