@@ -10,5 +10,6 @@ class ListMessageState with _$ListMessageState {
     @Default(false) bool isFirstPage,
     String? nextOffset,
     @Default('-1') String roomId,
+    @Default(false) bool isCalling,
   }) = _Initial;
 }

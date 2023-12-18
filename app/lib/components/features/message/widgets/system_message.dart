@@ -1,8 +1,8 @@
+import 'package:app/components/features/message/utils/message_utils.dart';
 import 'package:app/components/features/message/widgets/text_message.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:utilities/utilities.dart';
 
 /// A class that represents system message widget.
 class SystemMessage extends StatelessWidget {
@@ -36,11 +36,12 @@ class SystemMessage extends StatelessWidget {
         padding: EdgeInsets.all(AppSizeExt.of.majorPaddingScale(6 / 4)),
         child: Column(
           children: [
-            AppTextLabelSmallWidget()
-                .setText(DateTimeExt.dateTimeToDisplayHHmmddMMyyyy(
-                    dateTime: DateTime.now()))
-                .setTextStyle(const TextStyle(fontWeight: FontWeight.bold))
-                .build(context),
+            if (createdAt != null)
+              AppTextLabelSmallWidget()
+                  .setText(
+                      MessageUtils.getVerboseDateTimeRepresentation(createdAt!))
+                  .setTextStyle(const TextStyle(fontWeight: FontWeight.bold))
+                  .build(context),
             SizedBox(
               height: AppSizeExt.of.majorScale(1),
             ),

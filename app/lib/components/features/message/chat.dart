@@ -375,7 +375,10 @@ class _ChatState extends State<Chat> {
       final Widget messageWidget;
 
       if (message is SystemMessageModel) {
-        messageWidget = SystemMessage(message: message.content);
+        messageWidget = SystemMessage(
+          message: message.content,
+          createdAt: message.createdAt,
+        );
       } else {
         const minWidth = 440;
         final messageWidth =

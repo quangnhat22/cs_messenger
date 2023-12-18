@@ -5,6 +5,7 @@ import 'package:app/configs/di/di.dart';
 import 'package:app/configs/routes/app_router.dart';
 import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/features/room_chat/presentation/chat/controllers/list_message/list_message_cubit.dart';
+import 'package:app/features/room_chat/presentation/chat/widgets/chat_float_top_widget.dart';
 import 'package:app/features/room_chat/presentation/chat/widgets/chat_info_app_bar_widget.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
@@ -22,12 +23,26 @@ class ChatPage extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (_) => getIt<ListMessageCubit>()..initPage(roomId)),
+            create: (_) => getIt<ListMessageCubit>()..initPage(roomId),
+          ),
         ],
         child: AppMainPageWidget()
             .setAppBar(AppBarWidget()
                 .setTextTitleWidget(const ChatInfoAppBarWidget())
-                .setActions([
+                .setActions([_appBarActions(context)]).build(context))
+            .setResizeToAvoidBottomInset(true)
+            .setBody(_body(context))
+            .build(context));
+  }
+
+  Widget _appBarActions(BuildContext context) {
+    return BlocBuilder<ListMessageCubit, ListMessageState>(
+      buildWhen: (prev, current) => prev != current,
+      builder: (context, state) {
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            if (!state.isCalling)
               IconButton(
                 onPressed: () async {
                   await getIt<AppRouter>()
@@ -35,19 +50,19 @@ class ChatPage extends StatelessWidget {
                 },
                 icon: const Icon(Icons.video_camera_front_outlined),
               ),
-              IconButton(
-                onPressed: () {
-                  getIt<AppRouter>().push(GroupDetailChatRoomRoute(
-                      chatRoomId: roomId, groupId: '1'));
-                },
-                icon: const Icon(
-                  Icons.more_vert,
-                ),
+            IconButton(
+              onPressed: () {
+                getIt<AppRouter>().push(
+                    GroupDetailChatRoomRoute(chatRoomId: roomId, groupId: '1'));
+              },
+              icon: const Icon(
+                Icons.more_vert,
               ),
-            ]).build(context))
-            .setResizeToAvoidBottomInset(true)
-            .setBody(_body(context))
-            .build(context));
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Widget _body(BuildContext context) {
@@ -60,18 +75,20 @@ class ChatPage extends StatelessWidget {
           scrollPhysics: const BouncingScrollPhysics(),
           currentUserId: state.currentUser?.id ?? '-1',
           messages: state.listMessage,
-          onAttachmentPressed: () {},
+          isFirstPage: state.isFirstPage,
+          isLastPage: state.isLastPage,
+          topContainerWidget:
+              !state.isCalling ? const ChatFloatTopWidget() : null,
           onMessageTap: (_, message) async {
             await context.read<ListMessageCubit>().handleMessageTap(message);
           },
+          onAttachmentPressed: () {},
           onPreviewDataFetched: (textMessage, previewData) {
             Logs.d(previewData);
             context
                 .read<ListMessageCubit>()
                 .previewDataFetched(textMessage, previewData);
           },
-          isFirstPage: state.isFirstPage,
-          isLastPage: state.isLastPage,
           onEndReached: () async {
             await context.read<ListMessageCubit>().getMessagesTopPage();
           },

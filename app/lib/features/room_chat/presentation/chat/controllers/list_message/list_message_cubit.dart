@@ -52,6 +52,24 @@ class ListMessageCubit extends Cubit<ListMessageState> {
       final listMessageResponse =
           await _getListMessageChatRoomUseCase.executeList(
               request: GetListRoomMessageParam(chatRoomId: roomId, limit: 20));
+
+      final listMessage = listMessageResponse.netData;
+
+      if (listMessage != null && listMessage.isNotEmpty) {
+        final indexStartedCall = listMessage.indexWhere((message) =>
+            message is SystemMessageModel &&
+            message.systemMessage == SystemContent.callStarted);
+        final indexEndCall = listMessage.indexWhere((message) =>
+            message is SystemMessageModel &&
+            message.systemMessage == SystemContent.callEnded);
+
+        if (indexEndCall != -1 &&
+            indexEndCall != -1 &&
+            indexStartedCall < indexEndCall) {
+          emit(state.copyWith(isCalling: true));
+        }
+      }
+
       emit(state.copyWith(
         currentUser: userResponse.netData,
         listMessage: listMessageResponse.netData ?? [],
@@ -65,6 +83,14 @@ class ListMessageCubit extends Cubit<ListMessageState> {
 
   void _onReceiveNewMessage(IMessageModel newMessage) {
     if (newMessage.roomId == state.roomId) {
+      if (newMessage is SystemMessageModel) {
+        if (newMessage.systemMessage == SystemContent.callStarted) {
+          emit(state.copyWith(isCalling: true));
+        }
+        if (newMessage.systemMessage == SystemContent.callEnded) {
+          emit(state.copyWith(isCalling: false));
+        }
+      }
       emit(state.copyWith(listMessage: [newMessage, ...state.listMessage]));
     }
   }
