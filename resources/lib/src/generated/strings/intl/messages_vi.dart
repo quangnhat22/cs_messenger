@@ -26,10 +26,12 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m1(size) =>
       "Kích thước file không được quá ${size} mb! Vui lòng thử lại";
 
-  static String m2(email, expireTime) =>
+  static String m2(appName) => "${appName} đang chia sẻ màn hình.";
+
+  static String m3(email, expireTime) =>
       "Vui lòng mở \"${email}\" để xác minh tài khoản. Vui lòng xác nhận tài khoản trước \$${expireTime}, nếu không tài khoản của bạn có thể bị mất!";
 
-  static String m3(app) => "Chào mừng đến với ${app}";
+  static String m4(app) => "Chào mừng đến với ${app}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -155,6 +157,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "information": MessageLookupByLibrary.simpleMessage("Thông tin"),
         "invalidInput":
             MessageLookupByLibrary.simpleMessage("Input không hợp lệ"),
+        "isSharingTheScreen": m2,
         "join": MessageLookupByLibrary.simpleMessage("Tham gia"),
         "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
         "leaveGroup": MessageLookupByLibrary.simpleMessage("Rời nhóm"),
@@ -193,7 +196,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Số điện thoại không hợp lệ"),
         "pickFromGallery":
             MessageLookupByLibrary.simpleMessage("Lấy từ thư viện"),
-        "pleaseCheckYourEmail": m2,
+        "pleaseCheckYourEmail": m3,
         "pleaseCheckYourEmailToRecovery": MessageLookupByLibrary.simpleMessage(
             "Bạn hãy kiểm tra email để khôi phục mật khẩu nhé"),
         "pleaseLoginAgain":
@@ -214,6 +217,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "resendEmailAfter":
             MessageLookupByLibrary.simpleMessage("Gửi lại email sau"),
         "retry": MessageLookupByLibrary.simpleMessage("Thử lại"),
+        "screenSharing":
+            MessageLookupByLibrary.simpleMessage("Chia sẻ màn hình"),
         "search": MessageLookupByLibrary.simpleMessage("Tìm kiếm"),
         "searchFriend": MessageLookupByLibrary.simpleMessage("Tìm kiếm bạn bè"),
         "seePictureVideosFiles": MessageLookupByLibrary.simpleMessage(
@@ -293,7 +298,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcome": MessageLookupByLibrary.simpleMessage("Chào mừng bạn"),
         "welcomeBack":
             MessageLookupByLibrary.simpleMessage("Chào mừng bạn trở lại!"),
-        "welcomeToApp": m3,
+        "welcomeToApp": m4,
         "youHaveAlreadySentThisRequest": MessageLookupByLibrary.simpleMessage(
             "Bạn đã gửi yêu cầu trước đây? Vì vậy bạn không thể gửi thêm yêu cầu này nữa.")
       };

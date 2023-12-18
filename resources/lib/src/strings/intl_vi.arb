@@ -213,5 +213,15 @@
   "seePictureVideosFiles": "Xem hình ảnh, video, tệp tin",
   "leaveGroup": "Rời nhóm",
   "moreAction": "Hành động khác",
-  "information": "Thông tin"
+  "information": "Thông tin",
+  "screenSharing": "Chia sẻ màn hình",
+  "isSharingTheScreen": "{appName} đang chia sẻ màn hình.",
+  "@isSharingTheScreen": {
+    "placeholders": {
+      "appName": {
+        "type": "String",
+        "example": "CS Messenger"
+      }
+    }
+  }
 }

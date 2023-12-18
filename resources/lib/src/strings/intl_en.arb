@@ -213,5 +213,15 @@
   "seePictureVideosFiles": "See pictures, videos, files",
   "leaveGroup": "Leave group",
   "moreAction": "More action",
-  "information": "Information"
+  "information": "Information",
+  "screenSharing": "Screen Sharing",
+  "isSharingTheScreen": "{appName} is sharing the screen.",
+  "@isSharingTheScreen": {
+    "placeholders": {
+      "appName": {
+        "type": "String",
+        "example": "CS Messenger"
+      }
+    }
+  }
 }

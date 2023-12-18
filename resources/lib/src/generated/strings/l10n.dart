@@ -1839,6 +1839,26 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Chia sẻ màn hình`
+  String get screenSharing {
+    return Intl.message(
+      'Chia sẻ màn hình',
+      name: 'screenSharing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{appName} đang chia sẻ màn hình.`
+  String isSharingTheScreen(String appName) {
+    return Intl.message(
+      '$appName đang chia sẻ màn hình.',
+      name: 'isSharingTheScreen',
+      desc: '',
+      args: [appName],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

@@ -22,10 +22,7 @@ class VideoCallPage extends StatelessWidget {
       create: (_) => getIt<CallInfoCubit>()..initPage(chatRoomId),
       child: WillPopScope(
         onWillPop: () async => false,
-        child: AppMainPageWidget()
-            .setAppBar(AppBarWidget().setTextTitle('').build(context))
-            .setBody(_body(context))
-            .build(context),
+        child: AppMainPageWidget().setBody(_body(context)).build(context),
       ),
     );
   }

@@ -200,6 +200,20 @@ class _PreJoinViewState extends State<PreJoinView> {
           ),
         ),
         Positioned(
+          top: AppSizeExt.of.majorScale(1),
+          left: AppSizeExt.of.majorScale(2),
+          child: IconWrapper(
+            icon: const Icon(Icons.chevron_left),
+            onPressed: () async {
+              await _setEnableVideo(false);
+              await _setEnableAudio(false);
+              if (context.mounted) {
+                Navigator.of(context).pop();
+              }
+            },
+          ),
+        ),
+        Positioned(
           bottom: 0,
           left: 0,
           right: 0,

@@ -5,12 +5,14 @@ import 'dart:math' as math;
 import 'package:app/components/features/video_call/exts/video_call_exts.dart';
 import 'package:app/components/features/video_call/methos_channel/methos_channel.dart';
 import 'package:app/components/features/video_call/utils/video_call_utils.dart';
+import 'package:app/components/features/video_call/widgets/controls.dart';
+import 'package:app/components/features/video_call/widgets/participant.dart';
+import 'package:app/components/main/page/app_main_page_base_builder.dart';
+import 'package:app/configs/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:livekit_client/livekit_client.dart';
 import 'package:utilities/utilities.dart';
 
-import '../widgets/controls.dart';
-import '../widgets/participant.dart';
 import '../widgets/participant_info.dart';
 
 class RoomView extends StatefulWidget {
@@ -34,6 +36,7 @@ class _RoomViewState extends State<RoomView> {
 
   bool get fastConnection => widget.room.engine.fastConnectOptions != null;
   bool _flagStartedReplayKit = false;
+  bool _isHaveScreenSharing = false;
 
   @override
   void initState() {
@@ -103,7 +106,7 @@ class _RoomViewState extends State<RoomView> {
       _sortParticipants();
     })
     ..on<ParticipantMetadataUpdatedEvent>((event) {
-      print(
+      Logs.d(
           'Participant metadata updated: ${event.participant.identity}, metadata => ${event.metadata}');
     })
     ..on<RoomMetadataChangedEvent>((event) {
@@ -127,23 +130,6 @@ class _RoomViewState extends State<RoomView> {
         }
       }
     });
-
-  // void _askPublish() async {
-  //   final result = await context.showPublishDialog();
-  //   if (result != true) return;
-  //   // video will fail when running in ios simulator
-  //   try {
-  //     await widget.room.localParticipant?.setCameraEnabled(true);
-  //   } catch (error) {
-
-  //   }
-  //   try {
-  //     await widget.room.localParticipant?.setMicrophoneEnabled(true);
-  //   } catch (error) {
-  //     Logs.d('could not publish audio: $error');
-  //     await context.showErrorDialog(error);
-  //   }
-  // }
 
   void _askPublish() {
     VideoCallDialogExts.showPublishDialog(() async {
@@ -241,47 +227,84 @@ class _RoomViewState extends State<RoomView> {
     }
     setState(() {
       participantTracks = [...screenTracks, ...userMediaTracks];
+      _isHaveScreenSharing = screenTracks.isNotEmpty;
     });
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        body: Stack(
-          children: [
-            Column(
-              children: [
-                Expanded(
-                    child: participantTracks.isNotEmpty
-                        ? ParticipantWidget.widgetFor(participantTracks.first,
-                            showStatsLayer: true)
-                        : Container()),
-                if (widget.room.localParticipant != null)
-                  SafeArea(
-                    top: false,
-                    child: ControlsWidget(
-                        widget.room, widget.room.localParticipant!),
-                  )
-              ],
+  Widget build(BuildContext context) {
+    return AppMainPageWidget().setBody(_body(context)).build(context);
+  }
+
+  Widget _body(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: AppSizeExt.of.majorPaddingScale(4),
+      ),
+      child: Column(
+        children: <Widget>[
+          Expanded(
+            child: participantTracks.isNotEmpty
+                ? _isHaveScreenSharing
+                    ? _stackLayout(context)
+                    : _gridLayout(context)
+                : const SizedBox(),
+          ),
+          if (widget.room.localParticipant != null)
+            SafeArea(
+              top: false,
+              child: ControlsWidget(widget.room, widget.room.localParticipant!),
             ),
-            Positioned(
-              left: 0,
-              right: 0,
-              top: 0,
-              child: SizedBox(
-                height: 120,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: math.max(0, participantTracks.length - 1),
-                  itemBuilder: (BuildContext context, int index) => SizedBox(
-                    width: 180,
-                    height: 120,
-                    child: ParticipantWidget.widgetFor(
-                        participantTracks[index + 1]),
-                  ),
-                ),
+        ],
+      ),
+    );
+  }
+
+  Widget _gridLayout(BuildContext context) {
+    return participantTracks.length < 2
+        ? ParticipantWidget.widgetFor(participantTracks.first,
+            showStatsLayer: true)
+        : GridView.builder(
+            scrollDirection: Axis.vertical,
+            physics: const ScrollPhysics(),
+            shrinkWrap: true,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: AppSizeExt.of.majorScale(2 / 4),
+              mainAxisSpacing: AppSizeExt.of.majorScale(2 / 4),
+            ),
+            itemBuilder: (BuildContext s, int index) =>
+                ParticipantWidget.widgetFor(participantTracks[index]),
+            itemCount: participantTracks.length,
+          );
+  }
+
+  Widget _stackLayout(BuildContext context) {
+    return Stack(
+      children: <Widget>[
+        ParticipantWidget.widgetFor(
+          participantTracks.first,
+          showStatsLayer: true,
+        ),
+        Positioned(
+          left: 0,
+          right: 0,
+          top: 0,
+          child: SizedBox(
+            height: AppSizeExt.of.majorScale(30),
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: math.max(0, participantTracks.length - 1),
+              itemBuilder: (BuildContext context, int index) => SizedBox(
+                width: AppSizeExt.of.majorScale(25),
+                height: AppSizeExt.of.majorScale(30),
+                child:
+                    ParticipantWidget.widgetFor(participantTracks[index + 1]),
               ),
             ),
-          ],
+          ),
         ),
-      );
+      ],
+    );
+  }
 }

@@ -16,6 +16,7 @@ class DeviceInfo {
     try {
       deviceInfo.putIfAbsent('appVersion',
           () => "${packageInfo.version}(${packageInfo.buildNumber})");
+      deviceInfo.putIfAbsent('appName', () => packageInfo.appName);
       if (Platform.isIOS) {
         IosDeviceInfo iosDeviceInfo = await deviceInfoPlugin.iosInfo;
         deviceInfo.putIfAbsent('OS', () => "iOS");

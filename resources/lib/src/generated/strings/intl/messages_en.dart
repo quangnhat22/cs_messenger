@@ -26,10 +26,12 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m1(size) =>
       "File size cannot exceed ${size} mb!. Please try again";
 
-  static String m2(email, expireTime) =>
+  static String m2(appName) => "${appName} is sharing the screen.";
+
+  static String m3(email, expireTime) =>
       "Please check your email \"${email}\" to verify your account. Please confirm your email before ${expireTime}., otherwise your account will not be deleted in the future";
 
-  static String m3(app) => "Welcome to ${app}";
+  static String m4(app) => "Welcome to ${app}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -151,6 +153,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "image": MessageLookupByLibrary.simpleMessage("Image"),
         "information": MessageLookupByLibrary.simpleMessage("Information"),
         "invalidInput": MessageLookupByLibrary.simpleMessage("Invalid Input"),
+        "isSharingTheScreen": m2,
         "join": MessageLookupByLibrary.simpleMessage("Join"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "leaveGroup": MessageLookupByLibrary.simpleMessage("Leave group"),
@@ -187,7 +190,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Phone number is not valid"),
         "pickFromGallery":
             MessageLookupByLibrary.simpleMessage("Pick from gallery"),
-        "pleaseCheckYourEmail": m2,
+        "pleaseCheckYourEmail": m3,
         "pleaseCheckYourEmailToRecovery": MessageLookupByLibrary.simpleMessage(
             "Please check your email to recovery your password"),
         "pleaseLoginAgain":
@@ -207,6 +210,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "resendEmailAfter":
             MessageLookupByLibrary.simpleMessage("Resend email after"),
         "retry": MessageLookupByLibrary.simpleMessage("Retry"),
+        "screenSharing": MessageLookupByLibrary.simpleMessage("Screen Sharing"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "searchFriend": MessageLookupByLibrary.simpleMessage("Search friend"),
         "seePictureVideosFiles":
@@ -285,7 +289,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "voice": MessageLookupByLibrary.simpleMessage("Voice"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
-        "welcomeToApp": m3,
+        "welcomeToApp": m4,
         "youHaveAlreadySentThisRequest": MessageLookupByLibrary.simpleMessage(
             "You have already sent this request")
       };

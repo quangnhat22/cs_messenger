@@ -16,7 +16,6 @@ class VideoCallDialogExts {
         .setOnPositive(() async {
           try {
             await onPositive?.call();
-            await getIt<AppRouter>().pop();
           } catch (e) {
             Logs.d('could not publish video: $e');
             // await context.showErrorDialog(error);
