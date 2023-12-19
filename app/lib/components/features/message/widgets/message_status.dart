@@ -18,22 +18,22 @@ class MessageStatus extends StatelessWidget {
     switch (status) {
       case StatusMessageType.sent:
         return R.pngs.iconDelivered.image(
-          width: 4,
-          height: 4,
+          width: 20,
+          height: 20,
           color: Theme.of(context).colorScheme.primary,
         );
       case StatusMessageType.error:
         return R.pngs.iconError.image(
-          width: 4,
-          height: 4,
+          width: 20,
+          height: 20,
           color: Theme.of(context).colorScheme.error,
         );
 
       case StatusMessageType.sending:
         return Center(
           child: SizedBox(
-            height: 10,
-            width: 10,
+            height: 20,
+            width: 20,
             child: CircularProgressIndicator(
               backgroundColor: Colors.transparent,
               strokeWidth: 1.5,

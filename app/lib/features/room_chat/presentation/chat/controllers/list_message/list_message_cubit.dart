@@ -14,6 +14,7 @@ import 'package:injectable/injectable.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:utilities/utilities.dart';
+import 'package:uuid/uuid.dart';
 
 part 'list_message_cubit.freezed.dart';
 part 'list_message_state.dart';
@@ -91,7 +92,14 @@ class ListMessageCubit extends Cubit<ListMessageState> {
           emit(state.copyWith(isCalling: false));
         }
       }
-      emit(state.copyWith(listMessage: [newMessage, ...state.listMessage]));
+      if (newMessage.clientId != null) {
+        List<IMessageModel> currentListMessage = List.from(state.listMessage);
+        currentListMessage
+            .removeWhere((message) => message.clientId == newMessage.clientId);
+        emit(state.copyWith(listMessage: [newMessage, ...currentListMessage]));
+      } else {
+        emit(state.copyWith(listMessage: [newMessage, ...state.listMessage]));
+      }
     }
   }
 
@@ -196,14 +204,23 @@ class ListMessageCubit extends Cubit<ListMessageState> {
 
   Future<void> sendImageMessage(ImageMessageParam message) async {
     try {
-      final imageUrl = await UploadFileExts.uploadAndDownloadUrlFile(
-          message.uri, TypeFile.images.type);
-      if (imageUrl != null) {
-        final imageMessageParams = message.copyWith(uri: imageUrl);
+      //create temp message
+      final messageParam = message.copyWith(clientId: const Uuid().v4());
+      if (state.currentUser != null) {
+        final tempMessage = ImageMessageModel.getTextMessageModelFromParam(
+            messageParam, state.currentUser!, state.roomId);
 
-        final messageParams = SocketMessageParam.convert2SocketMessageParam(
-            imageMessageParams, state.roomId);
-        _sendMessageUseCase.executeObj(request: messageParams);
+        emit(state.copyWith(listMessage: [tempMessage, ...state.listMessage]));
+
+        final imageUrl = await UploadFileExts.uploadAndDownloadUrlFile(
+            messageParam.uri, TypeFile.images.type);
+        if (imageUrl != null) {
+          final imageMessageParams = messageParam.copyWith(uri: imageUrl);
+
+          final messageParams = SocketMessageParam.convert2SocketMessageParam(
+              imageMessageParams, state.roomId);
+          _sendMessageUseCase.executeObj(request: messageParams);
+        }
       }
     } on AppException catch (e) {
       Logs.e(e);
@@ -212,14 +229,23 @@ class ListMessageCubit extends Cubit<ListMessageState> {
 
   Future<void> sendFileMessage(FileMessageParam message) async {
     try {
-      final fileUrl = await UploadFileExts.uploadAndDownloadUrlFile(
-          message.uri, TypeFile.files.type);
-      if (fileUrl != null) {
-        final fileMessageParams = message.copyWith(uri: fileUrl);
+      //create temp message
+      final messageParam = message.copyWith(clientId: const Uuid().v4());
+      if (state.currentUser != null) {
+        final tempMessage = FileMessageModel.getFileMessageModelFromParam(
+            messageParam, state.currentUser!, state.roomId);
 
-        final messageParams = SocketMessageParam.convert2SocketMessageParam(
-            fileMessageParams, state.roomId);
-        _sendMessageUseCase.executeObj(request: messageParams);
+        emit(state.copyWith(listMessage: [tempMessage, ...state.listMessage]));
+
+        final fileUrl = await UploadFileExts.uploadAndDownloadUrlFile(
+            messageParam.uri, TypeFile.files.type);
+        if (fileUrl != null) {
+          final fileMessageParams = messageParam.copyWith(uri: fileUrl);
+
+          final messageParams = SocketMessageParam.convert2SocketMessageParam(
+              fileMessageParams, state.roomId);
+          _sendMessageUseCase.executeObj(request: messageParams);
+        }
       }
     } on AppException catch (e) {
       Logs.e(e);
@@ -228,14 +254,22 @@ class ListMessageCubit extends Cubit<ListMessageState> {
 
   Future<void> sendAudioMessage(AudioMessageParam message) async {
     try {
-      final fileUrl = await UploadFileExts.uploadAndDownloadUrlFile(
-          message.uri, TypeFile.audios.type);
-      if (fileUrl != null) {
-        final fileMessageParams = message.copyWith(uri: fileUrl);
+      if (state.currentUser != null) {
+        final messageParam = message.copyWith(clientId: const Uuid().v4());
+        final tempMessage = AudioMessageModel.getAudioMessageModelFromParam(
+            messageParam, state.currentUser!, state.roomId);
 
-        final messageParams = SocketMessageParam.convert2SocketMessageParam(
-            fileMessageParams, state.roomId);
-        _sendMessageUseCase.executeObj(request: messageParams);
+        emit(state.copyWith(listMessage: [tempMessage, ...state.listMessage]));
+
+        final fileUrl = await UploadFileExts.uploadAndDownloadUrlFile(
+            messageParam.uri, TypeFile.audios.type);
+        if (fileUrl != null) {
+          final fileMessageParams = messageParam.copyWith(uri: fileUrl);
+
+          final messageParams = SocketMessageParam.convert2SocketMessageParam(
+              fileMessageParams, state.roomId);
+          _sendMessageUseCase.executeObj(request: messageParams);
+        }
       }
     } on AppException catch (e) {
       Logs.e(e);
@@ -244,22 +278,31 @@ class ListMessageCubit extends Cubit<ListMessageState> {
 
   Future<void> sendVideoMessage(VideoMessageParam message) async {
     try {
-      String? thumbnailUrl = message.thumbnailUrl;
-      if (message.thumbnailUrl != null) {
-        thumbnailUrl = await UploadFileExts.uploadAndDownloadUrlFile(
-            message.thumbnailUrl!, TypeFile.images.type);
-      }
-      final fileUrl = await UploadFileExts.uploadAndDownloadUrlFile(
-          message.uri, TypeFile.videos.type);
-      if (fileUrl != null) {
-        final fileMessageParams = message.copyWith(
-          uri: fileUrl,
-          thumbnailUrl: thumbnailUrl ?? message.thumbnailUrl,
-        );
+      if (state.currentUser != null) {
+        //create temp message
+        final messageParam = message.copyWith(clientId: const Uuid().v4());
+        final tempMessage = VideoMessageModel.getVideoMessageModelFromParam(
+            messageParam, state.currentUser!, state.roomId);
 
-        final messageParams = SocketMessageParam.convert2SocketMessageParam(
-            fileMessageParams, state.roomId);
-        _sendMessageUseCase.executeObj(request: messageParams);
+        emit(state.copyWith(listMessage: [tempMessage, ...state.listMessage]));
+
+        String? thumbnailUrl = messageParam.thumbnailUrl;
+        if (messageParam.thumbnailUrl != null) {
+          thumbnailUrl = await UploadFileExts.uploadAndDownloadUrlFile(
+              messageParam.thumbnailUrl!, TypeFile.images.type);
+        }
+        final fileUrl = await UploadFileExts.uploadAndDownloadUrlFile(
+            messageParam.uri, TypeFile.videos.type);
+        if (fileUrl != null) {
+          final fileMessageParams = messageParam.copyWith(
+            uri: fileUrl,
+            thumbnailUrl: thumbnailUrl ?? messageParam.thumbnailUrl,
+          );
+
+          final messageParams = SocketMessageParam.convert2SocketMessageParam(
+              fileMessageParams, state.roomId);
+          _sendMessageUseCase.executeObj(request: messageParams);
+        }
       }
     } on AppException catch (e) {
       Logs.e(e);

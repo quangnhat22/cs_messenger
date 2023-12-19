@@ -21,5 +21,26 @@ class VideoMessageModel extends IMessageModel {
     required this.uri,
     this.name,
     this.thumbnailUrl,
+    super.isShowStatus,
   });
+
+  static VideoMessageModel getVideoMessageModelFromParam(
+      VideoMessageParam param, UserModel currentUser, String chatRoomId) {
+    return VideoMessageModel(
+      id: param.clientId ?? DateTime.now().toString(),
+      clientId: param.clientId,
+      author: currentUser,
+      content: param.uri,
+      type: MessageType.video,
+      isMe: true,
+      status: StatusMessageType.sending,
+      roomId: chatRoomId,
+      createdAt: DateTime.now(),
+      isShowStatus: true,
+      thumbnailUrl: param.thumbnailUrl,
+      size: param.size,
+      uri: param.uri,
+      name: param.name,
+    );
+  }
 }

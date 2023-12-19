@@ -17,5 +17,24 @@ class AudioMessageModel extends IMessageModel {
     super.deletedAt,
     this.name,
     required this.uri,
+    super.isShowStatus,
   });
+
+  static AudioMessageModel getAudioMessageModelFromParam(
+      AudioMessageParam param, UserModel currentUser, String chatRoomId) {
+    return AudioMessageModel(
+      id: param.clientId ?? DateTime.now().toString(),
+      clientId: param.clientId,
+      author: currentUser,
+      content: param.uri,
+      type: MessageType.audio,
+      isMe: true,
+      status: StatusMessageType.sending,
+      roomId: chatRoomId,
+      createdAt: DateTime.now(),
+      isShowStatus: true,
+      uri: param.uri,
+      name: param.name,
+    );
+  }
 }

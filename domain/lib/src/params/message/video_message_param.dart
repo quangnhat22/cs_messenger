@@ -4,6 +4,7 @@ part of '../base_param.dart';
 class VideoMessageParam extends IMessageParam with _$VideoMessageParam {
   const factory VideoMessageParam({
     String? name,
+    String? clientId,
     String? thumbnailUrl,
     required String uri,
     @Default(0) double size,

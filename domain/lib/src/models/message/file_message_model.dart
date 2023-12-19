@@ -24,5 +24,27 @@ class FileMessageModel extends IMessageModel with _$FileMessageModel {
     required double size,
     required String uri,
     String? name,
+    @Default(true) bool isShowStatus,
   }) = _FileMessageModel;
+
+  static FileMessageModel getFileMessageModelFromParam(
+      FileMessageParam param, UserModel currentUser, String chatRoomId) {
+    return FileMessageModel(
+      id: param.clientId ?? DateTime.now().toString(),
+      clientId: param.clientId,
+      author: currentUser,
+      content: param.uri,
+      type: MessageType.file,
+      isMe: true,
+      status: StatusMessageType.sending,
+      roomId: chatRoomId,
+      createdAt: DateTime.now(),
+      isShowStatus: true,
+      isLoading: true,
+      mimeType: param.mimeType,
+      size: param.size,
+      uri: param.uri,
+      name: param.name,
+    );
+  }
 }

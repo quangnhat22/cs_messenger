@@ -9,8 +9,8 @@ class ChatRoomRaw extends BaseRaw<ChatRoomModel> with _$ChatRoomRaw {
     String? name,
     String? avatar,
     MessageRaw? message,
-    // ignore: invalid_annotation_target
-    // @JsonKey(name: 'room_id') required String roomId,
+    //ignore: invalid_annotation_target
+    @JsonKey(name: 'is_calling') bool? isCalling,
     String? extra,
   }) = _ChatRoomRaw;
 

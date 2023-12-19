@@ -11,6 +11,7 @@ part 'auth/login_with_email_param.dart';
 part 'auth/sign_up_param.dart';
 part 'base_param.freezed.dart';
 part 'base_param.g.dart';
+part 'chat_room/get_chat_room_info_param.dart';
 part 'chat_room/get_list_chat_room_param.dart';
 part 'chat_room/get_list_room_message_chat_room_param.dart';
 part 'friends/get_list_call_history_param.dart';

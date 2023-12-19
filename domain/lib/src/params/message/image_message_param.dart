@@ -5,6 +5,7 @@ class ImageMessageParam extends IMessageParam with _$ImageMessageParam {
   const factory ImageMessageParam({
     String? name,
     required String uri,
+    String? clientId,
     double? size,
     double? height,
     double? width,

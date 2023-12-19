@@ -14,6 +14,8 @@ enum StatusMessageType {
       return StatusMessageType.sending;
     } else if (StatusMessageType.sent.value == type) {
       return StatusMessageType.sent;
+    } else if (StatusMessageType.error.value == type) {
+      return StatusMessageType.error;
     } else {
       return StatusMessageType.error;
     }
@@ -79,6 +81,7 @@ abstract class IMessageModel extends BaseModel {
   final String roomId;
   final DateTime? createdAt;
   final DateTime? deletedAt;
+  final bool isShowStatus;
 
   IMessageModel({
     required this.id,
@@ -91,5 +94,6 @@ abstract class IMessageModel extends BaseModel {
     required this.roomId,
     this.status,
     required this.type,
+    this.isShowStatus = true,
   });
 }

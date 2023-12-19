@@ -3,7 +3,7 @@ import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class GetChatRoomDetailInfoUseCase
-    extends BaseUseCase<BaseParam, ChatRoomModel> {}
+    extends BaseUseCase<GetChatRoomInfoParam, ChatRoomModel> {}
 
 @Injectable(as: GetChatRoomDetailInfoUseCase)
 class GetChatRoomDetailInfoUseCaseImpl extends GetChatRoomDetailInfoUseCase {
@@ -13,6 +13,6 @@ class GetChatRoomDetailInfoUseCaseImpl extends GetChatRoomDetailInfoUseCase {
 
   @override
   Future<AppObjResultModel<ChatRoomModel>> executeObj(
-          {BaseParam? request}) async =>
-      await _repo.getChatRoomInfo(query: {});
+          {GetChatRoomInfoParam? request}) async =>
+      await _repo.getChatRoomInfo(query: request?.toJson() ?? {});
 }

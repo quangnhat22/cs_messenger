@@ -23,5 +23,25 @@ class ImageMessageModel extends IMessageModel {
     this.size,
     this.width,
     this.height,
+    super.isShowStatus,
   });
+
+  static ImageMessageModel getTextMessageModelFromParam(
+      ImageMessageParam param, UserModel currentUser, String chatRoomId) {
+    return ImageMessageModel(
+      id: param.clientId ?? DateTime.now().toString(),
+      clientId: param.clientId,
+      author: currentUser,
+      content: param.uri,
+      type: MessageType.image,
+      isMe: true,
+      status: StatusMessageType.sending,
+      roomId: chatRoomId,
+      createdAt: DateTime.now(),
+      isShowStatus: true,
+      size: param.size,
+      uri: param.uri,
+      name: param.name,
+    );
+  }
 }

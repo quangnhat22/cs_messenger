@@ -10,13 +10,12 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
     required String content,
     required String type,
     @Default(false) bool isMe,
-    String? status,
+    @Default('sent') String? status,
     // ignore: invalid_annotation_target
     @JsonKey(name: 'room_id') required String roomId,
     // ignore: invalid_annotation_target
     @JsonKey(name: 'created_at') int? createdAt,
     int? deletedAt,
-    String? clientId,
     String? extra,
   }) = _MessageRaw;
 
@@ -43,7 +42,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
           deletedAt: deletedAt != null
               ? DateTimeExt.convertTimeStampToDateTime(deletedAt!)
               : null,
-          clientId: clientId,
+          // clientId: clientId,
         );
       case "map":
         final name = extraMessage?['name'] as String?;
@@ -63,7 +62,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
           deletedAt: deletedAt != null
               ? DateTimeExt.convertTimeStampToDateTime(deletedAt!)
               : null,
-          clientId: clientId,
+          // clientId: clientId,
           name: name,
           lat: lat ?? 10.782637,
           long: long ?? 106.695944,
@@ -83,13 +82,13 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
           deletedAt: deletedAt != null
               ? DateTimeExt.convertTimeStampToDateTime(deletedAt!)
               : null,
-          clientId: clientId,
+          // clientId: clientId,
           link: extra,
         );
       case "system":
         return SystemMessageModel(
           id: id,
-          clientId: clientId,
+          // clientId: clientId,
           author: author != null ? author!.raw2Model() : UserModel.empty,
           createdAt: createdAt != null
               ? DateTimeExt.convertTimeStampToDateTime(createdAt!)
@@ -106,6 +105,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
         final height = extraMessage?['height'] as double?;
         final width = extraMessage?['width'] as double?;
         final name = extraMessage?['name'] as String?;
+        final clientId = extraMessage['clientId'] as String?;
         return ImageMessageModel(
           id: id,
           clientId: clientId,
@@ -125,9 +125,10 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
         );
       case "audio":
         final name = extraMessage?['name'] as String?;
+        final clientId = extraMessage['clientId'] as String?;
         return AudioMessageModel(
           id: id,
-          clientId: clientId,
+          // clientId: clientId,
           author: author != null ? author!.raw2Model() : UserModel.empty,
           createdAt: createdAt != null
               ? DateTimeExt.convertTimeStampToDateTime(createdAt!)
@@ -139,14 +140,16 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
           content: content,
           name: name ?? '',
           isMe: isMe,
+          clientId: clientId,
         );
       case "video":
         final name = extraMessage?['name'] as String?;
         final thumbnailUrl = extraMessage?['thumbnailUrl'] as String?;
         final size = extraMessage?['size'] as double?;
+        final clientId = extraMessage['clientId'] as String?;
         return VideoMessageModel(
           id: id,
-          clientId: clientId,
+          // clientId: clientId,
           author: author != null ? author!.raw2Model() : UserModel.empty,
           createdAt: createdAt != null
               ? DateTimeExt.convertTimeStampToDateTime(createdAt!)
@@ -160,14 +163,16 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
           thumbnailUrl: thumbnailUrl ?? '',
           isMe: isMe,
           name: name,
+          clientId: clientId,
         );
       case "file":
         final size = extraMessage?['size'] as double?;
         final name = extraMessage?['name'] as String?;
         final mimeType = extraMessage?['mimeType'] as String?;
+        final clientId = extraMessage['clientId'] as String?;
         return FileMessageModel(
           id: id,
-          clientId: clientId,
+          // clientId: clientId,
           author: author != null ? author!.raw2Model() : UserModel.empty,
           createdAt: createdAt != null
               ? DateTimeExt.convertTimeStampToDateTime(createdAt!)
@@ -180,6 +185,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
           name: name,
           content: content,
           mimeType: mimeType,
+          clientId: clientId,
         );
       default:
         throw Exception("Message type not found");

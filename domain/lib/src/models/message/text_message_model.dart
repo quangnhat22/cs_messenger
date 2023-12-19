@@ -15,6 +15,7 @@ class TextMessageModel extends IMessageModel with _$TextMessageModel {
     DateTime? deletedAt,
     PreviewDataModel? previewData,
     IMessageModel? repliedMessage,
+    @Default(false) bool isShowStatus,
   }) = _TextMessageModel;
 
   static TextMessageModel getTextMessageModelFromParam(
@@ -29,6 +30,7 @@ class TextMessageModel extends IMessageModel with _$TextMessageModel {
       status: StatusMessageType.sending,
       roomId: param.roomId,
       createdAt: DateTime.now(),
+      isShowStatus: true,
       // repliedMessage: param.repliedMessage,
       // previewData:  param.previewData,
     );

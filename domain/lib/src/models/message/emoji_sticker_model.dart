@@ -15,5 +15,6 @@ class EmojiStickerModel extends IMessageModel {
     super.createdAt,
     super.deletedAt,
     this.link,
+    super.isShowStatus,
   });
 }

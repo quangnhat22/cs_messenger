@@ -19,5 +19,6 @@ class MapMessageModel extends IMessageModel {
     required this.lat,
     required this.long,
     this.name,
+    super.isShowStatus,
   });
 }

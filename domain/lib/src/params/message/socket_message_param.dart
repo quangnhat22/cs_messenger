@@ -18,6 +18,7 @@ class SocketMessageParam extends IMessageParam with _$SocketMessageParam {
       final meta = <String, dynamic>{
         'previewData': messageParam.previewData,
       };
+      meta.removeWhere((key, value) => value == null || value == "");
       return SocketMessageParam(
         roomId: roomId,
         content: messageParam.text,
@@ -30,7 +31,9 @@ class SocketMessageParam extends IMessageParam with _$SocketMessageParam {
         'width': messageParam.width,
         'height': messageParam.height,
         'size': messageParam.size,
+        'clientId': messageParam.clientId,
       };
+      meta.removeWhere((key, value) => value == null || value == "");
       return SocketMessageParam(
         roomId: roomId,
         content: messageParam.uri,
@@ -42,7 +45,9 @@ class SocketMessageParam extends IMessageParam with _$SocketMessageParam {
         'thumbnailUrl': messageParam.thumbnailUrl,
         'size': messageParam.size,
         'name': messageParam.name,
+        'clientId': messageParam.clientId,
       };
+      meta.removeWhere((key, value) => value == null || value == "");
       return SocketMessageParam(
         roomId: roomId,
         content: messageParam.uri,
@@ -52,7 +57,9 @@ class SocketMessageParam extends IMessageParam with _$SocketMessageParam {
     } else if (messageParam is AudioMessageParam) {
       final meta = <String, dynamic>{
         'name': messageParam.name,
+        'clientId': messageParam.clientId,
       };
+      meta.removeWhere((key, value) => value == null || value == "");
       return SocketMessageParam(
         roomId: roomId,
         content: messageParam.uri,
@@ -64,7 +71,9 @@ class SocketMessageParam extends IMessageParam with _$SocketMessageParam {
         'name': messageParam.name,
         'mimeType': messageParam.mimeType,
         'size': messageParam.size,
+        'clientId': messageParam.clientId,
       };
+      meta.removeWhere((key, value) => value == null || value == "");
       return SocketMessageParam(
         roomId: roomId,
         content: messageParam.uri,
@@ -76,7 +85,9 @@ class SocketMessageParam extends IMessageParam with _$SocketMessageParam {
         'name': messageParam.name,
         'lat': messageParam.lat,
         'long': messageParam.long,
+        'clientId': messageParam.clientId,
       };
+      meta.removeWhere((key, value) => value == null || value == "");
       return SocketMessageParam(
         roomId: roomId,
         content: messageParam.name ?? '-',

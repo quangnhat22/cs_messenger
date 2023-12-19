@@ -29,12 +29,11 @@ class ChatRoomRemoteDataSourceImpl extends ChatRoomRemoteDataSource {
     try {
       final AppResponse response = await _service.request(
         clientRequest: ClientRequest(
-          url: ApiProvider.group,
-          method: HttpMethod.post,
-          body: query,
+          url: ApiProvider.chatRoomById(query['id']),
+          method: HttpMethod.get,
         ),
       );
-      return response.toRaw((_) => ChatRoomRaw(id: '-1'));
+      return response.toRaw((data) => ChatRoomRaw.fromJson(data));
     } on AppException catch (_) {
       rethrow;
     }

@@ -208,8 +208,7 @@ class MessageUtils {
         'nextMessageInGroup': nextMessageInGroup,
         'showName': notMyMessage && showUserNames && showName,
         //TODO: check again
-        // 'showStatus': message.showStatus ?? false,
-        'showStatus': false,
+        'showStatus': true,
       });
 
       if (!nextMessageInGroup && message.type != MessageType.system) {

@@ -4,6 +4,7 @@ import 'package:app/components/main/page/app_main_page_base_builder.dart';
 import 'package:app/configs/di/di.dart';
 import 'package:app/configs/routes/app_router.dart';
 import 'package:app/configs/routes/app_router.gr.dart';
+import 'package:app/features/room_chat/presentation/chat/controllers/chat_room_info/chat_room_info_cubit.dart';
 import 'package:app/features/room_chat/presentation/chat/controllers/list_message/list_message_cubit.dart';
 import 'package:app/features/room_chat/presentation/chat/widgets/chat_float_top_widget.dart';
 import 'package:app/features/room_chat/presentation/chat/widgets/chat_info_app_bar_widget.dart';
@@ -24,6 +25,10 @@ class ChatPage extends StatelessWidget {
         providers: [
           BlocProvider(
             create: (_) => getIt<ListMessageCubit>()..initPage(roomId),
+          ),
+          BlocProvider(
+            create: (_) =>
+                getIt<ChatRoomInfoCubit>()..getChatRoomDetail(roomId),
           ),
         ],
         child: AppMainPageWidget()
@@ -78,7 +83,7 @@ class ChatPage extends StatelessWidget {
           isFirstPage: state.isFirstPage,
           isLastPage: state.isLastPage,
           topContainerWidget:
-              !state.isCalling ? const ChatFloatTopWidget() : null,
+              state.isCalling ? const ChatFloatTopWidget() : null,
           onMessageTap: (_, message) async {
             await context.read<ListMessageCubit>().handleMessageTap(message);
           },
@@ -97,7 +102,6 @@ class ChatPage extends StatelessWidget {
           // },
           //topContainerWidget: const ChatFloatTopWidget(),
           showUserAvatars: true,
-          isLeftStatus: true,
           onEndReachedThreshold: 0.4,
           onStartReachedThreshold: 0.8,
           onSendPressed: (textParam) async {
