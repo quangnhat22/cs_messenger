@@ -1,5 +1,6 @@
 import 'package:domain/domain.dart';
 
 abstract class ListDeviceRepository {
-  Future<AppListResultModel<EmptyModel>> getListDevices();
+  Future<AppListResultModel<DeviceModel>> getListDevices(
+      {required Map<String, dynamic> query});
 }

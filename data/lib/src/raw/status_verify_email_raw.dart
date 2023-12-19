@@ -6,6 +6,7 @@ class StatusVerifyEmailRaw extends BaseRaw<StatusVerifyEmailModel>
   StatusVerifyEmailRaw._();
 
   factory StatusVerifyEmailRaw(
+          // ignore: invalid_annotation_target
           {@JsonKey(name: 'is_verify') required bool isVerify}) =
       _StatusVerifyEmailRaw;
 

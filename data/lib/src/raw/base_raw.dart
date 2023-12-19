@@ -23,6 +23,7 @@ part 'token_raw.dart';
 part 'user_raw.dart';
 part 'video_call_token_raw.dart';
 part 'welcome_raw.dart';
+part 'device_raw.dart';
 
 abstract class BaseRaw<BM extends BaseModel> extends HiveObject {
   BM raw2Model();

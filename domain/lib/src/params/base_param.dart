@@ -38,5 +38,6 @@ part 'search/search_param.dart';
 part 'setting/theme_and_language_param.dart';
 part 'user/update_user_self_param.dart';
 part 'video_call/get_video_call_token_param.dart';
+part 'device/get_list_device_param.dart';
 
 abstract class BaseParam {}

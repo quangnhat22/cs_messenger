@@ -1,5 +1,5 @@
 import 'package:app/features/auth/data/sources/local/device_info_local_data_src.dart';
-import 'package:app/features/auth/data/sources/remote/device_remote_data_src.dart';
+import 'package:app/features/devices/data/sources/device_remote_data_src.dart';
 import 'package:app/features/auth/domain/repositories/device_repository.dart';
 import 'package:configs/configs.dart';
 import 'package:domain/domain.dart';

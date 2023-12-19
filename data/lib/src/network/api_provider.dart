@@ -14,8 +14,8 @@ class ApiProvider {
   static const String changePassword = '$_auth/update-password';
 
   //device
-  static const String _deviceUrl = '/device';
-  static const String deviceRegister = '$_deviceUrl/register';
+  static const String device = '/device';
+  static const String deviceRegister = '$device/register';
 
   //user-self
   static const String userSelfUrl = '/self';

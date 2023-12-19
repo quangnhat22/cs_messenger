@@ -11,6 +11,7 @@ part 'auth/welcome_model.dart';
 part 'base_model.freezed.dart';
 part 'chat_room/chat_room_model.dart';
 part 'device/device_id_model.dart';
+part 'device/device_model.dart';
 part 'group/group_model.dart';
 part 'history_call_model.dart';
 part 'message/audio_message_model.dart';

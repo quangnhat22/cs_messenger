@@ -6,6 +6,7 @@ class RelationRaw extends BaseRaw<RelationModel> with _$RelationRaw {
 
   factory RelationRaw({
     String? relation,
+    // ignore: invalid_annotation_target
     @JsonKey(name: "room_id") String? roomId,
   }) = _RelationRaw;
 

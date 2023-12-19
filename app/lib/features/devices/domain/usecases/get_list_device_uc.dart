@@ -3,7 +3,7 @@ import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class GetListDeviceUseCase
-    extends BaseUseCase<BaseParam, EmptyModel> {}
+    extends BaseUseCase<GetListDeviceParam, DeviceModel> {}
 
 @Injectable(as: GetListDeviceUseCase)
 class GetListDeviceUseCaseImpl extends GetListDeviceUseCase {
@@ -12,7 +12,7 @@ class GetListDeviceUseCaseImpl extends GetListDeviceUseCase {
   GetListDeviceUseCaseImpl(this._repo);
 
   @override
-  Future<AppListResultModel<EmptyModel>> executeList(
-          {BaseParam? request}) async =>
-      await _repo.getListDevices();
+  Future<AppListResultModel<DeviceModel>> executeList(
+          {GetListDeviceParam? request}) async =>
+      await _repo.getListDevices(query: request?.toJson() ?? {});
 }
