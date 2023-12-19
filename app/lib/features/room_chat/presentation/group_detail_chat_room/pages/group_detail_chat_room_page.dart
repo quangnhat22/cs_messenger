@@ -163,6 +163,8 @@ class GroupDetailChatRoomPage extends StatelessWidget {
                                   color: Theme.of(context).colorScheme.error,
                                 ))
                                 .build(context))
+                            .setOnTap(() {})
+                            .setHasBottomBorderRadius(true)
                             .build(context)
                       ],
                     ),

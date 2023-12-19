@@ -20,7 +20,7 @@ abstract class RealtimeService {
 
 @Singleton(as: RealtimeService)
 class SocketService implements RealtimeService {
-  late final IO.Socket _socket;
+  late IO.Socket _socket;
   late final AuthLocalDataSource _authLocalDataSource;
 
   SocketService(this._authLocalDataSource);
@@ -43,10 +43,13 @@ class SocketService implements RealtimeService {
               'Authorization': 'Bearer ${token.netData?.accessToken}',
             })
             .enableForceNew()
+            .enableReconnection()
             .build());
     _socket.onConnecting((data) => Logs.d("connecting"));
     _socket.onConnect((data) => Logs.d("connected"));
     _socket.onDisconnect((data) => Logs.d("disconnected"));
+    _socket.onReconnect((data) => Logs.d('reconnect'));
+    _socket.onConnectError((data) => Logs.d('connect error $data'));
     _socket.on('register', (data) => Logs.d(data));
     _socket.on(
         _newMessageEvent, ((data) => updateReceiveNewMessageStream(data)));
@@ -60,8 +63,8 @@ class SocketService implements RealtimeService {
 
   @override
   void disconnectSocket() {
-    _socket.disconnect();
     _dispose();
+    _socket.disconnect();
   }
 
   void _dispose() {
