@@ -43,8 +43,25 @@ class GroupRepositoryImpl extends GroupRepository {
 
   @override
   Future<AppObjResultModel<EmptyModel>> editGroup(
-      {required Map<String, dynamic> request}) {
-    // TODO: implement editGroup
-    throw UnimplementedError();
+      {required Map<String, dynamic> request, required String groupId}) async {
+    try {
+      final AppObjResultRaw<EmptyRaw> remoteData =
+          await _remote.editGroup(query: request, groupId: groupId);
+      return remoteData.raw2Model();
+    } on AppException catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<AppObjResultModel<EmptyModel>> leaveGroup(
+      {required Map<String, dynamic> request}) async {
+    try {
+      final AppObjResultRaw<EmptyRaw> remoteData =
+          await _remote.leaveGroup(query: request);
+      return remoteData.raw2Model();
+    } on AppException catch (_) {
+      rethrow;
+    }
   }
 }

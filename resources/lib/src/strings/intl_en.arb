@@ -229,5 +229,6 @@
   "memberJoined": "Member joined",
   "memberLeft": "Member left",
   "callStarted": "Started call",
-  "callEnded": "Call ended"
+  "callEnded": "Call ended",
+  "doYouWantToLeaveThisGroup": "Do you want to leave this group?"
 }

@@ -1919,6 +1919,16 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Bạn có muốn rời khỏi nhóm này không?`
+  String get doYouWantToLeaveThisGroup {
+    return Intl.message(
+      'Bạn có muốn rời khỏi nhóm này không?',
+      name: 'doYouWantToLeaveThisGroup',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

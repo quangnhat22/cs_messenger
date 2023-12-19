@@ -46,133 +46,138 @@ class GroupDetailChatRoomPage extends StatelessWidget {
   }
 
   Widget _body(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-          padding: EdgeInsets.all(AppSizeExt.of.majorPaddingScale(4)),
-          child: Column(
-            children: <Widget>[
-              GestureDetector(
-                onTap: () async {
-                  await _showDialogChangeGroupImage(context);
-                },
-                child: AppAvatarCircleWidget()
-                    .setSize(AppAvatarSize.extraExtraLarge)
-                    //TODO: set url
-                    .setUrl(
-                        'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsX29mZmljZV8zNF9mdWxsX2JvZHlfM2RfYXZhdGFyXzNkX3JlbmRlcl9vZl9hX2J1c2luZXNzd19jOWYzODYxYy1lZTYzLTQxOGYtOThmNC02MWJkNGM3OGE1YTZfMS5wbmc.png')
-                    .build(context),
-              ),
-              SizedBox(height: AppSizeExt.of.majorScale(5)),
-              AppTextHeadlineLargeWidget().setText('Group A').build(context),
-              SizedBox(
-                height: AppSizeExt.of.majorScale(5),
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  IconButtonWithTextWidget(
-                    icon: Icon(
-                      Icons.info_outline,
-                      color: Theme.of(context).colorScheme.primary,
+    return BlocBuilder<EditGroupCubit, EditGroupState>(
+      builder: (context, state) {
+        return SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(AppSizeExt.of.majorPaddingScale(4)),
+            child: Column(
+              children: <Widget>[
+                GestureDetector(
+                  onTap: () async {
+                    await _showDialogChangeGroupImage(context);
+                  },
+                  child: AppAvatarCircleWidget()
+                      .setSize(AppAvatarSize.extraExtraLarge)
+                      //TODO: set url
+                      .setUrl(
+                          'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsX29mZmljZV8zNF9mdWxsX2JvZHlfM2RfYXZhdGFyXzNkX3JlbmRlcl9vZl9hX2J1c2luZXNzd19jOWYzODYxYy1lZTYzLTQxOGYtOThmNC02MWJkNGM3OGE1YTZfMS5wbmc.png')
+                      .build(context),
+                ),
+                SizedBox(height: AppSizeExt.of.majorScale(5)),
+                AppTextHeadlineLargeWidget().setText('Group A').build(context),
+                SizedBox(
+                  height: AppSizeExt.of.majorScale(5),
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    IconButtonWithTextWidget(
+                      icon: Icon(
+                        Icons.info_outline,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      text: R.strings.information,
                     ),
-                    text: R.strings.information,
-                  ),
-                  IconButtonWithTextWidget(
-                    icon: Icon(
-                      Icons.edit_outlined,
-                      color: Theme.of(context).colorScheme.primary,
+                    IconButtonWithTextWidget(
+                      icon: Icon(
+                        Icons.edit_outlined,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      text: R.strings.edit,
+                      onTap: () => _buildDialogChangeGroupName(context, '123'),
                     ),
-                    text: R.strings.edit,
-                    onTap: () => _buildDialogChangeGroupName(context, '123'),
-                  ),
-                  IconButtonWithTextWidget(
-                    icon: Icon(
-                      Icons.group_outlined,
-                      color: Theme.of(context).colorScheme.primary,
+                    IconButtonWithTextWidget(
+                      icon: Icon(
+                        Icons.group_outlined,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      text: R.strings.members,
+                      onTap: () async {
+                        await getIt<AppRouter>()
+                            .push(GroupMemberRoute(groupId: '1'));
+                      },
                     ),
-                    text: R.strings.members,
-                    onTap: () async {
-                      await getIt<AppRouter>()
-                          .push(GroupMemberRoute(groupId: '1'));
-                    },
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: AppSizeExt.of.majorScale(4),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: AppSizeExt.of.majorPaddingScale(3),
-                      vertical: AppSizeExt.of.majorPaddingScale(3),
+                  ],
+                ),
+                SizedBox(
+                  height: AppSizeExt.of.majorScale(4),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppSizeExt.of.majorPaddingScale(3),
+                        vertical: AppSizeExt.of.majorPaddingScale(3),
+                      ),
+                      child: AppTextTitleMediumWidget()
+                          .setText(R.strings.moreAction)
+                          .setTextStyle(TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.bold,
+                          ))
+                          .build(context),
                     ),
-                    child: AppTextTitleMediumWidget()
-                        .setText(R.strings.moreAction)
-                        .setTextStyle(TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                          fontWeight: FontWeight.bold,
-                        ))
-                        .build(context),
-                  ),
-                  Card(
-                    elevation: 0,
-                    color: Theme.of(context)
-                        .colorScheme
-                        .primaryContainer
-                        .withOpacity(0.36),
-                    child: Column(
-                      children: <Widget>[
-                        AppCardBorderWidget()
-                            .setLeading(const Icon(Icons.image_outlined))
-                            .setTitle(AppTextBodyLargeWidget()
-                                .setText(R.strings.seePictureVideosFiles)
-                                .build(context))
-                            .setHasTopBorderRadius(true)
-                            .setIsShowBottomDivider(true)
-                            .setActions(
-                                [const Icon(Icons.chevron_right)]).setOnTap(
-                          () {
-                            getIt<AppRouter>()
-                                .push(RoomChatMediaRoute(roomId: chatRoomId));
-                          },
-                        ).build(context),
-                        AppCardBorderWidget()
-                            .setLeading(const Icon(Icons.push_pin_outlined))
-                            .setTitle(AppTextBodyLargeWidget()
-                                .setText('Tin nhắn đã ghim')
-                                .build(context))
-                            .setIsShowBottomDivider(true)
-                            .setActions(
-                                [const Icon(Icons.chevron_right)]).setOnTap(
-                          () {
-                            getIt<AppRouter>().push(const BlockRoute());
-                          },
-                        ).build(context),
-                        AppCardBorderWidget()
-                            .setLeading(Icon(
-                              Icons.logout_outlined,
-                              color: Theme.of(context).colorScheme.error,
-                            ))
-                            .setTitle(AppTextBodyLargeWidget()
-                                .setText(R.strings.leaveGroup)
-                                .setTextStyle(TextStyle(
-                                  color: Theme.of(context).colorScheme.error,
-                                ))
-                                .build(context))
-                            .setOnTap(() {})
-                            .setHasBottomBorderRadius(true)
-                            .build(context)
-                      ],
+                    Card(
+                      elevation: 0,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .primaryContainer
+                          .withOpacity(0.36),
+                      child: Column(
+                        children: <Widget>[
+                          AppCardBorderWidget()
+                              .setLeading(const Icon(Icons.image_outlined))
+                              .setTitle(AppTextBodyLargeWidget()
+                                  .setText(R.strings.seePictureVideosFiles)
+                                  .build(context))
+                              .setHasTopBorderRadius(true)
+                              .setIsShowBottomDivider(true)
+                              .setActions(
+                                  [const Icon(Icons.chevron_right)]).setOnTap(
+                            () {
+                              getIt<AppRouter>()
+                                  .push(RoomChatMediaRoute(roomId: chatRoomId));
+                            },
+                          ).build(context),
+                          AppCardBorderWidget()
+                              .setLeading(const Icon(Icons.push_pin_outlined))
+                              .setTitle(AppTextBodyLargeWidget()
+                                  .setText('Tin nhắn đã ghim')
+                                  .build(context))
+                              .setIsShowBottomDivider(true)
+                              .setActions(
+                                  [const Icon(Icons.chevron_right)]).setOnTap(
+                            () {
+                              getIt<AppRouter>().push(const BlockRoute());
+                            },
+                          ).build(context),
+                          AppCardBorderWidget()
+                              .setLeading(Icon(
+                                Icons.logout_outlined,
+                                color: Theme.of(context).colorScheme.error,
+                              ))
+                              .setTitle(AppTextBodyLargeWidget()
+                                  .setText(R.strings.leaveGroup)
+                                  .setTextStyle(TextStyle(
+                                    color: Theme.of(context).colorScheme.error,
+                                  ))
+                                  .build(context))
+                              .setOnTap(() => _buildDialogLeaveGroup(context))
+                              .setHasBottomBorderRadius(true)
+                              .build(context)
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              )
-            ],
-          )),
+                  ],
+                )
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -210,6 +215,21 @@ class GroupDetailChatRoomPage extends StatelessWidget {
             ),
           ),
         )
+        .buildDialog(context)
+        .show();
+  }
+
+  void _buildDialogLeaveGroup(BuildContext context) {
+    AppDefaultDialogWidget()
+        .setAppDialogType(AppDialogType.confirm)
+        .setTitle(R.strings.leaveGroup)
+        .setContent(R.strings.doYouWantToLeaveThisGroup)
+        .setNegativeText(R.strings.close)
+        .setPositiveText(R.strings.confirm)
+        .setOnPositive(() async {
+          await context.read<EditGroupCubit>().leaveGroup(groupId);
+          await getIt<AppRouter>().pop();
+        })
         .buildDialog(context)
         .show();
   }

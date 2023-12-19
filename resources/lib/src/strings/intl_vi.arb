@@ -229,5 +229,6 @@
   "memberJoined": "Tham gia nhóm",
   "memberLeft": "Rời nhóm",
   "callStarted": "Bắt đầu cuộc gọi",
-  "callEnded": "Cuộc gọi kết thúc"
+  "callEnded": "Cuộc gọi kết thúc",
+  "doYouWantToLeaveThisGroup": "Bạn có muốn rời khỏi nhóm này không?"
 }

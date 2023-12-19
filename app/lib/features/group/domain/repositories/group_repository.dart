@@ -11,5 +11,8 @@ abstract class GroupRepository {
       {required Map<String, dynamic> request});
 
   Future<AppObjResultModel<EmptyModel>> editGroup(
+      {required Map<String, dynamic> request, required String groupId});
+
+  Future<AppObjResultModel<EmptyModel>> leaveGroup(
       {required Map<String, dynamic> request});
 }

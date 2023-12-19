@@ -68,7 +68,7 @@ class SocketService implements RealtimeService {
   }
 
   void _dispose() {
-    newMessageController.close();
+    //  newMessageController.close();
   }
 
   @override
@@ -80,6 +80,10 @@ class SocketService implements RealtimeService {
   void updateReceiveNewMessageStream(data) {
     final response = AppResponse.fromJson(data as Map<String, dynamic>);
     final result = response.toRaw((data) => MessageRaw.fromJson(response.data));
+    // if (newMessageController.isClosed) {
+    //   newMessageController =
+    //       StreamController<AppObjResultRaw<MessageRaw>>.broadcast();
+    // }
     newMessageController.sink.add(result);
   }
 

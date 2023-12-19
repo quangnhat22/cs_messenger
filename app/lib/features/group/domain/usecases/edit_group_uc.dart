@@ -14,5 +14,6 @@ class EditGroupUseCaseImpl extends EditGroupUseCase {
   @override
   Future<AppObjResultModel<EmptyModel>> executeObj(
           {EditGroupParam? request}) async =>
-      await _repo.createNewGroup(request: request?.toJson() ?? {});
+      await _repo.editGroup(
+          request: request?.toJson() ?? {}, groupId: request!.groupId);
 }
