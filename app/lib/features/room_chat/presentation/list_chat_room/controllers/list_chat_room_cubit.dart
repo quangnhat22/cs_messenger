@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:app/components/main/listView/controllers/app_list_view_cubit.dart';
+import 'package:app/features/room_chat/domain/usecases/get_chat_room_detail_info_uc.dart';
 import 'package:app/features/room_chat/domain/usecases/get_list_chat_room_uc.dart';
 import 'package:app/features/room_chat/domain/usecases/send_message_uc.dart';
 import 'package:domain/domain.dart';
@@ -10,9 +11,11 @@ import 'package:utilities/utilities.dart';
 @Injectable()
 class ListChatRoomCubit extends AppListViewCubit<ChatRoomModel> {
   late final GetListChatRoomUseCase _getListFriendUseCase;
+  late final GetChatRoomDetailInfoUseCase _getChatRoomDetailInfoUseCase;
   late final SendMessageUseCase _sendMessageUseCase;
 
-  ListChatRoomCubit(this._getListFriendUseCase, this._sendMessageUseCase) {
+  ListChatRoomCubit(this._getListFriendUseCase,
+      this._getChatRoomDetailInfoUseCase, this._sendMessageUseCase) {
     _subGetNewMessage =
         _sendMessageUseCase.getNewMessageStream().listen((messageModel) {
       if (messageModel.netData != null) {
