@@ -45,7 +45,8 @@ class UploadFileExts {
           {
             final progress =
                 100 * (taskSnapshot.bytesTransferred / taskSnapshot.totalBytes);
-            AppLoadingOverlayWidget.show(message: progress.toString());
+            AppLoadingOverlayWidget.show(
+                message: '${progress.toStringAsFixed(2)}%');
             return null;
           }
         case TaskState.paused:

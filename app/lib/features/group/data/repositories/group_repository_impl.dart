@@ -45,6 +45,7 @@ class GroupRepositoryImpl extends GroupRepository {
   Future<AppObjResultModel<EmptyModel>> editGroup(
       {required Map<String, dynamic> request, required String groupId}) async {
     try {
+      request.removeWhere((key, value) => value == null || value == '');
       final AppObjResultRaw<EmptyRaw> remoteData =
           await _remote.editGroup(query: request, groupId: groupId);
       return remoteData.raw2Model();

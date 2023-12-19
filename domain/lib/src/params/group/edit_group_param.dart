@@ -5,7 +5,7 @@ class EditGroupParam extends BaseParam with _$EditGroupParam {
   const factory EditGroupParam({
     // ignore: invalid_annotation_target
     @JsonKey(includeToJson: false) required String groupId,
-    required String name,
+    String? name,
     String? avatar,
   }) = _EditGroupParam;
 

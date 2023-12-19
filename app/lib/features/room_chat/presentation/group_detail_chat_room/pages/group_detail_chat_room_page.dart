@@ -191,10 +191,15 @@ class GroupDetailChatRoomPage extends StatelessWidget {
 
     final file = await assetEntity?.file;
 
-    if (file?.path != null && context.mounted) {}
+    if (file?.path != null && context.mounted) {
+      context
+          .read<EditGroupCubit>()
+          .changeGroupAvatar(groupId: groupId, avatar: file!.path);
+    }
   }
 
   void _buildDialogChangeGroupName(BuildContext context, String groupName) {
+    final groupNameFormBloc = context.read<GroupEditNameFormBloc>().groupName;
     AppDialogRequestWidget()
         .setNegativeText(R.strings.close)
         .setPositiveText(R.strings.confirm)
@@ -202,19 +207,21 @@ class GroupDetailChatRoomPage extends StatelessWidget {
             .setText(R.strings.editGroup)
             .build(context))
         .setTextField(
-          BlocProvider(
-            create: (_) => getIt<GroupEditNameFormBloc>(),
-            child: Builder(
-              builder: (context) {
-                return AppTextFieldWidget()
-                    .setBloc(context.read<GroupEditNameFormBloc>().groupName
-                      ..updateInitialValue(groupName))
-                    .setLabelText(R.strings.groupName)
-                    .build(context);
-              },
-            ),
+          Builder(
+            builder: (context) {
+              return AppTextFieldWidget()
+                  .setBloc(groupNameFormBloc..updateInitialValue(groupName))
+                  .setLabelText(R.strings.groupName)
+                  .build(context);
+            },
           ),
         )
+        .setOnPositive(() {
+          context.read<EditGroupCubit>().changeGroupName(
+                groupId: groupId,
+                name: context.read<GroupEditNameFormBloc>().groupName.value,
+              );
+        })
         .buildDialog(context)
         .show();
   }
