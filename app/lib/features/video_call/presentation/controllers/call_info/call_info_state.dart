@@ -14,5 +14,6 @@ class CallInfoState with _$CallInfoState {
     @Default(ConnectVideoCallStatus.initial) ConnectVideoCallStatus callStatus,
     Room? room,
     EventsListener<RoomEvent>? listener,
+  
   }) = _Initial;
 }

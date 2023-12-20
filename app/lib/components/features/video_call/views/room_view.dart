@@ -9,6 +9,7 @@ import 'package:app/components/features/video_call/widgets/controls.dart';
 import 'package:app/components/features/video_call/widgets/participant.dart';
 import 'package:app/components/main/page/app_main_page_base_builder.dart';
 import 'package:app/configs/theme/app_theme.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:livekit_client/livekit_client.dart';
 import 'package:utilities/utilities.dart';
@@ -23,7 +24,12 @@ class RoomView extends StatefulWidget {
     this.room,
     this.listener, {
     Key? key,
+    required this.roomId,
+    this.onShowMembers,
   }) : super(key: key);
+
+  final String roomId;
+  final void Function()? onShowMembers;
 
   @override
   State<StatefulWidget> createState() => _RoomViewState();
@@ -253,7 +259,12 @@ class _RoomViewState extends State<RoomView> {
           if (widget.room.localParticipant != null)
             SafeArea(
               top: false,
-              child: ControlsWidget(widget.room, widget.room.localParticipant!),
+              child: ControlsWidget(
+                widget.room,
+                widget.room.localParticipant!,
+                roomId: widget.roomId,
+                onShowMembers: widget.onShowMembers,
+              ),
             ),
         ],
       ),

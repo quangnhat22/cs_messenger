@@ -1,6 +1,7 @@
 import 'package:app/configs/di/di.dart';
 import 'package:app/configs/exts/app_exts.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 import 'app_router.gr.dart';
@@ -15,12 +16,12 @@ class AppRouter extends $AppRouter {
           page: WelcomeRoute.page,
           initial: true,
         ),
-        AutoRoute(page: OnboardingRoute.page),
-        AutoRoute(page: LoginRoute.page),
-        AutoRoute(page: VerifyEmailRoute.page),
-        AutoRoute(page: ForgotPasswordRoute.page),
-        AutoRoute(page: SendEmailSuccessRoute.page),
-        AutoRoute(page: SignUpRoute.page),
+        _customRoute(page: OnboardingRoute.page),
+        _customRoute(page: LoginRoute.page),
+        _customRoute(page: VerifyEmailRoute.page),
+        _customRoute(page: ForgotPasswordRoute.page),
+        _customRoute(page: SendEmailSuccessRoute.page),
+        _customRoute(page: SignUpRoute.page),
         AutoRoute(
           page: MainRoute.page,
           guards: [getIt<AuthGuard>()],
@@ -73,17 +74,35 @@ class AppRouter extends $AppRouter {
               _customRoute(page: RoomVideoRoute.page),
               _customRoute(page: RoomFileRoute.page),
             ]),
-            _customRoute(page: VideoCallRoute.page),
+            _customRoute(
+                page: VideoCallRoute.page,
+                customRouteBuilder: modalSheetBuilder,
+                children: [
+                  _customRoute(page: ChatRoute.page),
+                ]),
           ],
         )
       ];
 
   CustomRoute _customRoute(
-      {required PageInfo<dynamic> page, List<AutoRoute>? children}) {
+      {required PageInfo<dynamic> page,
+      List<AutoRoute>? children,
+      Route<T> Function<T>(BuildContext, Widget, AutoRoutePage<T>)?
+          customRouteBuilder}) {
     return CustomRoute(
         page: page,
         transitionsBuilder: TransitionsBuilders.slideLeft,
         durationInMilliseconds: AppNavigationKeys.timeSwitchPage,
-        children: children);
+        children: children,
+        customRouteBuilder: customRouteBuilder);
+  }
+
+  Route<T> modalSheetBuilder<T>(
+      BuildContext context, Widget child, AutoRoutePage<T> page) {
+    return ModalBottomSheetRoute(
+      settings: page,
+      builder: (context) => child,
+      isScrollControlled: true,
+    );
   }
 }

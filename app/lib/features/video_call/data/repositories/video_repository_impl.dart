@@ -21,4 +21,16 @@ class VideoRepositoryImpl extends VideoRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<AppListResultModel<UserModel>> getListMemberVideoCall(
+      {required Map<String, dynamic> query}) async {
+    try {
+      final AppListResultRaw<UserRaw> remoteData =
+          await _remoteDataSource.getListMemberVideoCall(query: query);
+      return remoteData.raw2Model();
+    } on AppException catch (_) {
+      rethrow;
+    }
+  }
 }

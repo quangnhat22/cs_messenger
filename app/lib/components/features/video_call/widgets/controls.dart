@@ -3,9 +3,12 @@ import 'dart:convert';
 
 import 'package:app/components/features/video_call/exts/video_call_exts.dart';
 import 'package:app/components/features/video_call/widgets/icon_wrapper.dart';
+import 'package:app/components/features/video_call/widgets/pop_up_menu_button_widget.dart';
 import 'package:app/configs/theme/app_theme.dart';
+import 'package:app/features/room_chat/presentation/chat/pages/chat_page.dart';
 import 'package:collection/collection.dart';
 import 'package:configs/configs.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_background/flutter_background.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
@@ -22,7 +25,14 @@ class ControlsWidget extends StatefulWidget {
     this.room,
     this.participant, {
     Key? key,
+    this.members,
+    required this.roomId,
+    this.onShowMembers,
   }) : super(key: key);
+
+  final List<UserModel>? members;
+  final String roomId;
+  final void Function()? onShowMembers;
 
   @override
   State<StatefulWidget> createState() => _ControlsWidgetState();
@@ -552,12 +562,40 @@ class _ControlsWidgetState extends State<ControlsWidget> {
                     color: Colors.white,
                   ),
           ),
-          IconWrapper(
-            onPressed: () => _showMenuButton(context),
-            icon: const Icon(
-              Icons.more_horiz,
-              color: Colors.white,
+          PopupMenuButton(
+            icon: const IconWrapper(
+              icon: Icon(
+                Icons.more_horiz,
+                color: Colors.white,
+              ),
             ),
+            offset: const Offset(0, -120),
+            position: PopupMenuPosition.over,
+            elevation: AppSizeExt.of.majorScale(4),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                  Radius.circular(AppSizeExt.of.majorScale(4))),
+            ),
+            surfaceTintColor: Theme.of(context).colorScheme.background,
+            onSelected: (value) => _selectMenuItem(value, context),
+            itemBuilder: (context) => [
+              const PopupMenuItem(
+                value: "message",
+                child: PopUpMenuItemButtonWidget(
+                  label: "Messenger",
+                  icon: Icons.message_outlined,
+                  backgroundColor: Colors.black45,
+                ),
+              ),
+              const PopupMenuItem(
+                value: "member",
+                child: PopUpMenuItemButtonWidget(
+                  label: "Members",
+                  icon: Icons.group_outlined,
+                  backgroundColor: Colors.black45,
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -582,14 +620,14 @@ class _ControlsWidgetState extends State<ControlsWidget> {
               runSpacing: AppSizeExt.of.majorScale(4),
               children: [
                 IconWrapper(
-                  onPressed: () {},
+                  onPressed: () => _showChatMessage(context),
                   icon: const Icon(
                     Icons.message_outlined,
                     color: Colors.white,
                   ),
                 ),
                 IconWrapper(
-                  onPressed: () {},
+                  onPressed: _showMembers,
                   icon: const Icon(
                     Icons.group_outlined,
                     color: Colors.white,
@@ -601,6 +639,43 @@ class _ControlsWidgetState extends State<ControlsWidget> {
         );
       },
     );
+  }
+
+  void _selectMenuItem(String value, BuildContext context) async {
+    switch (value) {
+      case "message":
+        {
+          _showChatMessage(context);
+          return;
+        }
+      case "member":
+        {
+          _showMembers();
+          return;
+        }
+    }
+  }
+
+  void _showChatMessage(BuildContext context) {
+    // getIt<AppRouter>().modalSheetBuilder(ChatRoute(roomId: widget.roomId));
+    Navigator.of(context).push(ModalBottomSheetRoute(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppSizeExt.of.majorScale(4)),
+      ),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      builder: (context) => Material(
+          child: SizedBox(
+        height: MediaQuery.sizeOf(context).height * 0.8,
+        child: ChatPage(
+          roomId: widget.roomId,
+        ),
+      )),
+      isScrollControlled: false,
+    ));
+  }
+
+  void _showMembers() {
+    widget.onShowMembers?.call();
   }
 }
 
