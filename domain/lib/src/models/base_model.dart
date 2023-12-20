@@ -1,3 +1,4 @@
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:domain/src/params/base_param.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:resources/resources.dart';

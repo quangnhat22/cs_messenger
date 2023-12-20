@@ -12,6 +12,7 @@ import 'package:app/configs/routes/app_router.dart';
 import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:app/features/room_chat/presentation/list_chat_room/controllers/list_chat_room_cubit.dart';
+import 'package:app/features/room_chat/presentation/list_chat_room/widgets/room_chat_subtitle_widget.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
@@ -54,11 +55,8 @@ class RoomChatDashBoardPage extends StatelessWidget {
             .setSize(AppAvatarSize.medium)
             .build(context))
         .setTitle(AppTextTitleMediumWidget().setText(model.name).build(context))
-        .setSubtitle(AppTextLabelSmallWidget()
-            .setText(model.message!.content)
-            .setMaxLines(2)
-            .setTextOverFlow(TextOverflow.ellipsis)
-            .build(context))
+        .setSubtitle(RoomChatSubTitleWidget(
+            author: model.message?.author, content: model.message?.content))
         .setHasTopBorderRadius(true)
         .setIsShowBottomDivider(true)
         .setActions([
@@ -66,20 +64,19 @@ class RoomChatDashBoardPage extends StatelessWidget {
           .setText(MessageUtils.getVerboseDateTimeRepresentation(
               model.message!.createdAt!))
           .build(context),
-      SizedBox(
-        height: AppSizeExt.of.majorScale(2),
-      ),
-      AppDotIndicatorWidget(
-        height: AppSizeExt.of.majorScale(5),
-        width: AppSizeExt.of.majorScale(5),
-        isActive: true,
-        child: AppTextLabelSmallWidget()
-            .setText('1')
-            .setColor(Theme.of(context).colorScheme.background)
-            .build(context),
-      )
-    ]).setOnTap(() {
-      getIt<AppRouter>().push(ChatRoute(roomId: model.id));
+      if (model.isHasNewMessage)
+        SizedBox(
+          height: AppSizeExt.of.majorScale(2),
+        ),
+      if (model.isHasNewMessage)
+        AppDotIndicatorWidget(
+          height: AppSizeExt.of.majorScale(3),
+          width: AppSizeExt.of.majorScale(3),
+          isActive: true,
+        )
+    ]).setOnTap(() async {
+      context.read<ListChatRoomCubit>().removeNewMessageStatus(model.id);
+      await getIt<AppRouter>().push(ChatRoute(roomId: model.id));
     }).build(context);
   }
 }

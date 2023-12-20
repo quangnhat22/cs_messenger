@@ -59,8 +59,11 @@ class ListChatRoomCubit extends AppListViewCubit<ChatRoomModel> {
       final messageChatRoom = await _getChatRoomDetailInfoUseCase.executeObj(
           request: GetChatRoomInfoParam(id: newMessage.roomId));
 
+      final chatRoomUpdated =
+          messageChatRoom.netData?.copyWith(isHasNewMessage: true);
+
       if (messageChatRoom.netData != null) {
-        currentListChatRoom.insert(0, messageChatRoom.netData!);
+        currentListChatRoom.insert(0, chatRoomUpdated!);
         emit(state.copyWith(data: [...currentListChatRoom]));
       }
     } on AppException catch (e) {
@@ -69,6 +72,17 @@ class ListChatRoomCubit extends AppListViewCubit<ChatRoomModel> {
           onError: (e) {
             Logs.e(e);
           }).detected();
+    }
+  }
+
+  void removeNewMessageStatus(String chatRoomId) {
+    List<ChatRoomModel> currentListChatRoom = List.from(state.data);
+    final indexChatRoom = currentListChatRoom.indexWhere(
+        (element) => element.id == chatRoomId && element.isHasNewMessage);
+    if (indexChatRoom != -1) {
+      currentListChatRoom[indexChatRoom] =
+          currentListChatRoom[indexChatRoom].copyWith(isHasNewMessage: false);
+      emit(state.copyWith(data: [...currentListChatRoom]));
     }
   }
 }

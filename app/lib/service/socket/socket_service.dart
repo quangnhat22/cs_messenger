@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:app/features/auth/data/sources/local/auth_local_data_src.dart';
+import 'package:configs/configs.dart';
 import 'package:data/data.dart';
 import 'package:injectable/injectable.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
