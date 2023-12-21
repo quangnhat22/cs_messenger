@@ -1,18 +1,21 @@
 import 'package:app/features/setting/data/sources/local/theme_language_local_data_src.dart';
 import 'package:app/features/setting/domain/repositories/theme_language_repository.dart';
+import 'package:app/service/onesignal/onesignal_service.dart';
 import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: ThemeLanguageRepository)
 class ThemeLanguageRepositoryImpl extends ThemeLanguageRepository {
-  final ThemeLanguageLocalDataSrc _local;
+  late final OneSignalService _oneSignalService;
+  late final ThemeLanguageLocalDataSrc _local;
 
-  ThemeLanguageRepositoryImpl(this._local);
+  ThemeLanguageRepositoryImpl(this._local, this._oneSignalService);
 
   @override
   Future<AppObjResultModel<EmptyModel>> setLanguage(
       {required Map<String, dynamic> query}) async {
     try {
+      // await _oneSignalService.setLanguage(query['value']);
       await _local.setLanguage(query['value']);
       return AppObjResultModel(netData: EmptyModel());
     } on LocalException catch (_) {

@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 
 abstract class GetLanguageUseCase
     extends BaseUseCase<BaseParam, LanguageModel> {
+  @override
   Stream<LanguageModel> getStream();
 }
 

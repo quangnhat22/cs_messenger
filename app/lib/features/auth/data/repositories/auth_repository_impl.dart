@@ -1,4 +1,3 @@
-import 'package:app/configs/di/di.dart';
 import 'package:app/features/auth/data/sources/firebase/auth_firebase_data_source.dart';
 import 'package:app/features/auth/data/sources/local/auth_local_data_src.dart';
 import 'package:app/features/auth/data/sources/local/device_info_local_data_src.dart';
@@ -14,6 +13,7 @@ import 'package:utilities/utilities.dart';
 @Injectable(as: AuthRepository)
 class AuthRepositoryImpl extends AuthRepository {
   late final OneSignalService _oneSignalService;
+  late final RealtimeService _realtimeService;
   late final AuthFirebaseDataSource _authFirebaseDataSource;
   late final AuthRemoteDataSource _authRemoteDataSource;
   late final AuthLocalDataSource _authLocalDataSource;
@@ -22,6 +22,7 @@ class AuthRepositoryImpl extends AuthRepository {
 
   AuthRepositoryImpl(
     this._oneSignalService,
+    this._realtimeService,
     this._authFirebaseDataSource,
     this._authRemoteDataSource,
     this._authLocalDataSource,
@@ -70,9 +71,9 @@ class AuthRepositoryImpl extends AuthRepository {
     try {
       await _authRemoteDataSource.logOut();
       await _authFirebaseDataSource.logOut();
-      await _oneSignalService.logOut();
       await _removeLocal();
-      getIt<RealtimeService>().disconnectSocket();
+      await _oneSignalService.logOut();
+      _realtimeService.disconnectSocket();
       return AppObjResultModel<EmptyModel>(netData: EmptyModel());
     } on NetworkException catch (_) {
       rethrow;

@@ -32,6 +32,8 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
   late final LoginWithGoogleUseCase _loginWithGoogleUseCase;
   late final GetVerifyEmailTokenUseCase _getVerifyEmailTokenUseCase;
   late final GetUserProfileUseCase _getUserProfileUseCase;
+  late final RealtimeService _realtimeService;
+  late final OneSignalService _oneSignalService;
 
   WelcomeBloc(
     this._getIsFirstInstalledUseCase,
@@ -41,6 +43,8 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
     this._registerDeviceUseCase,
     this._getVerifyEmailTokenUseCase,
     this._getUserProfileUseCase,
+    this._realtimeService,
+    this._oneSignalService,
   ) : super(const WelcomeState.initial()) {
     on<WelcomeEvent>((event, emit) async {
       await event.map(
@@ -50,6 +54,8 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
             await _checkAuthenticated(event, emit),
       );
     });
+
+    // OneSignalService.
   }
 
   Future<void> _started(_Started event, Emitter<WelcomeState> emit) async {
@@ -140,7 +146,8 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
       emit(state.copyWith(isLoading: true));
       final tokenModel = await _checkAuthenticatedUseCase.executeObj();
       if (tokenModel.netData?.accessToken != '') {
-        getIt<RealtimeService>().connectSocket();
+        _realtimeService.connectSocket();
+        await _oneSignalService.login('123');
         await _getUserProfileUseCase.executeObj();
         emit(state.copyWith(isAuthenticated: true, isLoading: false));
       }
