@@ -147,7 +147,7 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
       final tokenModel = await _checkAuthenticatedUseCase.executeObj();
       if (tokenModel.netData?.accessToken != '') {
         _realtimeService.connectSocket();
-        await _oneSignalService.login('123');
+        await _setUpOneSignal();
         await _getUserProfileUseCase.executeObj();
         emit(state.copyWith(isAuthenticated: true, isLoading: false));
       }
@@ -159,6 +159,15 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
           onError: (e) {
             Logs.d(e);
           }).detected();
+    }
+  }
+
+  Future<void> _setUpOneSignal() async {
+    try {
+      await _oneSignalService.login('123');
+      _oneSignalService.onTapNotificationDisplay();
+    } catch (e) {
+      Logs.e(e);
     }
   }
 }

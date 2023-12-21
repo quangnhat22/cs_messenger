@@ -1,3 +1,6 @@
+import 'package:app/configs/di/di.dart';
+import 'package:app/configs/routes/app_router.dart';
+import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:configs/configs.dart';
 import 'package:injectable/injectable.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -37,5 +40,12 @@ class OneSignalService {
 
   Future<void> setLanguage(String languageCode) async {
     await OneSignal.User.setLanguage(languageCode);
+  }
+
+  void onTapNotificationDisplay() {
+    OneSignal.Notifications.addClickListener((event) async {
+      Logs.d('NOTIFICATION CLICK LISTENER CALLED WITH EVENT: $event');
+      await getIt<AppRouter>().push(const ListNotificationRoute());
+    });
   }
 }
