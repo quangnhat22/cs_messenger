@@ -35,7 +35,7 @@ class SocketService implements RealtimeService {
   void connectSocket() async {
     final token = await _authLocalDataSource.getToken();
     _socket = IO.io(
-        'http://103.153.73.170:30002',
+        BuildConfig.socketUrl,
         IO.OptionBuilder()
             .setTransports(['websocket'])
             //.enableForceNew()

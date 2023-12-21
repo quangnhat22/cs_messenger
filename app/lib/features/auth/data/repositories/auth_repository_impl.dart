@@ -5,6 +5,7 @@ import 'package:app/features/auth/data/sources/local/device_info_local_data_src.
 import 'package:app/features/auth/data/sources/local/first_install_app_local_data_src.dart';
 import 'package:app/features/auth/data/sources/remote/auth_remote_data_src.dart';
 import 'package:app/features/auth/domain/repositories/auth_repository.dart';
+import 'package:app/service/onesignal/onesignal_service.dart';
 import 'package:app/service/socket/socket_service.dart';
 import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
@@ -12,6 +13,7 @@ import 'package:utilities/utilities.dart';
 
 @Injectable(as: AuthRepository)
 class AuthRepositoryImpl extends AuthRepository {
+  late final OneSignalService _oneSignalService;
   late final AuthFirebaseDataSource _authFirebaseDataSource;
   late final AuthRemoteDataSource _authRemoteDataSource;
   late final AuthLocalDataSource _authLocalDataSource;
@@ -19,6 +21,7 @@ class AuthRepositoryImpl extends AuthRepository {
   late final FirstInstallAppLocalDataSource _firstInstallAppLocalDataSource;
 
   AuthRepositoryImpl(
+    this._oneSignalService,
     this._authFirebaseDataSource,
     this._authRemoteDataSource,
     this._authLocalDataSource,
@@ -51,6 +54,7 @@ class AuthRepositoryImpl extends AuthRepository {
     try {
       await _removeLocal();
       await _authFirebaseDataSource.logOut();
+      await _oneSignalService.logOut();
       return AppObjResultModel(netData: EmptyModel());
     } on LocalException catch (_) {
       rethrow;
@@ -66,6 +70,7 @@ class AuthRepositoryImpl extends AuthRepository {
     try {
       await _authRemoteDataSource.logOut();
       await _authFirebaseDataSource.logOut();
+      await _oneSignalService.logOut();
       await _removeLocal();
       getIt<RealtimeService>().disconnectSocket();
       return AppObjResultModel<EmptyModel>(netData: EmptyModel());

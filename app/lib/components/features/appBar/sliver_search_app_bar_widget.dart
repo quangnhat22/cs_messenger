@@ -1,4 +1,7 @@
 import 'package:app/components/features/search/search_delegate.dart';
+import 'package:app/configs/di/di.dart';
+import 'package:app/configs/routes/app_router.dart';
+import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:resources/resources.dart';
@@ -13,8 +16,8 @@ class SliverSearchAppBarWidget extends StatelessWidget {
     );
   }
 
-  void _handleNotificationIconButtonPressed(BuildContext context) {
-    //TODO: implement notification icon button at AppBar
+  void _handleNotificationIconButtonPressed(BuildContext context) async {
+    await getIt<AppRouter>().push(const ListNotificationRoute());
   }
 
   @override

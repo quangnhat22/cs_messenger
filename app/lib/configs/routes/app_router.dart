@@ -80,6 +80,7 @@ class AppRouter extends $AppRouter {
                 children: [
                   _customRoute(page: ChatRoute.page),
                 ]),
+            _customRoute(page: ListNotificationRoute.page),
           ],
         )
       ];
