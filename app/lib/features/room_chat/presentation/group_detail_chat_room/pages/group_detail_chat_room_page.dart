@@ -21,10 +21,8 @@ import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 @RoutePage()
 class GroupDetailChatRoomPage extends StatelessWidget {
-  const GroupDetailChatRoomPage(
-      {super.key, required this.groupId, required this.chatRoomId});
+  const GroupDetailChatRoomPage({super.key, required this.chatRoomId});
 
-  final String groupId;
   final String chatRoomId;
 
   @override
@@ -192,9 +190,7 @@ class GroupDetailChatRoomPage extends StatelessWidget {
     final file = await assetEntity?.file;
 
     if (file?.path != null && context.mounted) {
-      context
-          .read<EditGroupCubit>()
-          .changeGroupAvatar(groupId: groupId, avatar: file!.path);
+      context.read<EditGroupCubit>().changeGroupAvatar(avatar: file!.path);
     }
   }
 
@@ -218,7 +214,6 @@ class GroupDetailChatRoomPage extends StatelessWidget {
         )
         .setOnPositive(() {
           context.read<EditGroupCubit>().changeGroupName(
-                groupId: groupId,
                 name: context.read<GroupEditNameFormBloc>().groupName.value,
               );
         })
@@ -234,7 +229,7 @@ class GroupDetailChatRoomPage extends StatelessWidget {
         .setNegativeText(R.strings.close)
         .setPositiveText(R.strings.confirm)
         .setOnPositive(() async {
-          await context.read<EditGroupCubit>().leaveGroup(groupId);
+          await context.read<EditGroupCubit>().leaveGroup();
           await getIt<AppRouter>().pop();
         })
         .buildDialog(context)

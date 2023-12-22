@@ -57,8 +57,8 @@ class ChatPage extends StatelessWidget {
               ),
             IconButton(
               onPressed: () {
-                getIt<AppRouter>().push(
-                    GroupDetailChatRoomRoute(chatRoomId: roomId, groupId: '1'));
+                getIt<AppRouter>()
+                    .push(GroupDetailChatRoomRoute(chatRoomId: roomId));
               },
               icon: const Icon(
                 Icons.more_vert,
