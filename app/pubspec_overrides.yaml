@@ -1,0 +1,12 @@
+# melos_managed_dependency_overrides: configs,data,domain,resources,utilities
+dependency_overrides:
+  configs:
+    path: ../configs
+  data:
+    path: ../data
+  domain:
+    path: ../domain
+  resources:
+    path: ../resources
+  utilities:
+    path: ../utilities
