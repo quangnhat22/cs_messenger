@@ -830,6 +830,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.9.47"
+  focused_menu:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: b4bc4170ce07742b7a3e91b6119aa8f4c73e1674
+      url: "https://github.com/retroportalstudio/focused_menu.git"
+    source: git
+    version: "1.0.2"
   form_bloc:
     dependency: transitive
     description:

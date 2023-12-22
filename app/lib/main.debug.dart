@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:app/configs/di/di.dart';
 import 'package:app/features/app/presentation/app.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:configs/configs.dart';
 import 'package:data/data.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -21,6 +22,23 @@ void main() async {
   );
   _registerAdapterHive();
   Fsplash.remove();
+  const AudioContext audioContext = AudioContext(
+    iOS: AudioContextIOS(
+      category: AVAudioSessionCategory.playback,
+      options: [
+        AVAudioSessionOptions.defaultToSpeaker,
+        AVAudioSessionOptions.mixWithOthers,
+      ],
+    ),
+    android: AudioContextAndroid(
+      isSpeakerphoneOn: true,
+      stayAwake: true,
+      contentType: AndroidContentType.music,
+      usageType: AndroidUsageType.assistanceSonification,
+      audioFocus: AndroidAudioFocus.gain,
+    ),
+  );
+  AudioPlayer.global.setAudioContext(audioContext);
   runApp(const App());
 }
 

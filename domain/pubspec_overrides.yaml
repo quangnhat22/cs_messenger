@@ -1,6 +1,0 @@
-# melos_managed_dependency_overrides: resources,utilities
-dependency_overrides:
-  resources:
-    path: ../resources
-  utilities:
-    path: ../utilities

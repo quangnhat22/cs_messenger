@@ -47,5 +47,11 @@
 		<true/>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>$(FLUTTER_BUILD_NAME)requires access to the photo library.</string>
+		<key>NSMicrophoneUsageDescription</key>
+		<string>$(PRODUCT_NAME) uses your microphone.</string>
+		<key>NSCameraUsageDescription</key>
+		<string>$(PRODUCT_NAME) uses your camera.</string>
 	</dict>
 </plist>

@@ -11,6 +11,7 @@ import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:focused_menu/focused_menu.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import 'emoji_message.dart';
@@ -191,18 +192,71 @@ class Message extends StatelessWidget {
   ) =>
       enlargeEmojis && hideBackgroundOnEmojiMessages
           ? _messageBuilder(context)
-          : Container(
-              decoration: BoxDecoration(
-                borderRadius: borderRadius,
-                color: message.type == MessageType.emoji
-                    ? null
-                    : !currentUserIsAuthor || message.type == MessageType.image
-                        ? Theme.of(context).colorScheme.outline.withOpacity(0.1)
-                        : Theme.of(context).colorScheme.secondaryContainer,
-              ),
-              child: ClipRRect(
-                borderRadius: borderRadius,
-                child: _messageBuilder(context),
+          : FocusedMenuHolder(
+              onPressed: () {},
+              menuItems: [
+                FocusedMenuItem(
+                  title: AppTextBodyMediumWidget()
+                      .setText('Reply')
+                      .setTextStyle(
+                        TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      )
+                      .build(context),
+                  onPressed: () {},
+                ),
+                FocusedMenuItem(
+                  title: AppTextBodyMediumWidget()
+                      .setText('Forward')
+                      .setTextStyle(
+                        TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      )
+                      .build(context),
+                  onPressed: () {},
+                ),
+                FocusedMenuItem(
+                  title: AppTextBodyMediumWidget()
+                      .setText('Copy')
+                      .setTextStyle(
+                        TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      )
+                      .build(context),
+                  onPressed: () {},
+                ),
+                FocusedMenuItem(
+                  title: AppTextBodyMediumWidget()
+                      .setText('Delete')
+                      .setTextStyle(
+                        TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      )
+                      .build(context),
+                  onPressed: () {},
+                ),
+              ],
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: borderRadius,
+                  color: message.type == MessageType.emoji
+                      ? null
+                      : !currentUserIsAuthor ||
+                              message.type == MessageType.image
+                          ? Theme.of(context)
+                              .colorScheme
+                              .outline
+                              .withOpacity(0.1)
+                          : Theme.of(context).colorScheme.secondaryContainer,
+                ),
+                child: ClipRRect(
+                  borderRadius: borderRadius,
+                  child: _messageBuilder(context),
+                ),
               ),
             );
 
@@ -227,6 +281,7 @@ class Message extends StatelessWidget {
                 message: imageMessage,
                 messageWidth: messageWidth,
               );
+
       case MessageType.text:
         final textMessage = message as TextMessageModel;
         return textMessageBuilder != null
