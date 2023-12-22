@@ -39,6 +39,7 @@ class AppLocalBoxKeys {
   static const firstInstallAppBox = 'first_install_app_box';
   static const themeLanguageBox = 'theme_language_box';
   static const deviceInfoBox = 'device_info_box';
+  static const notificationSettingBox = 'notification_setting_box';
 }
 
 class AppNavigationKeys {
