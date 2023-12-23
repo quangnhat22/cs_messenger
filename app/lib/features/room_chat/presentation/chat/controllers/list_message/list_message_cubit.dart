@@ -116,7 +116,7 @@ class ListMessageCubit extends Cubit<ListMessageState> {
         request: GetListRoomMessageParam(
           chatRoomId: state.roomId,
           offset: state.nextOffset!,
-          limit: 15,
+          limit: 10,
         ),
       );
 

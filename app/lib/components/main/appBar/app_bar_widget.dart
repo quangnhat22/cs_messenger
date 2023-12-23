@@ -4,22 +4,22 @@ class AppBarWidget extends AppBarBaseBuilder {
   @override
   PreferredSizeWidget build(BuildContext context) {
     return AppBar(
-      title: _textTitleWidget ??
-          AppTextHeadlineSmallWidget()
-              .setText(_textTitle)
-              .setTextStyle(TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.primary,
-              ))
-              .setColor(_textTitleColor)
-              .build(context),
-      centerTitle: _centerTitle ?? true,
-      leading: _leading,
-      actions: _actions,
-      backgroundColor: _backgroundColor ?? Colors.transparent,
-      flexibleSpace: _flexibleSpace,
-      bottom: _bottom,
-    );
+        title: _textTitleWidget ??
+            AppTextHeadlineSmallWidget()
+                .setText(_textTitle)
+                .setTextStyle(TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary,
+                ))
+                .setColor(_textTitleColor)
+                .build(context),
+        centerTitle: _centerTitle ?? true,
+        leading: _leading,
+        actions: _actions,
+        backgroundColor: _backgroundColor ?? Colors.transparent,
+        flexibleSpace: _flexibleSpace,
+        bottom: _bottom,
+        surfaceTintColor: Colors.transparent);
   }
 
   @override

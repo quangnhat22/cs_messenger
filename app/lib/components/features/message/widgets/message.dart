@@ -53,6 +53,7 @@ class Message extends StatelessWidget {
     this.onMessageStatusTap,
     this.imageProviderBuilder,
     this.onPreviewDataFetched,
+    this.onReplyMessage,
   });
 
   /// Any message type.
@@ -126,6 +127,7 @@ class Message extends StatelessWidget {
 
   /// Called when user makes a long press on status icon in any message.
   final void Function(BuildContext context, IMessageModel)? onMessageStatusTap;
+  final void Function(IMessageModel)? onReplyMessage;
 
   /// Build a text message inside predefined bubble.
   final Widget Function(
@@ -193,52 +195,46 @@ class Message extends StatelessWidget {
       enlargeEmojis && hideBackgroundOnEmojiMessages
           ? _messageBuilder(context)
           : FocusedMenuHolder(
+              menuOffset: 10,
+              animateMenuItems: false,
+              menuBoxDecoration: BoxDecoration(
+                borderRadius:
+                    BorderRadius.circular(AppSizeExt.of.majorScale(4)),
+              ),
               onPressed: () {},
               menuItems: [
                 FocusedMenuItem(
-                  title: AppTextBodyMediumWidget()
-                      .setText('Reply')
-                      .setTextStyle(
-                        TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      )
-                      .build(context),
-                  onPressed: () {},
+                  trailing: const Icon(Icons.reply),
+                  title:
+                      AppTextBodyMediumWidget().setText('Reply').build(context),
+                  onPressed: () {
+                    onReplyMessage?.call(message);
+                  },
                 ),
                 FocusedMenuItem(
+                  trailing: const Icon(Icons.share),
                   title: AppTextBodyMediumWidget()
                       .setText('Forward')
-                      .setTextStyle(
-                        TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      )
                       .build(context),
                   onPressed: () {},
                 ),
                 FocusedMenuItem(
-                  title: AppTextBodyMediumWidget()
-                      .setText('Copy')
-                      .setTextStyle(
-                        TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      )
-                      .build(context),
+                  trailing: const Icon(Icons.copy),
+                  title:
+                      AppTextBodyMediumWidget().setText('Copy').build(context),
                   onPressed: () {},
                 ),
-                FocusedMenuItem(
-                  title: AppTextBodyMediumWidget()
-                      .setText('Delete')
-                      .setTextStyle(
-                        TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      )
-                      .build(context),
-                  onPressed: () {},
-                ),
+                // FocusedMenuItem(
+                //   title: AppTextBodyMediumWidget()
+                //       .setText('Delete')
+                //       .setTextStyle(
+                //         TextStyle(
+                //           color: Theme.of(context).colorScheme.primary,
+                //         ),
+                //       )
+                //       .build(context),
+                //   onPressed: () {},
+                // ),
               ],
               child: Container(
                 decoration: BoxDecoration(

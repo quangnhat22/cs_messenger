@@ -148,6 +148,7 @@ class GroupCreatePage extends StatelessWidget {
   Future<void> _showBottomSheetAddMember(
       BuildContext context, List<UserModel> filterMember) async {
     await showModalBottomSheet<List<UserModel>>(
+      clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(AppSizeExt.of.majorScale(5)),

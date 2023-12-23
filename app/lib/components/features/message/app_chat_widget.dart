@@ -96,11 +96,11 @@ class AppChatWidget extends StatefulWidget {
 
 class _AppChatWidgetState extends State<AppChatWidget>
     with SingleTickerProviderStateMixin {
-  // late final Animation<double> _animation = CurvedAnimation(
-  //   curve: Curves.easeOutQuad,
-  //   parent: _controller,
-  // );
-  // late final AnimationController _controller = AnimationController(vsync: this);
+  late final Animation<double> _animation = CurvedAnimation(
+    curve: Curves.easeOutQuad,
+    parent: _controller,
+  );
+  late final AnimationController _controller = AnimationController(vsync: this);
 
   // bool _indicatorOnScrollStatus = false;
 
@@ -130,7 +130,8 @@ class _AppChatWidgetState extends State<AppChatWidget>
 
   @override
   void dispose() {
-    // _controller.dispose();
+    _controller.dispose();
+
     super.dispose();
   }
 
@@ -140,7 +141,6 @@ class _AppChatWidgetState extends State<AppChatWidget>
       widget.items,
       equalityChecker: (item1, item2) {
         if (item1 is Map<String, Object> && item2 is Map<String, Object>) {
-          //TODO:debug
           final message1 = item1['message']! as IMessageModel;
           final message2 = item2['message']! as IMessageModel;
 
@@ -280,8 +280,8 @@ class _AppChatWidgetState extends State<AppChatWidget>
                   (widget.onEndReachedThreshold ?? 0.75))) {
             if (widget.items.isEmpty || _isNextPageLoading) return false;
 
-            // _controller.duration = Duration.zero;
-            // _controller.forward();
+            _controller.duration = Duration.zero;
+            _controller.forward();
 
             setState(() {
               _isNextPageLoading = true;
@@ -289,9 +289,9 @@ class _AppChatWidgetState extends State<AppChatWidget>
 
             widget.onEndReached!().whenComplete(() {
               if (mounted) {
-                // _controller.duration = const Duration(milliseconds: 100);
+                _controller.duration = const Duration(milliseconds: 100);
 
-                // _controller.reverse();
+                _controller.reverse();
 
                 setState(() {
                   _isNextPageLoading = false;
@@ -414,41 +414,41 @@ class _AppChatWidgetState extends State<AppChatWidget>
                           _newMessageBuilder(index, animation),
                     ),
                   ),
-                  // SliverPadding(
-                  //   padding: EdgeInsets.only(
-                  //     top: 16 +
-                  //         (widget.useTopSafeAreaInset
-                  //             ? MediaQuery.of(context).padding.top
-                  //             : 0),
-                  //   ),
-                  //   sliver: SliverToBoxAdapter(
-                  //     child: SizeTransition(
-                  //       axisAlignment: 1,
-                  //       sizeFactor: _animation,
-                  //       child: Center(
-                  //         child: Container(
-                  //           alignment: Alignment.center,
-                  //           height: 32,
-                  //           width: 32,
-                  //           child: SizedBox(
-                  //             height: 16,
-                  //             width: 16,
-                  //             child: _isNextPageLoading
-                  //                 ? CircularProgressIndicator(
-                  //                     backgroundColor: Colors.transparent,
-                  //                     strokeWidth: 1.5,
-                  //                     valueColor: AlwaysStoppedAnimation<Color>(
-                  //                         Theme.of(context)
-                  //                             .colorScheme
-                  //                             .primary),
-                  //                   )
-                  //                 : null,
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
+                  SliverPadding(
+                    padding: EdgeInsets.only(
+                      top: 16 +
+                          (widget.useTopSafeAreaInset
+                              ? MediaQuery.of(context).padding.top
+                              : 0),
+                    ),
+                    sliver: SliverToBoxAdapter(
+                      child: SizeTransition(
+                        axisAlignment: 1,
+                        sizeFactor: _animation,
+                        child: Center(
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 32,
+                            width: 32,
+                            child: SizedBox(
+                              height: 16,
+                              width: 16,
+                              child: _isNextPageLoading
+                                  ? CircularProgressIndicator(
+                                      backgroundColor: Colors.transparent,
+                                      strokeWidth: 1.5,
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          Theme.of(context)
+                                              .colorScheme
+                                              .primary),
+                                    )
+                                  : null,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -468,12 +468,16 @@ class _AppChatWidgetState extends State<AppChatWidget>
                       .colorScheme
                       .tertiaryContainer
                       .withOpacity(0.8),
-                  onPressed: () {
-                    widget.scrollController.animateTo(
-                      0,
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.easeInQuad,
-                    );
+                  onPressed: () async {
+                    Future.delayed(const Duration(milliseconds: 100), () {
+                      if (widget.scrollController.hasClients) {
+                        widget.scrollController.animateTo(
+                          0.0,
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.linear,
+                        );
+                      }
+                    });
                   },
                   child: const Icon(Icons.arrow_downward_outlined),
                 ),

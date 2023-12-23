@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app/components/main/button/app_button_base_builder.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/configs/theme/app_theme.dart';
@@ -66,7 +68,7 @@ class _MapMessageState extends State<MapMessage> {
                       zoom: 15),
                   mapType: MapType.normal,
                   myLocationEnabled: true,
-                  liteModeEnabled: true,
+                  liteModeEnabled: Platform.isAndroid ? true : false,
                   markers: markers,
                 ),
               ),

@@ -19,7 +19,9 @@ class DeviceRepositoryImpl implements DeviceRepository {
 
       final remoteData = await _remote.registerNewDevice(
         model: deviceInfo['model'],
-        os: deviceInfo['OS'],
+        //todo: check with BE
+        os: 'android',
+        // os: deviceInfo['OS'],
         appVersion: deviceInfo['appVersion'],
       );
 

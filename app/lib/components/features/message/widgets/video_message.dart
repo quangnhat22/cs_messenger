@@ -29,7 +29,6 @@ class VideoMessage extends StatelessWidget {
       children: [
         ImageMessage(
           currentUserId: currentUserId,
-          //remove it
           message: ImageMessageModel(
             id: message.id,
             author: message.author,
@@ -38,6 +37,8 @@ class VideoMessage extends StatelessWidget {
             content: message.thumbnailUrl ?? '-',
             type: MessageType.image,
             roomId: message.roomId,
+            width: MediaQuery.sizeOf(context).width * 0.4,
+            height: MediaQuery.sizeOf(context).height * 0.4,
           ),
           messageWidth: messageWidth,
         ),
@@ -52,12 +53,11 @@ class VideoMessage extends StatelessWidget {
                   .colorScheme
                   .primaryContainer
                   .withOpacity(0.5),
-              onPressed: () {
-                Navigator.of(context).push(
+              onPressed: () async {
+                await Navigator.of(context).push(
                   MaterialPageRoute<void>(
-                    builder: (BuildContext context) => VideoPlayPage(
-                      url: message.uri,
-                    ),
+                    builder: (BuildContext context) =>
+                        VideoPlayPage(url: message.uri),
                   ),
                 );
               },
@@ -138,6 +138,7 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
   Widget build(BuildContext context) {
     return AppMainPageWidget()
         .setAppBar(AppBarWidget()
+            .setTextTitle(widget.url)
             .setBackgroundColor(Colors.transparent)
             .build(context))
         .setBody(_body(context))

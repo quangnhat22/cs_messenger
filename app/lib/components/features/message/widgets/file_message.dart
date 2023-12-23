@@ -46,7 +46,7 @@ class FileMessage extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  if (message.isLoading ?? false)
+                  if (message.isLoading)
                     Positioned.fill(
                       child: CircularProgressIndicator(
                         color: currentUserId != message.author.id

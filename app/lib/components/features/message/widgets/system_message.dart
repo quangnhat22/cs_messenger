@@ -9,16 +9,12 @@ class SystemMessage extends StatelessWidget {
   const SystemMessage({
     required this.message,
     this.createdAt,
-    this.options = const TextMessageOptions(),
     super.key,
   });
 
   final DateTime? createdAt;
 
   final String message;
-
-  /// See [TextMessage.options].
-  final TextMessageOptions options;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -59,36 +55,10 @@ class SystemMessage extends StatelessWidget {
                   .textTheme
                   .bodyMedium
                   ?.copyWith(fontWeight: FontWeight.w200),
-              options: options,
+              options: const TextMessageOptions(),
               text: message,
             ),
           ],
         ),
       );
-}
-
-@immutable
-class SystemMessageTheme {
-  const SystemMessageTheme({
-    required this.margin,
-    this.linkTextStyle,
-    required this.textStyle,
-    this.boldTextStyle,
-    this.codeTextStyle,
-  });
-
-  /// Margin around the system message.
-  final EdgeInsets margin;
-
-  /// Style to apply to anything that matches a link.
-  final TextStyle? linkTextStyle;
-
-  /// Regular style to use for any unmatched text. Also used as basis for the fallback options.
-  final TextStyle textStyle;
-
-  /// Style to apply to anything that matches bold markdown.
-  final TextStyle? boldTextStyle;
-
-  /// Style to apply to anything that matches code markdown.
-  final TextStyle? codeTextStyle;
 }

@@ -1,5 +1,6 @@
 import 'package:app/components/features/message/input/attachment_button_widget.dart';
 import 'package:app/components/features/message/input/input_text_field_controller.dart';
+import 'package:app/components/features/message/input/reply_message_widget.dart';
 import 'package:app/components/features/message/input/send_button_widget.dart';
 import 'package:app/components/features/message/model/input_clear_mode.dart';
 import 'package:app/components/features/message/model/send_button_visibility_mode.dart';
@@ -149,65 +150,85 @@ class _InputWidgetState extends State<InputWidget> {
                     child: AnimatedSize(
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.easeInQuad,
-                      child: TextField(
-                        enabled: widget.options.enabled,
-                        autocorrect: widget.options.autocorrect,
-                        autofocus: widget.options.autofocus,
-                        enableSuggestions: widget.options.enableSuggestions,
-                        controller: _textController,
-                        cursorColor: Theme.of(context).colorScheme.outline,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                              width: 0.0,
-                              style: BorderStyle.none,
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(
-                                AppSizeExt.of.majorScale(4),
-                              ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.background,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(
+                              AppSizeExt.of.majorScale(4),
                             ),
                           ),
-                          contentPadding: EdgeInsets.symmetric(
-                            vertical: AppSizeExt.of.majorPaddingScale(2),
-                            horizontal: AppSizeExt.of.majorPaddingScale(3),
-                          ),
-                          isCollapsed: true,
-                          filled: true,
-                          fillColor: Theme.of(context).colorScheme.background,
-                          //TODO: support en vi
-                          hintText: 'Type a message',
                         ),
+                        padding: EdgeInsets.all(AppSizeExt.of.majorScale(1)),
+                        child: Column(
+                          children: [
+                            const ReplyMessage(),
+                            TextField(
+                              enabled: widget.options.enabled,
+                              autocorrect: widget.options.autocorrect,
+                              autofocus: widget.options.autofocus,
+                              enableSuggestions:
+                                  widget.options.enableSuggestions,
+                              controller: _textController,
+                              cursorColor:
+                                  Theme.of(context).colorScheme.outline,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.0,
+                                    style: BorderStyle.none,
+                                  ),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(
+                                      AppSizeExt.of.majorScale(4),
+                                    ),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.symmetric(
+                                  vertical: AppSizeExt.of.majorPaddingScale(2),
+                                  horizontal:
+                                      AppSizeExt.of.majorPaddingScale(3),
+                                ),
+                                isCollapsed: true,
+                                filled: true,
+                                fillColor:
+                                    Theme.of(context).colorScheme.background,
+                                //TODO: support en vi
+                                hintText: 'Type a message',
+                              ),
 
-                        //  InheritedChatTheme.of(context)
-                        //     .theme
-                        //     .inputTextDecoration
-                        //     .copyWith(
-                        //       hintStyle: InheritedChatTheme.of(context)
-                        //           .theme
-                        //           .inputTextStyle
-                        //           .copyWith(
-                        //             color: InheritedChatTheme.of(context)
-                        //                 .theme
-                        //                 .inputTextColor
-                        //                 .withOpacity(0.5),
-                        //           ),
-                        //       hintText:
-                        //           InheritedL10n.of(context).l10n.inputPlaceholder,
-                        //     ),
-                        focusNode: _inputFocusNode,
-                        keyboardType: widget.options.keyboardType,
-                        maxLines: 5,
-                        minLines: 1,
-                        onChanged: widget.options.onTextChanged,
-                        onTap: widget.options.onTextFieldTap,
-                        // style: const TextStyle(
-                        //   fontSize: 16,
-                        //   fontWeight: FontWeight.w500,
-                        //   height: 1.5,
-                        // ),
-                        style: Theme.of(context).textTheme.bodyLarge,
-                        textCapitalization: TextCapitalization.sentences,
+                              //  InheritedChatTheme.of(context)
+                              //     .theme
+                              //     .inputTextDecoration
+                              //     .copyWith(
+                              //       hintStyle: InheritedChatTheme.of(context)
+                              //           .theme
+                              //           .inputTextStyle
+                              //           .copyWith(
+                              //             color: InheritedChatTheme.of(context)
+                              //                 .theme
+                              //                 .inputTextColor
+                              //                 .withOpacity(0.5),
+                              //           ),
+                              //       hintText:
+                              //           InheritedL10n.of(context).l10n.inputPlaceholder,
+                              //     ),
+                              focusNode: _inputFocusNode,
+                              keyboardType: widget.options.keyboardType,
+                              maxLines: 5,
+                              minLines: 1,
+                              onChanged: widget.options.onTextChanged,
+                              onTap: widget.options.onTextFieldTap,
+                              // style: const TextStyle(
+                              //   fontSize: 16,
+                              //   fontWeight: FontWeight.w500,
+                              //   height: 1.5,
+                              // ),
+                              style: Theme.of(context).textTheme.bodyLarge,
+                              textCapitalization: TextCapitalization.sentences,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

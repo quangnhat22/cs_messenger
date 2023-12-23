@@ -13,6 +13,7 @@ import 'package:intl/intl.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:resources/resources.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import 'package:utilities/utilities.dart';
 
 import 'conditional/conditional.dart';
 import 'image_gallery.dart';
@@ -27,9 +28,10 @@ class Chat extends StatefulWidget {
     super.key,
     required this.messages,
     required this.currentUserId,
+    this.repliedMessage,
     this.isLastPage,
     this.isFirstPage,
-    this.scrollController,
+    required this.scrollController,
     this.scrollPhysics,
     this.useTopSafeAreaInset,
     this.userAgent,
@@ -84,10 +86,12 @@ class Chat extends StatefulWidget {
     this.onAudioSent,
     this.onStickerSent,
     this.onMapSent,
+    this.onReplyMessage,
   });
 
   final String currentUserId;
   final List<IMessageModel> messages;
+  final IMessageModel? repliedMessage;
   final bool showUserAvatars;
   final bool? isLastPage;
   final bool? isFirstPage;
@@ -96,7 +100,7 @@ class Chat extends StatefulWidget {
   final Map<String, String>? imageHeaders;
   final Widget? customBottomWidget;
   final Widget? listBottomWidget;
-  final AutoScrollController? scrollController;
+  final AutoScrollController scrollController;
   final ScrollPhysics? scrollPhysics;
   final Future<void> Function()? onEndReached;
   final double? onEndReachedThreshold;
@@ -143,6 +147,7 @@ class Chat extends StatefulWidget {
   })? imageProviderBuilder;
   final void Function(UserModel)? onAvatarTap;
   final void Function(TextMessageModel, PreviewDataModel)? onPreviewDataFetched;
+  final void Function(IMessageModel)? onReplyMessage;
 
   final DateFormat? dateFormat;
   final int dateHeaderThreshold;
@@ -157,7 +162,6 @@ class Chat extends StatefulWidget {
 
   ///top float widget in chat app
   final Widget? topContainerWidget;
-
   //function handle send message
   final void Function(ImageMessageParam)? onImageSent;
   final void Function(VideoMessageParam)? onVideoSent;
@@ -187,7 +191,7 @@ class _ChatState extends State<Chat> {
   void initState() {
     super.initState();
 
-    _scrollController = widget.scrollController ?? AutoScrollController();
+    _scrollController = widget.scrollController;
 
     didUpdateWidget(widget);
   }
@@ -221,7 +225,6 @@ class _ChatState extends State<Chat> {
   @override
   void dispose() {
     _galleryPageController?.dispose();
-    _scrollController.dispose();
     super.dispose();
   }
 
@@ -423,6 +426,7 @@ class _ChatState extends State<Chat> {
           onMessageStatusLongPress: widget.onMessageStatusLongPress,
           onMessageStatusTap: widget.onMessageStatusTap,
           onPreviewDataFetched: _onPreviewDataFetched,
+          onReplyMessage: widget.onReplyMessage,
         );
         // messageWidget = widget.slidableMessageBuilder == null
         //     ? msgWidget

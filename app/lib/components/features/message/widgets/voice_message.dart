@@ -134,7 +134,7 @@ class _AudioMessageItemState extends State<AudioMessageItem> {
                     "${MessageUtils.convertDurationToString(position)} / ${MessageUtils.convertDurationToString(duration)}")
                 .build(context),
             SizedBox(
-              width: AppSizeExt.of.majorScale(30),
+              width: MediaQuery.sizeOf(context).width * 0.29,
               child: Slider(
                 min: 0.0,
                 thumbColor:

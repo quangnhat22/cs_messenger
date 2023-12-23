@@ -48,6 +48,14 @@ class ListFriendInviteWidget extends StatelessWidget {
             .id ==
         UserModel.empty.id;
 
+    final isSelected = selectedMember
+            .firstWhere(
+              (element) => element.id == friend.id,
+              orElse: () => UserModel.empty,
+            )
+            .id !=
+        UserModel.empty.id;
+
     return CheckboxListTile(
       enabled: isEnable,
       title: AppTextTitleMediumWidget()
@@ -66,7 +74,7 @@ class ListFriendInviteWidget extends StatelessWidget {
           .setUrl(friend.avatar)
           .setSize(AppAvatarSize.medium)
           .build(context),
-      value: isEnable,
+      value: isSelected,
       onChanged: (bool? value) => {
         context.read<ListSelectedFriendCubit>().selectedMemberChanged(friend)
       },
