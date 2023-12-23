@@ -28,6 +28,12 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
         extra != null && extra!.isNotEmpty ? jsonDecode(extra!) : null;
     switch (type) {
       case "text":
+        final repliedMessage = extraMessage?['repliedMessage'] as dynamic;
+        if (repliedMessage != null) {
+          final messageReplyRaw = MessageRaw.fromJson(repliedMessage);
+          final messageReplyModel = messageReplyRaw.raw2Model();
+        }
+
         return TextMessageModel(
           id: id,
           author: author != null ? author!.raw2Model() : UserModel.empty,
@@ -42,6 +48,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
           deletedAt: deletedAt != null
               ? DateTimeExt.convertTimeStampToDateTime(deletedAt!)
               : null,
+
           // clientId: clientId,
         );
       case "map":

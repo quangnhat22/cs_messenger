@@ -17,6 +17,7 @@ class SocketMessageParam extends IMessageParam with _$SocketMessageParam {
     if (messageParam is TextMessageParam) {
       final meta = <String, dynamic>{
         'previewData': messageParam.previewData,
+        'repliedMessage': messageParam.repliedMessage,
       };
       meta.removeWhere((key, value) => value == null || value == "");
       return SocketMessageParam(

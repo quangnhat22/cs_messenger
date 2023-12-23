@@ -7,7 +7,7 @@ class TextMessageParam extends IMessageParam with _$TextMessageParam {
     String? clientId,
     required String text,
     PreviewDataParam? previewData,
-    // IMessageParam? repliedMessage,
+    @JsonKey(includeFromJson: false) IMessageParam? repliedMessage,
   }) = _TextMessageParam;
 
   factory TextMessageParam.fromJson(Map<String, Object?> json) =>
