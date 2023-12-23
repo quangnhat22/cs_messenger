@@ -11,5 +11,6 @@ class ListMessageState with _$ListMessageState {
     String? nextOffset,
     @Default('-1') String roomId,
     @Default(false) bool isCalling,
+    IMessageModel? tempRepliedMessage,
   }) = _Initial;
 }

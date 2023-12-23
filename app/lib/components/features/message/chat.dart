@@ -13,7 +13,6 @@ import 'package:intl/intl.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:resources/resources.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
-import 'package:utilities/utilities.dart';
 
 import 'conditional/conditional.dart';
 import 'image_gallery.dart';
@@ -115,7 +114,6 @@ class Chat extends StatefulWidget {
   final InputOptions inputOptions;
   final ImageGalleryOptions imageGalleryOptions;
 
-  //TODO: fix bug
   final void Function(TextMessageParam) onSendPressed;
   final void Function(BuildContext context, IMessageModel)? onMessageTap;
   final void Function(BuildContext context, IMessageModel)? onMessageDoubleTap;
@@ -147,7 +145,7 @@ class Chat extends StatefulWidget {
   })? imageProviderBuilder;
   final void Function(UserModel)? onAvatarTap;
   final void Function(TextMessageModel, PreviewDataModel)? onPreviewDataFetched;
-  final void Function(IMessageModel)? onReplyMessage;
+  final void Function(IMessageModel?)? onReplyMessage;
 
   final DateFormat? dateFormat;
   final int dateHeaderThreshold;
@@ -162,6 +160,7 @@ class Chat extends StatefulWidget {
 
   ///top float widget in chat app
   final Widget? topContainerWidget;
+
   //function handle send message
   final void Function(ImageMessageParam)? onImageSent;
   final void Function(VideoMessageParam)? onVideoSent;
@@ -185,13 +184,9 @@ class _ChatState extends State<Chat> {
   bool _isImageViewVisible = false;
   bool _isShowMediaOptions = false;
 
-  late final AutoScrollController _scrollController;
-
   @override
   void initState() {
     super.initState();
-
-    _scrollController = widget.scrollController;
 
     didUpdateWidget(widget);
   }
@@ -277,7 +272,7 @@ class _ChatState extends State<Chat> {
                               onStartReached: widget.onStartReached,
                               onStartReachedThreshold:
                                   widget.onStartReachedThreshold,
-                              scrollController: _scrollController,
+                              scrollController: widget.scrollController,
                               scrollPhysics: widget.scrollPhysics,
                               // typingIndicatorOptions:
                               //     widget.typingIndicatorOptions,
@@ -292,6 +287,7 @@ class _ChatState extends State<Chat> {
                 ),
                 widget.customBottomWidget ??
                     InputWidget(
+                      replyMessage: widget.repliedMessage,
                       isAttachmentUploading: widget.isAttachmentUploading,
                       onAttachmentPressed: () {
                         setState(() {
@@ -301,6 +297,9 @@ class _ChatState extends State<Chat> {
                         widget.onAttachmentPressed?.call();
                       },
                       onSendPressed: widget.onSendPressed,
+                      onRemoveReplyMessage: () {
+                        widget.onReplyMessage?.call(null);
+                      },
                       options: InputOptions(
                         onTextFieldTap: () {
                           setState(() {
@@ -345,8 +344,8 @@ class _ChatState extends State<Chat> {
       return Container(
         alignment: Alignment.center,
         margin: const EdgeInsets.only(
-          bottom: 32,
-          top: 16,
+          bottom: 8,
+          top: 8,
         ),
         child: Text(
           object.text,
@@ -364,7 +363,7 @@ class _ChatState extends State<Chat> {
       );
     } else if (object is UnreadHeaderData) {
       return AutoScrollTag(
-        controller: _scrollController,
+        controller: widget.scrollController,
         index: index ?? -1,
         key: const Key('unread_header'),
         child: UnreadHeader(
@@ -434,7 +433,7 @@ class _ChatState extends State<Chat> {
         messageWidget = msgWidget;
       }
       return AutoScrollTag(
-        controller: _scrollController,
+        controller: widget.scrollController,
         index: index ?? -1,
         key: Key('scroll-${message.id}'),
         highlightColor: Theme.of(context).colorScheme.secondaryContainer,
@@ -500,7 +499,7 @@ class _ChatState extends State<Chat> {
   void scrollToUnreadHeader() {
     final unreadHeaderIndex = chatMessageAutoScrollIndexById[_unreadHeaderId];
     if (unreadHeaderIndex != null) {
-      _scrollController.scrollToIndex(
+      widget.scrollController.scrollToIndex(
         unreadHeaderIndex,
         duration: widget.scrollToUnreadOptions.scrollDuration,
       );

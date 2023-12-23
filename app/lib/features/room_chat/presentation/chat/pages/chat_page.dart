@@ -6,7 +6,7 @@ import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/features/room_chat/presentation/chat/controllers/chat_room_info/chat_room_info_cubit.dart';
 import 'package:app/features/room_chat/presentation/chat/controllers/list_message/list_message_cubit.dart';
 import 'package:app/features/room_chat/presentation/chat/widgets/chat_info_app_bar_widget.dart';
-import 'package:app/features/room_chat/presentation/chat/widgets/chat_view.dart';
+import 'package:app/features/room_chat/presentation/chat/views/chat_view.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

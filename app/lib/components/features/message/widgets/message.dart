@@ -201,9 +201,12 @@ class Message extends StatelessWidget {
                 borderRadius:
                     BorderRadius.circular(AppSizeExt.of.majorScale(4)),
               ),
-              onPressed: () {},
+              onPressed: () {
+                onMessageTap?.call(context, message);
+              },
               menuItems: [
                 FocusedMenuItem(
+                  backgroundColor: Theme.of(context).colorScheme.background,
                   trailing: const Icon(Icons.reply),
                   title:
                       AppTextBodyMediumWidget().setText('Reply').build(context),
@@ -212,6 +215,7 @@ class Message extends StatelessWidget {
                   },
                 ),
                 FocusedMenuItem(
+                  backgroundColor: Theme.of(context).colorScheme.background,
                   trailing: const Icon(Icons.share),
                   title: AppTextBodyMediumWidget()
                       .setText('Forward')
@@ -219,6 +223,7 @@ class Message extends StatelessWidget {
                   onPressed: () {},
                 ),
                 FocusedMenuItem(
+                  backgroundColor: Theme.of(context).colorScheme.background,
                   trailing: const Icon(Icons.copy),
                   title:
                       AppTextBodyMediumWidget().setText('Copy').build(context),

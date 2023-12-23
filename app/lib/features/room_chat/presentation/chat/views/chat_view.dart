@@ -1,4 +1,5 @@
 import 'package:app/components/features/message/chat.dart';
+import 'package:app/components/features/skeleton/list_skeletion.dart';
 import 'package:app/features/room_chat/presentation/chat/controllers/list_message/list_message_cubit.dart';
 import 'package:app/features/room_chat/presentation/chat/widgets/chat_float_top_widget.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class _ChatViewState extends State<ChatView> {
     return BlocBuilder<ListMessageCubit, ListMessageState>(
       builder: (context, state) {
         if (state.isLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return const ListSkeleton();
         }
         return Chat(
           scrollController: _scrollController,
@@ -91,8 +92,9 @@ class _ChatViewState extends State<ChatView> {
           onStickerSent: (stickerParams) {
             context.read<ListMessageCubit>().sendEmojiMessage(stickerParams);
           },
+          repliedMessage: state.tempRepliedMessage,
           onReplyMessage: (message) {
-            Logs.e(message.content);
+            context.read<ListMessageCubit>().addTempRepliedMessage(message);
           },
         );
       },

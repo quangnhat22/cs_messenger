@@ -17,6 +17,8 @@ class InputWidget extends StatefulWidget {
     this.isAttachmentUploading,
     this.onAttachmentPressed,
     required this.onSendPressed,
+    this.replyMessage,
+    this.onRemoveReplyMessage,
     this.options = const InputOptions(),
   });
 
@@ -35,6 +37,9 @@ class InputWidget extends StatefulWidget {
 
   /// Customisation options for the [Input].
   final InputOptions options;
+
+  final IMessageModel? replyMessage;
+  final void Function()? onRemoveReplyMessage;
 
   @override
   State<InputWidget> createState() => _InputWidgetState();
@@ -155,14 +160,20 @@ class _InputWidgetState extends State<InputWidget> {
                           color: Theme.of(context).colorScheme.background,
                           borderRadius: BorderRadius.all(
                             Radius.circular(
-                              AppSizeExt.of.majorScale(4),
+                              AppSizeExt.of.majorScale(5),
                             ),
                           ),
                         ),
                         padding: EdgeInsets.all(AppSizeExt.of.majorScale(1)),
                         child: Column(
                           children: [
-                            const ReplyMessage(),
+                            if (widget.replyMessage != null)
+                              ReplyMessage(
+                                messageReply: widget.replyMessage!,
+                                onRemoveReplyMessage: () {
+                                  widget.onRemoveReplyMessage?.call();
+                                },
+                              ),
                             TextField(
                               enabled: widget.options.enabled,
                               autocorrect: widget.options.autocorrect,
@@ -196,34 +207,12 @@ class _InputWidgetState extends State<InputWidget> {
                                 //TODO: support en vi
                                 hintText: 'Type a message',
                               ),
-
-                              //  InheritedChatTheme.of(context)
-                              //     .theme
-                              //     .inputTextDecoration
-                              //     .copyWith(
-                              //       hintStyle: InheritedChatTheme.of(context)
-                              //           .theme
-                              //           .inputTextStyle
-                              //           .copyWith(
-                              //             color: InheritedChatTheme.of(context)
-                              //                 .theme
-                              //                 .inputTextColor
-                              //                 .withOpacity(0.5),
-                              //           ),
-                              //       hintText:
-                              //           InheritedL10n.of(context).l10n.inputPlaceholder,
-                              //     ),
                               focusNode: _inputFocusNode,
                               keyboardType: widget.options.keyboardType,
                               maxLines: 5,
                               minLines: 1,
                               onChanged: widget.options.onTextChanged,
                               onTap: widget.options.onTextFieldTap,
-                              // style: const TextStyle(
-                              //   fontSize: 16,
-                              //   fontWeight: FontWeight.w500,
-                              //   height: 1.5,
-                              // ),
                               style: Theme.of(context).textTheme.bodyLarge,
                               textCapitalization: TextCapitalization.sentences,
                             ),

@@ -366,4 +366,8 @@ class ListMessageCubit extends Cubit<ListMessageState> {
       await OpenFilex.open(localPath);
     }
   }
+
+  void addTempRepliedMessage(IMessageModel? message) {
+    emit(state.copyWith(tempRepliedMessage: message));
+  }
 }
