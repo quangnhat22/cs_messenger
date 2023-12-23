@@ -7,16 +7,18 @@ class ReplyMessage extends StatelessWidget {
   const ReplyMessage({
     super.key,
     required this.messageReply,
+    this.width,
     this.onRemoveReplyMessage,
   });
 
+  final double? width;
   final IMessageModel messageReply;
   final void Function()? onRemoveReplyMessage;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.sizeOf(context).width,
+      width: width ?? MediaQuery.sizeOf(context).width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppSizeExt.of.majorScale(4)),
         color: Theme.of(context).colorScheme.tertiaryContainer,

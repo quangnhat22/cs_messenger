@@ -131,7 +131,6 @@ class _AppChatWidgetState extends State<AppChatWidget>
   @override
   void dispose() {
     _controller.dispose();
-
     super.dispose();
   }
 

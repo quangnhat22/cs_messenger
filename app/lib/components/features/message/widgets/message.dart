@@ -1,4 +1,5 @@
 import 'package:app/components/features/message/conditional/conditional.dart';
+import 'package:app/components/features/message/input/reply_message_widget.dart';
 import 'package:app/components/features/message/model/bubble_rtl_alignment.dart';
 import 'package:app/components/features/message/model/emoji_enlargement_behavior.dart';
 import 'package:app/components/features/message/utils/message_utils.dart';
@@ -409,41 +410,34 @@ class Message extends StatelessWidget {
               maxWidth: messageWidth.toDouble(),
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: currentUserIsAuthor
+                  ? CrossAxisAlignment.end
+                  : CrossAxisAlignment.start,
               children: [
-                // Row(
-                //   mainAxisSize: MainAxisSize.min,
-                //   children: [
-                //     SizedBox(
-                //       width: AppSizeExt.of.majorScale(2),
-                //       height: AppSizeExt.of.majorScale(5),
-                //       child: VerticalDivider(
-                //         width: AppSizeExt.of.majorScale(1),
-                //         color: Theme.of(context).colorScheme.primary,
-                //         thickness: 1,
-                //       ),
-                //     ),
-                //     Column(
-                //       children: [
-                //         AppTextLabelSmallWidget()
-                //             .setText('Replied message')
-                //             .setTextStyle(
-                //                 const TextStyle(fontStyle: FontStyle.italic))
-                //             .build(context),
-                //         _bubbleBuilder(
-                //           context,
-                //           borderRadius.resolve(Directionality.of(context)),
-                //           currentUserIsAuthor,
-                //           enlargeEmojis,
-                //         ),
-                //       ],
-                //     ),
-                //   ],
-                // ),
+                Column(
+                  crossAxisAlignment: currentUserIsAuthor
+                      ? CrossAxisAlignment.end
+                      : CrossAxisAlignment.start,
+                  children: [
+                    AppTextLabelSmallWidget()
+                        .setText('Replied message')
+                        .build(context),
+                    SizedBox(
+                      height: AppSizeExt.of.majorScale(1),
+                    ),
+                    ReplyMessage(
+                      messageReply: message,
+                      width: MediaQuery.sizeOf(context).width * 0.6,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: AppSizeExt.of.majorScale(2),
+                ),
                 GestureDetector(
                   onDoubleTap: () => onMessageDoubleTap?.call(context, message),
                   onLongPress: () => onMessageLongPress?.call(context, message),
-                  onTap: () => onMessageTap?.call(context, message),
+                  // onTap: () => onMessageTap?.call(context, message),
                   child: onMessageVisibilityChanged != null
                       ? VisibilityDetector(
                           key: Key(message.id),
