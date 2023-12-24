@@ -278,8 +278,8 @@ class Message extends StatelessWidget {
             ? imageMessageBuilder!(imageMessage, messageWidth: messageWidth)
             : ImageMessage(
                 currentUserId: currentUserId,
-                imageHeaders: imageHeaders,
-                imageProviderBuilder: imageProviderBuilder,
+                // imageHeaders: imageHeaders,
+                // imageProviderBuilder: imageProviderBuilder,
                 message: imageMessage,
                 messageWidth: messageWidth,
               );

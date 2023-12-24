@@ -145,6 +145,10 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/ic_no_data.svg
   SvgGenImage get icNoData => const SvgGenImage('assets/svgs/ic_no_data.svg');
 
+  /// File path: assets/svgs/ic_no_document.svg
+  SvgGenImage get icNoDocument =>
+      const SvgGenImage('assets/svgs/ic_no_document.svg');
+
   /// File path: assets/svgs/ic_ongoing.svg
   SvgGenImage get icOngoing => const SvgGenImage('assets/svgs/ic_ongoing.svg');
 
@@ -185,6 +189,7 @@ class $AssetsSvgsGen {
         icErrorList,
         icFilledInfoCircle,
         icNoData,
+        icNoDocument,
         icOngoing,
         icSearchNotFound,
         icSticker,

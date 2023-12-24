@@ -39,6 +39,7 @@ class VideoMessage extends StatelessWidget {
             roomId: message.roomId,
             width: MediaQuery.sizeOf(context).width * 0.4,
             height: MediaQuery.sizeOf(context).height * 0.4,
+            status: StatusMessageType.sent,
           ),
           messageWidth: messageWidth,
         ),
