@@ -22,6 +22,7 @@ class VideoMessageModel extends IMessageModel {
     this.name,
     this.thumbnailUrl,
     super.isShowStatus,
+    super.repliedMessage,
   });
 
   static VideoMessageModel getVideoMessageModelFromParam(

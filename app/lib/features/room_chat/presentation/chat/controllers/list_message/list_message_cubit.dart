@@ -178,13 +178,17 @@ class ListMessageCubit extends Cubit<ListMessageState> {
       TextMessageParam params = message;
       if (repliedMessage != null) {
         params = message.copyWith(
-            repliedMessage: IMessageParam.convertModelToParam(repliedMessage));
+          repliedMessage:
+              ReplyMessageParam.convert2ReplyMessageParam(repliedMessage),
+        );
       }
 
       final messageParams =
           SocketMessageParam.convert2SocketMessageParam(params, state.roomId);
 
       _sendMessageUseCase.executeObj(request: messageParams);
+
+      emit(state.copyWith(tempRepliedMessage: null));
     } on AppException catch (e) {
       Logs.e(e);
     }

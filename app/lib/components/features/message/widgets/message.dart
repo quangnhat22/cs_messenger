@@ -414,26 +414,28 @@ class Message extends StatelessWidget {
                   ? CrossAxisAlignment.end
                   : CrossAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: currentUserIsAuthor
-                      ? CrossAxisAlignment.end
-                      : CrossAxisAlignment.start,
-                  children: [
-                    AppTextLabelSmallWidget()
-                        .setText('Replied message')
-                        .build(context),
-                    SizedBox(
-                      height: AppSizeExt.of.majorScale(1),
-                    ),
-                    ReplyMessage(
-                      messageReply: message,
-                      width: MediaQuery.sizeOf(context).width * 0.6,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: AppSizeExt.of.majorScale(2),
-                ),
+                if (message.repliedMessage != null)
+                  Column(
+                    crossAxisAlignment: currentUserIsAuthor
+                        ? CrossAxisAlignment.end
+                        : CrossAxisAlignment.start,
+                    children: [
+                      AppTextLabelSmallWidget()
+                          .setText('Replied message')
+                          .build(context),
+                      SizedBox(
+                        height: AppSizeExt.of.majorScale(1),
+                      ),
+                      ReplyMessage(
+                        messageReply: message.repliedMessage!,
+                        width: MediaQuery.sizeOf(context).width * 0.6,
+                      ),
+                    ],
+                  ),
+                if (message.repliedMessage != null)
+                  SizedBox(
+                    height: AppSizeExt.of.majorScale(2),
+                  ),
                 GestureDetector(
                   onDoubleTap: () => onMessageDoubleTap?.call(context, message),
                   onLongPress: () => onMessageLongPress?.call(context, message),

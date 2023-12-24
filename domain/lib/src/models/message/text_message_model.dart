@@ -14,7 +14,7 @@ class TextMessageModel extends IMessageModel with _$TextMessageModel {
     DateTime? createdAt,
     DateTime? deletedAt,
     PreviewDataModel? previewData,
-    IMessageModel? repliedMessage,
+    ReplyMessageModel? repliedMessage,
     @Default(false) bool isShowStatus,
   }) = _TextMessageModel;
 

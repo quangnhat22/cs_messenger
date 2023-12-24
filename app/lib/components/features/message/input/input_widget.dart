@@ -169,7 +169,13 @@ class _InputWidgetState extends State<InputWidget> {
                           children: [
                             if (widget.replyMessage != null)
                               ReplyMessage(
-                                messageReply: widget.replyMessage!,
+                                messageReply: ReplyMessageModel(
+                                  id: widget.replyMessage!.id,
+                                  roomId: widget.replyMessage?.roomId,
+                                  clientId: widget.replyMessage?.clientId,
+                                  content: widget.replyMessage?.content,
+                                  authorName: widget.replyMessage?.author.name,
+                                ),
                                 onRemoveReplyMessage: () {
                                   widget.onRemoveReplyMessage?.call();
                                 },

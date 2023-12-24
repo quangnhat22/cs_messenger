@@ -20,5 +20,6 @@ class MapMessageModel extends IMessageModel {
     required this.long,
     this.name,
     super.isShowStatus,
+    super.repliedMessage,
   });
 }

@@ -12,7 +12,7 @@ class ReplyMessage extends StatelessWidget {
   });
 
   final double? width;
-  final IMessageModel messageReply;
+  final ReplyMessageModel messageReply;
   final void Function()? onRemoveReplyMessage;
 
   @override
@@ -33,7 +33,7 @@ class ReplyMessage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               AppTextTitleSmallWidget()
-                  .setText(messageReply.author.name)
+                  .setText(messageReply.authorName)
                   .setTextOverFlow(TextOverflow.ellipsis)
                   .setMaxLines(1)
                   .build(context),

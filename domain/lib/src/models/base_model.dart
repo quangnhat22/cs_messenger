@@ -1,4 +1,3 @@
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:domain/src/params/base_param.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:resources/resources.dart';
@@ -23,6 +22,7 @@ part 'message/image_message_model.dart';
 part 'message/imessage_model.dart';
 part 'message/map_message_model.dart';
 part 'message/preview_data_model.dart';
+part 'message/reply_message_model.dart';
 part 'message/system_message_model.dart';
 part 'message/text_message_model.dart';
 part 'message/video_message_model.dart';
