@@ -8,6 +8,9 @@ abstract class DeviceRemoteDataSource {
 
   Future<AppListResultRaw<DeviceRaw>> fetchListDevices(
       {required Map<String, dynamic> query});
+
+  Future<AppObjResultRaw<EmptyRaw>> deleteDevice(
+      {required Map<String, dynamic> query});
 }
 
 @Injectable(as: DeviceRemoteDataSource)
@@ -52,6 +55,24 @@ class DeviceRemoteDataSourceImpl extends DeviceRemoteDataSource {
       return response.toRawList((data) => (data as List<dynamic>)
           .map((item) => DeviceRaw.fromJson(item))
           .toList());
+    } on NetworkException catch (_) {
+      rethrow;
+    } on GrpcException catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<AppObjResultRaw<EmptyRaw>> deleteDevice(
+      {required Map<String, dynamic> query}) async {
+    try {
+      final AppResponse response = await _networkService.request(
+        clientRequest: ClientRequest(
+          url: ApiProvider.deviceById(query['deviceId']),
+          method: HttpMethod.delete,
+        ),
+      );
+      return response.toRaw((data) => EmptyRaw());
     } on NetworkException catch (_) {
       rethrow;
     } on GrpcException catch (_) {

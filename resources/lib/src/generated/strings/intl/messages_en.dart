@@ -97,11 +97,17 @@ class MessageLookup extends MessageLookupByLibrary {
             "Input data has already existed!"),
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("Date of Birth"),
         "deleteAccount": MessageLookupByLibrary.simpleMessage("Delete account"),
+        "deleteDeviceFail":
+            MessageLookupByLibrary.simpleMessage("Delete device fail"),
+        "deleteDeviceSuccess":
+            MessageLookupByLibrary.simpleMessage("Delete device success"),
         "devices": MessageLookupByLibrary.simpleMessage("Devices"),
         "discoverSeamlessMessaging": MessageLookupByLibrary.simpleMessage(
             "Discover seamless messaging and high-quality video calls. Stay connected with friends and loved ones like never before."),
         "doYouWantAcceptFriendRequest": MessageLookupByLibrary.simpleMessage(
             "Do you want to accept this friend request? Make sure you know this person."),
+        "doYouWantDeleteDevice": MessageLookupByLibrary.simpleMessage(
+            "Do you want delete this device?"),
         "doYouWantRejectFriendRequest": MessageLookupByLibrary.simpleMessage(
             "Do you want to reject this friend request?"),
         "doYouWantToExit": MessageLookupByLibrary.simpleMessage(

@@ -99,11 +99,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "dateOfBirth":
             MessageLookupByLibrary.simpleMessage("Ngày tháng năm sinh"),
         "deleteAccount": MessageLookupByLibrary.simpleMessage("Xóa tài khoản"),
+        "deleteDeviceFail":
+            MessageLookupByLibrary.simpleMessage("Xóa thiết bị thất bại"),
+        "deleteDeviceSuccess":
+            MessageLookupByLibrary.simpleMessage("Xóa thiết bị mới thành công"),
         "devices": MessageLookupByLibrary.simpleMessage("Danh sách thiết bị"),
         "discoverSeamlessMessaging": MessageLookupByLibrary.simpleMessage(
             "Khám phá tính năng nhắn tin mượt mà và cuộc gọi video chất lượng cao. Giữ kết nối với bạn bè và người thân một cách dễ dàng chưa từng có."),
         "doYouWantAcceptFriendRequest": MessageLookupByLibrary.simpleMessage(
             "Bạn có muốn chấp nhận lời mời kết bạn này không? Hãy đảm bảo bạn có quen biết người này."),
+        "doYouWantDeleteDevice": MessageLookupByLibrary.simpleMessage(
+            "Bạn có muốn xóa thiết bị này hay không?"),
         "doYouWantRejectFriendRequest": MessageLookupByLibrary.simpleMessage(
             "Bạn có muốn từ chối lời mời kết bạn này hay không?"),
         "doYouWantToExit": MessageLookupByLibrary.simpleMessage(

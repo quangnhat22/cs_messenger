@@ -15,6 +15,8 @@ class ApiProvider {
 
   //device
   static const String device = '/device';
+
+  static String deviceById(String id) => '$device/$id';
   static const String deviceRegister = '$device/register';
 
   //user-self
@@ -58,6 +60,7 @@ class ApiProvider {
   //video call
   static String chatRoomVideoCallById(String id) =>
       '$chatRoom/$id/video-call/token';
+
   static String chatRoomVideoCallMembersById(String id) =>
       '$chatRoom/$id/video-call/members';
 

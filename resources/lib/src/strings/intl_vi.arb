@@ -230,5 +230,8 @@
   "memberLeft": "Rời nhóm",
   "callStarted": "Bắt đầu cuộc gọi",
   "callEnded": "Cuộc gọi kết thúc",
-  "doYouWantToLeaveThisGroup": "Bạn có muốn rời khỏi nhóm này không?"
+  "doYouWantToLeaveThisGroup": "Bạn có muốn rời khỏi nhóm này không?",
+  "doYouWantDeleteDevice": "Bạn có muốn xóa thiết bị này hay không?",
+  "deleteDeviceSuccess": "Xóa thiết bị mới thành công",
+  "deleteDeviceFail": "Xóa thiết bị thất bại"
 }

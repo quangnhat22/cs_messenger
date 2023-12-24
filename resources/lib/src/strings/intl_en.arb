@@ -230,5 +230,8 @@
   "memberLeft": "Member left",
   "callStarted": "Started call",
   "callEnded": "Call ended",
-  "doYouWantToLeaveThisGroup": "Do you want to leave this group?"
+  "doYouWantToLeaveThisGroup": "Do you want to leave this group?",
+  "doYouWantDeleteDevice": "Do you want delete this device?",
+  "deleteDeviceSuccess": "Delete device success",
+  "deleteDeviceFail": "Delete device fail"
 }

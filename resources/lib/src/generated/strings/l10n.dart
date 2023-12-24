@@ -1929,6 +1929,36 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Bạn có muốn xóa thiết bị này hay không?`
+  String get doYouWantDeleteDevice {
+    return Intl.message(
+      'Bạn có muốn xóa thiết bị này hay không?',
+      name: 'doYouWantDeleteDevice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Xóa thiết bị mới thành công`
+  String get deleteDeviceSuccess {
+    return Intl.message(
+      'Xóa thiết bị mới thành công',
+      name: 'deleteDeviceSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Xóa thiết bị thất bại`
+  String get deleteDeviceFail {
+    return Intl.message(
+      'Xóa thiết bị thất bại',
+      name: 'deleteDeviceFail',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {
