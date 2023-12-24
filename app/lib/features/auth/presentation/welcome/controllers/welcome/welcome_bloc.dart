@@ -9,6 +9,7 @@ import 'package:app/features/auth/domain/usecases/email/get_verify_email_token_u
 import 'package:app/features/auth/domain/usecases/onboarding/get_id_remote_device.dart';
 import 'package:app/features/auth/domain/usecases/onboarding/get_is_first_installed_uc.dart';
 import 'package:app/features/auth/domain/usecases/onboarding/register_device_uc.dart';
+import 'package:app/features/user/domain/usecases/profile/get_user_profile_local_uc.dart';
 import 'package:app/features/user/domain/usecases/profile/get_user_profile_uc.dart';
 import 'package:app/service/onesignal/onesignal_service.dart';
 import 'package:app/service/socket/socket_service.dart';
@@ -32,6 +33,7 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
   late final LoginWithGoogleUseCase _loginWithGoogleUseCase;
   late final GetVerifyEmailTokenUseCase _getVerifyEmailTokenUseCase;
   late final GetUserProfileUseCase _getUserProfileUseCase;
+  late final GetUserProfileLocalUseCase _getUserProfileLocalUseCase;
   late final RealtimeService _realtimeService;
   late final OneSignalService _oneSignalService;
 
@@ -45,6 +47,7 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
     this._getUserProfileUseCase,
     this._realtimeService,
     this._oneSignalService,
+    this._getUserProfileLocalUseCase,
   ) : super(const WelcomeState.initial()) {
     on<WelcomeEvent>((event, emit) async {
       await event.map(
@@ -147,8 +150,9 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
       final tokenModel = await _checkAuthenticatedUseCase.executeObj();
       if (tokenModel.netData?.accessToken != '') {
         _realtimeService.connectSocket();
-        await _setUpOneSignal();
         await _getUserProfileUseCase.executeObj();
+
+        await _setUpOneSignal();
         emit(state.copyWith(isAuthenticated: true, isLoading: false));
       }
       emit(state.copyWith(isAuthenticated: false, isLoading: false));
@@ -164,8 +168,12 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
 
   Future<void> _setUpOneSignal() async {
     try {
-      await _oneSignalService.login('123');
-      _oneSignalService.onTapNotificationDisplay();
+      final userInfo = await _getUserProfileLocalUseCase.executeObj();
+      if (userInfo.netData?.id != null) {
+        final userId = userInfo.netData!.id;
+        await _oneSignalService.login(userId);
+        _oneSignalService.onTapNotificationDisplay();
+      }
     } catch (e) {
       Logs.e(e);
     }

@@ -12,10 +12,21 @@ class OneSignalService {
     OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
     OneSignal.initialize(BuildConfig.onesignalKey);
     OneSignal.Notifications.requestPermission(true);
-    // OneSignal.User.pushSubscription.addObserver((stateChanges) {
-    //   Logs.e(
-    //       "SUBSCRIPTION STATE CHANGED: ${stateChanges.jsonRepresentation()}");
-    // });
+    OneSignal.User.pushSubscription.addObserver((stateChanges) {
+      Logs.e(
+          "SUBSCRIPTION STATE CHANGED: ${stateChanges.jsonRepresentation()}");
+    });
+    OneSignal.Notifications.addForegroundWillDisplayListener((event) {
+      Logs.d(event);
+
+      /// preventDefault to not display the notification
+      event.preventDefault();
+
+      /// Do async work
+
+      /// notification.display() to display after preventing default
+      event.notification.display();
+    });
   }
 
   Future<void> turnOffReceivePushNotification() async {
