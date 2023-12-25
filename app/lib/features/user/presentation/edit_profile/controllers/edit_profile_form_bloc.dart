@@ -88,14 +88,14 @@ class EditProfileFormBloc extends FormBloc<String, String> {
         birthday: DateTimeExt.convertDateTime2Timestamp(dateOfBirth.value),
         bio: bio.value,
       ));
-      emitSuccess();
-      AppLoadingOverlayWidget.dismiss();
-
       AppSnackBarWidget()
           .setLabelText(R.strings.updateProfileSuccess)
           .setAppSnackBarType(AppSnackBarType.informMessage)
           .setAppSnackBarStatus(AppSnackBarStatus.success)
           .showSnackBar();
+
+      AppLoadingOverlayWidget.dismiss();
+      emitSuccess();
     } on AppException catch (e) {
       AppLoadingOverlayWidget.dismiss();
       AppExceptionExt(

@@ -88,8 +88,8 @@ class SettingDashBoardPage extends StatelessWidget {
                             .setText(R.strings.editProfile)
                             .build(ctx))
                         .setIsShowBottomDivider(true)
-                        .setOnTap(() {
-                      getIt<AppRouter>().push(const EditProfileRoute());
+                        .setOnTap(() async {
+                      await getIt<AppRouter>().push(const EditProfileRoute());
                     }).setActions([const Icon(Icons.chevron_right)]).build(ctx),
                     AppCardBorderWidget()
                         .setLeading(const Icon(Icons.security_outlined))
@@ -97,8 +97,9 @@ class SettingDashBoardPage extends StatelessWidget {
                             .setText(R.strings.changePassword)
                             .build(ctx))
                         .setActions([const Icon(Icons.chevron_right)]).setOnTap(
-                            () {
-                      getIt<AppRouter>().push(const ChangePasswordRoute());
+                            () async {
+                      await getIt<AppRouter>()
+                          .push(const ChangePasswordRoute());
                     }).build(ctx)
                   ],
                 ),
@@ -130,8 +131,8 @@ class SettingDashBoardPage extends StatelessWidget {
                         .setHasTopBorderRadius(true)
                         .setIsShowBottomDivider(true)
                         .setActions([const Icon(Icons.chevron_right)]).setOnTap(
-                      () {
-                        getIt<AppRouter>()
+                      () async {
+                        await getIt<AppRouter>()
                             .push(const NotificationSettingRoute());
                       },
                     ).build(ctx),
@@ -142,8 +143,9 @@ class SettingDashBoardPage extends StatelessWidget {
                             .build(ctx))
                         .setIsShowBottomDivider(true)
                         .setActions([const Icon(Icons.chevron_right)]).setOnTap(
-                      () {
-                        getIt<AppRouter>().push(const ThemeAndLanguageRoute());
+                      () async {
+                        await getIt<AppRouter>()
+                            .push(const ThemeAndLanguageRoute());
                       },
                     ).build(ctx),
                     AppCardBorderWidget()
@@ -153,8 +155,8 @@ class SettingDashBoardPage extends StatelessWidget {
                             .build(ctx))
                         .setIsShowBottomDivider(true)
                         .setActions([const Icon(Icons.chevron_right)]).setOnTap(
-                      () {
-                        getIt<AppRouter>().push(const ListDevicesRoute());
+                      () async {
+                        await getIt<AppRouter>().push(const ListDevicesRoute());
                       },
                     ).build(ctx),
                     AppCardBorderWidget()
@@ -174,24 +176,26 @@ class SettingDashBoardPage extends StatelessWidget {
                               color: Theme.of(ctx).colorScheme.error,
                             ))
                             .build(ctx))
-                        .setIsShowBottomDivider(true)
                         .setActions([
-                      Icon(
-                        Icons.chevron_right,
-                        color: Theme.of(ctx).colorScheme.error,
-                      )
-                    ]).setOnTap(
-                      () {
-                        getIt<AppRouter>().push(const BlockRoute());
-                      },
-                    ).build(ctx),
-                    AppCardBorderWidget()
-                        .setLeading(
-                            const Icon(Icons.photo_camera_front_outlined))
-                        .setTitle(AppTextBodyLargeWidget()
-                            .setText(R.strings.deleteAccount)
-                            .build(ctx))
-                        .build(ctx)
+                          Icon(
+                            Icons.chevron_right,
+                            color: Theme.of(ctx).colorScheme.error,
+                          )
+                        ])
+                        .setOnTap(
+                          () async {
+                            await getIt<AppRouter>().push(const BlockRoute());
+                          },
+                        )
+                        .setHasBottomBorderRadius(true)
+                        .build(ctx),
+                    // AppCardBorderWidget()
+                    //     .setLeading(
+                    //         const Icon(Icons.photo_camera_front_outlined))
+                    //     .setTitle(AppTextBodyLargeWidget()
+                    //         .setText(R.strings.deleteAccount)
+                    //         .build(ctx))
+                    //     .build(ctx)
                   ],
                 ),
               ),
