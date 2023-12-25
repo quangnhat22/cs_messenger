@@ -14,14 +14,18 @@ import 'package:resources/resources.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Fsplash.preserve(widgetsBinding: WidgetsBinding.instance);
+
   configureAllPackagesDependencies();
   Bloc.observer = AppObserver();
+
   await Hive.initFlutter();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   _registerAdapterHive();
-  Fsplash.remove();
+
   const AudioContext audioContext = AudioContext(
     iOS: AudioContextIOS(
       category: AVAudioSessionCategory.playback,
@@ -39,6 +43,9 @@ void main() async {
     ),
   );
   AudioPlayer.global.setAudioContext(audioContext);
+
+  Fsplash.remove();
+
   runApp(const App());
 }
 

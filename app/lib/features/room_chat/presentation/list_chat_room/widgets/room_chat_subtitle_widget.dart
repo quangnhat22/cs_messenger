@@ -21,13 +21,13 @@ class RoomChatSubTitleWidget extends StatelessWidget {
           text: author?.name != null && author!.name!.isNotEmpty
               ? '${author?.name}: '
               : '',
-          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
           children: [
             TextSpan(
               text: '$content',
-              style: Theme.of(context).textTheme.labelSmall,
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           ]),
     );

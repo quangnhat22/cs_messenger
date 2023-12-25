@@ -61,7 +61,10 @@ class GroupDetailChatRoomPage extends StatelessWidget {
                       .build(context),
                 ),
                 SizedBox(height: AppSizeExt.of.majorScale(5)),
-                AppTextHeadlineLargeWidget().setText(state.name).build(context),
+                AppTextHeadlineLargeWidget()
+                    .setText(state.name)
+                    .setTextAlign(TextAlign.center)
+                    .build(context),
                 SizedBox(
                   height: AppSizeExt.of.majorScale(5),
                 ),

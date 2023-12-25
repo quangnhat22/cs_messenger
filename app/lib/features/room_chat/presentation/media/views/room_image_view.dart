@@ -20,7 +20,6 @@ class _RoomImageViewState extends State<RoomImageView> {
   PageController? _galleryPageController;
 
   bool _isImageViewVisible = false;
-  List<PreviewImage> _gallery = [];
 
   void _onCloseGalleryPressed() {
     setState(() {
@@ -30,8 +29,8 @@ class _RoomImageViewState extends State<RoomImageView> {
     _galleryPageController = null;
   }
 
-  void _onImagePressed(ImageMessageModel message) {
-    final initialPage = _gallery.indexWhere(
+  void _onImagePressed(List<PreviewImage> gallery, ImageMessageModel message) {
+    final initialPage = gallery.indexWhere(
       (element) => element.id == message.id && element.uri == message.uri,
     );
     _galleryPageController = PageController(initialPage: initialPage);
@@ -57,9 +56,7 @@ class _RoomImageViewState extends State<RoomImageView> {
         }
         if (_isImageViewVisible) {
           return ImageGallery(
-            // imageHeaders: widget.imageHeaders,
-            // imageProviderBuilder: widget.imageProviderBuilder,
-            images: _gallery,
+            images: state.listPreviewImages,
             pageController: _galleryPageController!,
             onClosePressed: _onCloseGalleryPressed,
             options: const ImageGalleryOptions(
@@ -79,8 +76,8 @@ class _RoomImageViewState extends State<RoomImageView> {
           ),
           itemBuilder: (BuildContext s, int index) {
             return GestureDetector(
-              onTap: () =>
-                  _onImagePressed(state.listPhotos[index] as ImageMessageModel),
+              onTap: () => _onImagePressed(state.listPreviewImages,
+                  state.listPhotos[index] as ImageMessageModel),
               child: ImageMessage(
                 currentUserId: '',
                 message: state.listPhotos[index] as ImageMessageModel,

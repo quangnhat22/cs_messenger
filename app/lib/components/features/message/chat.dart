@@ -505,4 +505,6 @@ class _ChatState extends State<Chat> {
       );
     }
   }
+
+  void scrollToMessage() {}
 }

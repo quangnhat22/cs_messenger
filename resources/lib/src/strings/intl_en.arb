@@ -172,10 +172,6 @@
   "emailOrPasswordWrong": "Email or Password wrong! Try again.",
   "join": "Join",
   "sendMediaOrEmojiMessage": "Send Media Or Emoji Message",
-  "camera": "Camera",
-  "gallery": "Gallery",
-  "voice": "Voice",
-  "files": "File",
   "stickers": "Sticker",
   "currentLocation": "Current location",
   "fileLimitSize": "File size cannot exceed {size} mb!. Please try again",
@@ -243,5 +239,18 @@
       }
     }
   },
-  "success": "Success"
+  "success": "Success",
+  "seeProfile": "See profile",
+  "createGroupWith": "Create a group chat with {name}",
+  "@createGroupWith": {
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "-"
+      }
+    }
+  },
+  "deleteFriend": "Delete friend",
+  "repliedMessage": "Replied message",
+  "reply": "Reply"
 }

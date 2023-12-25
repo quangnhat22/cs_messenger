@@ -13,6 +13,7 @@ import 'package:app/configs/theme/app_theme.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
+import 'package:resources/resources.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import 'emoji_message.dart';
@@ -47,6 +48,7 @@ class Message extends StatelessWidget {
     this.mapMessageBuilder,
     this.onAvatarTap,
     this.onMessageTap,
+    this.onRepliedMessageTap,
     this.onMessageDoubleTap,
     this.onMessageLongPress,
     this.onMessageVisibilityChanged,
@@ -112,6 +114,10 @@ class Message extends StatelessWidget {
 
   /// Called when user taps on any message.
   final void Function(BuildContext context, IMessageModel)? onMessageTap;
+
+  /// Called when user taps on any replied message.
+  final void Function(BuildContext context, ReplyMessageModel)?
+      onRepliedMessageTap;
 
   /// Called when user double taps on any message.
   final void Function(BuildContext context, IMessageModel)? onMessageDoubleTap;
@@ -209,8 +215,9 @@ class Message extends StatelessWidget {
                 FocusedMenuItem(
                   backgroundColor: Theme.of(context).colorScheme.background,
                   trailing: const Icon(Icons.reply),
-                  title:
-                      AppTextBodyMediumWidget().setText('Reply').build(context),
+                  title: AppTextBodyMediumWidget()
+                      .setText(R.strings.reply)
+                      .build(context),
                   onPressed: () {
                     onReplyMessage?.call(message);
                   },
@@ -421,7 +428,7 @@ class Message extends StatelessWidget {
                         : CrossAxisAlignment.start,
                     children: [
                       AppTextLabelSmallWidget()
-                          .setText('Replied message')
+                          .setText(R.strings.repliedMessage)
                           .build(context),
                       SizedBox(
                         height: AppSizeExt.of.majorScale(1),
@@ -429,6 +436,7 @@ class Message extends StatelessWidget {
                       ReplyMessage(
                         messageReply: message.repliedMessage!,
                         width: MediaQuery.sizeOf(context).width * 0.6,
+                        showClose: false,
                       ),
                     ],
                   ),

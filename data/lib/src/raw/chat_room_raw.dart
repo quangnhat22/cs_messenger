@@ -29,6 +29,7 @@ class ChatRoomRaw extends BaseRaw<ChatRoomModel> with _$ChatRoomRaw {
       message: message?.raw2Model(),
       type: ChatRoomType.convert2ChatRoomType(type),
       groupId: groupId,
+      isCalling: isCalling,
     );
   }
 }

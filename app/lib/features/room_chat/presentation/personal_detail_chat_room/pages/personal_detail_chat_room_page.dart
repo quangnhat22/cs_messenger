@@ -8,165 +8,194 @@ import 'package:app/configs/di/di.dart';
 import 'package:app/configs/routes/app_router.dart';
 import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/configs/theme/app_theme.dart';
+import 'package:app/features/room_chat/presentation/personal_detail_chat_room/controllers/personal_chat_room_info/personal_chat_room_info_cubit.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:resources/resources.dart';
 
 @RoutePage()
 class PersonalDetailChatRoomPage extends StatelessWidget {
-  const PersonalDetailChatRoomPage({super.key});
+  const PersonalDetailChatRoomPage({
+    super.key,
+    required this.chatRoomId,
+  });
+
+  final String chatRoomId;
 
   @override
   Widget build(BuildContext context) {
-    return AppMainPageWidget()
-        .setAppBar(AppBarWidget().setTextTitle('').build(context))
-        .setBackgroundColor(Theme.of(context).colorScheme.surface)
-        .setBody(_body(context))
-        .build(context);
+    return BlocProvider(
+      create: (_) => getIt<PersonalChatRoomInfoCubit>()..initPage(chatRoomId),
+      child: AppMainPageWidget()
+          .setAppBar(AppBarWidget().setTextTitle('').build(context))
+          .setBackgroundColor(Theme.of(context).colorScheme.surface)
+          .setBody(_body(context))
+          .build(context),
+    );
   }
 
   Widget _body(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.all(AppSizeExt.of.majorPaddingScale(4)),
-        child: Column(
-          children: <Widget>[
-            AppAvatarCircleWidget()
-                .setSize(AppAvatarSize.extraLarge)
-                //TODO: set url
-                .setUrl(
-                    'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsX29mZmljZV8zNF9mdWxsX2JvZHlfM2RfYXZhdGFyXzNkX3JlbmRlcl9vZl9hX2J1c2luZXNzd19jOWYzODYxYy1lZTYzLTQxOGYtOThmNC02MWJkNGM3OGE1YTZfMS5wbmc.png')
-                .build(context),
-            SizedBox(height: AppSizeExt.of.majorScale(6)),
-            AppTextHeadlineSmallWidget()
-                .setText(
-                    'Nguyen Dinh Nhat Quang sjdhjshdjhdjhshbdhsbdhbshdbhsbdhhsbdhsbhdbshdbhsbdh')
-                .setTextAlign(TextAlign.center)
-                .setTextOverFlow(TextOverflow.ellipsis)
-                .setMaxLines(2)
-                .build(context),
-            SizedBox(
-              height: AppSizeExt.of.majorScale(6),
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return BlocBuilder<PersonalChatRoomInfoCubit, PersonalChatRoomInfoState>(
+      builder: (context, state) {
+        return SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(AppSizeExt.of.majorPaddingScale(4)),
+            child: Column(
               children: <Widget>[
-                IconButtonWithTextWidget(
-                  icon: Icon(
-                    Icons.person_outline,
-                    color: Theme.of(context).colorScheme.background,
-                  ),
-                  text: 'Thông tin cá nhân',
-                ),
-              ],
-            ),
-            SizedBox(
-              height: AppSizeExt.of.majorScale(2),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: AppSizeExt.of.majorPaddingScale(3),
-                    vertical: AppSizeExt.of.majorPaddingScale(3),
-                  ),
-                  child: AppTextTitleMediumWidget()
-                      .setText('More action')
-                      .setTextStyle(TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
-                        fontWeight: FontWeight.bold,
-                      ))
-                      .build(context),
-                ),
-                Card(
-                  elevation: 0,
-                  color: Theme.of(context)
-                      .colorScheme
-                      .primaryContainer
-                      .withOpacity(0.36),
-                  child: Column(
-                    children: <Widget>[
-                      AppCardBorderWidget()
-                          .setLeading(const Icon(Icons.group_outlined))
-                          .setTitle(AppTextBodyLargeWidget()
-                              .setText(
-                                  'Tạo nhóm chat với Nguyễn Đình Nhật Quang')
-                              .build(context))
-                          .setHasTopBorderRadius(true)
-                          .setIsShowBottomDivider(true)
-                          .setActions(
-                              [const Icon(Icons.chevron_right)]).setOnTap(
-                        () {
-                          getIt<AppRouter>()
-                              .push(const NotificationSettingRoute());
-                        },
-                      ).build(context),
-                      AppCardBorderWidget()
-                          .setLeading(const Icon(Icons.image_outlined))
-                          .setTitle(AppTextBodyLargeWidget()
-                              .setText('Xem file phương tiện, file và liên kết')
-                              .build(context))
-                          .setIsShowBottomDivider(true)
-                          .setActions(
-                              [const Icon(Icons.chevron_right)]).setOnTap(
-                        () {
-                          getIt<AppRouter>()
-                              .push(const NotificationSettingRoute());
-                        },
-                      ).build(context),
-                      AppCardBorderWidget()
-                          .setLeading(const Icon(Icons.push_pin_outlined))
-                          .setTitle(AppTextBodyLargeWidget()
-                              .setText('Tin nhắn đã ghim')
-                              .build(context))
-                          .setIsShowBottomDivider(true)
-                          .setActions([
-                        Icon(
-                          Icons.chevron_right,
-                          color: Theme.of(context).colorScheme.error,
-                        )
-                      ]).setOnTap(
-                        () {
-                          getIt<AppRouter>().push(const BlockRoute());
-                        },
-                      ).build(context),
-                      AppCardBorderWidget()
-                          .setLeading(Icon(
-                            Icons.logout_outlined,
-                            color: Theme.of(context).colorScheme.error,
+                AppAvatarCircleWidget()
+                    .setSize(AppAvatarSize.extraExtraLarge)
+                    .setUrl(state.avatar)
+                    .build(context),
+                SizedBox(height: AppSizeExt.of.majorScale(6)),
+                AppTextHeadlineSmallWidget()
+                    .setText(state.name)
+                    .setTextAlign(TextAlign.center)
+                    .setTextOverFlow(TextOverflow.ellipsis)
+                    .setMaxLines(2)
+                    .build(context),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppSizeExt.of.majorPaddingScale(3),
+                        vertical: AppSizeExt.of.majorPaddingScale(3),
+                      ),
+                      child: AppTextTitleMediumWidget()
+                          .setText(R.strings.information)
+                          .setTextStyle(TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.bold,
                           ))
-                          .setTitle(AppTextBodyLargeWidget()
-                              .setText('Xoá kết bạn')
-                              .setTextStyle(TextStyle(
-                                color: Theme.of(context).colorScheme.error,
-                              ))
-                              .build(context))
-                          .setOnTap(() {})
-                          .setIsShowBottomDivider(true)
                           .build(context),
-                      AppCardBorderWidget()
-                          .setLeading(Icon(
-                            Icons.logout_outlined,
-                            color: Theme.of(context).colorScheme.error,
-                          ))
-                          .setTitle(AppTextBodyLargeWidget()
-                              .setText('Chặn')
-                              .setTextStyle(TextStyle(
+                    ),
+                    Card(
+                      elevation: 0,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .primaryContainer
+                          .withOpacity(0.36),
+                      child: Column(
+                        children: <Widget>[
+                          AppCardBorderWidget()
+                              .setLeading(const Icon(Icons.person_outline))
+                              .setTitle(AppTextBodyLargeWidget()
+                                  .setText(R.strings.seeProfile)
+                                  .build(context))
+                              .setHasTopBorderRadius(true)
+                              .setIsShowBottomDivider(true)
+                              .setActions(
+                                  [const Icon(Icons.chevron_right)]).setOnTap(
+                            () async {
+                              if (state.friendId != null) {
+                                await getIt<AppRouter>().push(
+                                    FriendInfoRoute(userId: state.friendId!));
+                              }
+                            },
+                          ).build(context),
+                          AppCardBorderWidget()
+                              .setLeading(const Icon(Icons.group_outlined))
+                              .setTitle(AppTextBodyLargeWidget()
+                                  .setText(R.strings
+                                      .createGroupWith(state.name ?? '-'))
+                                  .build(context))
+                              .setHasTopBorderRadius(true)
+                              .setIsShowBottomDivider(true)
+                              .setActions(
+                                  [const Icon(Icons.chevron_right)]).setOnTap(
+                            () {
+                              getIt<AppRouter>()
+                                  .push(const NotificationSettingRoute());
+                            },
+                          ).build(context),
+                          AppCardBorderWidget()
+                              .setLeading(Icon(
+                                Icons.logout_outlined,
                                 color: Theme.of(context).colorScheme.error,
                               ))
-                              .build(context))
-                          .setHasBottomBorderRadius(true)
-                          .setOnTap(() {})
-                          .build(context)
-                    ],
-                  ),
+                              .setTitle(AppTextBodyLargeWidget()
+                                  .setText(R.strings.deleteFriend)
+                                  .setTextStyle(TextStyle(
+                                    color: Theme.of(context).colorScheme.error,
+                                  ))
+                                  .build(context))
+                              .setOnTap(() {})
+                              .setIsShowBottomDivider(true)
+                              .build(context),
+                          AppCardBorderWidget()
+                              .setLeading(Icon(
+                                Icons.logout_outlined,
+                                color: Theme.of(context).colorScheme.error,
+                              ))
+                              .setTitle(AppTextBodyLargeWidget()
+                                  .setText(R.strings.block)
+                                  .setTextStyle(TextStyle(
+                                    color: Theme.of(context).colorScheme.error,
+                                  ))
+                                  .build(context))
+                              .setHasBottomBorderRadius(true)
+                              .setOnTap(() {})
+                              .build(context)
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
+                SizedBox(
+                  height: AppSizeExt.of.majorScale(1),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppSizeExt.of.majorPaddingScale(3),
+                        vertical: AppSizeExt.of.majorPaddingScale(3),
+                      ),
+                      child: AppTextTitleMediumWidget()
+                          .setText(R.strings.moreAction)
+                          .setTextStyle(TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.bold,
+                          ))
+                          .build(context),
+                    ),
+                    Card(
+                      elevation: 0,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .primaryContainer
+                          .withOpacity(0.36),
+                      child: Column(
+                        children: <Widget>[
+                          AppCardBorderWidget()
+                              .setLeading(const Icon(Icons.image_outlined))
+                              .setTitle(AppTextBodyLargeWidget()
+                                  .setText(R.strings.seePictureVideosFiles)
+                                  .build(context))
+                              .setHasTopBorderRadius(true)
+                              .setHasBottomBorderRadius(true)
+                              .setActions(
+                                  [const Icon(Icons.chevron_right)]).setOnTap(
+                            () async {
+                              if (state.chatRoomId != null) {
+                                await getIt<AppRouter>().push(
+                                    RoomChatMediaRoute(
+                                        roomId: state.chatRoomId!));
+                              }
+                            },
+                          ).build(context),
+                        ],
+                      ),
+                    ),
+                  ],
+                )
               ],
-            )
-          ],
-        ),
-      ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

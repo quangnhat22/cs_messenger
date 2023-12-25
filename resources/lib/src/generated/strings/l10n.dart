@@ -1979,6 +1979,56 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Xem thông tin cá nhân`
+  String get seeProfile {
+    return Intl.message(
+      'Xem thông tin cá nhân',
+      name: 'seeProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tạo nhóm Chat với {name}`
+  String createGroupWith(String name) {
+    return Intl.message(
+      'Tạo nhóm Chat với $name',
+      name: 'createGroupWith',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `Xóa kết bạn`
+  String get deleteFriend {
+    return Intl.message(
+      'Xóa kết bạn',
+      name: 'deleteFriend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phản hồi tin nhắn`
+  String get repliedMessage {
+    return Intl.message(
+      'Phản hồi tin nhắn',
+      name: 'repliedMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phản hồi`
+  String get reply {
+    return Intl.message(
+      'Phản hồi',
+      name: 'reply',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

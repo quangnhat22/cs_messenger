@@ -15,16 +15,13 @@ class ReplyMessageParam extends IMessageParam with _$ReplyMessageParam {
       _$ReplyMessageParamFromJson(json);
 
   static ReplyMessageParam convert2ReplyMessageParam(IMessageModel model) {
-    if (model is TextMessageModel) {
-      return ReplyMessageParam(
-        id: model.id,
-        roomId: model.roomId,
-        clientId: model.clientId,
-        content: model.content,
-        type: model.type.value,
-        authorName: model.author.name,
-      );
-    }
-    return const ReplyMessageParam(id: '-1');
+    return ReplyMessageParam(
+      id: model.id,
+      roomId: model.roomId,
+      clientId: model.clientId,
+      content: model.content,
+      type: model.type.value,
+      authorName: model.author.name,
+    );
   }
 }

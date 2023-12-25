@@ -23,18 +23,20 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m0(app) =>
       "Bỏ qua khoảng cách với ${app}. Chia sẻ những kỉ niệm, gửi tin nhắn và video call, bất kể bạn đang ở đâu.";
 
-  static String m1(size) =>
+  static String m1(name) => "Tạo nhóm Chat với ${name}";
+
+  static String m2(size) =>
       "Kích thước file không được quá ${size} mb! Vui lòng thử lại";
 
-  static String m2(appName) => "${appName} đang chia sẻ màn hình.";
+  static String m3(appName) => "${appName} đang chia sẻ màn hình.";
 
-  static String m3(email, expireTime) =>
+  static String m4(email, expireTime) =>
       "Vui lòng mở \"${email}\" để xác minh tài khoản. Vui lòng xác nhận tài khoản trước \$${expireTime}, nếu không tài khoản của bạn có thể bị mất!";
 
-  static String m4(name) =>
+  static String m5(name) =>
       "Gửi lời mời vào nhóm thất bại. ${name} đã được mời trước đó.";
 
-  static String m5(app) => "Chào mừng đến với ${app}";
+  static String m6(app) => "Chào mừng đến với ${app}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -89,6 +91,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tạo nhóm thất bại"),
         "createGroupSuccess":
             MessageLookupByLibrary.simpleMessage("Tạo nhóm thành công"),
+        "createGroupWith": m1,
         "createNewGroup": MessageLookupByLibrary.simpleMessage("Tạo nhóm mới"),
         "currentDevices":
             MessageLookupByLibrary.simpleMessage("Thiết bị hiện tại"),
@@ -106,6 +109,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Xóa thiết bị thất bại"),
         "deleteDeviceSuccess":
             MessageLookupByLibrary.simpleMessage("Xóa thiết bị mới thành công"),
+        "deleteFriend": MessageLookupByLibrary.simpleMessage("Xóa kết bạn"),
         "devices": MessageLookupByLibrary.simpleMessage("Danh sách thiết bị"),
         "discoverSeamlessMessaging": MessageLookupByLibrary.simpleMessage(
             "Khám phá tính năng nhắn tin mượt mà và cuộc gọi video chất lượng cao. Giữ kết nối với bạn bè và người thân một cách dễ dàng chưa từng có."),
@@ -147,7 +151,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Trải nghiệm sức mạnh của việc nhắn tin tức thời và cuộc gọi video rõ nét. Kết nối với mọi người trên toàn thế giới dễ dàng."),
         "female": MessageLookupByLibrary.simpleMessage("Nữ"),
         "file": MessageLookupByLibrary.simpleMessage("Tệp tin"),
-        "fileLimitSize": m1,
+        "fileLimitSize": m2,
         "files": MessageLookupByLibrary.simpleMessage("Tệp"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("Quên mật khẩu"),
         "friendCommon": MessageLookupByLibrary.simpleMessage("Bạn chung"),
@@ -172,7 +176,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "information": MessageLookupByLibrary.simpleMessage("Thông tin"),
         "invalidInput":
             MessageLookupByLibrary.simpleMessage("Input không hợp lệ"),
-        "isSharingTheScreen": m2,
+        "isSharingTheScreen": m3,
         "join": MessageLookupByLibrary.simpleMessage("Tham gia"),
         "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
         "leaveGroup": MessageLookupByLibrary.simpleMessage("Rời nhóm"),
@@ -213,7 +217,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Số điện thoại không hợp lệ"),
         "pickFromGallery":
             MessageLookupByLibrary.simpleMessage("Lấy từ thư viện"),
-        "pleaseCheckYourEmail": m3,
+        "pleaseCheckYourEmail": m4,
         "pleaseCheckYourEmailToRecovery": MessageLookupByLibrary.simpleMessage(
             "Bạn hãy kiểm tra email để khôi phục mật khẩu nhé"),
         "pleaseLoginAgain":
@@ -226,6 +230,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "rejectRequestSuccess":
             MessageLookupByLibrary.simpleMessage("Từ chối yêu cầu thành công!"),
         "removeFriend": MessageLookupByLibrary.simpleMessage("Xóa kết bạn"),
+        "repliedMessage":
+            MessageLookupByLibrary.simpleMessage("Phản hồi tin nhắn"),
+        "reply": MessageLookupByLibrary.simpleMessage("Phản hồi"),
         "requestFriend":
             MessageLookupByLibrary.simpleMessage("Lời mời kết bạn"),
         "requestGroup": MessageLookupByLibrary.simpleMessage("Lời mời nhóm"),
@@ -241,12 +248,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchFriend": MessageLookupByLibrary.simpleMessage("Tìm kiếm bạn bè"),
         "seePictureVideosFiles": MessageLookupByLibrary.simpleMessage(
             "Xem hình ảnh, video, tệp tin"),
+        "seeProfile":
+            MessageLookupByLibrary.simpleMessage("Xem thông tin cá nhân"),
         "selectGender": MessageLookupByLibrary.simpleMessage("Chọn giới tính"),
         "selected": MessageLookupByLibrary.simpleMessage("Đã chọn"),
         "sendEmail": MessageLookupByLibrary.simpleMessage("Gửi email"),
         "sendEmailSuccess":
             MessageLookupByLibrary.simpleMessage("Gửi email thành công"),
-        "sendGroupRequestFail": m4,
+        "sendGroupRequestFail": m5,
         "sendMediaOrEmojiMessage": MessageLookupByLibrary.simpleMessage(
             "Gửi tin nhắn emoji hoặc loại tin nhắn khác"),
         "sendMyLocation": MessageLookupByLibrary.simpleMessage("Gửi vị trí"),
@@ -318,7 +327,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcome": MessageLookupByLibrary.simpleMessage("Chào mừng bạn"),
         "welcomeBack":
             MessageLookupByLibrary.simpleMessage("Chào mừng bạn trở lại!"),
-        "welcomeToApp": m5,
+        "welcomeToApp": m6,
         "youHaveAlreadySentThisRequest": MessageLookupByLibrary.simpleMessage(
             "Bạn đã gửi yêu cầu trước đây? Vì vậy bạn không thể gửi thêm yêu cầu này nữa.")
       };

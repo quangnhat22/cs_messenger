@@ -243,5 +243,18 @@
       }
     }
   },
-  "success": "Thành công"
+  "success": "Thành công",
+  "seeProfile": "Xem thông tin cá nhân",
+  "createGroupWith": "Tạo nhóm Chat với {name}",
+  "@createGroupWith": {
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "-"
+      }
+    }
+  },
+  "deleteFriend": "Xóa kết bạn",
+  "repliedMessage": "Phản hồi tin nhắn",
+  "reply": "Phản hồi"
 }

@@ -23,18 +23,20 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m0(app) =>
       "Bridge the gap with ${app}. Share moments, send messages, and have face-to-face conversations, regardless of where you are.";
 
-  static String m1(size) =>
+  static String m1(name) => "Create a group chat with ${name}";
+
+  static String m2(size) =>
       "File size cannot exceed ${size} mb!. Please try again";
 
-  static String m2(appName) => "${appName} is sharing the screen.";
+  static String m3(appName) => "${appName} is sharing the screen.";
 
-  static String m3(email, expireTime) =>
+  static String m4(email, expireTime) =>
       "Please check your email \"${email}\" to verify your account. Please confirm your email before ${expireTime}., otherwise your account will not be deleted in the future";
 
-  static String m4(name) =>
+  static String m5(name) =>
       "Sending invitations to the group failed. ${name} was invited before.";
 
-  static String m5(app) => "Welcome to ${app}";
+  static String m6(app) => "Welcome to ${app}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -64,7 +66,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "bridgeTheGap": m0,
         "callEnded": MessageLookupByLibrary.simpleMessage("Call ended"),
         "callStarted": MessageLookupByLibrary.simpleMessage("Started call"),
-        "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change Password"),
@@ -88,6 +89,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Create group fail"),
         "createGroupSuccess":
             MessageLookupByLibrary.simpleMessage("Create group success"),
+        "createGroupWith": m1,
         "createNewGroup":
             MessageLookupByLibrary.simpleMessage("Create new group"),
         "currentDevices": MessageLookupByLibrary.simpleMessage("Current"),
@@ -104,6 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Delete device fail"),
         "deleteDeviceSuccess":
             MessageLookupByLibrary.simpleMessage("Delete device success"),
+        "deleteFriend": MessageLookupByLibrary.simpleMessage("Delete friend"),
         "devices": MessageLookupByLibrary.simpleMessage("Devices"),
         "discoverSeamlessMessaging": MessageLookupByLibrary.simpleMessage(
             "Discover seamless messaging and high-quality video calls. Stay connected with friends and loved ones like never before."),
@@ -144,14 +147,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Experience the power of instant messaging and crystal-clear video calls. Connect with people across the globe with ease."),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
         "file": MessageLookupByLibrary.simpleMessage("File"),
-        "fileLimitSize": m1,
-        "files": MessageLookupByLibrary.simpleMessage("File"),
+        "fileLimitSize": m2,
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password"),
         "friendCommon": MessageLookupByLibrary.simpleMessage("Friend Common"),
         "friendRequest": MessageLookupByLibrary.simpleMessage("Friend Request"),
         "friends": MessageLookupByLibrary.simpleMessage("Friends"),
-        "gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
         "gender": MessageLookupByLibrary.simpleMessage("Gender"),
         "getConnectWithYourFriends": MessageLookupByLibrary.simpleMessage(
             "Get connect with your friends"),
@@ -167,7 +168,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "image": MessageLookupByLibrary.simpleMessage("Image"),
         "information": MessageLookupByLibrary.simpleMessage("Information"),
         "invalidInput": MessageLookupByLibrary.simpleMessage("Invalid Input"),
-        "isSharingTheScreen": m2,
+        "isSharingTheScreen": m3,
         "join": MessageLookupByLibrary.simpleMessage("Join"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "leaveGroup": MessageLookupByLibrary.simpleMessage("Leave group"),
@@ -206,7 +207,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Phone number is not valid"),
         "pickFromGallery":
             MessageLookupByLibrary.simpleMessage("Pick from gallery"),
-        "pleaseCheckYourEmail": m3,
+        "pleaseCheckYourEmail": m4,
         "pleaseCheckYourEmailToRecovery": MessageLookupByLibrary.simpleMessage(
             "Please check your email to recovery your password"),
         "pleaseLoginAgain":
@@ -219,6 +220,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "rejectRequestSuccess":
             MessageLookupByLibrary.simpleMessage("Reject request success!"),
         "removeFriend": MessageLookupByLibrary.simpleMessage("Remove Friend"),
+        "repliedMessage":
+            MessageLookupByLibrary.simpleMessage("Replied message"),
+        "reply": MessageLookupByLibrary.simpleMessage("Reply"),
         "requestFriend": MessageLookupByLibrary.simpleMessage("Request friend"),
         "requestGroup": MessageLookupByLibrary.simpleMessage("Request Group"),
         "requestNotFound": MessageLookupByLibrary.simpleMessage(
@@ -232,12 +236,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchFriend": MessageLookupByLibrary.simpleMessage("Search friend"),
         "seePictureVideosFiles":
             MessageLookupByLibrary.simpleMessage("See pictures, videos, files"),
+        "seeProfile": MessageLookupByLibrary.simpleMessage("See profile"),
         "selectGender": MessageLookupByLibrary.simpleMessage("Select Gender"),
         "selected": MessageLookupByLibrary.simpleMessage("Selected"),
         "sendEmail": MessageLookupByLibrary.simpleMessage("Send email"),
         "sendEmailSuccess":
             MessageLookupByLibrary.simpleMessage("Send email success"),
-        "sendGroupRequestFail": m4,
+        "sendGroupRequestFail": m5,
         "sendMediaOrEmojiMessage":
             MessageLookupByLibrary.simpleMessage("Send Media Or Emoji Message"),
         "sendMyLocation":
@@ -305,10 +310,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "verifying": MessageLookupByLibrary.simpleMessage("Verifying"),
         "video": MessageLookupByLibrary.simpleMessage("Video"),
         "vn": MessageLookupByLibrary.simpleMessage("Vietnam"),
-        "voice": MessageLookupByLibrary.simpleMessage("Voice"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
-        "welcomeToApp": m5,
+        "welcomeToApp": m6,
         "youHaveAlreadySentThisRequest": MessageLookupByLibrary.simpleMessage(
             "You have already sent this request")
       };

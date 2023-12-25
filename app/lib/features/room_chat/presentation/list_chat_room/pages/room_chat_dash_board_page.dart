@@ -2,6 +2,7 @@ import 'package:app/components/features/appBar/sliver_search_app_bar_widget.dart
 import 'package:app/components/features/message/utils/message_utils.dart';
 import 'package:app/components/features/slide/app_dot_indicator_widget.dart';
 import 'package:app/components/main/avatar/app_avatar_base_builder.dart';
+import 'package:app/components/main/button/app_button_base_builder.dart';
 import 'package:app/components/main/card/app_card_base_builder.dart';
 import 'package:app/components/main/listView/app_list_view_widget.dart';
 import 'package:app/components/main/listView/controllers/app_list_view_cubit.dart';
@@ -17,6 +18,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:resources/resources.dart';
 
 @RoutePage()
 class RoomChatDashBoardPage extends StatelessWidget {
@@ -64,16 +66,25 @@ class RoomChatDashBoardPage extends StatelessWidget {
           .setText(MessageUtils.getVerboseDateTimeRepresentation(
               model.message!.createdAt!))
           .build(context),
-      if (model.isHasNewMessage)
+      if (model.isCalling != true && model.isHasNewMessage)
         SizedBox(
           height: AppSizeExt.of.majorScale(2),
         ),
-      if (model.isHasNewMessage)
+      if (model.isCalling != true && model.isHasNewMessage)
         AppDotIndicatorWidget(
           height: AppSizeExt.of.majorScale(3),
           width: AppSizeExt.of.majorScale(3),
           isActive: true,
-        )
+        ),
+      if (model.isCalling == true)
+        AppButtonOutlineWidget()
+            .setAppButtonSize(AppButtonSize.small)
+            .setButtonText(R.strings.join)
+            .setTextStyle(TextStyle(color: AppColorPalette.of.greenColor[5]))
+            .setBorderColor(AppColorPalette.of.greenColor[3])
+            .setOnPressed(() async {
+          await getIt<AppRouter>().push(VideoCallRoute(chatRoomId: model.id));
+        }).build(context),
     ]).setOnTap(() async {
       context.read<ListChatRoomCubit>().removeNewMessageStatus(model.id);
       await getIt<AppRouter>().push(ChatRoute(roomId: model.id));

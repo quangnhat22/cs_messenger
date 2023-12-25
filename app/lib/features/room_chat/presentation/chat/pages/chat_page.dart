@@ -8,6 +8,7 @@ import 'package:app/features/room_chat/presentation/chat/controllers/list_messag
 import 'package:app/features/room_chat/presentation/chat/widgets/chat_info_app_bar_widget.dart';
 import 'package:app/features/room_chat/presentation/chat/views/chat_view.dart';
 import 'package:auto_route/annotations.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -53,14 +54,30 @@ class ChatPage extends StatelessWidget {
                 },
                 icon: const Icon(Icons.video_camera_front_outlined),
               ),
-            IconButton(
-              onPressed: () {
-                getIt<AppRouter>()
-                    .push(GroupDetailChatRoomRoute(chatRoomId: roomId));
+            BlocBuilder<ChatRoomInfoCubit, ChatRoomInfoState>(
+              buildWhen: (prev, current) =>
+                  prev.chatRoomInfo != current.chatRoomInfo,
+              builder: (context, chatRoomInfoState) {
+                return IconButton(
+                  onPressed: () async {
+                    if (chatRoomInfoState.chatRoomInfo?.id != null) {
+                      if (chatRoomInfoState.chatRoomInfo?.type ==
+                          ChatRoomType.group) {
+                        await getIt<AppRouter>()
+                            .push(GroupDetailChatRoomRoute(chatRoomId: roomId));
+                      }
+                      if (chatRoomInfoState.chatRoomInfo?.type ==
+                          ChatRoomType.p2p) {
+                        await getIt<AppRouter>().push(
+                            PersonalDetailChatRoomRoute(chatRoomId: roomId));
+                      }
+                    }
+                  },
+                  icon: const Icon(
+                    Icons.more_vert,
+                  ),
+                );
               },
-              icon: const Icon(
-                Icons.more_vert,
-              ),
             ),
           ],
         );

@@ -33,10 +33,18 @@ class ListMediaCubit extends Cubit<ListMediaState> {
           return element.type == MessageType.image;
         }).toList();
 
+        final listPreviewImage = listImage
+            ?.map((image) => PreviewImage(
+                  id: image.id,
+                  uri: image.content,
+                ))
+            .toList();
+
         emit(state.copyWith(
           listFiles: listFile ?? [],
           listVideos: listVideo ?? [],
           listPhotos: listImage ?? [],
+          listPreviewImages: listPreviewImage ?? [],
         ));
       }
 
