@@ -11,8 +11,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:utilities/utilities.dart';
 
-part 'edit_group_state.dart';
 part 'edit_group_cubit.freezed.dart';
+part 'edit_group_state.dart';
 
 @Injectable()
 class EditGroupCubit extends Cubit<EditGroupState> {
@@ -29,9 +29,9 @@ class EditGroupCubit extends Cubit<EditGroupState> {
   Future<void> initPage(String chatRoomId) async {
     try {
       AppLoadingOverlayWidget.show();
-      emit(state.copyWith(chatRoomId: chatRoomId));
-      final (groupId, name, image) = await _getChatRoomInfo(chatRoomId);
-      emit(state.copyWith(name: name, avatarUrl: image, groupId: groupId));
+
+      await _getChatRoomInfo(chatRoomId);
+
       AppLoadingOverlayWidget.dismiss();
     } on AppException catch (e) {
       AppExceptionExt(
@@ -45,9 +45,7 @@ class EditGroupCubit extends Cubit<EditGroupState> {
   Future<void> refreshPage() async {
     try {
       if (state.chatRoomId != null) {
-        final (groupId, name, image) =
-            await _getChatRoomInfo(state.chatRoomId!);
-        emit(state.copyWith(name: name, avatarUrl: image, groupId: groupId));
+        await _getChatRoomInfo(state.chatRoomId!);
       }
     } on AppException catch (e) {
       AppExceptionExt(
@@ -58,16 +56,19 @@ class EditGroupCubit extends Cubit<EditGroupState> {
     }
   }
 
-  Future<(String?, String?, String?)> _getChatRoomInfo(
-      String chatRoomId) async {
+  Future<void> _getChatRoomInfo(String chatRoomId) async {
     try {
       final chatRoomResponse = await _getChatRoomDetailInfoUseCase.executeObj(
           request: GetChatRoomInfoParam(id: chatRoomId));
       final chatRoomInfo = chatRoomResponse.netData;
       if (chatRoomInfo != null) {
-        return (chatRoomInfo.id, chatRoomInfo.name, chatRoomInfo.avatar);
+        emit(state.copyWith(
+          chatRoomId: chatRoomInfo.id,
+          name: chatRoomInfo.name,
+          avatarUrl: chatRoomInfo.avatar,
+          groupId: chatRoomInfo.groupId,
+        ));
       }
-      return (null, null, null);
     } on AppException catch (_) {
       rethrow;
     }
@@ -80,6 +81,7 @@ class EditGroupCubit extends Cubit<EditGroupState> {
       }
       await _editGroupUseCase.executeObj(
           request: EditGroupParam(groupId: state.groupId!, name: name));
+      await refreshPage();
     } on AppException catch (e) {
       AppExceptionExt(
           appException: e,
@@ -102,6 +104,7 @@ class EditGroupCubit extends Cubit<EditGroupState> {
               await _editGroupUseCase.executeObj(
                   request:
                       EditGroupParam(groupId: state.groupId!, avatar: path));
+              await refreshPage();
             }
           },
         ),

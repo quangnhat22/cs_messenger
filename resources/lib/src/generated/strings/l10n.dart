@@ -1959,6 +1959,26 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Gửi lời mời vào nhóm thất bại. {name} đã được mời trước đó.`
+  String sendGroupRequestFail(String name) {
+    return Intl.message(
+      'Gửi lời mời vào nhóm thất bại. $name đã được mời trước đó.',
+      name: 'sendGroupRequestFail',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `Thành công`
+  String get success {
+    return Intl.message(
+      'Thành công',
+      name: 'success',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

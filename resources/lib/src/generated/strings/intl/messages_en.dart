@@ -31,7 +31,10 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m3(email, expireTime) =>
       "Please check your email \"${email}\" to verify your account. Please confirm your email before ${expireTime}., otherwise your account will not be deleted in the future";
 
-  static String m4(app) => "Welcome to ${app}";
+  static String m4(name) =>
+      "Sending invitations to the group failed. ${name} was invited before.";
+
+  static String m5(app) => "Welcome to ${app}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -234,6 +237,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendEmail": MessageLookupByLibrary.simpleMessage("Send email"),
         "sendEmailSuccess":
             MessageLookupByLibrary.simpleMessage("Send email success"),
+        "sendGroupRequestFail": m4,
         "sendMediaOrEmojiMessage":
             MessageLookupByLibrary.simpleMessage("Send Media Or Emoji Message"),
         "sendMyLocation":
@@ -263,6 +267,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "stayCloseNoMatterDistance": MessageLookupByLibrary.simpleMessage(
             "Stay Close, No Matter the Distance"),
         "stickers": MessageLookupByLibrary.simpleMessage("Sticker"),
+        "success": MessageLookupByLibrary.simpleMessage("Success"),
         "system": MessageLookupByLibrary.simpleMessage("System"),
         "systemIsCurrentlyErrorPleaseTryAgainLater":
             MessageLookupByLibrary.simpleMessage(
@@ -303,7 +308,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "voice": MessageLookupByLibrary.simpleMessage("Voice"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
-        "welcomeToApp": m4,
+        "welcomeToApp": m5,
         "youHaveAlreadySentThisRequest": MessageLookupByLibrary.simpleMessage(
             "You have already sent this request")
       };

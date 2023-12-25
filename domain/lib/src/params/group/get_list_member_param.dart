@@ -3,6 +3,7 @@ part of '../base_param.dart';
 @freezed
 class GetListMemberGroupParam extends BaseParam with _$GetListMemberGroupParam {
   const factory GetListMemberGroupParam({
+    required String groupId,
     @Default(1) int page,
     @Default(10) int pageSize,
   }) = _GetListMemberGroupParam;

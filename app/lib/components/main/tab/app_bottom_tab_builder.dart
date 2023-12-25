@@ -11,19 +11,38 @@ class AppBottomTabBuilder extends AppTabBaseBuilder {
       routes: _routes!,
       builder: (context, child) {
         final tabsRouter = AutoTabsRouter.of(context);
+
         return Scaffold(
           body: child,
           bottomNavigationBar: NavigationBar(
             selectedIndex: tabsRouter.activeIndex,
-            elevation: 2,
+            elevation: 1,
             onDestinationSelected: (value) {
               tabsRouter.setActiveIndex(value);
             },
-            indicatorColor: Theme.of(context).colorScheme.tertiaryContainer,
-            destinations: _labels!.map((label) {
-              final index = _labels!.indexOf(label);
-              return _buildDestination(context, index);
-            }).toList(),
+            //indicatorColor: Theme.of(context).colorScheme.tertiaryContainer,
+            // destinations: _labels!.map((label) {
+            //   final index = _labels!.indexOf(label);
+            //   return _buildDestination(context, index);
+            // }).toList(),
+            destinations: [
+              NavigationDestination(
+                icon: const Icon(Icons.home_outlined),
+                label: R.strings.home,
+              ),
+              NavigationDestination(
+                icon: const Icon(Icons.person_outline),
+                label: R.strings.friends,
+              ),
+              NavigationDestination(
+                icon: const Icon(Icons.group_outlined),
+                label: R.strings.groups,
+              ),
+              NavigationDestination(
+                icon: const Icon(Icons.settings_outlined),
+                label: R.strings.settings,
+              ),
+            ],
           ),
         );
       },

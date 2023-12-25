@@ -127,6 +127,7 @@ class AppExceptionExt {
                 .show();
             break;
           }
+
         case "16":
           {
             AppDefaultDialogWidget()
@@ -155,6 +156,18 @@ class AppExceptionExt {
                 .show();
             getIt<AppRouter>()
                 .replace(VerifyEmailRoute(isFirstRequestSendEmail: true));
+            break;
+          }
+        case "21":
+          {
+            AppDefaultDialogWidget()
+                .setTitle(R.strings.error)
+                .setContent(appException?.message)
+                .setAppDialogType(AppDialogType.error)
+                .setNegativeText(R.strings.close)
+                .setPositiveText(R.strings.confirm)
+                .buildDialog(AppKeys.navigatorKey.currentContext!)
+                .show();
             break;
           }
 

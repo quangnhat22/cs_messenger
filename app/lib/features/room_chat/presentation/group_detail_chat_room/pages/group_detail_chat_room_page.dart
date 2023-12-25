@@ -33,7 +33,7 @@ class GroupDetailChatRoomPage extends StatelessWidget {
           create: (_) => getIt<GroupEditNameFormBloc>(),
         ),
         BlocProvider(
-          create: (_) => getIt<EditGroupCubit>(),
+          create: (_) => getIt<EditGroupCubit>()..initPage(chatRoomId),
         ),
       ],
       child: AppMainPageWidget()
@@ -57,13 +57,11 @@ class GroupDetailChatRoomPage extends StatelessWidget {
                   },
                   child: AppAvatarCircleWidget()
                       .setSize(AppAvatarSize.extraExtraLarge)
-                      //TODO: set url
-                      .setUrl(
-                          'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsX29mZmljZV8zNF9mdWxsX2JvZHlfM2RfYXZhdGFyXzNkX3JlbmRlcl9vZl9hX2J1c2luZXNzd19jOWYzODYxYy1lZTYzLTQxOGYtOThmNC02MWJkNGM3OGE1YTZfMS5wbmc.png')
+                      .setUrl(state.avatarUrl)
                       .build(context),
                 ),
                 SizedBox(height: AppSizeExt.of.majorScale(5)),
-                AppTextHeadlineLargeWidget().setText('Group A').build(context),
+                AppTextHeadlineLargeWidget().setText(state.name).build(context),
                 SizedBox(
                   height: AppSizeExt.of.majorScale(5),
                 ),
@@ -84,7 +82,8 @@ class GroupDetailChatRoomPage extends StatelessWidget {
                         color: Theme.of(context).colorScheme.primary,
                       ),
                       text: R.strings.edit,
-                      onTap: () => _buildDialogChangeGroupName(context, '123'),
+                      onTap: () => _buildDialogChangeGroupName(
+                          context, state.name ?? ''),
                     ),
                     IconButtonWithTextWidget(
                       icon: Icon(
@@ -93,8 +92,10 @@ class GroupDetailChatRoomPage extends StatelessWidget {
                       ),
                       text: R.strings.members,
                       onTap: () async {
-                        await getIt<AppRouter>()
-                            .push(GroupMemberRoute(groupId: '1'));
+                        if (state.groupId != null) {
+                          await getIt<AppRouter>()
+                              .push(GroupMemberRoute(groupId: state.groupId!));
+                        }
                       },
                     ),
                   ],
@@ -135,8 +136,8 @@ class GroupDetailChatRoomPage extends StatelessWidget {
                               .setIsShowBottomDivider(true)
                               .setActions(
                                   [const Icon(Icons.chevron_right)]).setOnTap(
-                            () {
-                              getIt<AppRouter>()
+                            () async {
+                              await getIt<AppRouter>()
                                   .push(RoomChatMediaRoute(roomId: chatRoomId));
                             },
                           ).build(context),

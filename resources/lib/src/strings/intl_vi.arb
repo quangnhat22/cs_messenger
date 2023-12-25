@@ -233,5 +233,15 @@
   "doYouWantToLeaveThisGroup": "Bạn có muốn rời khỏi nhóm này không?",
   "doYouWantDeleteDevice": "Bạn có muốn xóa thiết bị này hay không?",
   "deleteDeviceSuccess": "Xóa thiết bị mới thành công",
-  "deleteDeviceFail": "Xóa thiết bị thất bại"
+  "deleteDeviceFail": "Xóa thiết bị thất bại",
+  "sendGroupRequestFail": "Gửi lời mời vào nhóm thất bại. {name} đã được mời trước đó.",
+  "@sendGroupRequestFail": {
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "-"
+      }
+    }
+  },
+  "success": "Thành công"
 }

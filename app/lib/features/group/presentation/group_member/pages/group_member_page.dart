@@ -27,7 +27,7 @@ class GroupMemberPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<GroupListMemberCubit>(),
+      create: (_) => getIt<GroupListMemberCubit>()..initPage(groupId),
       child: AppMainPageWidget()
           .setAppBar(
               AppBarWidget().setTextTitle(R.strings.members).build(context))
@@ -54,9 +54,8 @@ class GroupMemberPage extends StatelessWidget {
             .build(context))
         .setTitle(
             AppTextTitleMediumWidget().setText(friend.name).build(context))
-        .setSubtitle(AppTextBodyMediumWidget()
-            .setText("${R.strings.email}: ${friend.email}")
-            .build(context))
+        .setSubtitle(
+            AppTextBodyMediumWidget().setText("${friend.email}").build(context))
         .setHasTopBorderRadius(index == 0)
         .setActions([
           IconButton(
@@ -102,6 +101,7 @@ class GroupMemberPage extends StatelessWidget {
   Future<void> _showBottomSheetAddMember(
       BuildContext context, List<UserModel> filterMember) async {
     await showModalBottomSheet<List<UserModel>>(
+      clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(AppSizeExt.of.majorScale(5)),
@@ -113,8 +113,8 @@ class GroupMemberPage extends StatelessWidget {
         return InviteFriendPage(listFilterFriend: filterMember);
       },
     ).then((result) async {
-      if (result != null) {
-        // context.read<CreateGroupFormCubit>().friendInvitedChanged(result);
+      if (result != null && context.mounted) {
+        await context.read<GroupListMemberCubit>().inviteMember(result);
       }
     });
   }

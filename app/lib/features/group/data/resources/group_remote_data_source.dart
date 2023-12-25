@@ -6,6 +6,9 @@ abstract class GroupRemoteDataSource {
   Future<AppListResultRaw<GroupRaw>> fetchListGroup(
       {required Map<String, dynamic> query});
 
+  Future<AppListResultRaw<UserRaw>> fetchListMemberGroup(
+      {required Map<String, dynamic> query});
+
   Future<AppObjResultRaw<EmptyRaw>> createNewGroup(
       {required Map<String, dynamic> query});
 
@@ -36,6 +39,28 @@ class FriendRemoteDataSourceImpl extends GroupRemoteDataSource {
       );
       return response.toRawList((data) => (data as List<dynamic>)
           .map((item) => GroupRaw.fromJson(item))
+          .toList());
+    } on AppException catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<AppListResultRaw<UserRaw>> fetchListMemberGroup(
+      {required Map<String, dynamic> query}) async {
+    try {
+      final groupId = query['groupId'];
+      query.removeWhere((key, value) => key == 'groupId');
+      final AppResponse response = await _service.request(
+        clientRequest: ClientRequest(
+          url: ApiProvider.groupMemberById(groupId),
+          method: HttpMethod.get,
+          query: {...query},
+          isRequestForList: true,
+        ),
+      );
+      return response.toRawList((data) => (data as List<dynamic>)
+          .map((item) => UserRaw.fromJson(item))
           .toList());
     } on AppException catch (_) {
       rethrow;

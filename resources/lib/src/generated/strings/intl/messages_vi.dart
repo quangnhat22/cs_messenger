@@ -31,7 +31,10 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m3(email, expireTime) =>
       "Vui lòng mở \"${email}\" để xác minh tài khoản. Vui lòng xác nhận tài khoản trước \$${expireTime}, nếu không tài khoản của bạn có thể bị mất!";
 
-  static String m4(app) => "Chào mừng đến với ${app}";
+  static String m4(name) =>
+      "Gửi lời mời vào nhóm thất bại. ${name} đã được mời trước đó.";
+
+  static String m5(app) => "Chào mừng đến với ${app}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -243,6 +246,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendEmail": MessageLookupByLibrary.simpleMessage("Gửi email"),
         "sendEmailSuccess":
             MessageLookupByLibrary.simpleMessage("Gửi email thành công"),
+        "sendGroupRequestFail": m4,
         "sendMediaOrEmojiMessage": MessageLookupByLibrary.simpleMessage(
             "Gửi tin nhắn emoji hoặc loại tin nhắn khác"),
         "sendMyLocation": MessageLookupByLibrary.simpleMessage("Gửi vị trí"),
@@ -271,6 +275,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "stayCloseNoMatterDistance":
             MessageLookupByLibrary.simpleMessage("Khoảng cách không là vấn đề"),
         "stickers": MessageLookupByLibrary.simpleMessage("Stickers"),
+        "success": MessageLookupByLibrary.simpleMessage("Thành công"),
         "system": MessageLookupByLibrary.simpleMessage("Hệ thống"),
         "systemIsCurrentlyErrorPleaseTryAgainLater":
             MessageLookupByLibrary.simpleMessage(
@@ -313,7 +318,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcome": MessageLookupByLibrary.simpleMessage("Chào mừng bạn"),
         "welcomeBack":
             MessageLookupByLibrary.simpleMessage("Chào mừng bạn trở lại!"),
-        "welcomeToApp": m4,
+        "welcomeToApp": m5,
         "youHaveAlreadySentThisRequest": MessageLookupByLibrary.simpleMessage(
             "Bạn đã gửi yêu cầu trước đây? Vì vậy bạn không thể gửi thêm yêu cầu này nữa.")
       };

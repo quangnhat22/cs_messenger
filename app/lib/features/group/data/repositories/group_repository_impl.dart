@@ -36,9 +36,14 @@ class GroupRepositoryImpl extends GroupRepository {
 
   @override
   Future<AppListResultModel<UserModel>> getListMemberGroup(
-      {required Map<String, dynamic> query}) {
-    // TODO: implement getListMemberGroup
-    throw UnimplementedError();
+      {required Map<String, dynamic> query}) async {
+    try {
+      final AppListResultRaw<UserRaw> remoteData =
+          await _remote.fetchListMemberGroup(query: query);
+      return remoteData.raw2Model();
+    } on AppException catch (_) {
+      rethrow;
+    }
   }
 
   @override

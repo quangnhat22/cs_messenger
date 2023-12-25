@@ -233,5 +233,15 @@
   "doYouWantToLeaveThisGroup": "Do you want to leave this group?",
   "doYouWantDeleteDevice": "Do you want delete this device?",
   "deleteDeviceSuccess": "Delete device success",
-  "deleteDeviceFail": "Delete device fail"
+  "deleteDeviceFail": "Delete device fail",
+  "sendGroupRequestFail": "Sending invitations to the group failed. {name} was invited before.",
+  "@sendGroupRequestFail": {
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "-"
+      }
+    }
+  },
+  "success": "Success"
 }

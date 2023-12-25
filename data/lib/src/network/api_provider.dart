@@ -48,6 +48,8 @@ class ApiProvider {
   //group
   static const String group = '/group';
 
+  static String groupMemberById(String id) => '/group/$id/members';
+
   static String groupById(String id) => '$group/$id';
 
   //group
