@@ -2029,6 +2029,16 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Phòng chat`
+  String get chatRoom {
+    return Intl.message(
+      'Phòng chat',
+      name: 'chatRoom',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

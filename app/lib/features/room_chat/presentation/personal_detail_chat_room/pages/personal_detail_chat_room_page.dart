@@ -1,8 +1,9 @@
-import 'package:app/components/features/button/icon_button_with_text_widget.dart';
 import 'package:app/components/main/appBar/app_bar_base_builder.dart';
 import 'package:app/components/main/avatar/app_avatar_base_builder.dart';
 import 'package:app/components/main/card/app_card_base_builder.dart';
+import 'package:app/components/main/dialog/app_dialog_base_builder.dart';
 import 'package:app/components/main/page/app_main_page_base_builder.dart';
+import 'package:app/components/main/snackBar/app_snack_bar_base_builder.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/configs/di/di.dart';
 import 'package:app/configs/routes/app_router.dart';
@@ -63,6 +64,55 @@ class PersonalDetailChatRoomPage extends StatelessWidget {
                         vertical: AppSizeExt.of.majorPaddingScale(3),
                       ),
                       child: AppTextTitleMediumWidget()
+                          .setText(R.strings.moreAction)
+                          .setTextStyle(TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.bold,
+                          ))
+                          .build(context),
+                    ),
+                    Card(
+                      elevation: 0,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .primaryContainer
+                          .withOpacity(0.36),
+                      child: Column(
+                        children: <Widget>[
+                          AppCardBorderWidget()
+                              .setLeading(const Icon(Icons.image_outlined))
+                              .setTitle(AppTextBodyLargeWidget()
+                                  .setText(R.strings.seePictureVideosFiles)
+                                  .build(context))
+                              .setHasTopBorderRadius(true)
+                              .setHasBottomBorderRadius(true)
+                              .setActions(
+                                  [const Icon(Icons.chevron_right)]).setOnTap(
+                            () async {
+                              if (state.chatRoomId != null) {
+                                await getIt<AppRouter>().push(
+                                    RoomChatMediaRoute(
+                                        roomId: state.chatRoomId!));
+                              }
+                            },
+                          ).build(context),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: AppSizeExt.of.majorScale(1),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppSizeExt.of.majorPaddingScale(3),
+                        vertical: AppSizeExt.of.majorPaddingScale(3),
+                      ),
+                      child: AppTextTitleMediumWidget()
                           .setText(R.strings.information)
                           .setTextStyle(TextStyle(
                             color: Theme.of(context).colorScheme.primary,
@@ -102,16 +152,12 @@ class PersonalDetailChatRoomPage extends StatelessWidget {
                                   .build(context))
                               .setHasTopBorderRadius(true)
                               .setIsShowBottomDivider(true)
-                              .setActions(
-                                  [const Icon(Icons.chevron_right)]).setOnTap(
-                            () {
-                              getIt<AppRouter>()
-                                  .push(const NotificationSettingRoute());
-                            },
-                          ).build(context),
+                              .setOnTap(() => _onCreateGroupWithYourFriend(
+                                  context, state.name ?? ''))
+                              .build(context),
                           AppCardBorderWidget()
                               .setLeading(Icon(
-                                Icons.logout_outlined,
+                                Icons.remove_circle_outline,
                                 color: Theme.of(context).colorScheme.error,
                               ))
                               .setTitle(AppTextBodyLargeWidget()
@@ -120,12 +166,12 @@ class PersonalDetailChatRoomPage extends StatelessWidget {
                                     color: Theme.of(context).colorScheme.error,
                                   ))
                                   .build(context))
-                              .setOnTap(() {})
+                              .setOnTap(() => _onDeleteFriend(context))
                               .setIsShowBottomDivider(true)
                               .build(context),
                           AppCardBorderWidget()
                               .setLeading(Icon(
-                                Icons.logout_outlined,
+                                Icons.block_outlined,
                                 color: Theme.of(context).colorScheme.error,
                               ))
                               .setTitle(AppTextBodyLargeWidget()
@@ -135,67 +181,75 @@ class PersonalDetailChatRoomPage extends StatelessWidget {
                                   ))
                                   .build(context))
                               .setHasBottomBorderRadius(true)
-                              .setOnTap(() {})
+                              .setOnTap(() => _onBlockFriend(context))
                               .build(context)
                         ],
                       ),
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: AppSizeExt.of.majorScale(1),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppSizeExt.of.majorPaddingScale(3),
-                        vertical: AppSizeExt.of.majorPaddingScale(3),
-                      ),
-                      child: AppTextTitleMediumWidget()
-                          .setText(R.strings.moreAction)
-                          .setTextStyle(TextStyle(
-                            color: Theme.of(context).colorScheme.primary,
-                            fontWeight: FontWeight.bold,
-                          ))
-                          .build(context),
-                    ),
-                    Card(
-                      elevation: 0,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .primaryContainer
-                          .withOpacity(0.36),
-                      child: Column(
-                        children: <Widget>[
-                          AppCardBorderWidget()
-                              .setLeading(const Icon(Icons.image_outlined))
-                              .setTitle(AppTextBodyLargeWidget()
-                                  .setText(R.strings.seePictureVideosFiles)
-                                  .build(context))
-                              .setHasTopBorderRadius(true)
-                              .setHasBottomBorderRadius(true)
-                              .setActions(
-                                  [const Icon(Icons.chevron_right)]).setOnTap(
-                            () async {
-                              if (state.chatRoomId != null) {
-                                await getIt<AppRouter>().push(
-                                    RoomChatMediaRoute(
-                                        roomId: state.chatRoomId!));
-                              }
-                            },
-                          ).build(context),
-                        ],
-                      ),
-                    ),
-                  ],
-                )
               ],
             ),
           ),
         );
       },
     );
+  }
+
+  void _onDeleteFriend(BuildContext context) {
+    _showConfirmDialog(context, R.strings.doYouWantUnFriend, () async {
+      await context.read<PersonalChatRoomInfoCubit>().deleteFriend();
+      if (context.mounted) {
+        Navigator.of(context).popUntil((route) => route.isFirst);
+      }
+      AppSnackBarWidget()
+          .setLabelText(R.strings.unFriendSuccess)
+          .setAppSnackBarType(AppSnackBarType.informMessage)
+          .setAppSnackBarStatus(AppSnackBarStatus.success)
+          .showSnackBar();
+    });
+  }
+
+  void _onBlockFriend(BuildContext context) {
+    _showConfirmDialog(context, R.strings.areYouSureBlockThisUser, () async {
+      await context.read<PersonalChatRoomInfoCubit>().blockFriend();
+      if (context.mounted) {
+        Navigator.of(context).popUntil((route) => route.isFirst);
+      }
+      AppSnackBarWidget()
+          .setLabelText(R.strings.blockSuccess)
+          .setAppSnackBarType(AppSnackBarType.informMessage)
+          .setAppSnackBarStatus(AppSnackBarStatus.success)
+          .showSnackBar();
+    });
+  }
+
+  void _onCreateGroupWithYourFriend(BuildContext context, String name) {
+    _showConfirmDialog(context, R.strings.createGroupWith(name), () async {
+      await context
+          .read<PersonalChatRoomInfoCubit>()
+          .createGroupWithYourFriend();
+      if (context.mounted) {
+        Navigator.of(context).popUntil((route) => route.isFirst);
+      }
+      AppSnackBarWidget()
+          .setLabelText(R.strings.createGroupSuccess)
+          .setAppSnackBarType(AppSnackBarType.informMessage)
+          .setAppSnackBarStatus(AppSnackBarStatus.success)
+          .showSnackBar();
+    });
+  }
+
+  void _showConfirmDialog(
+      BuildContext context, String title, void Function()? onPositive) {
+    AppDefaultDialogWidget()
+        .setTitle(R.strings.confirm)
+        .setContent(title)
+        .setAppDialogType(AppDialogType.confirm)
+        .setNegativeText(R.strings.close)
+        .setPositiveText(R.strings.confirm)
+        .setOnPositive(onPositive)
+        .buildDialog(context)
+        .show();
   }
 }

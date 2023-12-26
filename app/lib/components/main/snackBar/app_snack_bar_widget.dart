@@ -60,7 +60,7 @@ class AppSnackBarWidget extends AppSnackBarBaseBuilder {
                           .setText(_labelText)
                           .setTextStyle(
                               const TextStyle(fontWeight: FontWeight.bold))
-                          .setColor(Theme.of(context).colorScheme.onSurface)
+                          .setColor(Theme.of(context).colorScheme.onBackground)
                           .build(context),
                     // _content ?? const SizedBox()
                   ],

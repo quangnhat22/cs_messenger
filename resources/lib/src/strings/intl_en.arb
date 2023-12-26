@@ -252,5 +252,6 @@
   },
   "deleteFriend": "Delete friend",
   "repliedMessage": "Replied message",
-  "reply": "Reply"
+  "reply": "Reply",
+  "chatRoom": "Chat room"
 }

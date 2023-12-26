@@ -73,6 +73,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Thay đổi mật khẩu"),
         "changePasswordSuccess":
             MessageLookupByLibrary.simpleMessage("Đổi mật khẩu thành công"),
+        "chatRoom": MessageLookupByLibrary.simpleMessage("Phòng chat"),
         "close": MessageLookupByLibrary.simpleMessage("Đóng"),
         "confirm": MessageLookupByLibrary.simpleMessage("Xác nhận"),
         "confirmNewPassword":

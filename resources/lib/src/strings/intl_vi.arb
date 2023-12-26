@@ -256,5 +256,6 @@
   },
   "deleteFriend": "Xóa kết bạn",
   "repliedMessage": "Phản hồi tin nhắn",
-  "reply": "Phản hồi"
+  "reply": "Phản hồi",
+  "chatRoom": "Phòng chat"
 }

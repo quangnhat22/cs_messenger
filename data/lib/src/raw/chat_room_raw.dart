@@ -15,6 +15,8 @@ class ChatRoomRaw extends BaseRaw<ChatRoomModel> with _$ChatRoomRaw {
     String? type,
     //ignore: invalid_annotation_target
     @JsonKey(name: 'group_id') String? groupId,
+    //ignore: invalid_annotation_target
+    @JsonKey(name: 'friend_id') String? friendId,
   }) = _ChatRoomRaw;
 
   factory ChatRoomRaw.fromJson(Map<String, Object?> json) =>
@@ -30,6 +32,7 @@ class ChatRoomRaw extends BaseRaw<ChatRoomModel> with _$ChatRoomRaw {
       type: ChatRoomType.convert2ChatRoomType(type),
       groupId: groupId,
       isCalling: isCalling,
+      friendId: friendId,
     );
   }
 }

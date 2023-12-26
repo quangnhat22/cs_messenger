@@ -71,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Change Password"),
         "changePasswordSuccess":
             MessageLookupByLibrary.simpleMessage("Change Password success"),
+        "chatRoom": MessageLookupByLibrary.simpleMessage("Chat room"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirmNewPassword":
