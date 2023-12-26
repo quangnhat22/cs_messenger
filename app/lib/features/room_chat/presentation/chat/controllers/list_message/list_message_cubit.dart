@@ -56,20 +56,20 @@ class ListMessageCubit extends Cubit<ListMessageState> {
 
       final listMessage = listMessageResponse.netData;
 
-      if (listMessage != null && listMessage.isNotEmpty) {
-        final indexStartedCall = listMessage.indexWhere((message) =>
-            message is SystemMessageModel &&
-            message.systemMessage == SystemContent.callStarted);
-        final indexEndCall = listMessage.indexWhere((message) =>
-            message is SystemMessageModel &&
-            message.systemMessage == SystemContent.callEnded);
-
-        if (indexEndCall != -1 &&
-            indexEndCall != -1 &&
-            indexStartedCall < indexEndCall) {
-          emit(state.copyWith(isCalling: true));
-        }
-      }
+      // if (listMessage != null && listMessage.isNotEmpty) {
+      //   final indexStartedCall = listMessage.indexWhere((message) =>
+      //       message is SystemMessageModel &&
+      //       message.systemMessage == SystemContent.callStarted);
+      //   final indexEndCall = listMessage.indexWhere((message) =>
+      //       message is SystemMessageModel &&
+      //       message.systemMessage == SystemContent.callEnded);
+      //
+      //   if (indexEndCall != -1 &&
+      //       indexEndCall != -1 &&
+      //       indexStartedCall < indexEndCall) {
+      //     emit(state.copyWith(isCalling: true));
+      //   }
+      // }
 
       emit(state.copyWith(
         currentUser: userResponse.netData,
@@ -80,6 +80,10 @@ class ListMessageCubit extends Cubit<ListMessageState> {
     } on AppException catch (e) {
       Logs.e(e);
     }
+  }
+
+  void changeIsCallingStatus(bool status) {
+    emit(state.copyWith(isCalling: status));
   }
 
   void _onReceiveNewMessage(IMessageModel newMessage) {
@@ -196,8 +200,16 @@ class ListMessageCubit extends Cubit<ListMessageState> {
 
   void sendMapMessage(MapMessageParam message) async {
     try {
+      final repliedMessage = state.tempRepliedMessage;
+      MapMessageParam params = message;
+      if (repliedMessage != null) {
+        params = message.copyWith(
+          repliedMessage:
+              ReplyMessageParam.convert2ReplyMessageParam(repliedMessage),
+        );
+      }
       final messageParams =
-          SocketMessageParam.convert2SocketMessageParam(message, state.roomId);
+          SocketMessageParam.convert2SocketMessageParam(params, state.roomId);
       _sendMessageUseCase.executeObj(request: messageParams);
     } on AppException catch (e) {
       Logs.e(e);

@@ -29,7 +29,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
     switch (type) {
       case "text":
         final repliedMessage = extraMessage?['repliedMessage'] as dynamic;
-        ReplyMessageModel? replyMessageModel = null;
+        ReplyMessageModel? replyMessageModel;
         if (repliedMessage != null) {
           final messageReplyRaw = ReplyMessageRaw.fromJson(repliedMessage);
           replyMessageModel = messageReplyRaw.raw2Model();
@@ -56,6 +56,12 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
         final name = extraMessage?['name'] as String?;
         final lat = extraMessage?['lat'] as double?;
         final long = extraMessage?['long'] as double?;
+        final repliedMessage = extraMessage?['repliedMessage'] as dynamic;
+        ReplyMessageModel? replyMessageModel;
+        if (repliedMessage != null) {
+          final messageReplyRaw = ReplyMessageRaw.fromJson(repliedMessage);
+          replyMessageModel = messageReplyRaw.raw2Model();
+        }
         return MapMessageModel(
           id: id,
           author: author != null ? author!.raw2Model() : UserModel.empty,
@@ -74,6 +80,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
           name: name,
           lat: lat ?? 10.782637,
           long: long ?? 106.695944,
+          repliedMessage: replyMessageModel,
         );
       case "gif":
         return EmojiStickerModel(

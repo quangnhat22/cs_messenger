@@ -87,6 +87,7 @@ class SocketMessageParam extends IMessageParam with _$SocketMessageParam {
         'lat': messageParam.lat,
         'long': messageParam.long,
         'clientId': messageParam.clientId,
+        'repliedMessage': messageParam.repliedMessage,
       };
       meta.removeWhere((key, value) => value == null || value == "");
       return SocketMessageParam(

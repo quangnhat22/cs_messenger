@@ -5,8 +5,8 @@ import 'package:app/configs/routes/app_router.dart';
 import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/features/room_chat/presentation/chat/controllers/chat_room_info/chat_room_info_cubit.dart';
 import 'package:app/features/room_chat/presentation/chat/controllers/list_message/list_message_cubit.dart';
-import 'package:app/features/room_chat/presentation/chat/widgets/chat_info_app_bar_widget.dart';
 import 'package:app/features/room_chat/presentation/chat/views/chat_view.dart';
+import 'package:app/features/room_chat/presentation/chat/widgets/chat_info_app_bar_widget.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
@@ -40,48 +40,57 @@ class ChatPage extends StatelessWidget {
   }
 
   Widget _appBarActions(BuildContext context) {
-    return BlocBuilder<ListMessageCubit, ListMessageState>(
-      buildWhen: (prev, current) => prev != current,
-      builder: (context, state) {
-        return Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            if (!state.isCalling)
-              IconButton(
-                onPressed: () async {
-                  await getIt<AppRouter>()
-                      .push(VideoCallRoute(chatRoomId: roomId));
-                },
-                icon: const Icon(Icons.video_camera_front_outlined),
-              ),
-            BlocBuilder<ChatRoomInfoCubit, ChatRoomInfoState>(
-              buildWhen: (prev, current) =>
-                  prev.chatRoomInfo != current.chatRoomInfo,
-              builder: (context, chatRoomInfoState) {
-                return IconButton(
-                  onPressed: () async {
-                    if (chatRoomInfoState.chatRoomInfo?.id != null) {
-                      if (chatRoomInfoState.chatRoomInfo?.type ==
-                          ChatRoomType.group) {
-                        await getIt<AppRouter>()
-                            .push(GroupDetailChatRoomRoute(chatRoomId: roomId));
-                      }
-                      if (chatRoomInfoState.chatRoomInfo?.type ==
-                          ChatRoomType.p2p) {
-                        await getIt<AppRouter>().push(
-                            PersonalDetailChatRoomRoute(chatRoomId: roomId));
-                      }
-                    }
-                  },
-                  icon: const Icon(
-                    Icons.more_vert,
-                  ),
-                );
-              },
-            ),
-          ],
-        );
+    return BlocListener<ChatRoomInfoCubit, ChatRoomInfoState>(
+      listenWhen: (prev, current) =>
+          prev.chatRoomInfo?.isCalling != current.chatRoomInfo?.isCalling,
+      listener: (context, state) {
+        context
+            .read<ListMessageCubit>()
+            .changeIsCallingStatus(state.chatRoomInfo?.isCalling ?? false);
       },
+      child: BlocBuilder<ListMessageCubit, ListMessageState>(
+        buildWhen: (prev, current) => prev != current,
+        builder: (context, state) {
+          return Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              if (!state.isCalling)
+                IconButton(
+                  onPressed: () async {
+                    await getIt<AppRouter>()
+                        .push(VideoCallRoute(chatRoomId: roomId));
+                  },
+                  icon: const Icon(Icons.video_camera_front_outlined),
+                ),
+              BlocBuilder<ChatRoomInfoCubit, ChatRoomInfoState>(
+                buildWhen: (prev, current) =>
+                    prev.chatRoomInfo != current.chatRoomInfo,
+                builder: (context, chatRoomInfoState) {
+                  return IconButton(
+                    onPressed: () async {
+                      if (chatRoomInfoState.chatRoomInfo?.id != null) {
+                        if (chatRoomInfoState.chatRoomInfo?.type ==
+                            ChatRoomType.group) {
+                          await getIt<AppRouter>().push(
+                              GroupDetailChatRoomRoute(chatRoomId: roomId));
+                        }
+                        if (chatRoomInfoState.chatRoomInfo?.type ==
+                            ChatRoomType.p2p) {
+                          await getIt<AppRouter>().push(
+                              PersonalDetailChatRoomRoute(chatRoomId: roomId));
+                        }
+                      }
+                    },
+                    icon: const Icon(
+                      Icons.more_vert,
+                    ),
+                  );
+                },
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 

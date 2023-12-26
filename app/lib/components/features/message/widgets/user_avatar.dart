@@ -1,4 +1,5 @@
 import 'package:app/components/features/message/model/bubble_rtl_alignment.dart';
+import 'package:app/components/main/avatar/app_avatar_base_builder.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:domain/domain.dart';
@@ -58,7 +59,7 @@ class UserAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = getUserAvatarNameColor(author, colors);
-    final hasImage = author.avatar != null;
+    final hasImage = author.avatar != null && author.avatar!.isNotEmpty;
     final initials = getUserInitials(author);
 
     return Container(
@@ -67,18 +68,20 @@ class UserAvatar extends StatelessWidget {
           : const EdgeInsets.only(right: 8),
       child: GestureDetector(
         onTap: () => onAvatarTap?.call(author),
-        child: CircleAvatar(
-          backgroundColor: hasImage
-              ? Theme.of(context).colorScheme.secondaryContainer
-              : color,
-          backgroundImage: hasImage
-              ? NetworkImage(author.avatar!, headers: imageHeaders)
-              : null,
-          radius: AppSizeExt.of.majorScale(4),
-          child: !hasImage
-              ? AppTextBodySmallWidget().setText(initials).build(context)
-              : null,
-        ),
+        child: hasImage
+            ? AppAvatarCircleWidget()
+                .setSize(AppAvatarSize.medium)
+                .setUrl(author.avatar)
+                .build(context)
+            : CircleAvatar(
+                backgroundColor: hasImage
+                    ? Theme.of(context).colorScheme.secondaryContainer
+                    : color,
+                radius: AppSizeExt.of.majorScale(4),
+                child: !hasImage
+                    ? AppTextBodySmallWidget().setText(initials).build(context)
+                    : null,
+              ),
       ),
     );
   }

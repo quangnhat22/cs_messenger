@@ -92,7 +92,7 @@ class AppRouter extends $AppRouter {
           customRouteBuilder}) {
     return CustomRoute(
         page: page,
-        transitionsBuilder: TransitionsBuilders.slideLeft,
+        transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
         durationInMilliseconds: AppNavigationKeys.timeSwitchPage,
         children: children,
         customRouteBuilder: customRouteBuilder);
