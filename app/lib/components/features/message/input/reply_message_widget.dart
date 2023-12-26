@@ -10,6 +10,7 @@ class ReplyMessage extends StatelessWidget {
     required this.messageReply,
     this.width,
     this.onRemoveReplyMessage,
+    this.onTapMessage,
   });
 
   final bool showClose;
