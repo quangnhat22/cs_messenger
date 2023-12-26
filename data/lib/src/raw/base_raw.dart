@@ -15,6 +15,7 @@ part 'device_raw.dart';
 part 'group_raw.dart';
 part 'history_call_raw.dart';
 part 'message_raw.dart';
+// part 'notification_raw.dart';
 part 'preview_data_raw.dart';
 part 'relation_raw.dart';
 part 'reply_message_raw.dart';

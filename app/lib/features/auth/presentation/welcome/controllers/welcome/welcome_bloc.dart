@@ -17,6 +17,7 @@ import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:resources/resources.dart';
 import 'package:utilities/utilities.dart';
 
@@ -172,10 +173,17 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
       if (userInfo.netData?.id != null) {
         final userId = userInfo.netData!.id;
         await _oneSignalService.login(userId);
-        _oneSignalService.onTapNotificationDisplay();
+        _handleNotificationOnTap();
       }
     } catch (e) {
       Logs.e(e);
     }
+  }
+
+  void _handleNotificationOnTap() {
+    OneSignal.Notifications.addClickListener((event) async {
+      Logs.d('NOTIFICATION CLICK LISTENER CALLED WITH EVENT: $event');
+      await getIt<AppRouter>().push(const ListNotificationRoute());
+    });
   }
 }
