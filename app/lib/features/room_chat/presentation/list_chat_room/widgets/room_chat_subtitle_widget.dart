@@ -18,18 +18,22 @@ class RoomChatSubTitleWidget extends StatelessWidget {
       textWidthBasis: TextWidthBasis.longestLine,
       overflow: TextOverflow.ellipsis,
       text: TextSpan(
-          text: author?.name != null && author!.name!.isNotEmpty
-              ? '${author?.name}: '
-              : '',
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-          children: [
-            TextSpan(
-              text: '$content',
-              style: Theme.of(context).textTheme.bodySmall,
+        text: author?.name != null && author!.name!.isNotEmpty
+            ? '${author?.name}: '
+            : '',
+        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.outline,
             ),
-          ]),
+        children: [
+          TextSpan(
+            text: '$content',
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Theme.of(context).colorScheme.outline,
+                ),
+          ),
+        ],
+      ),
     );
   }
 }

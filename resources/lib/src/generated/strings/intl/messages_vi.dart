@@ -111,6 +111,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteDeviceSuccess":
             MessageLookupByLibrary.simpleMessage("Xóa thiết bị mới thành công"),
         "deleteFriend": MessageLookupByLibrary.simpleMessage("Xóa kết bạn"),
+        "deleteNotification":
+            MessageLookupByLibrary.simpleMessage("Xóa thông báo"),
         "devices": MessageLookupByLibrary.simpleMessage("Danh sách thiết bị"),
         "discoverSeamlessMessaging": MessageLookupByLibrary.simpleMessage(
             "Khám phá tính năng nhắn tin mượt mà và cuộc gọi video chất lượng cao. Giữ kết nối với bạn bè và người thân một cách dễ dàng chưa từng có."),
@@ -120,6 +122,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bạn có muốn xóa thiết bị này hay không?"),
         "doYouWantRejectFriendRequest": MessageLookupByLibrary.simpleMessage(
             "Bạn có muốn từ chối lời mời kết bạn này hay không?"),
+        "doYouWantToDeleteAllNotifications":
+            MessageLookupByLibrary.simpleMessage(
+                "Bạn có muốn xóa toàn bộ thông báo?"),
+        "doYouWantToDeleteThisNotification":
+            MessageLookupByLibrary.simpleMessage(
+                "Bạn có muốn xóa thông báo này hay không?"),
         "doYouWantToExit": MessageLookupByLibrary.simpleMessage(
             "Bạn có muốn thoát khỏi trang này?"),
         "doYouWantToLeaveThisGroup": MessageLookupByLibrary.simpleMessage(

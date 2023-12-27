@@ -257,5 +257,8 @@
   "deleteFriend": "Xóa kết bạn",
   "repliedMessage": "Phản hồi tin nhắn",
   "reply": "Phản hồi",
-  "chatRoom": "Phòng chat"
+  "chatRoom": "Phòng chat",
+  "doYouWantToDeleteAllNotifications": "Bạn có muốn xóa toàn bộ thông báo?",
+  "doYouWantToDeleteThisNotification": "Bạn có muốn xóa thông báo này hay không?",
+  "deleteNotification": "Xóa thông báo"
 }

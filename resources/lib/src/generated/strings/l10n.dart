@@ -2039,6 +2039,36 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Bạn có muốn xóa toàn bộ thông báo?`
+  String get doYouWantToDeleteAllNotifications {
+    return Intl.message(
+      'Bạn có muốn xóa toàn bộ thông báo?',
+      name: 'doYouWantToDeleteAllNotifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bạn có muốn xóa thông báo này hay không?`
+  String get doYouWantToDeleteThisNotification {
+    return Intl.message(
+      'Bạn có muốn xóa thông báo này hay không?',
+      name: 'doYouWantToDeleteThisNotification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Xóa thông báo`
+  String get deleteNotification {
+    return Intl.message(
+      'Xóa thông báo',
+      name: 'deleteNotification',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

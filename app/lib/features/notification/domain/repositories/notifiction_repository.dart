@@ -1,9 +1,11 @@
 import 'package:domain/domain.dart';
 
 abstract class NotificationRepository {
-  Future<AppListResultModel<EmptyModel>> getListNotification(
+  Future<AppListResultModel<NotificationModel>> getListNotification(
       {required Map<String, dynamic> query});
 
-  Future<AppListResultModel<EmptyModel>> deleteNotification(
+  Future<AppObjResultModel<EmptyModel>> deleteNotificationById(
       {required Map<String, dynamic> query});
+
+  Future<AppObjResultModel<EmptyModel>> deleteAllNotification();
 }

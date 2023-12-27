@@ -108,6 +108,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteDeviceSuccess":
             MessageLookupByLibrary.simpleMessage("Delete device success"),
         "deleteFriend": MessageLookupByLibrary.simpleMessage("Delete friend"),
+        "deleteNotification":
+            MessageLookupByLibrary.simpleMessage("Delete Notification"),
         "devices": MessageLookupByLibrary.simpleMessage("Devices"),
         "discoverSeamlessMessaging": MessageLookupByLibrary.simpleMessage(
             "Discover seamless messaging and high-quality video calls. Stay connected with friends and loved ones like never before."),
@@ -117,6 +119,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Do you want delete this device?"),
         "doYouWantRejectFriendRequest": MessageLookupByLibrary.simpleMessage(
             "Do you want to reject this friend request?"),
+        "doYouWantToDeleteAllNotifications":
+            MessageLookupByLibrary.simpleMessage(
+                "Do you want to delete all notifications?"),
+        "doYouWantToDeleteThisNotification":
+            MessageLookupByLibrary.simpleMessage(
+                "Do you want to delete this notification?"),
         "doYouWantToExit": MessageLookupByLibrary.simpleMessage(
             "Do you want to exit this page?"),
         "doYouWantToLeaveThisGroup": MessageLookupByLibrary.simpleMessage(

@@ -66,6 +66,9 @@ class ApiProvider {
   static String chatRoomVideoCallMembersById(String id) =>
       '$chatRoom/$id/video-call/members';
 
+  //notification
+  static String notifications = '$userSelfUrl/notifications';
+
   //TODO: mockApi
   static const String mockServerUrl =
       'https://166706c7-b0dd-4262-a9a8-9e7b5f3dd1be.mock.pstmn.io';

@@ -1,7 +1,12 @@
 import 'package:app/components/main/appBar/app_bar_base_builder.dart';
 import 'package:app/components/main/page/app_main_page_base_builder.dart';
+import 'package:app/configs/di/di.dart';
+import 'package:app/features/notification/presentations/list_notification/controller/list_notification_cubit.dart';
+import 'package:app/features/notification/presentations/list_notification/widgets/list_notification_action_app_bar_widget.dart';
+import 'package:app/features/notification/presentations/list_notification/widgets/list_notification_widget.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
 
 @RoutePage()
@@ -10,14 +15,19 @@ class ListNotificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppMainPageWidget()
-        .setAppBar(
-            AppBarWidget().setTextTitle(R.strings.notification).build(context))
-        .setBody(_body(context))
-        .build(context);
+    return BlocProvider(
+      create: (_) => getIt<ListNotificationCubit>(),
+      child: AppMainPageWidget()
+          .setAppBar(AppBarWidget()
+              .setTextTitle(R.strings.notification)
+              .setActions([const ListNotificationActionAppBarWidget()]).build(
+                  context))
+          .setBody(_body(context))
+          .build(context),
+    );
   }
 
   Widget _body(BuildContext context) {
-    return Container();
+    return const ListNotificationWidget();
   }
 }

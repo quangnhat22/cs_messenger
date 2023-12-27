@@ -3,7 +3,7 @@ import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class GetListNotificationUseCase
-    extends BaseUseCase<CreateNewGroupParam, EmptyModel> {}
+    extends BaseUseCase<GetListNotificationParam, NotificationModel> {}
 
 @Injectable(as: GetListNotificationUseCase)
 class GetListNotificationUseCaseImpl extends GetListNotificationUseCase {
@@ -12,9 +12,8 @@ class GetListNotificationUseCaseImpl extends GetListNotificationUseCase {
   GetListNotificationUseCaseImpl(this._repo);
 
   @override
-  Future<AppListResultModel<EmptyModel>> executeList(
-      {CreateNewGroupParam? request}) {
-    // TODO: implement executeList
-    return super.executeList();
+  Future<AppListResultModel<NotificationModel>> executeList(
+      {GetListNotificationParam? request}) async {
+    return await _repo.getListNotification(query: request?.toJson() ?? {});
   }
 }
