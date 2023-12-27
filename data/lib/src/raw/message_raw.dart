@@ -84,6 +84,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
         );
       case "gif":
         final repliedMessage = extraMessage?['repliedMessage'] as dynamic;
+        final link = extraMessage?['link'] as String;
         ReplyMessageModel? replyMessageModel;
         if (repliedMessage != null) {
           final messageReplyRaw = ReplyMessageRaw.fromJson(repliedMessage);
@@ -104,7 +105,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
               ? DateTimeExt.convertTimeStampToDateTime(deletedAt!)
               : null,
           // clientId: clientId,
-          link: extra,
+          link: link,
           repliedMessage: replyMessageModel,
         );
       case "system":
@@ -128,6 +129,12 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
         final width = extraMessage?['width'] as double?;
         final name = extraMessage?['name'] as String?;
         final clientId = extraMessage['clientId'] as String?;
+        final repliedMessage = extraMessage?['repliedMessage'] as dynamic;
+        ReplyMessageModel? replyMessageModel;
+        if (repliedMessage != null) {
+          final messageReplyRaw = ReplyMessageRaw.fromJson(repliedMessage);
+          replyMessageModel = messageReplyRaw.raw2Model();
+        }
         return ImageMessageModel(
           id: id,
           clientId: clientId,
@@ -144,10 +151,17 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
           content: content,
           width: width ?? 0.0,
           height: height ?? 0.0,
+          repliedMessage: replyMessageModel,
         );
       case "audio":
         final name = extraMessage?['name'] as String?;
         final clientId = extraMessage['clientId'] as String?;
+        final repliedMessage = extraMessage?['repliedMessage'] as dynamic;
+        ReplyMessageModel? replyMessageModel;
+        if (repliedMessage != null) {
+          final messageReplyRaw = ReplyMessageRaw.fromJson(repliedMessage);
+          replyMessageModel = messageReplyRaw.raw2Model();
+        }
         return AudioMessageModel(
           id: id,
           // clientId: clientId,
@@ -163,12 +177,19 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
           name: name ?? '',
           isMe: isMe,
           clientId: clientId,
+          repliedMessage: replyMessageModel,
         );
       case "video":
         final name = extraMessage?['name'] as String?;
         final thumbnailUrl = extraMessage?['thumbnailUrl'] as String?;
         final size = extraMessage?['size'] as double?;
         final clientId = extraMessage['clientId'] as String?;
+        final repliedMessage = extraMessage?['repliedMessage'] as dynamic;
+        ReplyMessageModel? replyMessageModel;
+        if (repliedMessage != null) {
+          final messageReplyRaw = ReplyMessageRaw.fromJson(repliedMessage);
+          replyMessageModel = messageReplyRaw.raw2Model();
+        }
         return VideoMessageModel(
           id: id,
           // clientId: clientId,
@@ -186,12 +207,19 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
           isMe: isMe,
           name: name,
           clientId: clientId,
+          repliedMessage: replyMessageModel,
         );
       case "file":
         final size = extraMessage?['size'] as double?;
         final name = extraMessage?['name'] as String?;
         final mimeType = extraMessage?['mimeType'] as String?;
         final clientId = extraMessage['clientId'] as String?;
+        final repliedMessage = extraMessage?['repliedMessage'] as dynamic;
+        ReplyMessageModel? replyMessageModel;
+        if (repliedMessage != null) {
+          final messageReplyRaw = ReplyMessageRaw.fromJson(repliedMessage);
+          replyMessageModel = messageReplyRaw.raw2Model();
+        }
         return FileMessageModel(
           id: id,
           // clientId: clientId,
@@ -208,6 +236,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
           content: content,
           mimeType: mimeType,
           clientId: clientId,
+          repliedMessage: replyMessageModel,
         );
       default:
         throw Exception("Message type not found");
