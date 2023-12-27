@@ -9,6 +9,7 @@ class VideoMessageParam extends IMessageParam with _$VideoMessageParam {
     required String uri,
     @Default(0) double size,
     double? duration,
+    @JsonKey(includeFromJson: false) ReplyMessageParam? repliedMessage,
   }) = _VideoMessageParam;
 
   factory VideoMessageParam.fromJson(Map<String, Object?> json) =>

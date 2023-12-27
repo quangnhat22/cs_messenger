@@ -42,6 +42,9 @@ class VideoMessageModel extends IMessageModel {
       size: param.size,
       uri: param.uri,
       name: param.name,
+      repliedMessage: param.repliedMessage != null
+          ? ReplyMessageParam.convertReplyParam2Model(param.repliedMessage!)
+          : null,
     );
   }
 }

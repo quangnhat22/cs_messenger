@@ -9,6 +9,7 @@ class FileMessageParam extends IMessageParam with _$FileMessageParam {
     required String uri,
     String? name,
     bool? isLoading,
+    @JsonKey(includeFromJson: false) ReplyMessageParam? repliedMessage,
   }) = _FileMessageParam;
 
   factory FileMessageParam.fromJson(Map<String, Object?> json) =>

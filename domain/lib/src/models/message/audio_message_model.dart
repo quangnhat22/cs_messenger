@@ -36,6 +36,9 @@ class AudioMessageModel extends IMessageModel {
       isShowStatus: true,
       uri: param.uri,
       name: param.name,
+      repliedMessage: param.repliedMessage != null
+          ? ReplyMessageParam.convertReplyParam2Model(param.repliedMessage!)
+          : null,
     );
   }
 }

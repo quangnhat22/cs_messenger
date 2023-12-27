@@ -33,6 +33,7 @@ class SocketMessageParam extends IMessageParam with _$SocketMessageParam {
         'height': messageParam.height,
         'size': messageParam.size,
         'clientId': messageParam.clientId,
+        'repliedMessage': messageParam.repliedMessage,
       };
       meta.removeWhere((key, value) => value == null || value == "");
       return SocketMessageParam(
@@ -47,6 +48,7 @@ class SocketMessageParam extends IMessageParam with _$SocketMessageParam {
         'size': messageParam.size,
         'name': messageParam.name,
         'clientId': messageParam.clientId,
+        'repliedMessage': messageParam.repliedMessage,
       };
       meta.removeWhere((key, value) => value == null || value == "");
       return SocketMessageParam(
@@ -59,6 +61,7 @@ class SocketMessageParam extends IMessageParam with _$SocketMessageParam {
       final meta = <String, dynamic>{
         'name': messageParam.name,
         'clientId': messageParam.clientId,
+        'repliedMessage': messageParam.repliedMessage,
       };
       meta.removeWhere((key, value) => value == null || value == "");
       return SocketMessageParam(
@@ -73,6 +76,7 @@ class SocketMessageParam extends IMessageParam with _$SocketMessageParam {
         'mimeType': messageParam.mimeType,
         'size': messageParam.size,
         'clientId': messageParam.clientId,
+        'repliedMessage': messageParam.repliedMessage,
       };
       meta.removeWhere((key, value) => value == null || value == "");
       return SocketMessageParam(
@@ -97,10 +101,15 @@ class SocketMessageParam extends IMessageParam with _$SocketMessageParam {
         extra: jsonEncode(meta),
       );
     } else if (messageParam is EmojiMessageParam) {
+      final meta = <String, dynamic>{
+        'link': messageParam.link,
+        'repliedMessage': messageParam.repliedMessage,
+      };
+      meta.removeWhere((key, value) => value == null || value == "");
       return SocketMessageParam(
         roomId: roomId,
         content: "",
-        extra: messageParam.link,
+        extra: jsonEncode(meta),
         type: MessageType.emoji.value,
       );
     } else {

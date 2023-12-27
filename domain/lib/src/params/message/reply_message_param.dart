@@ -24,4 +24,15 @@ class ReplyMessageParam extends IMessageParam with _$ReplyMessageParam {
       authorName: model.author.name,
     );
   }
+
+  static ReplyMessageModel convertReplyParam2Model(ReplyMessageParam params) {
+    return ReplyMessageModel(
+      id: params.id,
+      authorName: params.authorName,
+      roomId: params.roomId,
+      clientId: params.clientId,
+      content: params.content,
+      type: MessageType.convertString2MessageType(params.type),
+    );
+  }
 }

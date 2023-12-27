@@ -218,8 +218,16 @@ class ListMessageCubit extends Cubit<ListMessageState> {
 
   void sendEmojiMessage(EmojiMessageParam message) async {
     try {
+      final repliedMessage = state.tempRepliedMessage;
+      EmojiMessageParam params = message;
+      if (repliedMessage != null) {
+        params = message.copyWith(
+          repliedMessage:
+              ReplyMessageParam.convert2ReplyMessageParam(repliedMessage),
+        );
+      }
       final messageParams =
-          SocketMessageParam.convert2SocketMessageParam(message, state.roomId);
+          SocketMessageParam.convert2SocketMessageParam(params, state.roomId);
       _sendMessageUseCase.executeObj(request: messageParams);
     } on AppException catch (e) {
       Logs.e(e);
@@ -228,10 +236,19 @@ class ListMessageCubit extends Cubit<ListMessageState> {
 
   Future<void> sendImageMessage(ImageMessageParam message) async {
     try {
+      //handle replied message
+      final repliedMessage = state.tempRepliedMessage;
+      ImageMessageParam params = message;
+      if (repliedMessage != null) {
+        params = message.copyWith(
+          repliedMessage:
+              ReplyMessageParam.convert2ReplyMessageParam(repliedMessage),
+        );
+      }
       //create temp message
-      final messageParam = message.copyWith(clientId: const Uuid().v4());
+      final messageParam = params.copyWith(clientId: const Uuid().v4());
       if (state.currentUser != null) {
-        final tempMessage = ImageMessageModel.getTextMessageModelFromParam(
+        final tempMessage = ImageMessageModel.getImageMessageModelFromParam(
             messageParam, state.currentUser!, state.roomId);
 
         emit(state.copyWith(listMessage: [tempMessage, ...state.listMessage]));
@@ -253,8 +270,16 @@ class ListMessageCubit extends Cubit<ListMessageState> {
 
   Future<void> sendFileMessage(FileMessageParam message) async {
     try {
+      final repliedMessage = state.tempRepliedMessage;
+      FileMessageParam params = message;
+      if (repliedMessage != null) {
+        params = message.copyWith(
+          repliedMessage:
+              ReplyMessageParam.convert2ReplyMessageParam(repliedMessage),
+        );
+      }
       //create temp message
-      final messageParam = message.copyWith(clientId: const Uuid().v4());
+      final messageParam = params.copyWith(clientId: const Uuid().v4());
       if (state.currentUser != null) {
         final tempMessage = FileMessageModel.getFileMessageModelFromParam(
             messageParam, state.currentUser!, state.roomId);
@@ -279,7 +304,15 @@ class ListMessageCubit extends Cubit<ListMessageState> {
   Future<void> sendAudioMessage(AudioMessageParam message) async {
     try {
       if (state.currentUser != null) {
-        final messageParam = message.copyWith(clientId: const Uuid().v4());
+        final repliedMessage = state.tempRepliedMessage;
+        AudioMessageParam params = message;
+        if (repliedMessage != null) {
+          params = message.copyWith(
+            repliedMessage:
+                ReplyMessageParam.convert2ReplyMessageParam(repliedMessage),
+          );
+        }
+        final messageParam = params.copyWith(clientId: const Uuid().v4());
         final tempMessage = AudioMessageModel.getAudioMessageModelFromParam(
             messageParam, state.currentUser!, state.roomId);
 
@@ -303,8 +336,16 @@ class ListMessageCubit extends Cubit<ListMessageState> {
   Future<void> sendVideoMessage(VideoMessageParam message) async {
     try {
       if (state.currentUser != null) {
+        final repliedMessage = state.tempRepliedMessage;
+        VideoMessageParam params = message;
+        if (repliedMessage != null) {
+          params = message.copyWith(
+            repliedMessage:
+                ReplyMessageParam.convert2ReplyMessageParam(repliedMessage),
+          );
+        }
         //create temp message
-        final messageParam = message.copyWith(clientId: const Uuid().v4());
+        final messageParam = params.copyWith(clientId: const Uuid().v4());
         final tempMessage = VideoMessageModel.getVideoMessageModelFromParam(
             messageParam, state.currentUser!, state.roomId);
 

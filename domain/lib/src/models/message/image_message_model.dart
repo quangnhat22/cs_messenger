@@ -27,7 +27,7 @@ class ImageMessageModel extends IMessageModel {
     super.repliedMessage,
   });
 
-  static ImageMessageModel getTextMessageModelFromParam(
+  static ImageMessageModel getImageMessageModelFromParam(
       ImageMessageParam param, UserModel currentUser, String chatRoomId) {
     return ImageMessageModel(
       id: param.clientId ?? DateTime.now().toString(),
@@ -43,6 +43,9 @@ class ImageMessageModel extends IMessageModel {
       size: param.size,
       uri: param.uri,
       name: param.name,
+      repliedMessage: param.repliedMessage != null
+          ? ReplyMessageParam.convertReplyParam2Model(param.repliedMessage!)
+          : null,
     );
   }
 }

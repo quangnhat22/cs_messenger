@@ -9,6 +9,7 @@ class ImageMessageParam extends IMessageParam with _$ImageMessageParam {
     double? size,
     double? height,
     double? width,
+    @JsonKey(includeFromJson: false) ReplyMessageParam? repliedMessage,
   }) = _ImageMessageParam;
 
   factory ImageMessageParam.fromJson(Map<String, Object?> json) =>
