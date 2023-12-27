@@ -12,6 +12,7 @@ import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:resources/resources.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -57,6 +58,7 @@ class Message extends StatelessWidget {
     this.imageProviderBuilder,
     this.onPreviewDataFetched,
     this.onReplyMessage,
+    this.onForwardMessage,
   });
 
   /// Any message type.
@@ -135,6 +137,7 @@ class Message extends StatelessWidget {
   /// Called when user makes a long press on status icon in any message.
   final void Function(BuildContext context, IMessageModel)? onMessageStatusTap;
   final void Function(IMessageModel)? onReplyMessage;
+  final void Function(IMessageModel)? onForwardMessage;
 
   /// Build a text message inside predefined bubble.
   final Widget Function(
@@ -226,16 +229,32 @@ class Message extends StatelessWidget {
                   backgroundColor: Theme.of(context).colorScheme.background,
                   trailing: const Icon(Icons.share),
                   title: AppTextBodyMediumWidget()
-                      .setText('Forward')
+                      .setText(R.strings.forward)
                       .build(context),
-                  onPressed: () {},
+                  onPressed: () {
+                    onForwardMessage?.call(message);
+                  },
                 ),
                 FocusedMenuItem(
                   backgroundColor: Theme.of(context).colorScheme.background,
                   trailing: const Icon(Icons.copy),
-                  title:
-                      AppTextBodyMediumWidget().setText('Copy').build(context),
-                  onPressed: () {},
+                  title: AppTextBodyMediumWidget()
+                      .setText(R.strings.copy)
+                      .build(context),
+                  onPressed: () async {
+                    await Clipboard.setData(
+                        ClipboardData(text: message.content));
+                    // if (context.mounted) {
+                    //   AppSnackBarWidget()
+                    //       .setAppSnackBarType(AppSnackBarType.toastMessage)
+                    //       .setContent(AppTextBodyMediumWidget()
+                    //           .setText(R.strings.copied)
+                    //           .setMaxLines(2)
+                    //           .setTextOverFlow(TextOverflow.ellipsis)
+                    //           .build(context))
+                    //       .showSnackBarWithContext(context);
+                    // }
+                  },
                 ),
                 // FocusedMenuItem(
                 //   title: AppTextBodyMediumWidget()

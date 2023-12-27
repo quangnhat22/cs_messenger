@@ -84,6 +84,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Xác nhận mật khẩu không trùng với Mật khẩu"),
         "connectingPeopleAnytimeAnywhere": MessageLookupByLibrary.simpleMessage(
             "Kết nối với bạn bè ở mọi lúc, mọi Nơi"),
+        "copied": MessageLookupByLibrary.simpleMessage("Đã sao chép"),
+        "copy": MessageLookupByLibrary.simpleMessage("Sao chép"),
         "create": MessageLookupByLibrary.simpleMessage("Tạo"),
         "createAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Tạo tài khoản thành công! Vui lòng đăng nhập để tiếp tục."),
@@ -163,6 +165,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fileLimitSize": m2,
         "files": MessageLookupByLibrary.simpleMessage("Tệp"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("Quên mật khẩu"),
+        "forward": MessageLookupByLibrary.simpleMessage("Chuyển tiếp"),
         "friendCommon": MessageLookupByLibrary.simpleMessage("Bạn chung"),
         "friendRequest":
             MessageLookupByLibrary.simpleMessage("Yêu cầu kết bạn"),
@@ -261,6 +264,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Xem thông tin cá nhân"),
         "selectGender": MessageLookupByLibrary.simpleMessage("Chọn giới tính"),
         "selected": MessageLookupByLibrary.simpleMessage("Đã chọn"),
+        "send": MessageLookupByLibrary.simpleMessage("Gửi"),
         "sendEmail": MessageLookupByLibrary.simpleMessage("Gửi email"),
         "sendEmailSuccess":
             MessageLookupByLibrary.simpleMessage("Gửi email thành công"),

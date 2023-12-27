@@ -2069,6 +2069,46 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Sao chép`
+  String get copy {
+    return Intl.message(
+      'Sao chép',
+      name: 'copy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Đã sao chép`
+  String get copied {
+    return Intl.message(
+      'Đã sao chép',
+      name: 'copied',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chuyển tiếp`
+  String get forward {
+    return Intl.message(
+      'Chuyển tiếp',
+      name: 'forward',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gửi`
+  String get send {
+    return Intl.message(
+      'Gửi',
+      name: 'send',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

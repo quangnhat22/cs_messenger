@@ -82,6 +82,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Password confirmation and Password must match."),
         "connectingPeopleAnytimeAnywhere": MessageLookupByLibrary.simpleMessage(
             "Connecting People, Anytime, Anywhere"),
+        "copied": MessageLookupByLibrary.simpleMessage("Copied"),
+        "copy": MessageLookupByLibrary.simpleMessage("Copy"),
         "create": MessageLookupByLibrary.simpleMessage("Create"),
         "createAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Create account success! Please login to continue."),
@@ -159,6 +161,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fileLimitSize": m2,
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password"),
+        "forward": MessageLookupByLibrary.simpleMessage("Forward"),
         "friendCommon": MessageLookupByLibrary.simpleMessage("Friend Common"),
         "friendRequest": MessageLookupByLibrary.simpleMessage("Friend Request"),
         "friends": MessageLookupByLibrary.simpleMessage("Friends"),
@@ -248,6 +251,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "seeProfile": MessageLookupByLibrary.simpleMessage("See profile"),
         "selectGender": MessageLookupByLibrary.simpleMessage("Select Gender"),
         "selected": MessageLookupByLibrary.simpleMessage("Selected"),
+        "send": MessageLookupByLibrary.simpleMessage("Send"),
         "sendEmail": MessageLookupByLibrary.simpleMessage("Send email"),
         "sendEmailSuccess":
             MessageLookupByLibrary.simpleMessage("Send email success"),

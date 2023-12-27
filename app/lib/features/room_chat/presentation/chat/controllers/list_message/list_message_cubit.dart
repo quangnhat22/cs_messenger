@@ -25,9 +25,11 @@ class ListMessageCubit extends Cubit<ListMessageState> {
   late final GetListMessageChatRoomUseCase _getListMessageChatRoomUseCase;
   late final SendMessageUseCase _sendMessageUseCase;
 
-  ListMessageCubit(this._getUserProfileLocalUseCase, this._sendMessageUseCase,
-      this._getListMessageChatRoomUseCase)
-      : super(const ListMessageState.initial()) {
+  ListMessageCubit(
+    this._getUserProfileLocalUseCase,
+    this._sendMessageUseCase,
+    this._getListMessageChatRoomUseCase,
+  ) : super(const ListMessageState.initial()) {
     _subGetNewMessage =
         _sendMessageUseCase.getNewMessageStream().listen((messageModel) {
       if (messageModel.netData != null) {
@@ -175,6 +177,24 @@ class ListMessageCubit extends Cubit<ListMessageState> {
   //         }).detected();
   //   }
   // }
+
+  void previewDataFetched(
+      TextMessageModel textMessage, PreviewDataModel previewData) {
+    var currentListMessage = state.listMessage.toList();
+    final index = currentListMessage
+        .indexWhere((element) => element.id == textMessage.id);
+    final updatedMessage =
+        (currentListMessage[index] as TextMessageModel).copyWith(
+      previewData: previewData,
+    );
+
+    currentListMessage[index] = updatedMessage;
+    emit(state.copyWith(listMessage: [...currentListMessage]));
+  }
+
+  void addTempRepliedMessage(IMessageModel? message) {
+    emit(state.copyWith(tempRepliedMessage: message));
+  }
 
   void sendTextMessage(TextMessageParam message) async {
     try {
@@ -374,20 +394,6 @@ class ListMessageCubit extends Cubit<ListMessageState> {
     }
   }
 
-  void previewDataFetched(
-      TextMessageModel textMessage, PreviewDataModel previewData) {
-    var currentListMessage = state.listMessage.toList();
-    final index = currentListMessage
-        .indexWhere((element) => element.id == textMessage.id);
-    final updatedMessage =
-        (currentListMessage[index] as TextMessageModel).copyWith(
-      previewData: previewData,
-    );
-
-    currentListMessage[index] = updatedMessage;
-    emit(state.copyWith(listMessage: [...currentListMessage]));
-  }
-
   Future<void> handleMessageTap(IMessageModel message) async {
     if (message is FileMessageModel) {
       var localPath = message.uri;
@@ -432,7 +438,5 @@ class ListMessageCubit extends Cubit<ListMessageState> {
     }
   }
 
-  void addTempRepliedMessage(IMessageModel? message) {
-    emit(state.copyWith(tempRepliedMessage: message));
-  }
+  Future<void> sendForwardMessage(IMessageModel message) async {}
 }

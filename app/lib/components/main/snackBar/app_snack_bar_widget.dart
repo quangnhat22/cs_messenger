@@ -14,6 +14,14 @@ class AppSnackBarWidget extends AppSnackBarBaseBuilder {
       ..showSnackBar(snackBar);
   }
 
+  void showSnackBarWithContext(BuildContext context) async {
+    final snackBar = _buildSnackBar(context);
+
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(snackBar);
+  }
+
   SnackBar _buildSnackBar(BuildContext context) {
     return SnackBar(
       margin: _marginSnackBar ??

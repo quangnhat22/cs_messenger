@@ -260,5 +260,9 @@
   "chatRoom": "Phòng chat",
   "doYouWantToDeleteAllNotifications": "Bạn có muốn xóa toàn bộ thông báo?",
   "doYouWantToDeleteThisNotification": "Bạn có muốn xóa thông báo này hay không?",
-  "deleteNotification": "Xóa thông báo"
+  "deleteNotification": "Xóa thông báo",
+  "copy": "Sao chép",
+  "copied": "Đã sao chép",
+  "forward": "Chuyển tiếp",
+  "send": "Gửi"
 }

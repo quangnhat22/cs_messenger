@@ -88,7 +88,7 @@ class TextMessageText extends StatelessWidget {
         overflow: overflow,
         regexOptions: const RegexOptions(multiLine: true, dotAll: true),
         selectable: options.isTextSelectable,
-        style: bodyTextStyle,
+        style: Theme.of(context).textTheme.bodyMedium,
         text: text,
         textWidthBasis: TextWidthBasis.longestLine,
       );
@@ -273,7 +273,7 @@ class TextMessage extends StatelessWidget {
 
 class TextMessageOptions {
   const TextMessageOptions({
-    this.isTextSelectable = true,
+    this.isTextSelectable = false,
     this.onLinkPressed,
     this.openOnPreviewImageTap = false,
     this.openOnPreviewTitleTap = false,

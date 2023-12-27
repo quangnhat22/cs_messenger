@@ -54,7 +54,7 @@ class RoomChatDashBoardPage extends StatelessWidget {
     return AppCardChatRoomWidget()
         .setLeading(AppAvatarCircleWidget()
             .setUrl(model.avatar)
-            .setSize(AppAvatarSize.medium)
+            .setSize(AppAvatarSize.mediumLarge)
             .build(context))
         .setTitle(AppTextTitleMediumWidget().setText(model.name).build(context))
         .setSubtitle(RoomChatSubTitleWidget(

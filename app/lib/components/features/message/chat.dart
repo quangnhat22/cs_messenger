@@ -86,6 +86,7 @@ class Chat extends StatefulWidget {
     this.onStickerSent,
     this.onMapSent,
     this.onReplyMessage,
+    this.onForwardMessage,
   });
 
   final String currentUserId;
@@ -146,6 +147,7 @@ class Chat extends StatefulWidget {
   final void Function(UserModel)? onAvatarTap;
   final void Function(TextMessageModel, PreviewDataModel)? onPreviewDataFetched;
   final void Function(IMessageModel?)? onReplyMessage;
+  final void Function(IMessageModel?)? onForwardMessage;
 
   final DateFormat? dateFormat;
   final int dateHeaderThreshold;
@@ -426,6 +428,7 @@ class _ChatState extends State<Chat> {
           onMessageStatusTap: widget.onMessageStatusTap,
           onPreviewDataFetched: _onPreviewDataFetched,
           onReplyMessage: widget.onReplyMessage,
+          onForwardMessage: widget.onForwardMessage,
         );
         // messageWidget = widget.slidableMessageBuilder == null
         //     ? msgWidget

@@ -1,6 +1,8 @@
 import 'package:app/components/features/message/chat.dart';
 import 'package:app/components/features/skeleton/list_skeletion.dart';
+import 'package:app/configs/theme/app_theme.dart';
 import 'package:app/features/room_chat/presentation/chat/controllers/list_message/list_message_cubit.dart';
+import 'package:app/features/room_chat/presentation/chat/views/list_chat_room_forward_view.dart';
 import 'package:app/features/room_chat/presentation/chat/widgets/chat_float_top_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -96,7 +98,26 @@ class _ChatViewState extends State<ChatView> {
           onReplyMessage: (message) {
             context.read<ListMessageCubit>().addTempRepliedMessage(message);
           },
+          onForwardMessage: (message) async {
+            await _showListChatRoomForwardDialog(context);
+          },
         );
+      },
+    );
+  }
+
+  Future<void> _showListChatRoomForwardDialog(BuildContext context) async {
+    final res = await await showModalBottomSheet(
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(AppSizeExt.of.majorScale(5)),
+          topRight: Radius.circular(AppSizeExt.of.majorScale(5)),
+        ),
+      ),
+      context: context,
+      builder: (context) {
+        return const ListChatRoomForwardView();
       },
     );
   }
