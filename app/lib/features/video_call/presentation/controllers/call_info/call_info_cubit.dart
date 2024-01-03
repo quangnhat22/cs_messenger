@@ -1,5 +1,5 @@
 import 'package:app/configs/exts/app_exts.dart';
-import 'package:app/features/video_call/domain/usecases/get_list_member_video_call_uc.dart';
+import 'package:app/features/room_chat/domain/usecases/get_chat_room_detail_info_uc.dart';
 import 'package:app/features/video_call/domain/usecases/get_video_call_token_uc.dart';
 import 'package:configs/configs.dart';
 import 'package:domain/domain.dart';
@@ -15,9 +15,12 @@ part 'call_info_state.dart';
 @Injectable()
 class CallInfoCubit extends Cubit<CallInfoState> {
   late final GetVideoCallTokenUseCase _getVideoCallTokenUseCase;
+  late final GetChatRoomDetailInfoUseCase _getChatRoomDetailInfoUseCase;
 
-  CallInfoCubit(this._getVideoCallTokenUseCase)
-      : super(const CallInfoState.initial());
+  CallInfoCubit(
+    this._getVideoCallTokenUseCase,
+    this._getChatRoomDetailInfoUseCase,
+  ) : super(const CallInfoState.initial());
 
   late final Room _room;
 
@@ -27,9 +30,23 @@ class CallInfoCubit extends Cubit<CallInfoState> {
     return super.close();
   }
 
-  void initPage(String chatRoomId) {
-    _room = Room();
-    emit(state.copyWith(room: _room, chatRoomId: chatRoomId));
+  void initPage(String chatRoomId) async {
+    try {
+      _room = Room();
+      final chatRoomResponse = await _getChatRoomDetailInfoUseCase.executeObj(
+          request: GetChatRoomInfoParam(id: chatRoomId));
+      emit(state.copyWith(
+        room: _room,
+        chatRoomId: chatRoomId,
+        chatRoomInfo: chatRoomResponse.netData,
+      ));
+    } on AppException catch (e) {
+      AppExceptionExt(
+          appException: e,
+          onError: (e) {
+            Logs.e(e);
+          }).detected();
+    }
   }
 
   Future<void> connectRoom(
@@ -96,6 +113,4 @@ class CallInfoCubit extends Cubit<CallInfoState> {
       Logs.e(e);
     }
   }
-
-  
 }

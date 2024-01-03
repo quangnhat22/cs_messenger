@@ -5,6 +5,9 @@ import 'package:app/components/main/dialog/app_dialog_base_builder.dart';
 import 'package:app/components/main/listView/app_list_view_widget.dart';
 import 'package:app/components/main/listView/controllers/app_list_view_cubit.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
+import 'package:app/configs/di/di.dart';
+import 'package:app/configs/routes/app_router.dart';
+import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:app/features/friend/presentation/friend_request/controllers/cubit_friend_request_action/friend_request_action_cubit.dart';
 import 'package:app/features/friend/presentation/friend_request/controllers/cubit_list_friend_sent_request.dart';
@@ -69,7 +72,8 @@ class FriendSentRequestView extends StatelessWidget {
                   await _handleUndoRequestButton(context, request.id))
               .build(context),
         ])
-        .setOnTap(() {})
+        .setOnTap(
+            () => _showDetailFriendReceiveReceive(context, request: request))
         .build(context);
   }
 
@@ -95,5 +99,93 @@ class FriendSentRequestView extends StatelessWidget {
     } catch (e) {
       Logs.e(e.toString());
     }
+  }
+
+  void _showDetailFriendReceiveReceive(BuildContext context,
+      {RequestModel? request}) {
+    AppDialogRequestWidget()
+        .setIsHaveCloseIcon(true)
+        .setTopWidget(AppTextHeadlineMediumWidget()
+            .setText(R.strings.friendRequest)
+            .setTextStyle(TextStyle(
+              color: Theme.of(context).colorScheme.primary,
+              fontWeight: FontWeight.bold,
+            ))
+            .build(context))
+        .setContentWidget(Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(
+              height: AppSizeExt.of.majorScale(4),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: AppSizeExt.of.majorPaddingScale(3),
+                vertical: AppSizeExt.of.majorPaddingScale(3),
+              ),
+              child: Row(
+                children: [
+                  AppTextTitleMediumWidget()
+                      .setText('${R.strings.sent} ')
+                      .setTextStyle(TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                      ))
+                      .build(context),
+                  SizedBox(
+                    width: AppSizeExt.of.majorScale(2),
+                  ),
+                  AppTextTitleMediumWidget()
+                      .setText(DateTimeExt.dateTimeToDisplayHHmmddMMyyyy(
+                          dateTime: request?.createdAt))
+                      .setTextStyle(
+                          const TextStyle(fontStyle: FontStyle.italic))
+                      .build(context),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: AppSizeExt.of.majorPaddingScale(3),
+                vertical: AppSizeExt.of.majorPaddingScale(3),
+              ),
+              child: AppTextTitleMediumWidget()
+                  .setText(R.strings.receiver)
+                  .setTextStyle(TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.bold,
+                  ))
+                  .build(context),
+            ),
+            AppCardWidget()
+                .setElevation(0)
+                .setLeading(
+                  AppAvatarCircleWidget()
+                      .setUrl(request?.receiver?.avatar)
+                      .setSize(AppAvatarSize.mediumLarge)
+                      .build(context),
+                )
+                .setTitle(
+                  AppTextTitleMediumWidget()
+                      .setText(request?.receiver?.name)
+                      .build(context),
+                )
+                .setSubtitle(
+                  AppTextBodySmallWidget()
+                      .setText('${request?.receiver?.email}')
+                      .setMaxLines(2)
+                      .build(context),
+                )
+                .setOnTap(() async {
+              if (request?.sender?.id != null) {
+                await getIt<AppRouter>().pop();
+                await getIt<AppRouter>()
+                    .push(FriendInfoRoute(userId: request!.receiver!.id));
+              }
+            }).setActions([const Icon(Icons.chevron_right)]).build(context)
+          ],
+        ))
+        .buildDialog(context)
+        .show();
   }
 }

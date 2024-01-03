@@ -69,6 +69,8 @@ class ApiProvider {
   //notification
   static String notifications = '$userSelfUrl/notifications';
 
+  static String notificationById(String id) => '$userSelfUrl/notifications/$id';
+
   //TODO: mockApi
   static const String mockServerUrl =
       'https://166706c7-b0dd-4262-a9a8-9e7b5f3dd1be.mock.pstmn.io';

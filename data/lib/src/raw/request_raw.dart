@@ -8,6 +8,7 @@ class RequestRaw extends BaseRaw<RequestModel> with _$RequestRaw {
     required String id,
     UserRaw? sender,
     UserRaw? receiver,
+    GroupRaw? group,
     // ignore: invalid_annotation_target
     @JsonKey(name: 'created_at') int? createdAt,
   }) = _RequestRaw;
@@ -24,6 +25,7 @@ class RequestRaw extends BaseRaw<RequestModel> with _$RequestRaw {
           ? DateTimeExt.convertTimeStampToDateTime(createdAt!)
           : null,
       receiver: receiver?.raw2Model(),
+      group: group?.raw2Model(),
     );
   }
 }

@@ -1,5 +1,4 @@
 import 'package:app/components/main/appBar/app_bar_base_builder.dart';
-import 'package:app/components/main/card/app_card_base_builder.dart';
 import 'package:app/components/main/page/app_main_page_base_builder.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/configs/di/di.dart';
@@ -34,32 +33,32 @@ class ListDevicesPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: AppSizeExt.of.majorPaddingScale(2),
-              vertical: AppSizeExt.of.majorPaddingScale(3),
-            ),
-            child: AppTextTitleMediumWidget()
-                .setText(R.strings.currentDevices)
-                .setTextStyle(TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontWeight: FontWeight.bold,
-                ))
-                .build(context),
-          ),
-          SizedBox(
-            height: AppSizeExt.of.majorScale(1),
-          ),
-          AppCardWidget()
-              .setLeading(const CircleAvatar(
-                child: Icon(Icons.android),
-              ))
-              .setTitle(
-                  AppTextBodyLargeWidget().setText('MI 9T').build(context))
-              .setSubtitle(AppTextBodyMediumWidget()
-                  .setText('Android 13 - Current')
-                  .build(context))
-              .build(context),
+          // Padding(
+          //   padding: EdgeInsets.symmetric(
+          //     horizontal: AppSizeExt.of.majorPaddingScale(2),
+          //     vertical: AppSizeExt.of.majorPaddingScale(3),
+          //   ),
+          //   child: AppTextTitleMediumWidget()
+          //       .setText(R.strings.currentDevices)
+          //       .setTextStyle(TextStyle(
+          //         color: Theme.of(context).colorScheme.primary,
+          //         fontWeight: FontWeight.bold,
+          //       ))
+          //       .build(context),
+          // ),
+          // SizedBox(
+          //   height: AppSizeExt.of.majorScale(1),
+          // ),
+          // AppCardWidget()
+          //     .setLeading(const CircleAvatar(
+          //       child: Icon(Icons.android),
+          //     ))
+          //     .setTitle(
+          //         AppTextBodyLargeWidget().setText('MI 9T').build(context))
+          //     .setSubtitle(AppTextBodyMediumWidget()
+          //         .setText('Android 13 - Current')
+          //         .build(context))
+          //     .build(context),
           SizedBox(
             height: AppSizeExt.of.majorScale(2),
           ),
@@ -69,7 +68,7 @@ class ListDevicesPage extends StatelessWidget {
               vertical: AppSizeExt.of.majorPaddingScale(3),
             ),
             child: AppTextTitleMediumWidget()
-                .setText(R.strings.historyDevices)
+                .setText(R.strings.activeSession)
                 .setTextStyle(TextStyle(
                   color: Theme.of(context).colorScheme.primary,
                   fontWeight: FontWeight.bold,
@@ -79,7 +78,9 @@ class ListDevicesPage extends StatelessWidget {
           SizedBox(
             height: AppSizeExt.of.majorScale(1),
           ),
-          Expanded(child: const ListHistoryDeviceWidget()),
+          const Expanded(
+            child: ListHistoryDeviceWidget(),
+          ),
         ],
       ),
     );

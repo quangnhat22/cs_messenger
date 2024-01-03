@@ -35,18 +35,20 @@ class ListHistoryDeviceWidget extends StatelessWidget {
               ))
         .setTitle(AppTextBodyLargeWidget().setText(device.model).build(context))
         .setSubtitle(AppTextBodyMediumWidget()
-            .setText(DateTimeExt.dateTimeToDisplay(dateTime: device.lastActive))
+            .setText(DateTimeExt.dateTimeToDisplayHHmmddMMyyyy(
+                dateTime: device.lastActive))
             .build(context))
         .setActions(
       [
-        AppButtonOutlineWidget()
-            .setPrefixIcon(Icon(
-              Icons.delete_outline,
-              color: Theme.of(context).colorScheme.error,
-            ).build(context))
-            .setBorderColor(Theme.of(context).colorScheme.errorContainer)
-            .setOnPressed(() => _deleteDevice(context, device.id))
-            .build(context)
+        if (!device.isCurrentDevice)
+          AppButtonOutlineWidget()
+              .setPrefixIcon(Icon(
+                Icons.delete_outline,
+                color: Theme.of(context).colorScheme.error,
+              ).build(context))
+              .setBorderColor(Theme.of(context).colorScheme.errorContainer)
+              .setOnPressed(() => _deleteDevice(context, device.id))
+              .build(context)
       ],
     ).build(context);
   }

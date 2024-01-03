@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:app/features/setting/domain/usecases/theme_language/get_language_uc.dart';
 import 'package:app/features/setting/domain/usecases/theme_language/get_theme_uc.dart';
+import 'package:app/service/onesignal/onesignal_service.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,10 +17,12 @@ part 'app_theme_language_state.dart';
 class AppThemeLanguageCubit extends Cubit<AppThemeLanguageState> {
   late final GetLanguageUseCase _getLanguageUseCase;
   late final GetThemeUseCase _getThemeUseCase;
+  late final OneSignalService _oneSignalService;
 
   AppThemeLanguageCubit(
     this._getLanguageUseCase,
     this._getThemeUseCase,
+    this._oneSignalService,
   ) : super(const AppThemeLanguageState.initial()) {
     // listen theme change from local storage
     _themeSub = _getThemeUseCase.getStream().listen((themeModel) {
@@ -49,6 +53,7 @@ class AppThemeLanguageCubit extends Cubit<AppThemeLanguageState> {
     final theme = _convertToThemeMode(themeModel.netData);
     final locale = _convertToLocale(languageModel.netData);
     emit(state.copyWith(theme: theme, language: locale));
+    await _oneSignalService.setLanguage(locale: locale.languageCode);
   }
 
   ThemeMode _convertToThemeMode(ThemeModel? theme) {
@@ -66,8 +71,13 @@ class AppThemeLanguageCubit extends Cubit<AppThemeLanguageState> {
     switch (language?.language) {
       case LanguageType.vi:
         return const Locale("vi", "VN");
-      default:
+      case LanguageType.en:
         return const Locale("en", "US");
+      default:
+        final String defaultLocale = Platform.localeName;
+        final languageCode = defaultLocale.split('_')[0];
+        final countryCode = defaultLocale.split('_')[1];
+        return Locale(languageCode, countryCode);
     }
   }
 }

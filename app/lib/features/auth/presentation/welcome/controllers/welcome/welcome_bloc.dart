@@ -58,15 +58,13 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
             await _checkAuthenticated(event, emit),
       );
     });
-
-    // OneSignalService.
   }
 
   Future<void> _started(_Started event, Emitter<WelcomeState> emit) async {
     try {
       emit(state.copyWith(isLoading: true));
 
-      await getIt<OneSignalService>().init();
+      await _oneSignalService.init();
 
       final welcomeModel = await _getIsFirstInstalledUseCase.executeObj();
       final idRemoteDeviceModel = await _getIdRemoteDeviceUseCase.executeObj();
@@ -85,13 +83,11 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
         final isVerifyEmail = await _checkIsVerifyingEmail();
 
         if (isVerifyEmail) {
-          //open verify email page
+          /// open verify email page
           await getIt<AppRouter>()
               .push(VerifyEmailRoute(isFirstRequestSendEmail: false));
         } else {
           add(const WelcomeCheckLoginAuthenticated());
-          // final isAuthenticated = await _checkAuthenticated();
-          // emit(state.copyWith(isAuthenticated: isAuthenticated));
         }
       }
       emit(state.copyWith(isLoading: false));
@@ -119,8 +115,6 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
       emit(state.copyWith(isLoading: true));
       await _loginWithGoogleUseCase.executeObj();
       add(const WelcomeEvent.checkAuthenticated());
-      // final isAuthenticated = await _checkAuthenticated();
-      // emit(state.copyWith(isAuthenticated: isAuthenticated));
       emit(state.copyWith(isLoading: false));
     } on AppException catch (e) {
       emit(state.copyWith(isLoading: false));
@@ -182,8 +176,10 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
 
   void _handleNotificationOnTap() {
     OneSignal.Notifications.addClickListener((event) async {
-      Logs.d('NOTIFICATION CLICK LISTENER CALLED WITH EVENT: $event');
-      await getIt<AppRouter>().push(const ListNotificationRoute());
+      final tokenModel = await _checkAuthenticatedUseCase.executeObj();
+      if (tokenModel.netData?.accessToken != '') {
+        await getIt<AppRouter>().push(const ListNotificationRoute());
+      }
     });
   }
 }

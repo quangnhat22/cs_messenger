@@ -15,9 +15,9 @@ class UserRaw extends BaseRaw<UserModel> with _$UserRaw {
     @HiveField(6) int? birthday,
     @HiveField(7) String? bio,
     // ignore: invalid_annotation_target
-    @Default(0) @JsonKey(name: "friend_common") int? friendCommon,
+    @Default(0) @JsonKey(name: "common_friend") int? friendCommon,
     // ignore: invalid_annotation_target
-    @Default(0) @JsonKey(name: "group_common") int? groupCommon,
+    @Default(0) @JsonKey(name: "common_group") int? groupCommon,
     RelationRaw? relation,
   }) = _UserRaw;
 

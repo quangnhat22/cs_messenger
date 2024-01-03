@@ -92,6 +92,8 @@ dependencies:
     git:
       url: https://github.com/retroportalstudio/focused_menu.git
   flutter_slidable: ^3.0.1
+  scrollable_positioned_list: ^0.3.8
+  open_mail_app: ^0.4.5
 
 dev_dependencies:
   flutter_test:

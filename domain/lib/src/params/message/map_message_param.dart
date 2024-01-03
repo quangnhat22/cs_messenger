@@ -8,6 +8,7 @@ class MapMessageParam extends IMessageParam with _$MapMessageParam {
     required double long,
     String? name,
     @JsonKey(includeFromJson: false) ReplyMessageParam? repliedMessage,
+    @Default(false) bool isForward,
   }) = _MapMessageParam;
 
   factory MapMessageParam.fromJson(Map<String, Object?> json) =>

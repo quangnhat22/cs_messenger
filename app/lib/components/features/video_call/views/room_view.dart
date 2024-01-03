@@ -9,7 +9,6 @@ import 'package:app/components/features/video_call/widgets/controls.dart';
 import 'package:app/components/features/video_call/widgets/participant.dart';
 import 'package:app/components/main/page/app_main_page_base_builder.dart';
 import 'package:app/configs/theme/app_theme.dart';
-import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:livekit_client/livekit_client.dart';
 import 'package:utilities/utilities.dart';
@@ -239,34 +238,39 @@ class _RoomViewState extends State<RoomView> {
 
   @override
   Widget build(BuildContext context) {
-    return AppMainPageWidget().setBody(_body(context)).build(context);
+    return AppMainPageWidget()
+        .setResizeToAvoidBottomInset(true)
+        .setBody(_body(context))
+        .build(context);
   }
 
   Widget _body(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: AppSizeExt.of.majorPaddingScale(4),
-      ),
-      child: Column(
-        children: <Widget>[
-          Expanded(
-            child: participantTracks.isNotEmpty
-                ? _isHaveScreenSharing
-                    ? _stackLayout(context)
-                    : _gridLayout(context)
-                : const SizedBox(),
-          ),
-          if (widget.room.localParticipant != null)
-            SafeArea(
-              top: false,
-              child: ControlsWidget(
+    return SafeArea(
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSizeExt.of.majorPaddingScale(4),
+        ),
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: AppSizeExt.of.majorScale(12),
+            ),
+            Expanded(
+              child: participantTracks.isNotEmpty
+                  ? _isHaveScreenSharing
+                      ? _stackLayout(context)
+                      : _gridLayout(context)
+                  : const SizedBox(),
+            ),
+            if (widget.room.localParticipant != null)
+              ControlsWidget(
                 widget.room,
                 widget.room.localParticipant!,
                 roomId: widget.roomId,
                 onShowMembers: widget.onShowMembers,
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -276,7 +280,7 @@ class _RoomViewState extends State<RoomView> {
         ? ParticipantWidget.widgetFor(participantTracks.first,
             showStatsLayer: true)
         : GridView.builder(
-            scrollDirection: Axis.vertical,
+            scrollDirection: Axis.horizontal,
             physics: const ScrollPhysics(),
             shrinkWrap: true,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -291,28 +295,28 @@ class _RoomViewState extends State<RoomView> {
   }
 
   Widget _stackLayout(BuildContext context) {
-    return Stack(
+    return Column(
       children: <Widget>[
-        ParticipantWidget.widgetFor(
-          participantTracks.first,
-          showStatsLayer: true,
-        ),
-        Positioned(
-          left: 0,
-          right: 0,
-          top: 0,
-          child: SizedBox(
-            height: AppSizeExt.of.majorScale(30),
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: math.max(0, participantTracks.length - 1),
-              itemBuilder: (BuildContext context, int index) => SizedBox(
-                width: AppSizeExt.of.majorScale(25),
-                height: AppSizeExt.of.majorScale(30),
+        SizedBox(
+          height: AppSizeExt.of.majorScale(30),
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: math.max(0, participantTracks.length - 1),
+            itemBuilder: (BuildContext context, int index) => SizedBox(
+              width: AppSizeExt.of.majorScale(25),
+              height: AppSizeExt.of.majorScale(30),
+              child: Padding(
+                padding: EdgeInsets.all(AppSizeExt.of.majorScale(1)),
                 child:
                     ParticipantWidget.widgetFor(participantTracks[index + 1]),
               ),
             ),
+          ),
+        ),
+        Expanded(
+          child: ParticipantWidget.widgetFor(
+            participantTracks.first,
+            showStatsLayer: true,
           ),
         ),
       ],

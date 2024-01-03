@@ -17,6 +17,9 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
     @JsonKey(name: 'created_at') int? createdAt,
     int? deletedAt,
     String? extra,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: 'is_latest_message') @Default(false) bool isLatestMessage,
+    String? offset,
   }) = _MessageRaw;
 
   factory MessageRaw.fromJson(Map<String, Object?> json) =>
@@ -29,6 +32,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
     switch (type) {
       case "text":
         final repliedMessage = extraMessage?['repliedMessage'] as dynamic;
+        final isForward = extraMessage?['isForward'] as bool?;
         ReplyMessageModel? replyMessageModel;
         if (repliedMessage != null) {
           final messageReplyRaw = ReplyMessageRaw.fromJson(repliedMessage);
@@ -50,6 +54,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
               ? DateTimeExt.convertTimeStampToDateTime(deletedAt!)
               : null,
           repliedMessage: replyMessageModel,
+          isForward: isForward ?? false,
           // clientId: clientId,
         );
       case "map":
@@ -57,6 +62,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
         final lat = extraMessage?['lat'] as double?;
         final long = extraMessage?['long'] as double?;
         final repliedMessage = extraMessage?['repliedMessage'] as dynamic;
+        final isForward = extraMessage?['isForward'] as bool?;
         ReplyMessageModel? replyMessageModel;
         if (repliedMessage != null) {
           final messageReplyRaw = ReplyMessageRaw.fromJson(repliedMessage);
@@ -81,10 +87,12 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
           lat: lat ?? 10.782637,
           long: long ?? 106.695944,
           repliedMessage: replyMessageModel,
+          isForward: isForward ?? false,
         );
       case "gif":
         final repliedMessage = extraMessage?['repliedMessage'] as dynamic;
-        final link = extraMessage?['link'] as String;
+        final link = extraMessage?['link'] as String?;
+        final isForward = extraMessage?['isForward'] as bool?;
         ReplyMessageModel? replyMessageModel;
         if (repliedMessage != null) {
           final messageReplyRaw = ReplyMessageRaw.fromJson(repliedMessage);
@@ -107,6 +115,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
           // clientId: clientId,
           link: link,
           repliedMessage: replyMessageModel,
+          isForward: isForward ?? false,
         );
       case "system":
         return SystemMessageModel(
@@ -130,6 +139,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
         final name = extraMessage?['name'] as String?;
         final clientId = extraMessage['clientId'] as String?;
         final repliedMessage = extraMessage?['repliedMessage'] as dynamic;
+        final isForward = extraMessage?['isForward'] as bool?;
         ReplyMessageModel? replyMessageModel;
         if (repliedMessage != null) {
           final messageReplyRaw = ReplyMessageRaw.fromJson(repliedMessage);
@@ -152,11 +162,13 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
           width: width ?? 0.0,
           height: height ?? 0.0,
           repliedMessage: replyMessageModel,
+          isForward: isForward ?? false,
         );
       case "audio":
         final name = extraMessage?['name'] as String?;
         final clientId = extraMessage['clientId'] as String?;
         final repliedMessage = extraMessage?['repliedMessage'] as dynamic;
+        final isForward = extraMessage?['isForward'] as bool?;
         ReplyMessageModel? replyMessageModel;
         if (repliedMessage != null) {
           final messageReplyRaw = ReplyMessageRaw.fromJson(repliedMessage);
@@ -178,6 +190,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
           isMe: isMe,
           clientId: clientId,
           repliedMessage: replyMessageModel,
+          isForward: isForward ?? false,
         );
       case "video":
         final name = extraMessage?['name'] as String?;
@@ -185,6 +198,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
         final size = extraMessage?['size'] as double?;
         final clientId = extraMessage['clientId'] as String?;
         final repliedMessage = extraMessage?['repliedMessage'] as dynamic;
+        final isForward = extraMessage?['isForward'] as bool?;
         ReplyMessageModel? replyMessageModel;
         if (repliedMessage != null) {
           final messageReplyRaw = ReplyMessageRaw.fromJson(repliedMessage);
@@ -208,6 +222,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
           name: name,
           clientId: clientId,
           repliedMessage: replyMessageModel,
+          isForward: isForward ?? false,
         );
       case "file":
         final size = extraMessage?['size'] as double?;
@@ -215,6 +230,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
         final mimeType = extraMessage?['mimeType'] as String?;
         final clientId = extraMessage['clientId'] as String?;
         final repliedMessage = extraMessage?['repliedMessage'] as dynamic;
+        final isForward = extraMessage?['isForward'] as bool?;
         ReplyMessageModel? replyMessageModel;
         if (repliedMessage != null) {
           final messageReplyRaw = ReplyMessageRaw.fromJson(repliedMessage);
@@ -237,6 +253,7 @@ class MessageRaw extends BaseRaw<IMessageModel> with _$MessageRaw {
           mimeType: mimeType,
           clientId: clientId,
           repliedMessage: replyMessageModel,
+          isForward: isForward ?? false,
         );
       default:
         throw Exception("Message type not found");

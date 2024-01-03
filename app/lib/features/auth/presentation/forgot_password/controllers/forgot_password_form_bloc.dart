@@ -36,7 +36,9 @@ class ForgotPasswordFormBloc extends FormBloc<String, String> {
   Future<void> onSubmitting() async {
     try {
       AppLoadingOverlayWidget.show();
-      await _forgotPasswordUseCase.executeObj();
+      await _forgotPasswordUseCase.executeObj(
+          request: ForgotPasswordParam(email: email.value));
+      emitSuccess();
       AppLoadingOverlayWidget.dismiss();
       await getIt<AppRouter>().push(SendEmailSuccessRoute(email: email.value));
     } on AppException catch (e) {

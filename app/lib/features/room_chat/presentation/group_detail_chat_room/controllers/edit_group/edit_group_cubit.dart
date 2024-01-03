@@ -126,6 +126,7 @@ class EditGroupCubit extends Cubit<EditGroupState> {
       AppLoadingOverlayWidget.show();
       await _leaveGroupUseCase.executeObj(
           request: LeaveGroupParam(groupId: state.groupId!));
+
       AppLoadingOverlayWidget.dismiss();
     } on AppException catch (e) {
       AppLoadingOverlayWidget.dismiss();

@@ -160,13 +160,16 @@ class SettingDashBoardPage extends StatelessWidget {
                       },
                     ).build(ctx),
                     AppCardBorderWidget()
-                        .setLeading(
-                            const Icon(Icons.photo_camera_front_outlined))
+                        .setLeading(const Icon(Icons.info_outline))
                         .setTitle(AppTextBodyLargeWidget()
                             .setText(R.strings.about)
                             .build(ctx))
                         .setIsShowBottomDivider(true)
-                        .build(ctx),
+                        .setActions([const Icon(Icons.chevron_right)]).setOnTap(
+                      () async {
+                        await getIt<AppRouter>().push(const AboutUsRoute());
+                      },
+                    ).build(ctx),
                     AppCardBorderWidget()
                         .setLeading(Icon(Icons.block_outlined,
                             color: Theme.of(ctx).colorScheme.error))

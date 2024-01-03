@@ -12,6 +12,7 @@ class AppDialogRequestWidget extends AppDialogBaseBuilder {
           _buildContentDialog(context),
           if (_isHaveCloseIcon == true)
             Positioned(
+              top: AppSizeExt.of.majorScale(2 / 4),
               right: AppSizeExt.of.majorScale(2),
               child: IconButton(
                 icon: const Icon(Icons.close),
@@ -50,6 +51,7 @@ class AppDialogRequestWidget extends AppDialogBaseBuilder {
                   .setTextAlign(TextAlign.center)
                   .build(context),
             ),
+          if (_contentWidget != null) _contentWidget!,
           if (_content != null)
             AppTextBodyLargeWidget()
                 .setText(_content)
@@ -86,7 +88,6 @@ class AppDialogRequestWidget extends AppDialogBaseBuilder {
                             .setAppButtonSize(AppButtonSize.large)
                             .setAppButtonType(AppButtonType.danger)
                             .setOnPressed(() async {
-                          //TODO: implement auto route
                           await getIt<AppRouter>().pop();
                           _onPositive?.call();
                         }).build(context),

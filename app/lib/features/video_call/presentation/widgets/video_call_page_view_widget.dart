@@ -10,6 +10,7 @@ class VideoCallPageViewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CallInfoCubit, CallInfoState>(
+      buildWhen: (prev, current) => prev.callStatus != current.callStatus,
       builder: (context, state) {
         switch (state.callStatus) {
           case ConnectVideoCallStatus.initial:

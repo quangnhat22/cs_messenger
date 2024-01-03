@@ -18,6 +18,7 @@ class SocketMessageParam extends IMessageParam with _$SocketMessageParam {
       final meta = <String, dynamic>{
         'previewData': messageParam.previewData,
         'repliedMessage': messageParam.repliedMessage,
+        'isForward': messageParam.isForward,
       };
       meta.removeWhere((key, value) => value == null || value == "");
       return SocketMessageParam(
@@ -34,6 +35,7 @@ class SocketMessageParam extends IMessageParam with _$SocketMessageParam {
         'size': messageParam.size,
         'clientId': messageParam.clientId,
         'repliedMessage': messageParam.repliedMessage,
+        'isForward': messageParam.isForward,
       };
       meta.removeWhere((key, value) => value == null || value == "");
       return SocketMessageParam(
@@ -49,6 +51,7 @@ class SocketMessageParam extends IMessageParam with _$SocketMessageParam {
         'name': messageParam.name,
         'clientId': messageParam.clientId,
         'repliedMessage': messageParam.repliedMessage,
+        'isForward': messageParam.isForward,
       };
       meta.removeWhere((key, value) => value == null || value == "");
       return SocketMessageParam(
@@ -62,6 +65,7 @@ class SocketMessageParam extends IMessageParam with _$SocketMessageParam {
         'name': messageParam.name,
         'clientId': messageParam.clientId,
         'repliedMessage': messageParam.repliedMessage,
+        'isForward': messageParam.isForward,
       };
       meta.removeWhere((key, value) => value == null || value == "");
       return SocketMessageParam(
@@ -77,6 +81,7 @@ class SocketMessageParam extends IMessageParam with _$SocketMessageParam {
         'size': messageParam.size,
         'clientId': messageParam.clientId,
         'repliedMessage': messageParam.repliedMessage,
+        'isForward': messageParam.isForward,
       };
       meta.removeWhere((key, value) => value == null || value == "");
       return SocketMessageParam(
@@ -92,6 +97,7 @@ class SocketMessageParam extends IMessageParam with _$SocketMessageParam {
         'long': messageParam.long,
         'clientId': messageParam.clientId,
         'repliedMessage': messageParam.repliedMessage,
+        'isForward': messageParam.isForward,
       };
       meta.removeWhere((key, value) => value == null || value == "");
       return SocketMessageParam(
@@ -104,6 +110,7 @@ class SocketMessageParam extends IMessageParam with _$SocketMessageParam {
       final meta = <String, dynamic>{
         'link': messageParam.link,
         'repliedMessage': messageParam.repliedMessage,
+        'isForward': messageParam.isForward,
       };
       meta.removeWhere((key, value) => value == null || value == "");
       return SocketMessageParam(

@@ -118,8 +118,7 @@ class Message extends StatelessWidget {
   final void Function(BuildContext context, IMessageModel)? onMessageTap;
 
   /// Called when user taps on any replied message.
-  final void Function(BuildContext context, ReplyMessageModel)?
-      onRepliedMessageTap;
+  final void Function(ReplyMessageModel)? onRepliedMessageTap;
 
   /// Called when user double taps on any message.
   final void Function(BuildContext context, IMessageModel)? onMessageDoubleTap;
@@ -440,6 +439,21 @@ class Message extends StatelessWidget {
                   ? CrossAxisAlignment.end
                   : CrossAxisAlignment.start,
               children: [
+                if (message.isForward)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      AppTextLabelSmallWidget()
+                          .setText(R.strings.forwardMessage)
+                          .setTextStyle(
+                              const TextStyle(fontStyle: FontStyle.italic))
+                          .build(context),
+                      SizedBox(
+                        width: AppSizeExt.of.majorScale(1),
+                      ),
+                      const Icon(Icons.forward_outlined)
+                    ],
+                  ),
                 if (message.repliedMessage != null)
                   Column(
                     crossAxisAlignment: currentUserIsAuthor
@@ -456,6 +470,9 @@ class Message extends StatelessWidget {
                         messageReply: message.repliedMessage!,
                         width: MediaQuery.sizeOf(context).width * 0.6,
                         showClose: false,
+                        onTapMessage: (chatRoomId, replyMessage) {
+                          onRepliedMessageTap?.call(replyMessage);
+                        },
                       ),
                     ],
                   ),

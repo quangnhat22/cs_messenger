@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:resources/resources.dart';
-import 'package:scroll_to_index/scroll_to_index.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import 'conditional/conditional.dart';
 import 'image_gallery.dart';
@@ -30,7 +30,7 @@ class Chat extends StatefulWidget {
     this.repliedMessage,
     this.isLastPage,
     this.isFirstPage,
-    required this.scrollController,
+    required this.itemScrollController,
     this.scrollPhysics,
     this.useTopSafeAreaInset,
     this.userAgent,
@@ -87,6 +87,8 @@ class Chat extends StatefulWidget {
     this.onMapSent,
     this.onReplyMessage,
     this.onForwardMessage,
+    this.onFindIndexMessage,
+    required this.onRefreshPage,
   });
 
   final String currentUserId;
@@ -100,7 +102,7 @@ class Chat extends StatefulWidget {
   final Map<String, String>? imageHeaders;
   final Widget? customBottomWidget;
   final Widget? listBottomWidget;
-  final AutoScrollController scrollController;
+  final ItemScrollController itemScrollController;
   final ScrollPhysics? scrollPhysics;
   final Future<void> Function()? onEndReached;
   final double? onEndReachedThreshold;
@@ -170,6 +172,8 @@ class Chat extends StatefulWidget {
   final void Function(AudioMessageParam)? onAudioSent;
   final void Function(EmojiMessageParam)? onStickerSent;
   final void Function(MapMessageParam)? onMapSent;
+  final Future<int> Function(String)? onFindIndexMessage;
+  final Future<void> Function()? onRefreshPage;
 
   @override
   State<Chat> createState() => _ChatState();
@@ -185,6 +189,7 @@ class _ChatState extends State<Chat> {
   bool _hadScrolledToUnreadOnOpen = false;
   bool _isImageViewVisible = false;
   bool _isShowMediaOptions = false;
+  bool _isScrollFindIndex = false;
 
   @override
   void initState() {
@@ -274,7 +279,7 @@ class _ChatState extends State<Chat> {
                               onStartReached: widget.onStartReached,
                               onStartReachedThreshold:
                                   widget.onStartReachedThreshold,
-                              scrollController: widget.scrollController,
+                              itemScrollController: widget.itemScrollController,
                               scrollPhysics: widget.scrollPhysics,
                               // typingIndicatorOptions:
                               //     widget.typingIndicatorOptions,
@@ -283,6 +288,8 @@ class _ChatState extends State<Chat> {
                               bottomContainerWidget:
                                   widget.bottomContainerWidget,
                               topContainerWidget: widget.topContainerWidget,
+                              isScrollFindIndex: _isScrollFindIndex,
+                              onRefreshPage: widget.onRefreshPage,
                             ),
                           ),
                         ),
@@ -364,13 +371,16 @@ class _ChatState extends State<Chat> {
         height: object.height,
       );
     } else if (object is UnreadHeaderData) {
-      return AutoScrollTag(
-        controller: widget.scrollController,
-        index: index ?? -1,
-        key: const Key('unread_header'),
-        child: UnreadHeader(
-          marginTop: object.marginTop,
-        ),
+      // return AutoScrollTag(
+      //   controller: widget.itemScrollController,
+      //   index: index ?? -1,
+      //   key: const Key('unread_header'),
+      //   child: UnreadHeader(
+      //     marginTop: object.marginTop,
+      //   ),
+      // );
+      return const SizedBox(
+        height: 10,
       );
     } else {
       final map = object as Map<String, Object>;
@@ -429,19 +439,21 @@ class _ChatState extends State<Chat> {
           onPreviewDataFetched: _onPreviewDataFetched,
           onReplyMessage: widget.onReplyMessage,
           onForwardMessage: widget.onForwardMessage,
+          onRepliedMessageTap: _onRepliedMessageTap,
         );
         // messageWidget = widget.slidableMessageBuilder == null
         //     ? msgWidget
         //     : widget.slidableMessageBuilder!(message, msgWidget);
         messageWidget = msgWidget;
       }
-      return AutoScrollTag(
-        controller: widget.scrollController,
-        index: index ?? -1,
-        key: Key('scroll-${message.id}'),
-        highlightColor: Theme.of(context).colorScheme.secondaryContainer,
-        child: messageWidget,
-      );
+      return messageWidget;
+      // return AutoScrollTag(
+      //   controller: widget.scrollController,
+      //   index: index ?? -1,
+      //   key: Key('scroll-${message.id}'),
+      //   highlightColor: Theme.of(context).colorScheme.secondaryContainer,
+      //   child: messageWidget,
+      // );
     }
   }
 
@@ -502,12 +514,31 @@ class _ChatState extends State<Chat> {
   void scrollToUnreadHeader() {
     final unreadHeaderIndex = chatMessageAutoScrollIndexById[_unreadHeaderId];
     if (unreadHeaderIndex != null) {
-      widget.scrollController.scrollToIndex(
-        unreadHeaderIndex,
+      widget.itemScrollController.scrollTo(
+        index: 0,
         duration: widget.scrollToUnreadOptions.scrollDuration,
       );
     }
   }
 
   void scrollToMessage() {}
+
+  void _onRepliedMessageTap(ReplyMessageModel replyMessage) async {
+    final index = await widget.onFindIndexMessage?.call(replyMessage.id);
+    if (index != null && index >= 0) {
+      setState(() {
+        _isScrollFindIndex = true;
+      });
+
+      await widget.itemScrollController.scrollTo(
+          index: index + 5,
+          duration: const Duration(
+            milliseconds: 200,
+          ));
+
+      setState(() {
+        _isScrollFindIndex = false;
+      });
+    }
+  }
 }

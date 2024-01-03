@@ -21,5 +21,6 @@ class MapMessageModel extends IMessageModel {
     this.name,
     super.isShowStatus,
     super.repliedMessage,
+    super.isForward,
   });
 }

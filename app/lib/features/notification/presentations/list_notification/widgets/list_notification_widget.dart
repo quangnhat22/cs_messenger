@@ -4,6 +4,9 @@ import 'package:app/components/main/dialog/app_dialog_base_builder.dart';
 import 'package:app/components/main/listView/app_list_view_widget.dart';
 import 'package:app/components/main/listView/controllers/app_list_view_cubit.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
+import 'package:app/configs/di/di.dart';
+import 'package:app/configs/routes/app_router.dart';
+import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:app/features/notification/presentations/list_notification/controller/list_notification_cubit.dart';
 import 'package:domain/domain.dart';
@@ -88,14 +91,14 @@ class ListNotificationWidget extends StatelessWidget {
             //   )
             // ])
             .setOnTap(() async {
-          // await getIt<AppRouter>()
-          //     .push(FriendInfoRoute(userId: friend.id))
-          //     .then((result) {
-          //   Logs.d(result);
-          //   if (result == true) {
-          //     context.read<GetListFriendCubit>().onRefreshCall();
-          //   }
-          // });
+          if (notification.details?.action ==
+              NotificationActionType.receiveFriendRequest) {
+            await getIt<AppRouter>().push(const FriendRequestRoute());
+          }
+          if (notification.details?.action ==
+              NotificationActionType.receiveGroupRequest) {
+            await getIt<AppRouter>().push(const GroupRequestRoute());
+          }
         }).build(context),
       ),
     );

@@ -25,6 +25,7 @@ class ImageMessageModel extends IMessageModel {
     this.height,
     super.isShowStatus,
     super.repliedMessage,
+    super.isForward = false,
   });
 
   static ImageMessageModel getImageMessageModelFromParam(

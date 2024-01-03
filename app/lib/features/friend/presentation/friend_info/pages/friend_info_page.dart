@@ -1,18 +1,21 @@
 import 'package:app/components/main/appBar/app_bar_base_builder.dart';
+import 'package:app/components/main/avatar/app_avatar_base_builder.dart';
 import 'package:app/components/main/card/app_card_base_builder.dart';
 import 'package:app/components/main/page/app_main_page_base_builder.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/configs/di/di.dart';
+import 'package:app/configs/exts/app_exts.dart';
+import 'package:app/configs/routes/app_router.dart';
+import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:app/features/friend/presentation/friend_info/controllers/cubit_friend_info/friend_info_cubit.dart';
 import 'package:app/features/friend/presentation/friend_info/widgets/friend_info_action_button_widget.dart';
 import 'package:auto_route/annotations.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
 import 'package:utilities/utilities.dart';
-
-import '../../../../../components/main/avatar/app_avatar_base_builder.dart';
 
 @RoutePage()
 class FriendInfoPage extends StatelessWidget {
@@ -25,19 +28,43 @@ class FriendInfoPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => getIt<FriendInfoCubit>()..initPage(userId),
       child: AppMainPageWidget()
-          .setAppBar(AppBarWidget().setTextTitle("").setActions([
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.phone_outlined),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.message_outlined),
-            ),
-          ]).build(context))
+          .setAppBar(AppBarWidget()
+              .setTextTitle("")
+              .setActions([_appBarActions(context)]).build(context))
           .setBackgroundColor(Theme.of(context).colorScheme.surfaceVariant)
           .setBody(_body(context))
           .build(context),
+    );
+  }
+
+  Widget _appBarActions(BuildContext context) {
+    return BlocBuilder<FriendInfoCubit, FriendInfoState>(
+      builder: (context, state) {
+        return state.userInfo?.relation?.relation == RelationType.friend
+            ? Row(
+                children: <Widget>[
+                  IconButton(
+                    onPressed: () async {
+                      if (state.userInfo?.relation?.roomId != null) {
+                        await getIt<AppRouter>().navigate(VideoCallRoute(
+                            chatRoomId: state.userInfo!.relation!.roomId!));
+                      }
+                    },
+                    icon: const Icon(Icons.phone_outlined),
+                  ),
+                  IconButton(
+                    onPressed: () async {
+                      if (state.userInfo?.relation?.roomId != null) {
+                        await getIt<AppRouter>().navigate(ChatRoute(
+                            roomId: state.userInfo!.relation!.roomId!));
+                      }
+                    },
+                    icon: const Icon(Icons.message_outlined),
+                  ),
+                ],
+              )
+            : const SizedBox();
+      },
     );
   }
 
@@ -62,6 +89,10 @@ class FriendInfoPage extends StatelessWidget {
                   SizedBox(height: AppSizeExt.of.majorScale(4)),
                   Card(
                     elevation: 0,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .primaryContainer
+                        .withOpacity(AppConstants.appOpacityCard),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                         vertical: AppSizeExt.of.majorPaddingScale(5),
@@ -123,6 +154,10 @@ class FriendInfoPage extends StatelessWidget {
                   SizedBox(height: AppSizeExt.of.majorScale(4)),
                   Card(
                     elevation: 0,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .primaryContainer
+                        .withOpacity(0.36),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                           vertical: AppSizeExt.of.majorPaddingScale(1)),
@@ -165,6 +200,10 @@ class FriendInfoPage extends StatelessWidget {
                   SizedBox(height: AppSizeExt.of.majorScale(4)),
                   Card(
                     elevation: 0,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .primaryContainer
+                        .withOpacity(0.36),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                           vertical: AppSizeExt.of.majorPaddingScale(1)),

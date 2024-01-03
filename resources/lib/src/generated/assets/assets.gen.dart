@@ -17,6 +17,10 @@ class $AssetsPngsGen {
   /// File path: assets/pngs/app_icon.png
   AssetGenImage get appIcon => const AssetGenImage('assets/pngs/app_icon.png');
 
+  /// File path: assets/pngs/app_splash_icon.png
+  AssetGenImage get appSplashIcon =>
+      const AssetGenImage('assets/pngs/app_splash_icon.png');
+
   /// File path: assets/pngs/avatar_empty.png
   AssetGenImage get avatarEmpty =>
       const AssetGenImage('assets/pngs/avatar_empty.png');
@@ -94,6 +98,7 @@ class $AssetsPngsGen {
   /// List of all assets
   List<AssetGenImage> get values => [
         appIcon,
+        appSplashIcon,
         avatarEmpty,
         googleLogo,
         iconArrow,

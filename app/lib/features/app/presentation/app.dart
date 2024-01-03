@@ -2,6 +2,7 @@ import 'package:app/components/main/overlay/app_loading_overlay_widget.dart';
 import 'package:app/configs/di/di.dart';
 import 'package:app/configs/routes/app_router.dart';
 import 'package:app/configs/theme/app_theme.dart';
+import 'package:app/features/app/presentation/controllers/app_notification/app_notification_cubit.dart';
 import 'package:app/features/search/presentation/controllers/bloc/search_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,6 +25,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => getIt<SearchBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => getIt<AppNotificationCubit>(),
         ),
       ],
       child: BlocBuilder<AppThemeLanguageCubit, AppThemeLanguageState>(

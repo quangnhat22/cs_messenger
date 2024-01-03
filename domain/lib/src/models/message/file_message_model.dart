@@ -26,6 +26,7 @@ class FileMessageModel extends IMessageModel with _$FileMessageModel {
     String? name,
     @Default(true) bool isShowStatus,
     ReplyMessageModel? repliedMessage,
+    @Default(false) bool isForward,
   }) = _FileMessageModel;
 
   static FileMessageModel getFileMessageModelFromParam(

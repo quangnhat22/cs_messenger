@@ -1,6 +1,5 @@
 import 'package:app/components/main/dialog/app_dialog_base_builder.dart';
 import 'package:app/components/main/overlay/app_loading_overlay_widget.dart';
-import 'package:app/components/main/snackBar/app_snack_bar_base_builder.dart';
 import 'package:app/configs/exts/app_exts.dart';
 import 'package:app/features/search/domain/usecases/search_uc.dart';
 import 'package:app/features/user/domain/usecases/request/sent_request_uc.dart';
@@ -24,10 +23,11 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       : super(const _Initial()) {
     on<SearchEvent>((event, emit) async {
       await event.map(
-        inputChanged: (event) async => await _inputChanged(event, emit),
-        sendFriendRequest: (event) async =>
-            await _sendFriendRequest(event, emit),
-      );
+          inputChanged: (event) async => await _inputChanged(event, emit),
+          sendFriendRequest: (event) async =>
+              await _sendFriendRequest(event, emit),
+          sendFriendRequestSuccess: (event) async =>
+              _sendFriendRequestSuccess(event, emit));
     },
         transformer:
             debounce(Duration(milliseconds: AppConstants.timeDebounceSearch)));
@@ -38,8 +38,26 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       if (event.query != null && event.query!.isNotEmpty) {
         final response = await _searchUseCase.executeObj(
             request: SearchParam(query: event?.query));
+        int totalResults = 0;
+        if (response.netData?.messages != null &&
+            response.netData!.messages!.isNotEmpty) {
+          totalResults += 1;
+        }
+        if (response.netData?.groups != null &&
+            response.netData!.groups!.isNotEmpty) {
+          totalResults += 1;
+        }
+        if (response.netData?.users != null &&
+            response.netData!.users!.isNotEmpty) {
+          totalResults += 1;
+        }
+        if (response.netData?.recommendedFriend != null &&
+            response.netData!.recommendedFriend!.isNotEmpty) {
+          totalResults += 1;
+        }
         emit(state.copyWith(
           searchResult: response.netData,
+          totalResults: totalResults,
         ));
       }
     } catch (e) {
@@ -55,11 +73,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           request: SentRequestParam(
         userId: event.userId,
       ));
-      AppSnackBarWidget()
-          .setLabelText(R.strings.sendRequestSuccess)
-          .setAppSnackBarType(AppSnackBarType.informMessage)
-          .setAppSnackBarStatus(AppSnackBarStatus.success)
-          .showSnackBar();
+      emit(state.copyWith(isSentFriendRequestSuccess: true));
       AppLoadingOverlayWidget.dismiss();
     } on AppException catch (e) {
       AppLoadingOverlayWidget.dismiss();
@@ -76,6 +90,11 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
                 .show();
           }).detected();
     }
+  }
+
+  void _sendFriendRequestSuccess(
+      SearchSendFriendRequestSuccess event, Emitter<SearchState> emit) {
+    emit(state.copyWith(isSentFriendRequestSuccess: false));
   }
 
   EventTransformer<E> debounce<E>(Duration duration) {

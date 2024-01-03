@@ -9,12 +9,18 @@ class VideoCallPreJoinView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PreJoinView(
-      onConnect:
-          (LocalAudioTrack? audioTrack, LocalVideoTrack? videoTrack) async {
-        await context
-            .read<CallInfoCubit>()
-            .connectRoom(audioTrack: audioTrack, videoTrack: videoTrack);
+    return BlocBuilder<CallInfoCubit, CallInfoState>(
+      buildWhen: (prev, current) => prev.chatRoomInfo != current.chatRoomInfo,
+      builder: (context, state) {
+        return PreJoinView(
+          chatRoomInfo: state.chatRoomInfo,
+          onConnect:
+              (LocalAudioTrack? audioTrack, LocalVideoTrack? videoTrack) async {
+            await context
+                .read<CallInfoCubit>()
+                .connectRoom(audioTrack: audioTrack, videoTrack: videoTrack);
+          },
+        );
       },
     );
   }

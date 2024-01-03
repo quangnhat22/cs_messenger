@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:app/configs/di/di.dart';
 import 'package:app/features/app/presentation/app.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -10,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:resources/resources.dart';
+import 'package:utilities/utilities.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,30 +56,30 @@ class AppObserver extends BlocObserver {
   @override
   void onEvent(Bloc bloc, Object? event) {
     super.onEvent(bloc, event);
-    log(event.toString());
+    Logs.i(event.toString());
   }
 
   @override
   void onChange(BlocBase bloc, Change change) {
     super.onChange(bloc, change);
-    log(change.toString(), name: "BLOC");
+    Logs.i(change.toString());
   }
 
   @override
   void onCreate(BlocBase bloc) {
     super.onCreate(bloc);
-    log(bloc.toString());
+    Logs.i(bloc.toString());
   }
 
   @override
   void onTransition(Bloc bloc, Transition transition) {
     super.onTransition(bloc, transition);
-    log(transition.toString());
+    Logs.i(transition.toString());
   }
 
   @override
   void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
-    log(error.toString());
+    Logs.i(error.toString());
     super.onError(bloc, error, stackTrace);
   }
 }

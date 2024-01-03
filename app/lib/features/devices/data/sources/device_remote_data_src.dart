@@ -1,3 +1,4 @@
+import 'package:app/features/auth/data/sources/local/device_info_local_data_src.dart';
 import 'package:data/data.dart';
 import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
@@ -16,8 +17,9 @@ abstract class DeviceRemoteDataSource {
 @Injectable(as: DeviceRemoteDataSource)
 class DeviceRemoteDataSourceImpl extends DeviceRemoteDataSource {
   late final NetworkService _networkService;
+  late final DeviceInfoLocalDataSource _local;
 
-  DeviceRemoteDataSourceImpl(this._networkService);
+  DeviceRemoteDataSourceImpl(this._networkService, this._local);
 
   @override
   Future<AppObjResultRaw<DeviceIdRaw>> registerNewDevice(
@@ -52,8 +54,12 @@ class DeviceRemoteDataSourceImpl extends DeviceRemoteDataSource {
           isRequestForList: true,
         ),
       );
+      final deviceIdLocal = await _local.getDeviceId();
       return response.toRawList((data) => (data as List<dynamic>)
-          .map((item) => DeviceRaw.fromJson(item))
+          .map((item) => DeviceRaw.fromJson(item)
+              .copyWith(isCurrentDevice: item['id'] == deviceIdLocal))
+          .toList()
+          .reversed
           .toList());
     } on NetworkException catch (_) {
       rethrow;

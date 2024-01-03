@@ -44,6 +44,11 @@ class AppThemeData {
       //     TextButtonThemeData(style: AppButtonStyle.textButtonStyle),
       outlinedButtonTheme:
           OutlinedButtonThemeData(style: AppButtonStyle.outlinedButtonStyle),
+      inputDecorationTheme: InputDecorationTheme(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSizeExt.of.majorScale(3)),
+        ),
+      ),
     );
   }
 }

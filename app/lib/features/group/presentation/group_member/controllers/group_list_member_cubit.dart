@@ -51,7 +51,7 @@ class GroupListMemberCubit extends AppListViewCubit<UserModel> {
   Future<void> inviteMember(List<UserModel> friends) async {
     try {
       if (friends.isEmpty) return;
-      bool isSuccess = false;
+      bool isSuccess = true;
 
       friends.forEach((friend) async {
         try {
@@ -60,7 +60,6 @@ class GroupListMemberCubit extends AppListViewCubit<UserModel> {
             userId: friend.id,
             groupId: _groupId,
           ));
-          isSuccess = true;
         } catch (_) {
           AppDefaultDialogWidget()
               .setTitle(R.strings.error)

@@ -1,8 +1,8 @@
-import 'package:app/configs/di/di.dart';
-import 'package:app/configs/routes/app_router.dart';
-import 'package:app/configs/routes/app_router.gr.dart';
+import 'dart:io';
+
 import 'package:configs/configs.dart';
 import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:utilities/utilities.dart';
 
@@ -49,7 +49,22 @@ class OneSignalService {
     }
   }
 
-  Future<void> setLanguage(String languageCode) async {
-    await OneSignal.User.setLanguage(languageCode);
+  Future<void> setLanguage({String? locale}) async {
+    try {
+      String appLocale = Intl.getCurrentLocale();
+      if (locale != null) {
+        if (locale == 'system') {
+          final languageCode = Platform.localeName.split('_')[0];
+          appLocale = languageCode;
+        } else {
+          appLocale = locale;
+        }
+      }
+
+      await OneSignal.User.setLanguage(appLocale);
+    } catch (e) {
+      Logs.e(e);
+      rethrow;
+    }
   }
 }

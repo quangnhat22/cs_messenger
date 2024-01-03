@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:app/components/main/overlay/app_loading_overlay_widget.dart';
 import 'package:app/configs/exts/app_exts.dart';
 import 'package:app/features/room_chat/domain/usecases/get_list_message_chat_room_uc.dart';
 import 'package:app/features/room_chat/domain/usecases/send_message_uc.dart';
@@ -48,35 +49,75 @@ class ListMessageCubit extends Cubit<ListMessageState> {
     return super.close();
   }
 
-  Future<void> initPage(String roomId) async {
+  Future<void> initPage(
+    String roomId, {
+    bool isLatestMessage = false,
+    String? offsetMessageToFind,
+    IMessageModel? messageToFind,
+  }) async {
     try {
-      emit(state.copyWith(isLoading: true, roomId: roomId));
+      //handle start firstPage
+      emit(state.copyWith(
+        isLoading: true,
+        roomId: roomId,
+        listMessage: [],
+        isLastPage: false,
+        isFirstPage: false,
+        nextOffset: null,
+        bottomOffset: null,
+        isCalling: false,
+      ));
       final userResponse = await _getUserProfileLocalUseCase.executeObj();
-      final listMessageResponse =
+
+      List<IMessageModel> messages = List<IMessageModel>.empty();
+
+      if (messageToFind != null) {
+        messages = [...messages, messageToFind];
+      }
+
+      final listTopMessageResponse =
           await _getListMessageChatRoomUseCase.executeList(
-              request: GetListRoomMessageParam(chatRoomId: roomId, limit: 20));
+              request: GetListRoomMessageParam(
+                  chatRoomId: roomId,
+                  limit: isLatestMessage ? 10 : 5,
+                  offset: offsetMessageToFind ?? ''));
 
-      final listMessage = listMessageResponse.netData;
+      final listTopMessage = listTopMessageResponse.netData;
 
-      // if (listMessage != null && listMessage.isNotEmpty) {
-      //   final indexStartedCall = listMessage.indexWhere((message) =>
-      //       message is SystemMessageModel &&
-      //       message.systemMessage == SystemContent.callStarted);
-      //   final indexEndCall = listMessage.indexWhere((message) =>
-      //       message is SystemMessageModel &&
-      //       message.systemMessage == SystemContent.callEnded);
-      //
-      //   if (indexEndCall != -1 &&
-      //       indexEndCall != -1 &&
-      //       indexStartedCall < indexEndCall) {
-      //     emit(state.copyWith(isCalling: true));
-      //   }
-      // }
+      if (listTopMessage != null) {
+        messages = [...messages, ...listTopMessage];
+      }
+
+      if (isLatestMessage) {
+        emit(state.copyWith(isFirstPage: true));
+      } else {
+        final listBottomMessageResponse =
+            await _getListMessageChatRoomUseCase.executeList(
+                request: GetListRoomMessageParam(
+          chatRoomId: roomId,
+          limit: 5,
+          offset: offsetMessageToFind ?? '',
+          order: MessageOrder.asc.value,
+        ));
+
+        final listBottomMessage = listBottomMessageResponse.netData;
+
+        if (listBottomMessage != null) {
+          messages = [...listBottomMessage.reversed, ...messages];
+          if (listBottomMessage.length < 5) {
+            emit(state.copyWith(isFirstPage: true));
+          } else {
+            emit(state.copyWith(
+              bottomOffset: listBottomMessageResponse.next,
+            ));
+          }
+        }
+      }
 
       emit(state.copyWith(
         currentUser: userResponse.netData,
-        listMessage: listMessageResponse.netData ?? [],
-        nextOffset: listMessageResponse.next,
+        listMessage: messages,
+        nextOffset: listTopMessageResponse.next,
       ));
       emit(state.copyWith(isLoading: false));
     } on AppException catch (e) {
@@ -122,7 +163,7 @@ class ListMessageCubit extends Cubit<ListMessageState> {
         request: GetListRoomMessageParam(
           chatRoomId: state.roomId,
           offset: state.nextOffset!,
-          limit: 15,
+          limit: 5,
         ),
       );
 
@@ -146,37 +187,49 @@ class ListMessageCubit extends Cubit<ListMessageState> {
     }
   }
 
-  // Future<void> getMessagesBottomPage() async {
-  //   try {
-  //     final currentListMessage = state.listMessage;
+  Future<void> getMessagesBottomPage() async {
+    try {
+      if (state.bottomOffset != null && !state.isFirstPage) {
+        final currentListMessage = state.listMessage;
 
-  //     final listMessageResponse =
-  //         await _getListMessageChatRoomUseCase.executeList(
-  //       request: GetListRoomMessageParam(
-  //         chatRoomId: state.roomId,
-  //         offset: currentListMessage.first.id,
-  //         order: MessageOrder.asc.value,
-  //       ),
-  //     );
+        final listBottomMessageResponse =
+            await _getListMessageChatRoomUseCase.executeList(
+          request: GetListRoomMessageParam(
+            chatRoomId: state.roomId,
+            offset: state.bottomOffset!,
+            order: MessageOrder.asc.value,
+          ),
+        );
 
-  //     final bool isFirstPage =
-  //         (listMessageResponse.netData?.length ?? 0) < limitMessage;
+        final bottomMessages = listBottomMessageResponse.netData;
+        final bottomOffset = listBottomMessageResponse.next;
 
-  //     final List<IMessageModel> newListMessage = [
-  //       ...listMessageResponse.netData?.reversed ?? [],
-  //       ...currentListMessage
-  //     ];
+        if (bottomMessages != null) {
+          final bool isFirstPage =
+              (listBottomMessageResponse.netData?.length ?? 0) < 10 ||
+                  bottomOffset == '' ||
+                  bottomOffset == null;
 
-  //     emit(state.copyWith(
-  //         listMessage: newListMessage, isFirstPage: isFirstPage));
-  //   } on AppException catch (e) {
-  //     AppExceptionExt(
-  //         appException: e,
-  //         onError: (_) {
-  //           Logs.e(e);
-  //         }).detected();
-  //   }
-  // }
+          final List<IMessageModel> newListMessage = [
+            ...bottomMessages.reversed,
+            ...currentListMessage
+          ];
+
+          emit(state.copyWith(
+            listMessage: newListMessage,
+            isFirstPage: isFirstPage,
+            bottomOffset: bottomOffset,
+          ));
+        }
+      }
+    } on AppException catch (e) {
+      AppExceptionExt(
+          appException: e,
+          onError: (_) {
+            Logs.e(e);
+          }).detected();
+    }
+  }
 
   void previewDataFetched(
       TextMessageModel textMessage, PreviewDataModel previewData) {
@@ -438,5 +491,93 @@ class ListMessageCubit extends Cubit<ListMessageState> {
     }
   }
 
-  Future<void> sendForwardMessage(IMessageModel message) async {}
+  Future<int> findIndexMessage(String id) async {
+    try {
+      int index = state.listMessage.indexWhere((element) => element.id == id);
+      if (index == -1 && state.nextOffset != null) {
+        AppLoadingOverlayWidget.show();
+        int indexRecursion = index;
+        bool isLastPage = false;
+        String offset = state.nextOffset!;
+        List<IMessageModel> listMessageTemp = [];
+        int countLoop = 0;
+        while (indexRecursion == -1 && offset != '' && !isLastPage) {
+          final listMessageResponse =
+              await _getListMessageChatRoomUseCase.executeList(
+            request: GetListRoomMessageParam(
+              chatRoomId: state.roomId,
+              offset: offset,
+              limit: 10,
+            ),
+          );
+
+          countLoop += 1;
+
+          offset = listMessageResponse.next ?? '';
+
+          if (listMessageResponse.netData != null) {
+            listMessageTemp.addAll(listMessageResponse.netData!);
+
+            isLastPage = (listMessageResponse.next == null ||
+                listMessageResponse.next == '');
+
+            indexRecursion = listMessageResponse.netData
+                    ?.indexWhere((element) => element.id == id) ??
+                0;
+
+            if (indexRecursion != -1) {
+              break;
+            }
+
+            if (isLastPage) {
+              indexRecursion = 0;
+              break;
+            }
+          } else {
+            break;
+          }
+        }
+        if (indexRecursion != -1) {
+          if (countLoop == 0) {
+            index = indexRecursion;
+          } else if (countLoop > 1) {
+            index =
+                indexRecursion + state.listMessage.length + (countLoop) * 10;
+          }
+
+          emit(state.copyWith(
+            listMessage: [...state.listMessage, ...listMessageTemp],
+            isLastPage: isLastPage,
+          ));
+        }
+        AppLoadingOverlayWidget.dismiss();
+      }
+      return index;
+    } on AppException catch (e) {
+      AppExceptionExt(
+          appException: e,
+          onError: (e) {
+            Logs.e(e);
+          }).detected();
+      return -1;
+    }
+  }
+
+  Future<void> sendForwardMessage(
+      String chatRoomId, IMessageModel messageForward) async {
+    try {
+      final messageParam =
+          IMessageParam.convertModel2Params(messageModel: messageForward);
+      final socketMessageParams = SocketMessageParam.convert2SocketMessageParam(
+          messageParam, chatRoomId);
+
+      await _sendMessageUseCase.executeObj(request: socketMessageParams);
+    } on AppException catch (e) {
+      AppExceptionExt(
+          appException: e,
+          onError: (e) {
+            Logs.e(e);
+          }).detected();
+    }
+  }
 }

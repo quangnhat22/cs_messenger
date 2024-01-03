@@ -4,6 +4,8 @@ import 'package:app/features/auth/data/sources/local/device_info_local_data_src.
 import 'package:app/features/auth/data/sources/local/first_install_app_local_data_src.dart';
 import 'package:app/features/auth/data/sources/remote/auth_remote_data_src.dart';
 import 'package:app/features/auth/domain/repositories/auth_repository.dart';
+import 'package:app/features/notification/data/sources/local/notification_local_data_src.dart';
+import 'package:app/features/user/data/resources/local/user_local_data_src.dart';
 import 'package:app/service/onesignal/onesignal_service.dart';
 import 'package:app/service/socket/socket_service.dart';
 import 'package:domain/domain.dart';
@@ -19,6 +21,8 @@ class AuthRepositoryImpl extends AuthRepository {
   late final AuthLocalDataSource _authLocalDataSource;
   late final DeviceInfoLocalDataSource _deviceInfoLocalDataSource;
   late final FirstInstallAppLocalDataSource _firstInstallAppLocalDataSource;
+  late final NotificationLocalDataSource _notificationLocalDataSource;
+  late final UserLocalDataSource _userLocalDataSource;
 
   AuthRepositoryImpl(
     this._oneSignalService,
@@ -28,13 +32,17 @@ class AuthRepositoryImpl extends AuthRepository {
     this._authLocalDataSource,
     this._deviceInfoLocalDataSource,
     this._firstInstallAppLocalDataSource,
+    this._notificationLocalDataSource,
+    this._userLocalDataSource,
   );
 
   Future<void> _removeLocal() async {
     try {
       await _authLocalDataSource.clearToken();
       await _firstInstallAppLocalDataSource.deleteBox();
-      // await _deviceInfoLocalDataSource.deleteBox();
+      await _notificationLocalDataSource.deleteBox();
+      await _userLocalDataSource.deleteBox();
+      //
     } on LocalException catch (_) {
       rethrow;
     }
@@ -54,8 +62,10 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<AppObjResultModel<EmptyModel>> forceLogOut() async {
     try {
       await _removeLocal();
+      await _deviceInfoLocalDataSource.deleteBox();
       await _authFirebaseDataSource.logOut();
       await _oneSignalService.logOut();
+      //_realtimeService.disconnectSocket();
       return AppObjResultModel(netData: EmptyModel());
     } on LocalException catch (_) {
       rethrow;
@@ -70,14 +80,16 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<AppObjResultModel<EmptyModel>> logOut() async {
     try {
       await _authRemoteDataSource.logOut();
-      await _authFirebaseDataSource.logOut();
       await _removeLocal();
+      await _authFirebaseDataSource.logOut();
       await _oneSignalService.logOut();
-      _realtimeService.disconnectSocket();
+      //_realtimeService.disconnectSocket();
       return AppObjResultModel<EmptyModel>(netData: EmptyModel());
-    } on NetworkException catch (_) {
+    } on AppException catch (_) {
+      await _removeLocal();
       rethrow;
-    } on GrpcException catch (_) {
+    } catch (_) {
+      await _removeLocal();
       rethrow;
     }
   }

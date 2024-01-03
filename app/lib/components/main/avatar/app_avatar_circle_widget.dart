@@ -12,35 +12,38 @@ class AppAvatarCircleWidget extends AppAvatarBaseBuilder {
         height: _size!.value,
       );
     } else {
-      return ExtendedImage.network(_url!,
-          width: _size!.value,
-          height: _size!.value,
-          fit: BoxFit.cover,
-          shape: BoxShape.circle,
-          cache: true, loadStateChanged: (ExtendedImageState state) {
-        switch (state.extendedImageLoadState) {
-          case LoadState.loading:
-            return null;
-          case LoadState.completed:
-            return state.completedWidget;
-          case LoadState.failed:
-            return GestureDetector(
-              child: Stack(
-                fit: StackFit.expand,
-                children: <Widget>[
-                  R.pngs.avatarEmpty.image(),
-                  const Positioned(
-                    bottom: 0.0,
-                    top: 0.0,
-                    left: 0.0,
-                    right: 0.0,
-                    child: Icon(Icons.error_outline),
-                  )
-                ],
-              ),
-            );
-        }
-      });
+      return ExtendedImage.network(
+        _url!,
+        width: _size!.value,
+        height: _size!.value,
+        fit: BoxFit.cover,
+        shape: BoxShape.circle,
+        cache: true,
+        loadStateChanged: (ExtendedImageState state) {
+          switch (state.extendedImageLoadState) {
+            case LoadState.loading:
+              return null;
+            case LoadState.completed:
+              return state.completedWidget;
+            case LoadState.failed:
+              return GestureDetector(
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: <Widget>[
+                    R.pngs.avatarEmpty.image(),
+                    const Positioned(
+                      bottom: 0.0,
+                      top: 0.0,
+                      left: 0.0,
+                      right: 0.0,
+                      child: Icon(Icons.error_outline),
+                    )
+                  ],
+                ),
+              );
+          }
+        },
+      );
     }
   }
 

@@ -6,14 +6,14 @@ import 'package:app/components/main/listView/controllers/app_list_view_cubit.dar
 import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/configs/di/di.dart';
 import 'package:app/configs/theme/app_theme.dart';
-import 'package:app/features/room_chat/presentation/chat/controllers/list_chatroom/list_chat_chatroom_reply_cubit.dart';
+import 'package:app/features/room_chat/presentation/chat/controllers/forward_message/list_chat_chatroom_reply_cubit.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resources/resources.dart';
 
-class ListChatRoomForwardView extends StatelessWidget {
-  const ListChatRoomForwardView({super.key});
+class ChatForwardMessageView extends StatelessWidget {
+  const ChatForwardMessageView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -59,14 +59,13 @@ class ListChatRoomForwardView extends StatelessWidget {
         .setTitle(AppTextTitleMediumWidget().setText(model.name).build(context))
         .setIsShowBottomDivider(true)
         .setActions([
-          AppButtonOutlineWidget()
-              .setAppButtonSize(AppButtonSize.small)
-              .setButtonText(R.strings.send)
-              .setBorderColor(Theme.of(context).colorScheme.primary)
-              .setOnPressed(() {})
-              .build(context),
-        ])
-        .setOnTap(() async {})
-        .build(context);
+      AppButtonOutlineWidget()
+          .setAppButtonSize(AppButtonSize.small)
+          .setButtonText(R.strings.send)
+          .setBorderColor(Theme.of(context).colorScheme.primary)
+          .setOnPressed(() {
+        Navigator.pop(context, model.id);
+      }).build(context),
+    ]).build(context);
   }
 }

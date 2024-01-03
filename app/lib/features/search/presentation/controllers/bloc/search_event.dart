@@ -7,4 +7,7 @@ class SearchEvent with _$SearchEvent {
   const factory SearchEvent.sendFriendRequest({
     required String userId,
   }) = SearchSendFriendRequest;
+
+  const factory SearchEvent.sendFriendRequestSuccess() =
+      SearchSendFriendRequestSuccess;
 }

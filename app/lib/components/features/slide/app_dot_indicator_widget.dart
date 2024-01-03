@@ -7,12 +7,14 @@ class AppDotIndicatorWidget extends StatelessWidget {
     this.height = 4,
     this.width = 4,
     this.child,
+    this.activeColor,
   });
 
   final bool isActive;
   final double? height;
   final double? width;
   final Widget? child;
+  final Color? activeColor;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class AppDotIndicatorWidget extends StatelessWidget {
       width: width,
       decoration: BoxDecoration(
         color: isActive
-            ? Theme.of(context).colorScheme.primary
+            ? activeColor ?? Theme.of(context).colorScheme.primary
             : Theme.of(context).colorScheme.primaryContainer,
         borderRadius: const BorderRadius.all(
           Radius.circular(12),

@@ -2,6 +2,7 @@ import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:resources/resources.dart';
 
 class ReplyMessage extends StatelessWidget {
   const ReplyMessage({
@@ -17,13 +18,32 @@ class ReplyMessage extends StatelessWidget {
   final double? width;
   final ReplyMessageModel messageReply;
   final void Function()? onRemoveReplyMessage;
-  final void Function(String chatRoomId)? onTapMessage;
+  final void Function(String chatRoomId, ReplyMessageModel replyMessage)?
+      onTapMessage;
+
+  String? handleReplyMessageContent(ReplyMessageModel replyMessage) {
+    if (replyMessage.type == MessageType.video) {
+      return R.strings.video;
+    } else if (replyMessage.type == MessageType.image) {
+      return R.strings.image;
+    } else if (replyMessage.type == MessageType.audio) {
+      return R.strings.audio;
+    } else if (replyMessage.type == MessageType.file) {
+      return R.strings.file;
+    } else if (replyMessage.type == MessageType.file) {
+      return R.strings.file;
+    } else if (replyMessage.type == MessageType.emoji) {
+      return R.strings.stickers;
+    } else {
+      return replyMessage.content;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        onTapMessage?.call(messageReply.id);
+        onTapMessage?.call(messageReply.id, messageReply);
       },
       child: Container(
         width: width ?? MediaQuery.sizeOf(context).width,
@@ -46,7 +66,7 @@ class ReplyMessage extends StatelessWidget {
                     .setMaxLines(1)
                     .build(context),
                 AppTextBodyMediumWidget()
-                    .setText(messageReply.content)
+                    .setText(handleReplyMessageContent(messageReply))
                     .setTextOverFlow(TextOverflow.ellipsis)
                     .setMaxLines(3)
                     .build(context)

@@ -8,6 +8,7 @@ class TextMessageParam extends IMessageParam with _$TextMessageParam {
     required String text,
     PreviewDataParam? previewData,
     @JsonKey(includeFromJson: false) ReplyMessageParam? repliedMessage,
+    @Default(false) bool isForward,
   }) = _TextMessageParam;
 
   factory TextMessageParam.fromJson(Map<String, Object?> json) =>
