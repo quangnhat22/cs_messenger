@@ -26,7 +26,8 @@ dev_dependencies:
   flutter_gen_runner: ^5.3.1
   melos: ^3.1.1
   flutter_launcher_icons:
-    path: ../flutter_launcher_icons-master
+    git:
+      url: https://github.com/quangnhat22/launcher_icon_package.git
 
 flutter_gen:
   output: lib/src/generated/assets
