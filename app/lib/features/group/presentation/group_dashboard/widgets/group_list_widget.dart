@@ -44,14 +44,17 @@ class GroupListWidget extends StatelessWidget {
         .setHasBottomBorderRadius(index == 99)
         .setActions([
           IconButton(
-            onPressed: () {
-              getIt<AppRouter>().push(ChatRoute(roomId: group.roomId));
+            onPressed: () async {
+              await getIt<AppRouter>().push(ChatRoute(roomId: group.roomId));
             },
             icon: const Icon(Icons.message_outlined),
           )
         ])
         .setIsShowBottomDivider(true)
-        .setOnTap(() {})
+        .setOnTap(() async {
+          await getIt<AppRouter>().push(
+              GroupInfoRoute(groupId: group.id, chatRoomId: group.roomId));
+        })
         .build(context);
   }
 }

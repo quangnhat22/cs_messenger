@@ -5,6 +5,7 @@ enum MessageOrder {
   desc('desc');
 
   const MessageOrder(this.value);
+
   final String value;
 }
 
@@ -12,7 +13,7 @@ enum MessageOrder {
 class GetListRoomMessageParam extends BaseParam with _$GetListRoomMessageParam {
   const factory GetListRoomMessageParam({
     @Default("") String offset,
-    @Default(15) int limit,
+    @Default(10) int limit,
     @Default('desc') String order,
     required String chatRoomId,
   }) = _GetListRoomMessageParam;

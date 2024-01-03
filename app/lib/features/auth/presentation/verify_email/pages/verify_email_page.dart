@@ -4,12 +4,14 @@ import 'package:app/components/main/button/app_button_base_builder.dart';
 import 'package:app/components/main/dialog/app_dialog_base_builder.dart';
 import 'package:app/components/main/page/app_main_page_base_builder.dart';
 import 'package:app/configs/di/di.dart';
+import 'package:app/configs/exts/app_exts.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:app/features/auth/presentation/verify_email/controllers/bloc_verify_email/verify_email_cubit.dart';
 import 'package:app/features/auth/presentation/verify_email/widgets/verify_email_waiting_widget.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:open_mail_app/open_mail_app.dart';
 import 'package:resources/resources.dart';
 import 'package:utilities/utilities.dart';
 
@@ -52,6 +54,36 @@ class VerifyEmailPage extends StatelessWidget {
     await context.read<VerifyEmailCubit>().requestSendVerifyEmail();
   }
 
+  void _handleButtonOpenMailApp(BuildContext context) async {
+    var result = await OpenMailApp.openMailApp();
+
+    if (!result.didOpen && !result.canOpen) {
+      _showNoMailAppsDialog();
+    } else if (!result.didOpen && result.canOpen) {
+      if (context.mounted) {
+        showDialog(
+          context: context,
+          builder: (_) {
+            return MailAppPickerDialog(
+              mailApps: result.options,
+            );
+          },
+        );
+      }
+    }
+  }
+
+  void _showNoMailAppsDialog() async {
+    AppDefaultDialogWidget()
+        .setTitle(R.strings.openEmailApp)
+        .setContent(R.strings.noMailAppInstalled)
+        .setAppDialogType(AppDialogType.error)
+        .setNegativeText(R.strings.close)
+        .setPositiveText(R.strings.confirm)
+        .buildDialog(AppKeys.navigatorKey.currentContext!)
+        .show();
+  }
+
   Widget _body(BuildContext context) {
     return BlocBuilder<VerifyEmailCubit, VerifyEmailState>(
       buildWhen: (prev, current) => prev != current,
@@ -82,6 +114,15 @@ class VerifyEmailPage extends StatelessWidget {
                     TextStyle(color: Theme.of(context).colorScheme.primary))
                 .setOnPressed(() => _handleOnLogOutButton(context))
                 .build(context),
+            SizedBox(
+              height: AppSizeExt.of.majorScale(1),
+            ),
+            AppButtonTextWidget()
+                .setButtonText(R.strings.openEmailApp)
+                .setTextStyle(
+                    TextStyle(color: Theme.of(context).colorScheme.primary))
+                .setOnPressed(() => _handleButtonOpenMailApp(context))
+                .build(context)
           ],
         );
       },

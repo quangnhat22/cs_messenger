@@ -12,16 +12,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:resources/resources.dart';
 
-class ListMemberView extends StatefulWidget {
-  const ListMemberView({super.key, required this.chatRoomId});
+class VideoCallListMemberView extends StatefulWidget {
+  const VideoCallListMemberView({super.key, required this.chatRoomId});
 
   final String chatRoomId;
 
   @override
-  State<ListMemberView> createState() => _ListMemberViewState();
+  State<VideoCallListMemberView> createState() =>
+      _VideoCallListMemberViewState();
 }
 
-class _ListMemberViewState extends State<ListMemberView> {
+class _VideoCallListMemberViewState extends State<VideoCallListMemberView> {
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 

@@ -87,7 +87,9 @@ class RoomChatDashBoardPage extends StatelessWidget {
         }).build(context),
     ]).setOnTap(() async {
       context.read<ListChatRoomCubit>().removeNewMessageStatus(model.id);
-      await getIt<AppRouter>().push(ChatRoute(roomId: model.id));
+      await getIt<AppRouter>().push(ChatRoute(
+        roomId: model.id,
+      ));
     }).build(context);
   }
 }

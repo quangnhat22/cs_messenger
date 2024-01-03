@@ -5,6 +5,13 @@ class RequestModel extends BaseModel {
   final UserModel? sender;
   final UserModel? receiver;
   final DateTime? createdAt;
+  final GroupModel? group;
 
-  RequestModel({required this.id, this.sender, this.receiver, this.createdAt});
+  RequestModel({
+    required this.id,
+    this.sender,
+    this.receiver,
+    this.createdAt,
+    this.group,
+  });
 }

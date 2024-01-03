@@ -2,6 +2,8 @@ flutter_native_splash:
   color: "#ffffff"
   image: assets/pngs/app_icon.png
   app_module: "app"
+  android: true
+  ios: true
 
   android_12:
     image: assets/pngs/app_icon.png

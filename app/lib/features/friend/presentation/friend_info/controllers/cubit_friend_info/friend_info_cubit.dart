@@ -1,3 +1,4 @@
+import 'package:app/components/main/dialog/app_dialog_base_builder.dart';
 import 'package:app/components/main/overlay/app_loading_overlay_widget.dart';
 import 'package:app/components/main/snackBar/app_snack_bar_base_builder.dart';
 import 'package:app/configs/di/di.dart';
@@ -44,10 +45,22 @@ class FriendInfoCubit extends Cubit<FriendInfoState> {
     } on AppException catch (e) {
       AppLoadingOverlayWidget.dismiss();
       AppExceptionExt(
-          appException: e,
-          onError: (_) {
-            Logs.e(e.toString());
-          }).detected();
+        appException: e,
+        onError: (_) {
+          Logs.e(e.toString());
+        },
+        onGrpcError: (e) {
+          if (e.errorCode == '5') {
+            AppDefaultDialogWidget()
+                .setTitle(R.strings.error)
+                .setContent(R.strings.userNotFound)
+                .setAppDialogType(AppDialogType.error)
+                .setPositiveText(R.strings.confirm)
+                .buildDialog(AppKeys.navigatorKey.currentContext!)
+                .show();
+          }
+        },
+      ).detected();
     }
   }
 
@@ -136,10 +149,25 @@ class FriendInfoCubit extends Cubit<FriendInfoState> {
     } on AppException catch (e) {
       AppLoadingOverlayWidget.dismiss();
       AppExceptionExt(
-          appException: e,
-          onError: (e) {
-            Logs.e(e.toString());
-          }).detected();
+        appException: e,
+        onError: (e) {
+          Logs.e(e.toString());
+        },
+        onGrpcError: (e) {
+          if (e.errorCode == '5') {
+            AppDefaultDialogWidget()
+                .setTitle(R.strings.error)
+                .setContent(R.strings.userNotFound)
+                .setAppDialogType(AppDialogType.error)
+                .setPositiveText(R.strings.confirm)
+                .setOnPositive(() async {
+                  await getIt<AppRouter>().pop();
+                })
+                .buildDialog(AppKeys.navigatorKey.currentContext!)
+                .show();
+          }
+        },
+      ).detected();
     }
   }
 }

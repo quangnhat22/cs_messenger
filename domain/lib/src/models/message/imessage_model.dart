@@ -83,6 +83,7 @@ abstract class IMessageModel extends BaseModel {
   final DateTime? deletedAt;
   final bool isShowStatus;
   final ReplyMessageModel? repliedMessage;
+  final bool isForward;
 
   IMessageModel({
     required this.id,
@@ -97,5 +98,6 @@ abstract class IMessageModel extends BaseModel {
     required this.type,
     this.isShowStatus = true,
     this.repliedMessage,
+    this.isForward = false,
   });
 }

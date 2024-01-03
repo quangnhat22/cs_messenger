@@ -2,6 +2,7 @@ import 'package:app/features/setting/domain/usecases/theme_language/get_language
 import 'package:app/features/setting/domain/usecases/theme_language/get_theme_uc.dart';
 import 'package:app/features/setting/domain/usecases/theme_language/set_language_uc.dart';
 import 'package:app/features/setting/domain/usecases/theme_language/set_theme_uc.dart';
+import 'package:app/service/onesignal/onesignal_service.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -17,12 +18,14 @@ class ThemeAndLanguageCubit extends Cubit<ThemeAndLanguageState> {
   late final GetThemeUseCase _getThemeUseCase;
   late final SetLanguageUseCase _setLanguageUseCase;
   late final SetThemeUseCase _setThemeUseCase;
+  late final OneSignalService _oneSignalService;
 
   ThemeAndLanguageCubit(
     this._getThemeUseCase,
     this._getLanguageUseCase,
     this._setLanguageUseCase,
     this._setThemeUseCase,
+    this._oneSignalService,
   ) : super(const ThemeAndLanguageState.initial());
 
   Future<void> initPage() async {
@@ -60,8 +63,11 @@ class ThemeAndLanguageCubit extends Cubit<ThemeAndLanguageState> {
       emit(
         state.copyWith(language: value),
       );
+      await _oneSignalService.setLanguage(locale: value);
     } on AppException catch (e) {
       Logs.e(e.toString());
+    } catch (e) {
+      Logs.e(e);
     }
   }
 }

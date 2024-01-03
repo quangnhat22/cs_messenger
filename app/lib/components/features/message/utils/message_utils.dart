@@ -207,7 +207,6 @@ class MessageUtils {
         'message': message,
         'nextMessageInGroup': nextMessageInGroup,
         'showName': notMyMessage && showUserNames && showName,
-        //TODO: check again
         'showStatus': true,
       });
 

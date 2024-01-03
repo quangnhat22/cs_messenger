@@ -22,6 +22,7 @@ class AppRouter extends $AppRouter {
         _customRoute(page: ForgotPasswordRoute.page),
         _customRoute(page: SendEmailSuccessRoute.page),
         _customRoute(page: SignUpRoute.page),
+        _customRoute(page: ThemeAndLanguageRoute.page),
         AutoRoute(
           page: MainRoute.page,
           guards: [getIt<AuthGuard>()],
@@ -60,7 +61,6 @@ class AppRouter extends $AppRouter {
               ],
             ),
             _customRoute(page: EditProfileRoute.page),
-            _customRoute(page: ThemeAndLanguageRoute.page),
             _customRoute(page: NotificationSettingRoute.page),
             _customRoute(page: ListDevicesRoute.page),
             _customRoute(page: ChangePasswordRoute.page),
@@ -69,6 +69,7 @@ class AppRouter extends $AppRouter {
             _customRoute(page: PersonalDetailChatRoomRoute.page),
             _customRoute(page: GroupDetailChatRoomRoute.page),
             _customRoute(page: GroupMemberRoute.page),
+            _customRoute(page: GroupInfoRoute.page),
             _customRoute(page: RoomChatMediaRoute.page, children: [
               _customRoute(page: RoomImageRoute.page),
               _customRoute(page: RoomVideoRoute.page),
@@ -81,6 +82,7 @@ class AppRouter extends $AppRouter {
                   _customRoute(page: ChatRoute.page),
                 ]),
             _customRoute(page: ListNotificationRoute.page),
+            _customRoute(page: AboutUsRoute.page),
           ],
         )
       ];

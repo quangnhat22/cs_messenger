@@ -31,6 +31,8 @@ class ChatRoomModel extends BaseModel with _$ChatRoomModel {
     ChatRoomType? type,
     String? groupId,
     String? friendId,
+    bool? isLatestMessage,
+    String? offset,
   }) = _ChatRoomModel;
 
   static ChatRoomModel get empty => const ChatRoomModel(id: '-1');

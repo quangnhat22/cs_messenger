@@ -6,7 +6,7 @@ class NotificationRaw extends BaseRaw<NotificationModel>
   NotificationRaw._();
 
   factory NotificationRaw({
-    String? id,
+    required String id,
     required String heading,
     required String content,
     required NotificationDetailRaw details,

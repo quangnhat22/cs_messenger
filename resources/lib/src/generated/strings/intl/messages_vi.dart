@@ -31,7 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m3(appName) => "${appName} đang chia sẻ màn hình.";
 
   static String m4(email, expireTime) =>
-      "Vui lòng mở \"${email}\" để xác minh tài khoản. Vui lòng xác nhận tài khoản trước \$${expireTime}, nếu không tài khoản của bạn có thể bị mất!";
+      "Vui lòng mở \"${email}\" để xác minh tài khoản. Vui lòng xác nhận tài khoản trước ${expireTime}, nếu không tài khoản của bạn có thể bị mất!";
 
   static String m5(name) =>
       "Gửi lời mời vào nhóm thất bại. ${name} đã được mời trước đó.";
@@ -46,6 +46,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "acceptRequestSuccess": MessageLookupByLibrary.simpleMessage(
             "Chấp nhận lời mời thành công!"),
         "account": MessageLookupByLibrary.simpleMessage("Tài khoản"),
+        "accountExist":
+            MessageLookupByLibrary.simpleMessage("Tài khoản đã tồn tại"),
+        "activeSession":
+            MessageLookupByLibrary.simpleMessage("Phiên hoạt động"),
         "addFriend": MessageLookupByLibrary.simpleMessage("Kết bạn"),
         "addNewContact":
             MessageLookupByLibrary.simpleMessage("Thêm liên hệ mới"),
@@ -54,6 +58,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ứng dụng không có quyền để thực hiện tính năng này. Vui lòng cấp quyền cho ứng dụng"),
         "areYouSureBlockThisUser": MessageLookupByLibrary.simpleMessage(
             "Bạn có chắc chắn muốn chặn người này?"),
+        "areYouSureDisconnect": MessageLookupByLibrary.simpleMessage(
+            "Bạn có chắc muốn kết thúc cuộc gọi?"),
         "audio": MessageLookupByLibrary.simpleMessage("Audio"),
         "back": MessageLookupByLibrary.simpleMessage("Quay lại"),
         "backToWelcome":
@@ -69,6 +75,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "callStarted": MessageLookupByLibrary.simpleMessage("Bắt đầu cuộc gọi"),
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "cancel": MessageLookupByLibrary.simpleMessage("Đóng"),
+        "changeGroupName":
+            MessageLookupByLibrary.simpleMessage("Thay đổi tên nhóm"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Thay đổi mật khẩu"),
         "changePasswordSuccess":
@@ -84,6 +92,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Xác nhận mật khẩu không trùng với Mật khẩu"),
         "connectingPeopleAnytimeAnywhere": MessageLookupByLibrary.simpleMessage(
             "Kết nối với bạn bè ở mọi lúc, mọi Nơi"),
+        "contact_message": MessageLookupByLibrary.simpleMessage(
+            "Nếu bạn có nhu cầu liên hệ hoặc báo các vấn đề, lỗi phát sinh khi dùng ứng dụng, vui lòng liên hệ đến địa chỉ Email sau: "),
         "copied": MessageLookupByLibrary.simpleMessage("Đã sao chép"),
         "copy": MessageLookupByLibrary.simpleMessage("Sao chép"),
         "create": MessageLookupByLibrary.simpleMessage("Tạo"),
@@ -96,6 +106,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tạo nhóm thành công"),
         "createGroupWith": m1,
         "createNewGroup": MessageLookupByLibrary.simpleMessage("Tạo nhóm mới"),
+        "createdBy": MessageLookupByLibrary.simpleMessage("Được tạo bởi"),
+        "createdDate": MessageLookupByLibrary.simpleMessage("Ngày tạo"),
         "currentDevices":
             MessageLookupByLibrary.simpleMessage("Thiết bị hiện tại"),
         "currentLocation":
@@ -116,14 +128,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteNotification":
             MessageLookupByLibrary.simpleMessage("Xóa thông báo"),
         "devices": MessageLookupByLibrary.simpleMessage("Danh sách thiết bị"),
+        "disableCamera": MessageLookupByLibrary.simpleMessage("Tắt Camera"),
+        "disableMicrophone":
+            MessageLookupByLibrary.simpleMessage("Tắt Microphone"),
+        "disconnect": MessageLookupByLibrary.simpleMessage("Kết thúc cuộc gọi"),
         "discoverSeamlessMessaging": MessageLookupByLibrary.simpleMessage(
             "Khám phá tính năng nhắn tin mượt mà và cuộc gọi video chất lượng cao. Giữ kết nối với bạn bè và người thân một cách dễ dàng chưa từng có."),
         "doYouWantAcceptFriendRequest": MessageLookupByLibrary.simpleMessage(
             "Bạn có muốn chấp nhận lời mời kết bạn này không? Hãy đảm bảo bạn có quen biết người này."),
         "doYouWantDeleteDevice": MessageLookupByLibrary.simpleMessage(
             "Bạn có muốn xóa thiết bị này hay không?"),
+        "doYouWantJoinGroupRequest": MessageLookupByLibrary.simpleMessage(
+            "Bạn có muốn tham gia nhóm này hay không?"),
         "doYouWantRejectFriendRequest": MessageLookupByLibrary.simpleMessage(
             "Bạn có muốn từ chối lời mời kết bạn này hay không?"),
+        "doYouWantRejectGroupRequest": MessageLookupByLibrary.simpleMessage(
+            "Bạn có muốn từ chối lời mời tham gia group này?"),
         "doYouWantToDeleteAllNotifications":
             MessageLookupByLibrary.simpleMessage(
                 "Bạn có muốn xóa toàn bộ thông báo?"),
@@ -142,6 +162,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bạn có muốn huỷ kết bạn?"),
         "doYouWantUndoFriendRequest": MessageLookupByLibrary.simpleMessage(
             "Bạn có muốn thu hồi lời mời kết bạn này hay không?"),
+        "doYouWantUndoGroupRequest": MessageLookupByLibrary.simpleMessage(
+            "Bạn có muốn thu hồi lời mời tham gia nhóm này hay không?"),
         "done": MessageLookupByLibrary.simpleMessage("Hoàn tất"),
         "edit": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),
         "editGroup": MessageLookupByLibrary.simpleMessage("Chỉnh sửa nhóm"),
@@ -152,6 +174,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tài khoản hoặc mật khẩu sai! Vui lòng thử lại."),
         "emailPasswordWrong":
             MessageLookupByLibrary.simpleMessage("Tài khoản hoặc mật khẩu sai"),
+        "emailUsedByOtherAccount": MessageLookupByLibrary.simpleMessage(
+            "Email này đã được sử dụng! Vui lòng đăng ký với một email khác."),
         "emailValidate":
             MessageLookupByLibrary.simpleMessage("Địa chỉ email khong hợp lệ."),
         "en": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
@@ -166,6 +190,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "files": MessageLookupByLibrary.simpleMessage("Tệp"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("Quên mật khẩu"),
         "forward": MessageLookupByLibrary.simpleMessage("Chuyển tiếp"),
+        "forwardMessage":
+            MessageLookupByLibrary.simpleMessage("Tin nhắn chuyển tiếp"),
+        "forwardMessageSuccess": MessageLookupByLibrary.simpleMessage(
+            "Chuyển tiếp tin nhắn thành công"),
         "friendCommon": MessageLookupByLibrary.simpleMessage("Bạn chung"),
         "friendRequest":
             MessageLookupByLibrary.simpleMessage("Yêu cầu kết bạn"),
@@ -175,7 +203,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "getConnectWithYourFriends": MessageLookupByLibrary.simpleMessage(
             "Kết nối với \"network\" của bạn"),
         "gotIt": MessageLookupByLibrary.simpleMessage("Hiểu rồi"),
+        "group": MessageLookupByLibrary.simpleMessage("Nhóm"),
         "groupCommon": MessageLookupByLibrary.simpleMessage("Nhóm chung"),
+        "groupInfo": MessageLookupByLibrary.simpleMessage("Thông tin nhóm"),
         "groupName": MessageLookupByLibrary.simpleMessage("Tên nhóm"),
         "groupNameCannotBeEmpty": MessageLookupByLibrary.simpleMessage(
             "Tên nhóm không được để trống"),
@@ -192,6 +222,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "join": MessageLookupByLibrary.simpleMessage("Tham gia"),
         "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
         "leaveGroup": MessageLookupByLibrary.simpleMessage("Rời nhóm"),
+        "leaveGroupSuccess":
+            MessageLookupByLibrary.simpleMessage("Rời nhóm thành công"),
         "lightMode": MessageLookupByLibrary.simpleMessage("Chế độ sáng"),
         "listFriend": MessageLookupByLibrary.simpleMessage("Danh sách bạn bè"),
         "listUserBlock": MessageLookupByLibrary.simpleMessage("Danh sách chặn"),
@@ -210,15 +242,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "memberJoined": MessageLookupByLibrary.simpleMessage("Tham gia nhóm"),
         "memberLeft": MessageLookupByLibrary.simpleMessage("Rời nhóm"),
         "members": MessageLookupByLibrary.simpleMessage("Thành viên"),
+        "messenger": MessageLookupByLibrary.simpleMessage("Tin nhắn"),
         "moreAction": MessageLookupByLibrary.simpleMessage("Hành động khác"),
         "name": MessageLookupByLibrary.simpleMessage("Tên"),
         "newPassword": MessageLookupByLibrary.simpleMessage("Mật khẩu mới"),
         "next": MessageLookupByLibrary.simpleMessage("Tiếp tục"),
         "noData": MessageLookupByLibrary.simpleMessage(" Không có dữ liệu!"),
+        "noMailAppInstalled": MessageLookupByLibrary.simpleMessage(
+            "Không tìm thấy ứng dụng Mail nào! Vui lòng kiểm tra lại"),
         "notification": MessageLookupByLibrary.simpleMessage("Thông báo"),
         "openEmailApp":
             MessageLookupByLibrary.simpleMessage("Mở ứng dụng Email"),
+        "openEmailFail": MessageLookupByLibrary.simpleMessage(
+            "Không thể mở ứng dụng Mail. Vui lòng thử lại!"),
         "openLocation": MessageLookupByLibrary.simpleMessage("Mở vị trí"),
+        "openMailApp": MessageLookupByLibrary.simpleMessage("Mở ứng dụng Mail"),
         "or": MessageLookupByLibrary.simpleMessage("Hoặc"),
         "other": MessageLookupByLibrary.simpleMessage("Khác"),
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
@@ -234,8 +272,16 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bạn hãy kiểm tra email để khôi phục mật khẩu nhé"),
         "pleaseLoginAgain":
             MessageLookupByLibrary.simpleMessage("Vui lòng đăng nhập lại"),
+        "reLoginToContinue": MessageLookupByLibrary.simpleMessage(
+            "Hệ thống sẽ tiến hành đăng xuất. Bạn hãy đăng nhập lại để tiếp tục nhé!"),
         "receive": MessageLookupByLibrary.simpleMessage("Đã nhận"),
+        "receiver": MessageLookupByLibrary.simpleMessage("Người nhận"),
         "recentCall": MessageLookupByLibrary.simpleMessage("Cuộc gọi gần đây"),
+        "recommendedUser":
+            MessageLookupByLibrary.simpleMessage("Người dùng bạn có thể quen"),
+        "reconnect": MessageLookupByLibrary.simpleMessage("Kết nối lại"),
+        "reconnectSuccess":
+            MessageLookupByLibrary.simpleMessage("Kết nối lại thành công."),
         "register": MessageLookupByLibrary.simpleMessage("Đăng ký"),
         "registerEmailToReceivePasswordReset": MessageLookupByLibrary.simpleMessage(
             "Bạn vui lòng nhập email đã đăng ký bên dưới, và chúng tôi sẽ gửi hướng dẫn khôi phục mật khẩu đến cho bạn"),
@@ -262,7 +308,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Xem hình ảnh, video, tệp tin"),
         "seeProfile":
             MessageLookupByLibrary.simpleMessage("Xem thông tin cá nhân"),
+        "selectCamera": MessageLookupByLibrary.simpleMessage("Chọn Camera"),
         "selectGender": MessageLookupByLibrary.simpleMessage("Chọn giới tính"),
+        "selectMicrophone":
+            MessageLookupByLibrary.simpleMessage("Chọn Microphone"),
+        "selectVideoDimension":
+            MessageLookupByLibrary.simpleMessage("Chọn kích thước Video"),
         "selected": MessageLookupByLibrary.simpleMessage("Đã chọn"),
         "send": MessageLookupByLibrary.simpleMessage("Gửi"),
         "sendEmail": MessageLookupByLibrary.simpleMessage("Gửi email"),
@@ -276,9 +327,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Yêu cầu của bạn gửi thất bại! Vui lòng thử lại."),
         "sendRequestSuccess": MessageLookupByLibrary.simpleMessage(
             "Yêu cầu của bạn đã gửi thành công!"),
+        "sender": MessageLookupByLibrary.simpleMessage("Người gửi"),
         "sending": MessageLookupByLibrary.simpleMessage("Đang gửi"),
         "sent": MessageLookupByLibrary.simpleMessage("Đã gửi"),
         "serverError": MessageLookupByLibrary.simpleMessage("Lỗi hệ thống"),
+        "settingAdvanced":
+            MessageLookupByLibrary.simpleMessage("Cài đặt nâng cao"),
         "settings": MessageLookupByLibrary.simpleMessage("Cài đặt"),
         "signInWithEmail":
             MessageLookupByLibrary.simpleMessage("Đăng nhập với email"),
@@ -308,8 +362,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "theme": MessageLookupByLibrary.simpleMessage("Chủ đề"),
         "themeAndLanguage":
             MessageLookupByLibrary.simpleMessage("Chủ đề và ngôn ngữ"),
+        "thisWillForceReconnect":
+            MessageLookupByLibrary.simpleMessage("Hệ thống buộc kết nối lại"),
         "turnOnOffNotification":
             MessageLookupByLibrary.simpleMessage("Bật/tắt mở thông báo"),
+        "typeAMessage": MessageLookupByLibrary.simpleMessage("Nhập tin nhắn"),
         "unBlock": MessageLookupByLibrary.simpleMessage("Bỏ chặn"),
         "unBlockSuccess": MessageLookupByLibrary.simpleMessage(
             "Bỏ chặn người dùng thành công"),
@@ -331,6 +388,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "uploadImageSuccess": MessageLookupByLibrary.simpleMessage(
             "Tải hình ảnh lên thành công!"),
         "user": MessageLookupByLibrary.simpleMessage("Người dùng"),
+        "userNotFound":
+            MessageLookupByLibrary.simpleMessage("Không tìm thấy người dùng"),
         "verifyYourEmail":
             MessageLookupByLibrary.simpleMessage("Xác minh email"),
         "verifying": MessageLookupByLibrary.simpleMessage("Đang xác thực"),

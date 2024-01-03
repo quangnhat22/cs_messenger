@@ -3,6 +3,7 @@ import 'package:app/configs/di/di.dart';
 import 'package:app/configs/exts/app_exts.dart';
 import 'package:app/configs/routes/app_router.dart';
 import 'package:flutter/material.dart';
+import 'package:resources/resources.dart';
 import 'package:utilities/utilities.dart';
 
 class VideoCallDialogExts {
@@ -122,16 +123,16 @@ extension VideCallExts on BuildContext {
   Future<bool?> showDisconnectDialog() => showDialog<bool>(
         context: this,
         builder: (ctx) => AlertDialog(
-          title: const Text('Disconnect'),
-          content: const Text('Are you sure to disconnect?'),
+          title: Text(R.strings.disconnect),
+          content: Text(R.strings.areYouSureDisconnect),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              child: const Text('Cancel'),
+              child: Text(R.strings.close),
             ),
             TextButton(
               onPressed: () => Navigator.pop(ctx, true),
-              child: const Text('Disconnect'),
+              child: Text(R.strings.confirm),
             ),
           ],
         ),
@@ -140,16 +141,16 @@ extension VideCallExts on BuildContext {
   Future<bool?> showReconnectDialog() => showDialog<bool>(
         context: this,
         builder: (ctx) => AlertDialog(
-          title: const Text('Reconnect'),
-          content: const Text('This will force a reconnection'),
+          title: Text(R.strings.reconnect),
+          content: Text(R.strings.thisWillForceReconnect),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              child: const Text('Cancel'),
+              child: Text(R.strings.close),
             ),
             TextButton(
               onPressed: () => Navigator.pop(ctx, true),
-              child: const Text('Reconnect'),
+              child: Text(R.strings.reconnect),
             ),
           ],
         ),
@@ -158,12 +159,12 @@ extension VideCallExts on BuildContext {
   Future<void> showReconnectSuccessDialog() => showDialog<void>(
         context: this,
         builder: (ctx) => AlertDialog(
-          title: const Text('Reconnect'),
-          content: const Text('Reconnection was successful.'),
+          title: Text(R.strings.reconnect),
+          content: Text(R.strings.reconnectSuccess),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx),
-              child: const Text('OK'),
+              child: Text(R.strings.confirm),
             ),
           ],
         ),
@@ -209,46 +210,13 @@ extension VideCallExts on BuildContext {
           title: const Text('Room recording reminder'),
           content: Text(isActiveRecording
               ? 'Room recording is active.'
-              : 'Room recording is stoped.'),
+              : 'Room recording is stopped.'),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, true),
               child: const Text('OK'),
             ),
           ],
-        ),
-      );
-
-  Future<bool?> showSubscribePermissionDialog() => showDialog<bool>(
-        context: this,
-        builder: (ctx) => AlertDialog(
-          title: const Text('Allow subscription'),
-          content: const Text(
-              'Allow all participants to subscribe tracks published by local participant?'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(ctx, false),
-              child: const Text('NO'),
-            ),
-            TextButton(
-              onPressed: () => Navigator.pop(ctx, true),
-              child: const Text('YES'),
-            ),
-          ],
-        ),
-      );
-
-  Future<SimulateScenarioResult?> showSimulateScenarioDialog() =>
-      showDialog<SimulateScenarioResult>(
-        context: this,
-        builder: (ctx) => SimpleDialog(
-          title: const Text('Simulate Scenario'),
-          children: SimulateScenarioResult.values
-              .map((e) => SimpleDialogOption(
-                    child: Text(e.name),
-                    onPressed: () => Navigator.pop(ctx, e),
-                  ))
-              .toList(),
         ),
       );
 }

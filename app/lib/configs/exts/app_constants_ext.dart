@@ -15,13 +15,17 @@ class AppConstants {
 
   static int timeDelaySendEmail = 30;
 
-  static int timeRepeatCallCheckVerifyEmail = 5000;
+  static int timeRepeatCallCheckVerifyEmail = 5;
 
   static double numberElevationContainer = 10;
 
   static int timeDebounceSearch = 1000;
 
   static int sizeMbFileLimit = 10;
+
+  static double appOpacityCard = 0.36;
+
+  static String emailContact = 'quangnguyen221202@gmail.com';
 }
 
 class AppFormKeys {

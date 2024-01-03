@@ -46,6 +46,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "acceptRequestSuccess":
             MessageLookupByLibrary.simpleMessage("Accept request success!"),
         "account": MessageLookupByLibrary.simpleMessage("Account"),
+        "accountExist": MessageLookupByLibrary.simpleMessage("Account exist"),
+        "activeSession": MessageLookupByLibrary.simpleMessage("Active session"),
         "addFriend": MessageLookupByLibrary.simpleMessage("Add"),
         "addNewContact":
             MessageLookupByLibrary.simpleMessage("Add new contact"),
@@ -54,6 +56,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "The app does not have permission to perform this feature. Please grant permission"),
         "areYouSureBlockThisUser": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to block this person?"),
+        "areYouSureDisconnect":
+            MessageLookupByLibrary.simpleMessage("Are you sure to disconnect?"),
         "audio": MessageLookupByLibrary.simpleMessage("Audio"),
         "back": MessageLookupByLibrary.simpleMessage("Back"),
         "backToWelcome":
@@ -66,7 +70,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "bridgeTheGap": m0,
         "callEnded": MessageLookupByLibrary.simpleMessage("Call ended"),
         "callStarted": MessageLookupByLibrary.simpleMessage("Started call"),
+        "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "changeGroupName":
+            MessageLookupByLibrary.simpleMessage("Change group name"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change Password"),
         "changePasswordSuccess":
@@ -82,6 +89,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Password confirmation and Password must match."),
         "connectingPeopleAnytimeAnywhere": MessageLookupByLibrary.simpleMessage(
             "Connecting People, Anytime, Anywhere"),
+        "contact_message": MessageLookupByLibrary.simpleMessage(
+            "If you have a need to contact or report an error in the application, please contact this Email: "),
         "copied": MessageLookupByLibrary.simpleMessage("Copied"),
         "copy": MessageLookupByLibrary.simpleMessage("Copy"),
         "create": MessageLookupByLibrary.simpleMessage("Create"),
@@ -95,6 +104,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "createGroupWith": m1,
         "createNewGroup":
             MessageLookupByLibrary.simpleMessage("Create new group"),
+        "createdBy": MessageLookupByLibrary.simpleMessage("Created by"),
+        "createdDate": MessageLookupByLibrary.simpleMessage("Created"),
         "currentDevices": MessageLookupByLibrary.simpleMessage("Current"),
         "currentLocation":
             MessageLookupByLibrary.simpleMessage("Current location"),
@@ -113,14 +124,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteNotification":
             MessageLookupByLibrary.simpleMessage("Delete Notification"),
         "devices": MessageLookupByLibrary.simpleMessage("Devices"),
+        "disableCamera": MessageLookupByLibrary.simpleMessage("Disable Camera"),
+        "disableMicrophone":
+            MessageLookupByLibrary.simpleMessage("Disable Microphone"),
+        "disconnect": MessageLookupByLibrary.simpleMessage("Disconnect"),
         "discoverSeamlessMessaging": MessageLookupByLibrary.simpleMessage(
             "Discover seamless messaging and high-quality video calls. Stay connected with friends and loved ones like never before."),
         "doYouWantAcceptFriendRequest": MessageLookupByLibrary.simpleMessage(
             "Do you want to accept this friend request? Make sure you know this person."),
         "doYouWantDeleteDevice": MessageLookupByLibrary.simpleMessage(
             "Do you want delete this device?"),
+        "doYouWantJoinGroupRequest": MessageLookupByLibrary.simpleMessage(
+            "Do you want to join this group?"),
         "doYouWantRejectFriendRequest": MessageLookupByLibrary.simpleMessage(
             "Do you want to reject this friend request?"),
+        "doYouWantRejectGroupRequest": MessageLookupByLibrary.simpleMessage(
+            "Do you want to reject this group?"),
         "doYouWantToDeleteAllNotifications":
             MessageLookupByLibrary.simpleMessage(
                 "Do you want to delete all notifications?"),
@@ -139,6 +158,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Do you want to unfriend?"),
         "doYouWantUndoFriendRequest": MessageLookupByLibrary.simpleMessage(
             "Do you want to undo this friend request?"),
+        "doYouWantUndoGroupRequest": MessageLookupByLibrary.simpleMessage(
+            "Do you want to undo this group request?"),
         "done": MessageLookupByLibrary.simpleMessage("Done"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "editGroup": MessageLookupByLibrary.simpleMessage("Edit group"),
@@ -148,6 +169,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Email or Password wrong! Try again."),
         "emailPasswordWrong":
             MessageLookupByLibrary.simpleMessage("Email or Password wrong"),
+        "emailUsedByOtherAccount": MessageLookupByLibrary.simpleMessage(
+            "This email is already in use by other accounts! Please use another email."),
         "emailValidate": MessageLookupByLibrary.simpleMessage(
             "The email address is badly formatted."),
         "en": MessageLookupByLibrary.simpleMessage("English"),
@@ -159,17 +182,25 @@ class MessageLookup extends MessageLookupByLibrary {
         "female": MessageLookupByLibrary.simpleMessage("Female"),
         "file": MessageLookupByLibrary.simpleMessage("File"),
         "fileLimitSize": m2,
+        "files": MessageLookupByLibrary.simpleMessage("Files"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password"),
         "forward": MessageLookupByLibrary.simpleMessage("Forward"),
+        "forwardMessage":
+            MessageLookupByLibrary.simpleMessage("Forward message"),
+        "forwardMessageSuccess":
+            MessageLookupByLibrary.simpleMessage("Forward message success!"),
         "friendCommon": MessageLookupByLibrary.simpleMessage("Friend Common"),
         "friendRequest": MessageLookupByLibrary.simpleMessage("Friend Request"),
         "friends": MessageLookupByLibrary.simpleMessage("Friends"),
+        "gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
         "gender": MessageLookupByLibrary.simpleMessage("Gender"),
         "getConnectWithYourFriends": MessageLookupByLibrary.simpleMessage(
             "Get connect with your friends"),
         "gotIt": MessageLookupByLibrary.simpleMessage("Got it"),
+        "group": MessageLookupByLibrary.simpleMessage("Group"),
         "groupCommon": MessageLookupByLibrary.simpleMessage("Group Common"),
+        "groupInfo": MessageLookupByLibrary.simpleMessage("Group Information"),
         "groupName": MessageLookupByLibrary.simpleMessage("Group name"),
         "groupNameCannotBeEmpty":
             MessageLookupByLibrary.simpleMessage("Group name cannot be empty"),
@@ -184,6 +215,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "join": MessageLookupByLibrary.simpleMessage("Join"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "leaveGroup": MessageLookupByLibrary.simpleMessage("Leave group"),
+        "leaveGroupSuccess":
+            MessageLookupByLibrary.simpleMessage("Leave Group Success"),
         "lightMode": MessageLookupByLibrary.simpleMessage("Light Mode"),
         "listFriend": MessageLookupByLibrary.simpleMessage("List Friends"),
         "listUserBlock":
@@ -201,14 +234,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "memberJoined": MessageLookupByLibrary.simpleMessage("Member joined"),
         "memberLeft": MessageLookupByLibrary.simpleMessage("Member left"),
         "members": MessageLookupByLibrary.simpleMessage("Members"),
+        "messenger": MessageLookupByLibrary.simpleMessage("Messenger"),
         "moreAction": MessageLookupByLibrary.simpleMessage("More action"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "newPassword": MessageLookupByLibrary.simpleMessage("New password"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "noData": MessageLookupByLibrary.simpleMessage("No Data!"),
+        "noMailAppInstalled":
+            MessageLookupByLibrary.simpleMessage("No mail apps installed"),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "openEmailApp": MessageLookupByLibrary.simpleMessage("Open Email app"),
+        "openEmailFail": MessageLookupByLibrary.simpleMessage(
+            "Can\'t open Email app. Try again!"),
         "openLocation": MessageLookupByLibrary.simpleMessage("Open location"),
+        "openMailApp": MessageLookupByLibrary.simpleMessage("Open Mail App"),
         "or": MessageLookupByLibrary.simpleMessage("Or"),
         "other": MessageLookupByLibrary.simpleMessage("Other"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
@@ -224,8 +263,16 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please check your email to recovery your password"),
         "pleaseLoginAgain":
             MessageLookupByLibrary.simpleMessage("Please login again"),
+        "reLoginToContinue": MessageLookupByLibrary.simpleMessage(
+            "The system will proceed with the login process. Please log in again to continue!"),
         "receive": MessageLookupByLibrary.simpleMessage("Receive"),
+        "receiver": MessageLookupByLibrary.simpleMessage("Receiver"),
         "recentCall": MessageLookupByLibrary.simpleMessage("Recent calls"),
+        "recommendedUser":
+            MessageLookupByLibrary.simpleMessage("Recommended user"),
+        "reconnect": MessageLookupByLibrary.simpleMessage("Reconnect"),
+        "reconnectSuccess": MessageLookupByLibrary.simpleMessage(
+            "Reconnection was successful."),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "registerEmailToReceivePasswordReset": MessageLookupByLibrary.simpleMessage(
             "Enter you registered email below to receive password reset instruction"),
@@ -249,7 +296,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "seePictureVideosFiles":
             MessageLookupByLibrary.simpleMessage("See pictures, videos, files"),
         "seeProfile": MessageLookupByLibrary.simpleMessage("See profile"),
+        "selectCamera": MessageLookupByLibrary.simpleMessage("Select Camera"),
         "selectGender": MessageLookupByLibrary.simpleMessage("Select Gender"),
+        "selectMicrophone":
+            MessageLookupByLibrary.simpleMessage("Select Microphone"),
+        "selectVideoDimension":
+            MessageLookupByLibrary.simpleMessage("Select Video Dimensions"),
         "selected": MessageLookupByLibrary.simpleMessage("Selected"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "sendEmail": MessageLookupByLibrary.simpleMessage("Send email"),
@@ -264,9 +316,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sent your request fail! Try again"),
         "sendRequestSuccess":
             MessageLookupByLibrary.simpleMessage("Sent your request success!"),
+        "sender": MessageLookupByLibrary.simpleMessage("Sender"),
         "sending": MessageLookupByLibrary.simpleMessage("Sending"),
         "sent": MessageLookupByLibrary.simpleMessage("Sent"),
         "serverError": MessageLookupByLibrary.simpleMessage("Server error"),
+        "settingAdvanced":
+            MessageLookupByLibrary.simpleMessage("Setting advanced"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "signInWithEmail":
             MessageLookupByLibrary.simpleMessage("Sign in with email"),
@@ -296,8 +351,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "themeAndLanguage":
             MessageLookupByLibrary.simpleMessage("Theme and Language"),
+        "thisWillForceReconnect": MessageLookupByLibrary.simpleMessage(
+            "This will force a reconnection"),
         "turnOnOffNotification":
             MessageLookupByLibrary.simpleMessage("Turn on/off notification"),
+        "typeAMessage": MessageLookupByLibrary.simpleMessage("Type a message"),
         "unBlock": MessageLookupByLibrary.simpleMessage("Unblock"),
         "unBlockSuccess":
             MessageLookupByLibrary.simpleMessage("Unblock user success"),
@@ -318,11 +376,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "uploadImageSuccess":
             MessageLookupByLibrary.simpleMessage("Upload image success"),
         "user": MessageLookupByLibrary.simpleMessage("User"),
+        "userNotFound": MessageLookupByLibrary.simpleMessage("User not found"),
         "verifyYourEmail":
             MessageLookupByLibrary.simpleMessage("Verify your email"),
         "verifying": MessageLookupByLibrary.simpleMessage("Verifying"),
         "video": MessageLookupByLibrary.simpleMessage("Video"),
         "vn": MessageLookupByLibrary.simpleMessage("Vietnam"),
+        "voice": MessageLookupByLibrary.simpleMessage("Voice"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
         "welcomeToApp": m6,

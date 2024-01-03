@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app/components/main/dialog/app_dialog_base_builder.dart';
 import 'package:app/components/main/overlay/app_loading_overlay_widget.dart';
 import 'package:app/configs/exts/app_exts.dart';
 import 'package:app/configs/exts/app_form_validator_ext.dart';
@@ -69,6 +70,7 @@ class SignUpFormBloc extends FormBloc<String, String> {
   FutureOr<void> onSubmitting() async {
     try {
       AppLoadingOverlayWidget.show();
+
       await _createNewAccountUseCase.executeObj(
           request: SignUpParam(email: email.value, password: password.value));
 
@@ -81,11 +83,25 @@ class SignUpFormBloc extends FormBloc<String, String> {
     } on AppException catch (e) {
       AppLoadingOverlayWidget.dismiss();
       AppExceptionExt(
-        appException: e,
-        onError: (_) {
-          emitFailure();
-        },
-      ).detected();
+          appException: e,
+          onError: (_) {
+            emitFailure();
+          },
+          onGrpcError: (e) {
+            if (e.errorCode == '6') {
+              AppDefaultDialogWidget()
+                  .setTitle(R.strings.accountExist)
+                  .setContent(R.strings.emailUsedByOtherAccount)
+                  .setAppDialogType(AppDialogType.error)
+                  .setNegativeText(R.strings.close)
+                  .setPositiveText(R.strings.confirm)
+                  .setOnPositive(() {
+                    emitFailure();
+                  })
+                  .buildDialog(AppKeys.navigatorKey.currentContext!)
+                  .show();
+            }
+          }).detected();
     }
   }
 }

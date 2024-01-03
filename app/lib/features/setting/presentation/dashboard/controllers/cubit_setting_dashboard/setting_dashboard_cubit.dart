@@ -34,6 +34,12 @@ class SettingDashboardCubit extends Cubit<SettingDashboardState> {
 
   late StreamSubscription<UserModel?> userLocalSub;
 
+  @override
+  Future<void> close() async {
+    await userLocalSub.cancel();
+    return super.close();
+  }
+
   Future<void> initPage() async {
     try {
       userLocalSub =

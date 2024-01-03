@@ -15,7 +15,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:resources/resources.dart';
-import 'package:utilities/utilities.dart';
 
 part 'verify_email_cubit.freezed.dart';
 part 'verify_email_state.dart';
@@ -108,19 +107,21 @@ class VerifyEmailCubit extends Cubit<VerifyEmailState> {
     try {
       emit(state.copyWith(isVerifying: true));
       _timer = Timer.periodic(
-          Duration(milliseconds: AppConstants.timeRepeatCallCheckVerifyEmail),
+          Duration(seconds: AppConstants.timeRepeatCallCheckVerifyEmail),
           (timer) async {
         final statusVerifyModel = await _checkVerifyEmailUseCase.executeObj();
         final statusVerify = statusVerifyModel.netData?.isVerify ?? false;
         if (statusVerify) {
-          AppSnackBarWidget()
-              .setLabelText(R.strings.thankForVerifyEmail)
-              .setAppSnackBarType(AppSnackBarType.informMessage)
-              .setAppSnackBarStatus(AppSnackBarStatus.success)
-              .showSnackBar();
-          await logOut();
+          AppDefaultDialogWidget()
+              .setTitle(R.strings.thankForVerifyEmail)
+              .setAppDialogType(AppDialogType.success)
+              .setPositiveText(R.strings.confirm)
+              .setOnPositive(() async {
+                await logOut();
+              })
+              .buildDialog(AppKeys.navigatorKey.currentContext!)
+              .show();
         }
-        Logs.d('tick ${timer.tick}');
       });
     } on AppException catch (_) {
       rethrow;

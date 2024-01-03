@@ -16,6 +16,7 @@ class TextMessageModel extends IMessageModel with _$TextMessageModel {
     PreviewDataModel? previewData,
     ReplyMessageModel? repliedMessage,
     @Default(false) bool isShowStatus,
+    @Default(false) bool isForward,
   }) = _TextMessageModel;
 
   static TextMessageModel getTextMessageModelFromParam(

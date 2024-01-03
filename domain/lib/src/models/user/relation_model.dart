@@ -1,6 +1,7 @@
 part of '../base_model.dart';
 
 enum RelationType {
+  empty('empty'),
   self('self'),
   friend('friend'),
   stranger('stranger'),
@@ -23,6 +24,8 @@ enum RelationType {
       return RelationType.requesting;
     } else if (RelationType.requested.value == type) {
       return RelationType.requested;
+    } else if (RelationType.stranger.value == type) {
+      return RelationType.stranger;
     } else {
       return RelationType.stranger;
     }

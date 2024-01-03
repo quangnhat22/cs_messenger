@@ -17,5 +17,6 @@ class EmojiStickerModel extends IMessageModel {
     this.link,
     super.isShowStatus,
     super.repliedMessage,
+    super.isForward = false,
   });
 }

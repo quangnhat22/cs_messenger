@@ -39,15 +39,34 @@ class NotificationRemoteDataSourceImpl extends NotificationRemoteDataSource {
   }
 
   @override
-  Future<AppObjResultRaw<EmptyRaw>> deleteAllNotification() {
-    // TODO: implement deleteAllNotification
-    throw UnimplementedError();
+  Future<AppObjResultRaw<EmptyRaw>> deleteAllNotification() async {
+    try {
+      final AppResponse response = await _service.request(
+        clientRequest: ClientRequest(
+          url: ApiProvider.notifications,
+          method: HttpMethod.delete,
+        ),
+      );
+      return response.toRaw((_) => EmptyRaw());
+    } on AppException catch (_) {
+      rethrow;
+    }
   }
 
   @override
   Future<AppObjResultRaw<EmptyRaw>> deleteNotificationById(
-      {required Map<String, dynamic> query}) {
-    // TODO: implement deleteNotificationById
-    throw UnimplementedError();
+      {required Map<String, dynamic> query}) async {
+    try {
+      final notificationId = query['id'] as String;
+      final AppResponse response = await _service.request(
+        clientRequest: ClientRequest(
+          url: ApiProvider.notificationById(notificationId),
+          method: HttpMethod.delete,
+        ),
+      );
+      return response.toRaw((_) => EmptyRaw());
+    } on AppException catch (_) {
+      rethrow;
+    }
   }
 }

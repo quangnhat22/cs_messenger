@@ -10,6 +10,7 @@ import 'package:domain/domain.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:resources/resources.dart';
 
 class InputWidget extends StatefulWidget {
   const InputWidget({
@@ -210,8 +211,7 @@ class _InputWidgetState extends State<InputWidget> {
                                 filled: true,
                                 fillColor:
                                     Theme.of(context).colorScheme.background,
-                                //TODO: support en vi
-                                hintText: 'Type a message',
+                                hintText: R.strings.typeAMessage,
                               ),
                               focusNode: _inputFocusNode,
                               keyboardType: widget.options.keyboardType,

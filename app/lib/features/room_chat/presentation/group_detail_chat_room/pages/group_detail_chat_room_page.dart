@@ -1,4 +1,3 @@
-import 'package:app/components/features/button/icon_button_with_text_widget.dart';
 import 'package:app/components/features/imagePicker/app_dialog_image_picker.dart';
 import 'package:app/components/main/appBar/app_bar_base_builder.dart';
 import 'package:app/components/main/avatar/app_avatar_base_builder.dart';
@@ -8,6 +7,7 @@ import 'package:app/components/main/page/app_main_page_base_builder.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/components/main/textField/app_field_base_builder.dart';
 import 'package:app/configs/di/di.dart';
+import 'package:app/configs/exts/app_exts.dart';
 import 'package:app/configs/routes/app_router.dart';
 import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/configs/theme/app_theme.dart';
@@ -51,15 +51,10 @@ class GroupDetailChatRoomPage extends StatelessWidget {
             padding: EdgeInsets.all(AppSizeExt.of.majorPaddingScale(4)),
             child: Column(
               children: <Widget>[
-                GestureDetector(
-                  onTap: () async {
-                    await _showDialogChangeGroupImage(context);
-                  },
-                  child: AppAvatarCircleWidget()
-                      .setSize(AppAvatarSize.extraExtraLarge)
-                      .setUrl(state.avatarUrl)
-                      .build(context),
-                ),
+                AppAvatarCircleWidget()
+                    .setSize(AppAvatarSize.extraExtraLarge)
+                    .setUrl(state.avatarUrl)
+                    .build(context),
                 SizedBox(height: AppSizeExt.of.majorScale(5)),
                 AppTextHeadlineLargeWidget()
                     .setText(state.name)
@@ -67,44 +62,6 @@ class GroupDetailChatRoomPage extends StatelessWidget {
                     .build(context),
                 SizedBox(
                   height: AppSizeExt.of.majorScale(5),
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    IconButtonWithTextWidget(
-                      icon: Icon(
-                        Icons.info_outline,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                      text: R.strings.information,
-                    ),
-                    IconButtonWithTextWidget(
-                      icon: Icon(
-                        Icons.edit_outlined,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                      text: R.strings.edit,
-                      onTap: () => _buildDialogChangeGroupName(
-                          context, state.name ?? ''),
-                    ),
-                    IconButtonWithTextWidget(
-                      icon: Icon(
-                        Icons.group_outlined,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                      text: R.strings.members,
-                      onTap: () async {
-                        if (state.groupId != null) {
-                          await getIt<AppRouter>()
-                              .push(GroupMemberRoute(groupId: state.groupId!));
-                        }
-                      },
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: AppSizeExt.of.majorScale(4),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -127,7 +84,7 @@ class GroupDetailChatRoomPage extends StatelessWidget {
                       color: Theme.of(context)
                           .colorScheme
                           .primaryContainer
-                          .withOpacity(0.36),
+                          .withOpacity(AppConstants.appOpacityCard),
                       child: Column(
                         children: <Widget>[
                           AppCardBorderWidget()
@@ -136,7 +93,7 @@ class GroupDetailChatRoomPage extends StatelessWidget {
                                   .setText(R.strings.seePictureVideosFiles)
                                   .build(context))
                               .setHasTopBorderRadius(true)
-                              .setIsShowBottomDivider(true)
+                              .setHasBottomBorderRadius(true)
                               .setActions(
                                   [const Icon(Icons.chevron_right)]).setOnTap(
                             () async {
@@ -144,18 +101,86 @@ class GroupDetailChatRoomPage extends StatelessWidget {
                                   .push(RoomChatMediaRoute(roomId: chatRoomId));
                             },
                           ).build(context),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: AppSizeExt.of.majorScale(1),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppSizeExt.of.majorPaddingScale(3),
+                        vertical: AppSizeExt.of.majorPaddingScale(3),
+                      ),
+                      child: AppTextTitleMediumWidget()
+                          .setText(R.strings.information)
+                          .setTextStyle(TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.bold,
+                          ))
+                          .build(context),
+                    ),
+                    Card(
+                      elevation: 0,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .primaryContainer
+                          .withOpacity(AppConstants.appOpacityCard),
+                      child: Column(
+                        children: <Widget>[
                           AppCardBorderWidget()
-                              .setLeading(const Icon(Icons.push_pin_outlined))
+                              .setLeading(
+                                  const Icon(Icons.info_outline_rounded))
                               .setTitle(AppTextBodyLargeWidget()
-                                  .setText('Tin nhắn đã ghim')
+                                  .setText(R.strings.groupInfo)
+                                  .build(context))
+                              .setHasTopBorderRadius(true)
+                              .setIsShowBottomDivider(true)
+                              .setOnTap(() async {
+                            if (state.groupId != null &&
+                                state.chatRoomId != null) {
+                              await getIt<AppRouter>().push(GroupInfoRoute(
+                                  groupId: state.groupId!,
+                                  chatRoomId: chatRoomId));
+                            }
+                          }).build(context),
+                          AppCardBorderWidget()
+                              .setLeading(const Icon(Icons.camera_alt_outlined))
+                              .setTitle(AppTextBodyLargeWidget()
+                                  .setText(R.strings.updateAvatar)
                                   .build(context))
                               .setIsShowBottomDivider(true)
-                              .setActions(
-                                  [const Icon(Icons.chevron_right)]).setOnTap(
-                            () {
-                              getIt<AppRouter>().push(const BlockRoute());
-                            },
-                          ).build(context),
+                              .setOnTap(() async =>
+                                  await _showDialogChangeGroupImage(context))
+                              .build(context),
+                          AppCardBorderWidget()
+                              .setLeading(const Icon(Icons.edit_outlined))
+                              .setTitle(AppTextBodyLargeWidget()
+                                  .setText(R.strings.changeGroupName)
+                                  .build(context))
+                              .setHasTopBorderRadius(true)
+                              .setIsShowBottomDivider(true)
+                              .setOnTap(() => _buildDialogChangeGroupName(
+                                  context, state.name ?? ''))
+                              .build(context),
+                          AppCardBorderWidget()
+                              .setLeading(const Icon(Icons.groups_outlined))
+                              .setTitle(AppTextBodyLargeWidget()
+                                  .setText(R.strings.members)
+                                  .build(context))
+                              .setHasTopBorderRadius(true)
+                              .setIsShowBottomDivider(true)
+                              .setOnTap(() async {
+                            if (state.groupId != null) {
+                              await getIt<AppRouter>().push(
+                                  GroupMemberRoute(groupId: state.groupId!));
+                            }
+                          }).build(context),
                           AppCardBorderWidget()
                               .setLeading(Icon(
                                 Icons.logout_outlined,
@@ -167,14 +192,14 @@ class GroupDetailChatRoomPage extends StatelessWidget {
                                     color: Theme.of(context).colorScheme.error,
                                   ))
                                   .build(context))
-                              .setOnTap(() => _buildDialogLeaveGroup(context))
                               .setHasBottomBorderRadius(true)
+                              .setOnTap(() => _buildDialogLeaveGroup(context))
                               .build(context)
                         ],
                       ),
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),
@@ -234,7 +259,9 @@ class GroupDetailChatRoomPage extends StatelessWidget {
         .setPositiveText(R.strings.confirm)
         .setOnPositive(() async {
           await context.read<EditGroupCubit>().leaveGroup();
-          await getIt<AppRouter>().pop();
+          if (context.mounted) {
+            await context.router.navigate(const HomeRoute());
+          }
         })
         .buildDialog(context)
         .show();

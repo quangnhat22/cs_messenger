@@ -2,6 +2,7 @@ import 'package:app/components/features/scroll_view/scroll_view_widget.dart';
 import 'package:app/components/main/page/app_main_page_base_builder.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/configs/di/di.dart';
+import 'package:app/configs/routes/app_router.dart';
 import 'package:app/configs/routes/app_router.gr.dart';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:app/features/auth/presentation/welcome/controllers/welcome/welcome_bloc.dart';
@@ -53,30 +54,49 @@ class WelcomePage extends StatelessWidget {
                   AppSizeExt.of.majorPaddingScale(6),
                 ),
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    R.pngs.welcomeBanner.image(
-                      height: AppSizeExt.of.majorScale(250 / 4),
+                  children: [
+                    Expanded(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          R.pngs.welcomeBanner.image(
+                            height: AppSizeExt.of.majorScale(250 / 4),
+                          ),
+                          SizedBox(
+                            height: AppSizeExt.of.majorScale(4),
+                          ),
+                          AppTextHeadlineMediumWidget()
+                              .setText(R.strings.getConnectWithYourFriends)
+                              .setTextAlign(TextAlign.center)
+                              .setTextStyle(TextStyle(
+                                  color: Theme.of(context).colorScheme.primary))
+                              .build(context),
+                          SizedBox(
+                            height: AppSizeExt.of.majorScale(8),
+                          ),
+                          (state.isLoading)
+                              ? Padding(
+                                  padding: EdgeInsets.only(
+                                      top: AppSizeExt.of.majorPaddingScale(10)),
+                                  child: const CircularProgressIndicator(),
+                                )
+                              : const WelcomeButtonsWidget()
+                        ],
+                      ),
                     ),
-                    SizedBox(
-                      height: AppSizeExt.of.majorScale(4),
-                    ),
-                    AppTextHeadlineMediumWidget()
-                        .setText(R.strings.getConnectWithYourFriends)
-                        .setTextAlign(TextAlign.center)
-                        .setTextStyle(TextStyle(
-                            color: Theme.of(context).colorScheme.primary))
-                        .build(context),
-                    SizedBox(
-                      height: AppSizeExt.of.majorScale(8),
-                    ),
-                    (state.isLoading)
-                        ? Padding(
-                            padding: EdgeInsets.only(
-                                top: AppSizeExt.of.majorPaddingScale(10)),
-                            child: const CircularProgressIndicator(),
-                          )
-                        : const WelcomeButtonsWidget()
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(
+                          onPressed: () async {
+                            await getIt<AppRouter>()
+                                .push(const ThemeAndLanguageRoute());
+                          },
+                          icon: const Icon(Icons.settings),
+                        )
+                      ],
+                    )
                   ],
                 ),
               ),

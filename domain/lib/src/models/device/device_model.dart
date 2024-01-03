@@ -6,11 +6,14 @@ class DeviceModel extends BaseModel {
   final String? os;
   final String? appVersion;
   final DateTime? lastActive;
+  final bool isCurrentDevice;
 
-  DeviceModel(
-      {required this.id,
-      this.model,
-      this.os,
-      this.appVersion,
-      this.lastActive});
+  DeviceModel({
+    required this.id,
+    this.model,
+    this.os,
+    this.appVersion,
+    this.lastActive,
+    this.isCurrentDevice = false,
+  });
 }

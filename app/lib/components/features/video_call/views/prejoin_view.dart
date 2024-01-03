@@ -7,20 +7,25 @@ import 'package:app/components/main/avatar/app_avatar_base_builder.dart';
 import 'package:app/components/main/button/app_button_base_builder.dart';
 import 'package:app/components/main/text/app_text_base_builder.dart';
 import 'package:app/configs/theme/app_theme.dart';
+import 'package:domain/domain.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:livekit_client/livekit_client.dart';
+import 'package:resources/resources.dart';
 import 'package:utilities/utilities.dart';
 
 class PreJoinView extends StatefulWidget {
   const PreJoinView({
     super.key,
     this.onConnect,
+    required this.chatRoomInfo,
   });
 
   // final JoinArgs args;
   final Future<void> Function(LocalAudioTrack?, LocalVideoTrack?)? onConnect;
+
+  final ChatRoomModel? chatRoomInfo;
 
   @override
   State<PreJoinView> createState() => _PreJoinViewState();
@@ -53,10 +58,6 @@ class _PreJoinViewState extends State<PreJoinView> {
 
   @override
   void deactivate() {
-    // Future.delayed(Duration.zero, () async {
-    //   await _setEnableVideo(false);
-    //   await _setEnableAudio(false);
-    // });
     _subscription?.cancel();
     super.deactivate();
   }
@@ -200,20 +201,6 @@ class _PreJoinViewState extends State<PreJoinView> {
           ),
         ),
         Positioned(
-          top: AppSizeExt.of.majorScale(1),
-          left: AppSizeExt.of.majorScale(2),
-          child: IconWrapper(
-            icon: const Icon(Icons.chevron_left),
-            onPressed: () async {
-              await _setEnableVideo(false);
-              await _setEnableAudio(false);
-              if (context.mounted) {
-                Navigator.of(context).pop();
-              }
-            },
-          ),
-        ),
-        Positioned(
           bottom: 0,
           left: 0,
           right: 0,
@@ -278,57 +265,85 @@ class _PreJoinViewState extends State<PreJoinView> {
                 ),
                 padding: EdgeInsets.symmetric(
                   vertical: AppSizeExt.of.majorPaddingScale(4),
-                  horizontal: AppSizeExt.of.majorPaddingScale(2),
+                  horizontal: AppSizeExt.of.majorPaddingScale(4),
                 ),
                 child: SingleChildScrollView(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      SizedBox(
+                        height: AppSizeExt.of.majorScale(4),
+                      ),
                       AppAvatarCircleWidget()
-                          .setUrl('')
+                          .setUrl(widget.chatRoomInfo?.avatar)
                           .setSize(AppAvatarSize.extraLarge)
                           .build(context),
+                      SizedBox(
+                        height: AppSizeExt.of.majorScale(4),
+                      ),
                       Padding(
                         padding: EdgeInsets.symmetric(
-                            vertical: AppSizeExt.of.majorScale(4)),
-                        child: AppTextBodyLargeWidget()
-                            .setText('Group A')
+                          vertical: AppSizeExt.of.majorPaddingScale(4),
+                          horizontal: AppSizeExt.of.majorPaddingScale(4),
+                        ),
+                        child: AppTextHeadlineSmallWidget()
+                            .setText(widget.chatRoomInfo?.name)
                             .setTextAlign(TextAlign.center)
+                            .setTextStyle(
+                                const TextStyle(fontWeight: FontWeight.bold))
                             .build(context),
                       ),
-                      ElevatedButton(
-                        onPressed: _busy ? null : () => _join(context),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            if (_busy)
-                              const Padding(
-                                padding: EdgeInsets.only(right: 10),
-                                child: SizedBox(
-                                  height: 15,
-                                  width: 15,
-                                  child: CircularProgressIndicator(
-                                    color: Colors.white,
-                                    strokeWidth: 2,
-                                  ),
-                                ),
-                              ),
-                            const Text('JOIN'),
-                          ],
-                        ),
+                      SizedBox(
+                        height: AppSizeExt.of.majorScale(4),
                       ),
-                      AppButtonTextWidget()
-                          .setButtonText('Setting advanced')
-                          .setTextStyle(TextStyle(
-                              color: Theme.of(context).colorScheme.primary))
-                          .setOnPressed(
-                              () async => _showAdvancedSetting(context))
-                          .build(context)
+                      if (!_busy)
+                        AppButtonFilledWidget()
+                            .setButtonText(R.strings.join)
+                            .setTextStyle(TextStyle(
+                                color:
+                                    Theme.of(context).colorScheme.background))
+                            .setOnPressed(_busy ? null : () => _join(context))
+                            .build(context),
+                      if (!_busy)
+                        AppButtonTextWidget()
+                            .setButtonText(R.strings.settingAdvanced)
+                            .setTextStyle(TextStyle(
+                                color: Theme.of(context).colorScheme.primary))
+                            .setOnPressed(
+                                () async => _showAdvancedSetting(context))
+                            .build(context),
+                      if (_busy)
+                        SizedBox(
+                          height: AppSizeExt.of.majorScale(12),
+                          width: AppSizeExt.of.majorScale(10),
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              color: Theme.of(context).colorScheme.primary,
+                              strokeWidth: 4,
+                            ),
+                          ),
+                        ),
                     ],
                   ),
                 ),
               ),
             ],
+          ),
+        ),
+        Positioned(
+          top: AppSizeExt.of.majorScale(15),
+          left: AppSizeExt.of.majorScale(5),
+          child: IconWrapper(
+            icon: const Icon(
+              Icons.chevron_left,
+              color: Colors.white,
+            ),
+            onPressed: () async {
+              await _setEnableVideo(false);
+              await _setEnableAudio(false);
+              if (context.mounted) {
+                Navigator.of(context).pop();
+              }
+            },
           ),
         ),
       ],
@@ -357,10 +372,8 @@ class _PreJoinViewState extends State<PreJoinView> {
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton2<MediaDevice>(
                     isExpanded: true,
-                    disabledHint: const Text('Disable Camera'),
-                    hint: const Text(
-                      'Select Camera',
-                    ),
+                    disabledHint: Text(R.strings.disableCamera),
+                    hint: Text(R.strings.selectCamera),
                     items: _enableVideo
                         ? _videoInputs
                             .map((MediaDevice item) =>
@@ -400,9 +413,7 @@ class _PreJoinViewState extends State<PreJoinView> {
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton2<VideoParameters>(
                       isExpanded: true,
-                      hint: const Text(
-                        'Select Video Dimensions',
-                      ),
+                      hint: Text(R.strings.selectVideoDimension),
                       items: [
                         VideoParametersPresets.h480_43,
                         VideoParametersPresets.h540_169,
@@ -444,10 +455,8 @@ class _PreJoinViewState extends State<PreJoinView> {
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton2<MediaDevice>(
                     isExpanded: true,
-                    disabledHint: const Text('Disable Microphone'),
-                    hint: const Text(
-                      'Select Microphone',
-                    ),
+                    disabledHint: Text(R.strings.selectMicrophone),
+                    hint: Text(R.strings.selectMicrophone),
                     items: _enableAudio
                         ? _audioInputs
                             .map((MediaDevice item) =>

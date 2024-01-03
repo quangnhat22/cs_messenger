@@ -80,6 +80,26 @@ class DateTimeExt {
         ? null
         : (dateTime.toUtc().millisecondsSinceEpoch ~/ 1000).floor();
   }
+
+  /// -1 -> yesterday
+  /// 0 -> today
+  /// 1 -> other
+  static int dateDiffWithToday(DateTime dateToCheck) {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final yesterday = DateTime(now.year, now.month, now.day - 1);
+
+    final tempDate =
+        DateTime(dateToCheck.year, dateToCheck.month, dateToCheck.day);
+
+    if (tempDate == today) {
+      return 0;
+    } else if (tempDate == yesterday) {
+      return -1;
+    } else {
+      return 1;
+    }
+  }
 }
 
 extension AppDateTime on DateTime {

@@ -630,10 +630,10 @@ class Strings {
     );
   }
 
-  /// `Vui lòng mở "{email}" để xác minh tài khoản. Vui lòng xác nhận tài khoản trước ${expireTime}, nếu không tài khoản của bạn có thể bị mất!`
+  /// `Vui lòng mở "{email}" để xác minh tài khoản. Vui lòng xác nhận tài khoản trước {expireTime}, nếu không tài khoản của bạn có thể bị mất!`
   String pleaseCheckYourEmail(String email, String expireTime) {
     return Intl.message(
-      'Vui lòng mở "$email" để xác minh tài khoản. Vui lòng xác nhận tài khoản trước \$$expireTime, nếu không tài khoản của bạn có thể bị mất!',
+      'Vui lòng mở "$email" để xác minh tài khoản. Vui lòng xác nhận tài khoản trước $expireTime, nếu không tài khoản của bạn có thể bị mất!',
       name: 'pleaseCheckYourEmail',
       desc: '',
       args: [email, expireTime],
@@ -2105,6 +2105,366 @@ class Strings {
     return Intl.message(
       'Gửi',
       name: 'send',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thay đổi tên nhóm`
+  String get changeGroupName {
+    return Intl.message(
+      'Thay đổi tên nhóm',
+      name: 'changeGroupName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tin nhắn`
+  String get messenger {
+    return Intl.message(
+      'Tin nhắn',
+      name: 'messenger',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tin nhắn chuyển tiếp`
+  String get forwardMessage {
+    return Intl.message(
+      'Tin nhắn chuyển tiếp',
+      name: 'forwardMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chuyển tiếp tin nhắn thành công`
+  String get forwardMessageSuccess {
+    return Intl.message(
+      'Chuyển tiếp tin nhắn thành công',
+      name: 'forwardMessageSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nếu bạn có nhu cầu liên hệ hoặc báo các vấn đề, lỗi phát sinh khi dùng ứng dụng, vui lòng liên hệ đến địa chỉ Email sau: `
+  String get contact_message {
+    return Intl.message(
+      'Nếu bạn có nhu cầu liên hệ hoặc báo các vấn đề, lỗi phát sinh khi dùng ứng dụng, vui lòng liên hệ đến địa chỉ Email sau: ',
+      name: 'contact_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Không thể mở ứng dụng Mail. Vui lòng thử lại!`
+  String get openEmailFail {
+    return Intl.message(
+      'Không thể mở ứng dụng Mail. Vui lòng thử lại!',
+      name: 'openEmailFail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cài đặt nâng cao`
+  String get settingAdvanced {
+    return Intl.message(
+      'Cài đặt nâng cao',
+      name: 'settingAdvanced',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ngày tạo`
+  String get createdDate {
+    return Intl.message(
+      'Ngày tạo',
+      name: 'createdDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Được tạo bởi`
+  String get createdBy {
+    return Intl.message(
+      'Được tạo bởi',
+      name: 'createdBy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phiên hoạt động`
+  String get activeSession {
+    return Intl.message(
+      'Phiên hoạt động',
+      name: 'activeSession',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Người dùng bạn có thể quen`
+  String get recommendedUser {
+    return Intl.message(
+      'Người dùng bạn có thể quen',
+      name: 'recommendedUser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tài khoản đã tồn tại`
+  String get accountExist {
+    return Intl.message(
+      'Tài khoản đã tồn tại',
+      name: 'accountExist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email này đã được sử dụng! Vui lòng đăng ký với một email khác.`
+  String get emailUsedByOtherAccount {
+    return Intl.message(
+      'Email này đã được sử dụng! Vui lòng đăng ký với một email khác.',
+      name: 'emailUsedByOtherAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mở ứng dụng Mail`
+  String get openMailApp {
+    return Intl.message(
+      'Mở ứng dụng Mail',
+      name: 'openMailApp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Không tìm thấy ứng dụng Mail nào! Vui lòng kiểm tra lại`
+  String get noMailAppInstalled {
+    return Intl.message(
+      'Không tìm thấy ứng dụng Mail nào! Vui lòng kiểm tra lại',
+      name: 'noMailAppInstalled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Người nhận`
+  String get receiver {
+    return Intl.message(
+      'Người nhận',
+      name: 'receiver',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Người gửi`
+  String get sender {
+    return Intl.message(
+      'Người gửi',
+      name: 'sender',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bạn có muốn từ chối lời mời tham gia group này?`
+  String get doYouWantRejectGroupRequest {
+    return Intl.message(
+      'Bạn có muốn từ chối lời mời tham gia group này?',
+      name: 'doYouWantRejectGroupRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bạn có muốn tham gia nhóm này hay không?`
+  String get doYouWantJoinGroupRequest {
+    return Intl.message(
+      'Bạn có muốn tham gia nhóm này hay không?',
+      name: 'doYouWantJoinGroupRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bạn có muốn thu hồi lời mời tham gia nhóm này hay không?`
+  String get doYouWantUndoGroupRequest {
+    return Intl.message(
+      'Bạn có muốn thu hồi lời mời tham gia nhóm này hay không?',
+      name: 'doYouWantUndoGroupRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nhập tin nhắn`
+  String get typeAMessage {
+    return Intl.message(
+      'Nhập tin nhắn',
+      name: 'typeAMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hệ thống sẽ tiến hành đăng xuất. Bạn hãy đăng nhập lại để tiếp tục nhé!`
+  String get reLoginToContinue {
+    return Intl.message(
+      'Hệ thống sẽ tiến hành đăng xuất. Bạn hãy đăng nhập lại để tiếp tục nhé!',
+      name: 'reLoginToContinue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nhóm`
+  String get group {
+    return Intl.message(
+      'Nhóm',
+      name: 'group',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Không tìm thấy người dùng`
+  String get userNotFound {
+    return Intl.message(
+      'Không tìm thấy người dùng',
+      name: 'userNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rời nhóm thành công`
+  String get leaveGroupSuccess {
+    return Intl.message(
+      'Rời nhóm thành công',
+      name: 'leaveGroupSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thông tin nhóm`
+  String get groupInfo {
+    return Intl.message(
+      'Thông tin nhóm',
+      name: 'groupInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tắt Camera`
+  String get disableCamera {
+    return Intl.message(
+      'Tắt Camera',
+      name: 'disableCamera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chọn Camera`
+  String get selectCamera {
+    return Intl.message(
+      'Chọn Camera',
+      name: 'selectCamera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chọn kích thước Video`
+  String get selectVideoDimension {
+    return Intl.message(
+      'Chọn kích thước Video',
+      name: 'selectVideoDimension',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tắt Microphone`
+  String get disableMicrophone {
+    return Intl.message(
+      'Tắt Microphone',
+      name: 'disableMicrophone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chọn Microphone`
+  String get selectMicrophone {
+    return Intl.message(
+      'Chọn Microphone',
+      name: 'selectMicrophone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Kết thúc cuộc gọi`
+  String get disconnect {
+    return Intl.message(
+      'Kết thúc cuộc gọi',
+      name: 'disconnect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bạn có chắc muốn kết thúc cuộc gọi?`
+  String get areYouSureDisconnect {
+    return Intl.message(
+      'Bạn có chắc muốn kết thúc cuộc gọi?',
+      name: 'areYouSureDisconnect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Kết nối lại`
+  String get reconnect {
+    return Intl.message(
+      'Kết nối lại',
+      name: 'reconnect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Kết nối lại thành công.`
+  String get reconnectSuccess {
+    return Intl.message(
+      'Kết nối lại thành công.',
+      name: 'reconnectSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hệ thống buộc kết nối lại`
+  String get thisWillForceReconnect {
+    return Intl.message(
+      'Hệ thống buộc kết nối lại',
+      name: 'thisWillForceReconnect',
       desc: '',
       args: [],
     );

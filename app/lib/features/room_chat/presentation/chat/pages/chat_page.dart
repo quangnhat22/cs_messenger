@@ -14,16 +14,33 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
 class ChatPage extends StatelessWidget {
-  const ChatPage({super.key, required this.roomId});
+  const ChatPage({
+    super.key,
+    required this.roomId,
+    this.isLite = false,
+    this.isLatestMessage = true,
+    this.offsetMessageToFind,
+    this.messageToFind,
+  });
 
   final String roomId;
+  final bool isLite;
+  final bool isLatestMessage;
+  final String? offsetMessageToFind;
+  final IMessageModel? messageToFind;
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (_) => getIt<ListMessageCubit>()..initPage(roomId),
+            create: (_) => getIt<ListMessageCubit>()
+              ..initPage(
+                roomId,
+                isLatestMessage: isLatestMessage,
+                offsetMessageToFind: offsetMessageToFind,
+                messageToFind: messageToFind,
+              ),
           ),
           BlocProvider(
             create: (_) =>
@@ -31,9 +48,11 @@ class ChatPage extends StatelessWidget {
           ),
         ],
         child: AppMainPageWidget()
-            .setAppBar(AppBarWidget()
-                .setTextTitleWidget(const ChatInfoAppBarWidget())
-                .setActions([_appBarActions(context)]).build(context))
+            .setAppBar(!isLite
+                ? AppBarWidget()
+                    .setTextTitleWidget(const ChatInfoAppBarWidget())
+                    .setActions([_appBarActions(context)]).build(context)
+                : null)
             .setResizeToAvoidBottomInset(true)
             .setBody(_body(context))
             .build(context));

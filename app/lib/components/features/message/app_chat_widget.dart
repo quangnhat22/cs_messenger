@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:app/configs/theme/app_theme.dart';
 import 'package:diffutil_dart/diffutil.dart';
 import 'package:domain/domain.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import 'model/bubble_rtl_alignment.dart';
 
@@ -23,11 +23,13 @@ class AppChatWidget extends StatefulWidget {
     this.onStartReached,
     this.onStartReachedThreshold,
     required this.keyboardDismissBehavior,
-    required this.scrollController,
+    required this.itemScrollController,
     this.scrollPhysics,
     required this.useTopSafeAreaInset,
     this.bottomContainerWidget,
     this.topContainerWidget,
+    this.isScrollFindIndex = false,
+    this.onRefreshPage,
   });
 
   final String currentUserId;
@@ -67,7 +69,7 @@ class AppChatWidget extends StatefulWidget {
 
   /// Scroll controller for the main [CustomScrollView]. Also used to auto scroll
   /// to specific messages.
-  final ScrollController scrollController;
+  final ItemScrollController itemScrollController;
 
   /// Determines the physics of the scroll view.
   final ScrollPhysics? scrollPhysics;
@@ -89,6 +91,10 @@ class AppChatWidget extends StatefulWidget {
 
   ///top float widget in chat app
   final Widget? topContainerWidget;
+
+  final bool isScrollFindIndex;
+
+  final Future<void> Function()? onRefreshPage;
 
   @override
   State<AppChatWidget> createState() => _AppChatWidgetState();
@@ -190,12 +196,21 @@ class _AppChatWidgetState extends State<AppChatWidget>
             // Delay to give some time for Flutter to calculate new
             // size after new message was added.
             Future.delayed(const Duration(milliseconds: 100), () {
-              if (widget.scrollController.hasClients) {
-                widget.scrollController.animateTo(
-                  0,
+              // if (widget.scrollController.hasClients) {
+              //   widget.scrollController.animateTo(
+              //     0,
+              //     duration: const Duration(milliseconds: 300),
+              //     curve: Curves.easeInOut,
+              //   );
+              // }
+              if (widget.isFirstPage == true) {
+                widget.itemScrollController.scrollTo(
+                  index: 0,
                   duration: const Duration(milliseconds: 300),
                   curve: Curves.easeInOut,
                 );
+              } else {
+                widget.onRefreshPage?.call();
               }
             });
           }
@@ -217,16 +232,19 @@ class _AppChatWidgetState extends State<AppChatWidget>
         ),
       );
 
-  Widget _newMessageBuilder(int index, Animation<double> animation) {
+  Widget _newMessageBuilder(int index, Animation<double>? animation) {
     try {
       final item = _oldData[index];
 
-      return SizeTransition(
-        key: _valueKeyForItem(item),
-        axisAlignment: -1,
-        sizeFactor: animation.drive(CurveTween(curve: Curves.easeOutQuad)),
-        child: widget.itemBuilder(item, index),
-      );
+      return animation == null
+          ? widget.itemBuilder(item, index)
+          : SizeTransition(
+              key: _valueKeyForItem(item),
+              axisAlignment: -1,
+              sizeFactor:
+                  animation.drive(CurveTween(curve: Curves.easeOutQuad)),
+              child: widget.itemBuilder(item, index),
+            );
     } catch (e) {
       return const SizedBox();
     }
@@ -253,8 +271,8 @@ class _AppChatWidgetState extends State<AppChatWidget>
             });
           }
 
-          if (notification.metrics.pixels ==
-              notification.metrics.minScrollExtent) {
+          if (notification.metrics.pixels <=
+              notification.metrics.minScrollExtent + 10) {
             setState(() {
               _showButtonGoToBottom = false;
             });
@@ -270,41 +288,36 @@ class _AppChatWidgetState extends State<AppChatWidget>
           //   });
           // }
 
-          if (widget.onEndReached == null || widget.isLastPage == true) {
-            return false;
-          }
+          // if (widget.onEndReached == null || widget.isLastPage == true) {
+          //   return false;
+          // }
 
           if (notification.metrics.pixels >=
               (notification.metrics.maxScrollExtent *
                   (widget.onEndReachedThreshold ?? 0.75))) {
             if (widget.items.isEmpty || _isNextPageLoading) return false;
 
-            _controller.duration = Duration.zero;
-            _controller.forward();
-
             setState(() {
               _isNextPageLoading = true;
             });
 
-            widget.onEndReached!().whenComplete(() {
-              if (mounted) {
-                _controller.duration = const Duration(milliseconds: 100);
-
-                _controller.reverse();
-
-                setState(() {
-                  _isNextPageLoading = false;
-                });
-              }
-            });
+            if (!widget.isScrollFindIndex) {
+              widget.onEndReached!().whenComplete(() {
+                if (mounted) {
+                  setState(() {
+                    _isNextPageLoading = false;
+                  });
+                }
+              });
+            }
           }
 
-          if (notification.metrics.pixels ==
-                  notification.metrics.minScrollExtent &&
+          if (notification.metrics.pixels <
+                  notification.metrics.minScrollExtent + 10 &&
               widget.onStartReached != null &&
               widget.isFirstPage == false) {
-            // _controller.duration = Duration.zero;
-            // _controller.forward();
+            _controller.duration = Duration.zero;
+            _controller.forward();
 
             setState(() {
               _isNextBottomPageLoading = true;
@@ -312,8 +325,8 @@ class _AppChatWidgetState extends State<AppChatWidget>
 
             widget.onStartReached!().whenComplete(() {
               if (mounted) {
-                // _controller.duration = const Duration(milliseconds: 1000);
-                // _controller.reverse();
+                _controller.duration = const Duration(milliseconds: 1000);
+                _controller.reverse();
 
                 setState(() {
                   _isNextBottomPageLoading = false;
@@ -326,130 +339,84 @@ class _AppChatWidgetState extends State<AppChatWidget>
         },
         child: Stack(
           children: [
-            CupertinoScrollbar(
-              controller: widget.scrollController,
-              child: CustomScrollView(
-                controller: widget.scrollController,
-                keyboardDismissBehavior: widget.keyboardDismissBehavior,
-                physics: widget.scrollPhysics,
-                reverse: true,
-                slivers: [
-                  if (widget.bottomContainerWidget != null)
-                    makeHeader(widget.bottomContainerWidget!),
-                  if (widget.bottomWidget != null)
-                    SliverToBoxAdapter(child: widget.bottomWidget),
+            CustomScrollView(
+              // controller: widget.scrollController,
+              keyboardDismissBehavior: widget.keyboardDismissBehavior,
+              physics: widget.scrollPhysics,
+              reverse: true,
+              slivers: [
+                if (widget.bottomContainerWidget != null)
+                  makeHeader(widget.bottomContainerWidget!),
+                if (widget.bottomWidget != null)
+                  SliverToBoxAdapter(child: widget.bottomWidget),
 
-                  // SliverPadding(
-                  //   padding: EdgeInsets.only(
-                  //     top: 16 +
-                  //         (widget.useTopSafeAreaInset
-                  //             ? MediaQuery.of(context).padding.bottom
-                  //             : 0),
-                  //   ),
-                  //   sliver: SliverToBoxAdapter(
-                  //     child: SizeTransition(
-                  //       axisAlignment: 1,
-                  //       sizeFactor: _animation,
-                  //       child: Center(
-                  //         child: Container(
-                  //           alignment: Alignment.center,
-                  //           height: 32,
-                  //           width: 32,
-                  //           child: SizedBox(
-                  //             height: 16,
-                  //             width: 16,
-                  //             child: _isNextBottomPageLoading
-                  //                 ? CircularProgressIndicator(
-                  //                     backgroundColor: Colors.transparent,
-                  //                     strokeWidth: 1.5,
-                  //                     valueColor: AlwaysStoppedAnimation<Color>(
-                  //                         Theme.of(context)
-                  //                             .colorScheme
-                  //                             .primary),
-                  //                   )
-                  //                 : null,
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-
-                  // SliverPadding(
-                  //   padding: const EdgeInsets.only(bottom: 4),
-                  //   sliver: SliverToBoxAdapter(
-                  //     child: (widget.typingIndicatorOptions!.typingUsers.isNotEmpty &&
-                  //             !_indicatorOnScrollStatus)
-                  //         ? widget.typingIndicatorOptions?.customTypingIndicator ??
-                  //             TypingIndicator(
-                  //               bubbleAlignment: widget.bubbleRtlAlignment,
-                  //               options: widget.typingIndicatorOptions!,
-                  //               showIndicator: (widget.typingIndicatorOptions!
-                  //                       .typingUsers.isNotEmpty &&
-                  //                   !_indicatorOnScrollStatus),
-                  //             )
-                  //         : const SizedBox.shrink(),
-                  //   ),
-                  // ),
-
-                  ///message
+                if (_isNextBottomPageLoading)
                   SliverPadding(
-                    padding: const EdgeInsets.only(bottom: 4),
-                    sliver: SliverAnimatedList(
-                      findChildIndexCallback: (Key key) {
-                        if (key is ValueKey<Object>) {
-                          final newIndex = widget.items.indexWhere(
-                            (v) => _valueKeyForItem(v) == key,
-                          );
-                          if (newIndex != -1) {
-                            return newIndex;
-                          }
-                        }
-                        return null;
-                      },
-                      initialItemCount: widget.items.length,
-                      key: _listKey,
-                      itemBuilder: (_, index, animation) =>
-                          _newMessageBuilder(index, animation),
+                    padding: EdgeInsets.only(
+                      top: 16 +
+                          (widget.useTopSafeAreaInset
+                              ? MediaQuery.of(context).padding.bottom
+                              : 0),
+                    ),
+                    sliver: SliverToBoxAdapter(
+                      child: SizeTransition(
+                        axisAlignment: 1,
+                        sizeFactor: _animation,
+                        child: Center(
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 24,
+                            width: 32,
+                            child: SizedBox(
+                              height: 16,
+                              width: 16,
+                              child: _isNextBottomPageLoading
+                                  ? CircularProgressIndicator(
+                                      backgroundColor: Colors.transparent,
+                                      strokeWidth: 1.5,
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          Theme.of(context)
+                                              .colorScheme
+                                              .primary),
+                                    )
+                                  : null,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                  // SliverPadding(
-                  //   padding: EdgeInsets.only(
-                  //     top: 16 +
-                  //         (widget.useTopSafeAreaInset
-                  //             ? MediaQuery.of(context).padding.top
-                  //             : 0),
-                  //   ),
-                  //   sliver: SliverToBoxAdapter(
-                  //     child: SizeTransition(
-                  //       axisAlignment: 1,
-                  //       sizeFactor: _animation,
-                  //       child: Center(
-                  //         child: Container(
-                  //           alignment: Alignment.center,
-                  //           height: 32,
-                  //           width: 32,
-                  //           child: SizedBox(
-                  //             height: 16,
-                  //             width: 16,
-                  //             child: _isNextPageLoading
-                  //                 ? CircularProgressIndicator(
-                  //                     backgroundColor: Colors.transparent,
-                  //                     strokeWidth: 1.5,
-                  //                     valueColor: AlwaysStoppedAnimation<Color>(
-                  //                         Theme.of(context)
-                  //                             .colorScheme
-                  //                             .primary),
-                  //                   )
-                  //                 : null,
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-                ],
-              ),
+
+                // SliverPadding(
+                //   padding: const EdgeInsets.only(bottom: 4),
+                //   sliver: SliverToBoxAdapter(
+                //     child: (widget.typingIndicatorOptions!.typingUsers.isNotEmpty &&
+                //             !_indicatorOnScrollStatus)
+                //         ? widget.typingIndicatorOptions?.customTypingIndicator ??
+                //             TypingIndicator(
+                //               bubbleAlignment: widget.bubbleRtlAlignment,
+                //               options: widget.typingIndicatorOptions!,
+                //               showIndicator: (widget.typingIndicatorOptions!
+                //                       .typingUsers.isNotEmpty &&
+                //                   !_indicatorOnScrollStatus),
+                //             )
+                //         : const SizedBox.shrink(),
+                //   ),
+                // ),
+
+                SliverFillRemaining(
+                  child: ScrollablePositionedList.builder(
+                    reverse: true,
+                    itemCount: widget.items.length,
+                    itemBuilder: (context, index) =>
+                        _newMessageBuilder(index, null),
+                    itemScrollController: widget.itemScrollController,
+                    // scrollOffsetController: scrollOffsetController,
+                    // itemPositionsListener: itemPositionsListener,
+                    // scrollOffsetListener: scrollOffsetListener,
+                  ),
+                ),
+              ],
             ),
             if (widget.topContainerWidget != null)
               Positioned(
@@ -458,7 +425,7 @@ class _AppChatWidgetState extends State<AppChatWidget>
                 right: 0,
                 child: widget.topContainerWidget!,
               ),
-            if (_showButtonGoToBottom)
+            if (_showButtonGoToBottom || widget.isFirstPage == false)
               Positioned(
                 bottom: AppSizeExt.of.majorScale(5),
                 right: AppSizeExt.of.majorScale(5),
@@ -469,12 +436,14 @@ class _AppChatWidgetState extends State<AppChatWidget>
                       .withOpacity(0.8),
                   onPressed: () async {
                     Future.delayed(const Duration(milliseconds: 100), () {
-                      if (widget.scrollController.hasClients) {
-                        widget.scrollController.animateTo(
-                          0.0,
+                      if (widget.isFirstPage == true) {
+                        widget.itemScrollController.scrollTo(
+                          index: 0,
                           duration: const Duration(milliseconds: 300),
-                          curve: Curves.linear,
+                          // curve: Curves.linear,
                         );
+                      } else {
+                        widget.onRefreshPage?.call();
                       }
                     });
                   },

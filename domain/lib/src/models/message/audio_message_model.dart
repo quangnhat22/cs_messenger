@@ -19,6 +19,7 @@ class AudioMessageModel extends IMessageModel {
     required this.uri,
     super.isShowStatus,
     super.repliedMessage,
+    super.isForward = false,
   });
 
   static AudioMessageModel getAudioMessageModelFromParam(

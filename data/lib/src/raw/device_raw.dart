@@ -12,6 +12,7 @@ class DeviceRaw extends BaseRaw<DeviceModel> with _$DeviceRaw {
     @JsonKey(name: 'app_version') String? appVersion,
     // ignore: invalid_annotation_target
     @JsonKey(name: 'last_active') int? lastActive,
+    @Default(false) bool isCurrentDevice,
   }) = _DeviceRaw;
 
   factory DeviceRaw.fromJson(Map<String, Object?> json) =>
@@ -25,8 +26,9 @@ class DeviceRaw extends BaseRaw<DeviceModel> with _$DeviceRaw {
       os: os,
       appVersion: appVersion,
       lastActive: lastActive != null
-          ? DateTime.fromMillisecondsSinceEpoch(lastActive!)
+          ? DateTimeExt.convertTimeStampToDateTime(lastActive!)
           : null,
+      isCurrentDevice: isCurrentDevice,
     );
   }
 }
